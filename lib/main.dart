@@ -1,6 +1,11 @@
 import 'app.dart';
+import 'backend/sessions.dart';
 import 'package:flutter/material.dart';
 void main() {
-  runApp(const InS());
+  sessionManager.loadSessions().then((_) {
+    print("sessions loaded");
+    runApp(const InS());
+  });
+  print("starting app");
 }
 

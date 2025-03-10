@@ -1,8 +1,24 @@
 import 'package:flutter/material.dart';
 import '../../backend/sessions.dart';
 
-class StudentSignupPage extends StatelessWidget {
+class StudentSignupPage extends StatefulWidget {
   const StudentSignupPage({super.key});
+
+  @override
+  State<StudentSignupPage> createState() => _StudentSignupPageState();
+}
+
+class _StudentSignupPageState extends State<StudentSignupPage> {
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _codeController = TextEditingController();
+
+  @override
+  void dispose() {
+    _nameController.dispose();
+    _codeController.dispose();
+    super.dispose();
+  }
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,57 +33,62 @@ class StudentSignupPage extends StatelessWidget {
           child: Padding(
             padding: EdgeInsets.all(20.0),
             child: Card(
-                    margin: EdgeInsets.all(20.0),
-                    child: Padding(
-                      padding: EdgeInsets.all(16.0),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: <Widget>[
-                          TextField(
-                            decoration: InputDecoration(
-                              labelText: 'Your Name',
-                              prefixIcon: Icon(Icons.person),
-                              fillColor: Theme.of(context).colorScheme.inversePrimary,
-                            ),
-                          ),
-                          SizedBox(height: 10),
-                          TextField(
-                            decoration: InputDecoration(
-                              labelText: 'Your code',
-                              prefixIcon: Icon(Icons.lock),
-                              fillColor: Theme.of(context).colorScheme.inversePrimary,
-                            ),
-                            maxLength: 14,
-                          ),
-                          SizedBox(height: 20),
-                          FilledButton(
-                            onPressed: () async {
-                              if(!(await sessionLogin("", ""))) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: const Text('Could not log you in.'),
-                                    action: SnackBarAction(
-                                      label: 'Retry',
-                                      onPressed: () {
-                                      },
-                                    ),
-                                  ),
-                                );
-                              }
-                            },
-                            child: Text('Signup >'),
-                          ),
-                        ],
+              margin: EdgeInsets.all(20.0),
+              child: Padding(
+                padding: EdgeInsets.all(16.0),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    TextField(
+                      controller: _nameController,
+                      decoration: InputDecoration(
+                        labelText: 'Your Name',
+                        prefixIcon: Icon(Icons.person),
+                        fillColor: Theme.of(context).colorScheme.inversePrimary,
                       ),
                     ),
-                  )
+                    SizedBox(height: 10),
+                    TextField(
+                      controller: _codeController,
+                      decoration: InputDecoration(
+                        labelText: 'Your code',
+                        prefixIcon: Icon(Icons.lock),
+                        fillColor: Theme.of(context).colorScheme.inversePrimary,
+                      ),
+                      maxLength: 14,
+                    ),
+                    SizedBox(height: 20),
+                    FilledButton(
+                      onPressed: () async {
+                        
+                          // Assuming sessionManager.signup() accepts two parameters:
+                          final session = await sessionManager.signup(
+                            _nameController.text,
+                            _codeController.text,
+                          );
+                          if (session != null) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text("Successfully signed up")),
+                            );
+                          }
+                        try {} catch (e) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text(e.toString())),
+                          );
+                        }
+                      },
+                      child: Text('Signup >'),
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ),
         ),
       ),
     );
   }
 }
-
 
 class SignupChooserPage extends StatelessWidget {
   const SignupChooserPage({super.key});
@@ -98,7 +119,10 @@ class SignupChooserPage extends StatelessWidget {
               SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => StudentSignupPage()));
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => StudentSignupPage()),
+                  );
                 },
                 child: Text("A student"),
               ),
@@ -109,5 +133,3 @@ class SignupChooserPage extends StatelessWidget {
     );
   }
 }
-
-

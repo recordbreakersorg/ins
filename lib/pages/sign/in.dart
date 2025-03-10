@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../backend/sessions.dart';
 
 class SigninChooserPage extends StatelessWidget {
   const SigninChooserPage({super.key});
@@ -6,8 +7,8 @@ class SigninChooserPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: const DecoratedBox(
-        decoration: BoxDecoration(
+      body: DecoratedBox(
+        decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage("assets/backgrounds/welcome3.png"),
             fit: BoxFit.cover,
@@ -16,8 +17,11 @@ class SigninChooserPage extends StatelessWidget {
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-            ],
+            children: sessionManager.sessions.map((session) => ElevatedButton(
+                onPressed: () {
+                },
+                child: Text(session.userId),
+              )).toList()
           ),
         )
       ),
