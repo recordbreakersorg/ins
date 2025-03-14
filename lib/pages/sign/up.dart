@@ -60,8 +60,7 @@ class _StudentSignupPageState extends State<StudentSignupPage> {
                     SizedBox(height: 20),
                     FilledButton(
                       onPressed: () async {
-                        
-                          // Assuming sessionManager.signup() accepts two parameters:
+                          try {
                           final session = await sessionManager.signup(
                             _nameController.text,
                             _codeController.text,
@@ -70,8 +69,12 @@ class _StudentSignupPageState extends State<StudentSignupPage> {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(content: Text("Successfully signed up")),
                             );
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => StudentSignupPage()),
+                            );
                           }
-                        try {} catch (e) {
+                        } catch (e) {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(content: Text(e.toString())),
                           );

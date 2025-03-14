@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
@@ -21,7 +23,6 @@ Future<void> main() async {
       final dynamic jsonResponse = jsonDecode(response.body);
       print('Response: $jsonResponse');
     } else {
-      print('Request failed with status: ${response.statusCode}');
     }
   } catch (e) {
     print('An error occurred: $e');
