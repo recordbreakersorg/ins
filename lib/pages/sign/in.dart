@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:ins/backend/models.dart';
 import '../../backend/sessions.dart';
+import '../../theme.dart';
 
 class SigninChooserPage extends StatelessWidget {
   const SigninChooserPage({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,26 +16,97 @@ class SigninChooserPage extends StatelessWidget {
           ),
         ),
         child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: sessionManager.sessions.map((session) {
-              return FutureBuilder(
-                future: session.getUser(),
-                builder: (context, snapshot) {
-                  if (!snapshot.hasData) return const CircularProgressIndicator();
-                  final user = snapshot.data!;
-                  return Card(
-                    child: Row(children: [
-                      Text(user.name),
-                    ],),
-                  );
-                }//67d32bd5e4a0fa024c191734, ama2025-03-13-20:02:45.179607782-+0100-WAT-m=+546.656327203
-              );
-            }).toList(),
+          child: Padding(
+            padding: EdgeInsets.all(20.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children:
+                  sessionManager.sessions.isNotEmpty
+                      ? sessionManager.sessions.map((session) {
+                        return StudentSchoolCard(session: session);
+                      }).toList()
+                      : <Widget>[
+                        Text(
+                          'No sessions found',
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: Color.fromARGB(100, 10, 10, 10),
+                          ),
+                        ),
+                      ],
+            ),
           ),
-        )
+        ),
       ),
     );
   }
 }
 
+class StudentSchoolCard extends StatelessWidget {
+  final Session session;
+  const StudentSchoolCard({super.key, required this.session});
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+      future: session.getUser(),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) return const CircularProgressIndicator();
+        final user = snapshot.data!;
+        return Card(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+          clipBehavior: Clip.antiAliasWithSaveLayer,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(15),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Image.network(
+                      "https://avatars.githubusercontent.com/u/137279923?v=4",
+                      height: 100,
+                      width: 100,
+                      fit: BoxFit.cover,
+                    ),
+                    Container(width: 20),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Container(height: 5),
+                          Text(
+                            user.name,
+                            style: Theme.of(context).textTheme.titleLarge!
+                                .copyWith(color: MyColorsSample.grey_80),
+                          ),
+                          Container(height: 5),
+                          Text(
+                            "Student",
+                            style: MyTextSample.body1(
+                              context,
+                            )!.copyWith(color: Colors.grey[500]),
+                          ),
+                          // Add some spacing between the subtitle and the text
+                          Container(height: 10),
+                          // Add a text widget to display some text
+                          Text(
+                            "Lycee bilingue de D'Application",
+                            maxLines: 2,
+                            style: MyTextSample.subhead(
+                              context,
+                            )!.copyWith(color: Colors.grey[700]),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        );
+      }, //67d32bd5e4a0fa024c191734, ama2025-03-13-20:02:45.179607782-+0100-WAT-m=+546.656327203
+    );
+  }
+}

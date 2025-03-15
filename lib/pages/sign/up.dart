@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../backend/sessions.dart';
+import './in.dart';
 
 class StudentSignupPage extends StatefulWidget {
   const StudentSignupPage({super.key});
@@ -71,7 +72,7 @@ class _StudentSignupPageState extends State<StudentSignupPage> {
                             );
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => StudentSignupPage()),
+                              MaterialPageRoute(builder: (context) => SigninChooserPage()),
                             );
                           }
                         } catch (e) {
