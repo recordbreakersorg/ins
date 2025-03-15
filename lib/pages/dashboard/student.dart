@@ -43,22 +43,6 @@ class StudentDashboardPage extends StatelessWidget {
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
-            DrawerHeader(
-              decoration: BoxDecoration(color: Theme.of(context).primaryColor),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Navigation',
-                    style: GoogleFonts.lato(
-                      color: Colors.white,
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
-            ),
             ListTile(
               leading: Icon(Icons.dashboard),
               title: Text('Dashboard'),
@@ -119,6 +103,23 @@ class StudentDashboardPage extends StatelessWidget {
             ),
           ],
         ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        currentIndex: 0,
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
+        selectedItemColor: Theme.of(context).primaryColor,
+        unselectedItemColor: Colors.grey,
+        items: const [
+          BottomNavigationBarItem(icon: Icon(Icons.dashboard), label: ''),
+          BottomNavigationBarItem(icon: Icon(Icons.announcement), label: ''),
+          BottomNavigationBarItem(icon: Icon(Icons.calendar_month), label: ''),
+          BottomNavigationBarItem(icon: Icon(Icons.assignment), label: ''),
+        ],
+        onTap: (index) {
+          // TODO: Implement navigation
+        },
       ),
     );
   }

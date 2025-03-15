@@ -27,12 +27,51 @@ class SigninChooserPage extends StatelessWidget {
                         return StudentSchoolCard(session: session);
                       }).toList()
                       : <Widget>[
-                        Text(
-                          'No sessions found',
-                          style: TextStyle(
-                            fontSize: 20,
-                            color: Color.fromARGB(100, 10, 10, 10),
-                          ),
+                        Column(
+                          children: [
+                            Icon(
+                              Icons.account_circle_outlined,
+                              size: 120,
+                              color: Color.fromARGB(100, 10, 10, 10),
+                            ),
+                            SizedBox(height: 24),
+                            Text(
+                              'No account found',
+                              style: GoogleFonts.lato(
+                                fontSize: 28,
+                                color: Color.fromARGB(100, 10, 10, 10),
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            SizedBox(height: 12),
+                            Text(
+                              'Please go to the signup page to create an account',
+                              textAlign: TextAlign.center,
+                              style: GoogleFonts.lato(
+                                fontSize: 16,
+                                color: Color.fromARGB(100, 10, 10, 10),
+                              ),
+                            ),
+                            SizedBox(height: 24),
+                            ElevatedButton(
+                              onPressed: () {
+                                Navigator.pushNamed(context, '/signup');
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 24,
+                                  vertical: 12,
+                                ),
+                                child: Text(
+                                  'Sign Up',
+                                  style: GoogleFonts.lato(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ],
             ),
