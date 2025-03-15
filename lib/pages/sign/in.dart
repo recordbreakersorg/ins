@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ins/backend/models.dart';
 import '../../backend/sessions.dart';
-import '../../theme.dart';
+import '../dashboard/student.dart';
 
 class SigninChooserPage extends StatelessWidget {
   const SigninChooserPage({super.key});
@@ -53,81 +53,97 @@ class StudentSchoolCard extends StatelessWidget {
       builder: (context, snapshot) {
         if (!snapshot.hasData) return const CircularProgressIndicator();
         final user = snapshot.data!;
-        print(user.profile.getPath());
-        return Card(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-          clipBehavior: Clip.antiAliasWithSaveLayer,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.all(15),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(45),
-                      child: Image.network(
-                        user.profile.getPath(),
-                        height: 100,
-                        width: 100,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    Container(width: 10),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                            user.name,
-                            style: GoogleFonts.lato(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w700,
-                            ).copyWith(
-                              color: const Color.fromRGBO(55, 71, 79, 1),
-                            ),
-                          ),
-                          Container(height: 5),
-                          Text(
-                            user.role,
-                            style: GoogleFonts.lato(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w400,
-                            ).copyWith(
-                              color: const Color.fromRGBO(158, 158, 158, 1),
-                            ),
-                          ),
-                          // Add some spacing between the subtitle and the text
-                          Container(height: 5),
-                          // Add a text widget to display some text
-                          FutureBuilder(
-                            future: user.getSchool(),
-                            builder: (context, snapshot) {
-                              if (!snapshot.hasData) {
-                                return const CircularProgressIndicator();
-                              } else {
-                                final school = snapshot.data!;
-                                return Text(
-                                  school.name,
-                                  maxLines: 2,
-                                  style: GoogleFonts.lato(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w400,
-                                  ).copyWith(
-                                    color: const Color.fromRGBO(97, 97, 97, 1),
-                                  ),
-                                );
-                              }
-                            },
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
+        return GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => StudentDashboardPage(student: user),
               ),
-            ],
+            );
+          },
+          child: Card(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(5),
+            ),
+            clipBehavior: Clip.antiAliasWithSaveLayer,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.all(15),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(45),
+                        child: Image.network(
+                          user.profile.getPath(),
+                          height: 100,
+                          width: 100,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      Container(width: 10),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text(
+                              user.name,
+                              style: GoogleFonts.lato(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w700,
+                              ).copyWith(
+                                color: const Color.fromRGBO(55, 71, 79, 1),
+                              ),
+                            ),
+                            Container(height: 5),
+                            Text(
+                              user.role,
+                              style: GoogleFonts.lato(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400,
+                              ).copyWith(
+                                color: const Color.fromRGBO(158, 158, 158, 1),
+                              ),
+                            ),
+                            // Add some spacing between the subtitle and the text
+                            Container(height: 5),
+                            // Add a text widget to display some text
+                            FutureBuilder(
+                              future: user.getSchool(),
+                              builder: (context, snapshot) {
+                                if (!snapshot.hasData) {
+                                  return const CircularProgressIndicator();
+                                } else {
+                                  final school = snapshot.data!;
+                                  return Text(
+                                    school.name,
+                                    maxLines: 2,
+                                    style: GoogleFonts.lato(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w400,
+                                    ).copyWith(
+                                      color: const Color.fromRGBO(
+                                        97,
+                                        97,
+                                        97,
+                                        1,
+                                      ),
+                                    ),
+                                  );
+                                }
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         );
       }, //67d32bd5e4a0fa024c191734, ama2025-03-13-20:02:45.179607782-+0100-WAT-m=+546.656327203
