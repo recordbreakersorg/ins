@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:ins/backend/models.dart';
 import '../../backend/sessions.dart';
 import '../../theme.dart';
@@ -52,6 +53,7 @@ class StudentSchoolCard extends StatelessWidget {
       builder: (context, snapshot) {
         if (!snapshot.hasData) return const CircularProgressIndicator();
         final user = snapshot.data!;
+        print(user.profile.getPath());
         return Card(
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
           clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -63,39 +65,51 @@ class StudentSchoolCard extends StatelessWidget {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Image.network(
-                      "https://avatars.githubusercontent.com/u/137279923?v=4",
-                      height: 100,
-                      width: 100,
-                      fit: BoxFit.cover,
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(45),
+                      child: Image.network(
+                        user.profile.getPath(),
+                        height: 100,
+                        width: 100,
+                        fit: BoxFit.cover,
+                      ),
                     ),
-                    Container(width: 20),
+                    Container(width: 10),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Container(height: 5),
                           Text(
                             user.name,
-                            style: Theme.of(context).textTheme.titleLarge!
-                                .copyWith(color: MyColorsSample.grey_80),
+                            style: GoogleFonts.lato(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w700,
+                            ).copyWith(
+                              color: const Color.fromRGBO(55, 71, 79, 1),
+                            ),
                           ),
                           Container(height: 5),
                           Text(
-                            "Student",
-                            style: MyTextSample.body1(
-                              context,
-                            )!.copyWith(color: Colors.grey[500]),
+                            user.role,
+                            style: GoogleFonts.lato(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w400,
+                            ).copyWith(
+                              color: const Color.fromRGBO(158, 158, 158, 1),
+                            ),
                           ),
                           // Add some spacing between the subtitle and the text
-                          Container(height: 10),
+                          Container(height: 5),
                           // Add a text widget to display some text
                           Text(
                             "Lycee bilingue de D'Application",
                             maxLines: 2,
-                            style: MyTextSample.subhead(
-                              context,
-                            )!.copyWith(color: Colors.grey[700]),
+                            style: GoogleFonts.lato(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w400,
+                            ).copyWith(
+                              color: const Color.fromRGBO(97, 97, 97, 1),
+                            ),
                           ),
                         ],
                       ),

@@ -2,7 +2,22 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'backend.dart';
 
-class Session {
+abstract class Model {
+  Map<String, dynamic> toJson();
+
+  static Model fromJson(Map<String, dynamic> json) {
+    throw UnimplementedError(
+      'Model.fromJson() must be implemented by subclasses',
+    );
+  }
+
+  @override
+  String toString() {
+    return json.encode(toJson());
+  }
+}
+
+class Session implements Model {
   final String token;
   final String userId;
   final String id;
@@ -10,74 +25,167 @@ class Session {
 
   Session({required this.id, required this.token, required this.userId});
 
-  factory Session.fromJson(Map<String, dynamic> json) {
+  static Session fromJson(Map<String, dynamic> json) {
     return Session(
       token: json['token'],
       userId: json['user_id'],
-      id: json['id']
+      id: json['id'],
     );
   }
 
+  @override
   Map<String, dynamic> toJson() {
-    return {
-      'token': token,
-      'user_id': userId,
-      'id': id,
-    };
+    return {'token': token, 'user_id': userId, 'id': id};
   }
+
   Future<User?> getUser() async {
     final url = Uri.parse("${get_backend_url()}/api/v1/user");
     try {
-      final response = await http.get(url, headers: {
-        'session-id': id,
-        'session-token': token,
-      });
-      if(response.statusCode == 200) {
-        print("Good status");
+      final response = await http.get(
+        url,
+        headers: {'session-id': id, 'session-token': token},
+      );
+      if (response.statusCode == 200) {
         final data = json.decode(response.body);
-        if(data['status'] >= 0) {
-          print("Got user: ${data['user']}");
+        if (data['status'] >= 0) {
           return User.fromJson(data['user']);
-        } else {
-          print("Failed to get user: ${data['message']}");
-          return null;
         }
+        print("Failed to get user: ${data['message']}");
+        return null;
       }
+      print("Failed to get user: HTTP ${response.statusCode}");
+      return null;
     } catch (e) {
       print("An error occurred: $e");
       return null;
     }
-    print("Failed to get user");
-    return null;
   }
 }
 
-class Profile {
+class Profile implements Model {
   final String pid;
   final String register;
-  Profile({required this.pid, required this.register});
+  final String ext;
+
+  const Profile({required this.pid, required this.register, required this.ext});
+
+  String getPath() {
+    return "${get_backend_url()}/profiles/$register/$pid.$ext";
+  }
+
+  static Profile fromJson(Map<String, dynamic> json) {
+    return Profile(
+      pid: json['pid'],
+      register: json['register'],
+      ext: json['ext'],
+    );
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return {'pid': pid, 'register': register, 'ext': ext};
+  }
 }
 
-class UserContact {
+class UserContact implements Model {
   final String? email;
   final String? phone;
+
   UserContact({this.email, this.phone});
+
+  @override
+  Map<String, dynamic> toJson() {
+    return {'email': email, 'phone': phone};
+  }
+
+  static UserContact fromJson(Map<String, dynamic> json) {
+    return UserContact(email: json['email'], phone: json['phone']);
+  }
 }
-class User {
+
+class SchoolInfo implements Model {
+  const SchoolInfo();
+
+  @override
+  Map<String, dynamic> toJson() {
+    return {};
+  }
+
+  static SchoolInfo fromJson(Map<String, dynamic> json) {
+    return const SchoolInfo();
+  }
+}
+
+class School implements Model {
+  final String id;
+  final String name;
+  final SchoolInfo info;
+  final Profile profile;
+
+  const School({
+    required this.id,
+    required this.name,
+    required this.info,
+    required this.profile,
+  });
+
+  factory School.fromJson(Map<String, dynamic> json) {
+    return School(
+      name: json['name'],
+      id: json['id'],
+      profile: Profile.fromJson(json['profile']),
+      info: SchoolInfo(),
+    );
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'info': info.toJson(),
+      'profile': profile.toJson(),
+    };
+  }
+}
+
+class User implements Model {
   final String name;
   final String id;
   final String schoolId;
   final Profile profile;
   final UserContact contact;
-  User({required this.name, required this.id, required this.schoolId, required this.profile, required this.contact});
+  final String role;
+
+  User({
+    required this.name,
+    required this.id,
+    required this.schoolId,
+    required this.profile,
+    required this.contact,
+    required this.role,
+  });
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
       name: json['name'],
       id: json['id'],
       schoolId: json['school_id'],
-      profile: Profile(pid: json['profile']['pid'], register: json['profile']['register']),
-      contact: UserContact(email: json['contact']['email'], phone: json['contact']['phone']),
+      profile: Profile.fromJson(json['profile']),
+      contact: UserContact.fromJson(json['contact']),
+      role: json['role'],
     );
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return {
+      'name': name,
+      'id': id,
+      'school_id': schoolId,
+      'profile': profile.toJson(),
+      'contact': contact.toJson(),
+      'role': role,
+    };
   }
 }

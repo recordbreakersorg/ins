@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'sign/up.dart';
 import 'sign/in.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class WelcomePage extends StatelessWidget {
   const WelcomePage({super.key, required this.title});
@@ -26,26 +27,37 @@ class WelcomePage extends StatelessWidget {
             children: <Widget>[
               Padding(
                 padding: const EdgeInsets.only(bottom: 100.0),
-                child: Image.asset('assets/is_logo.png', width: 200, height: 200),
+                child: Image.asset(
+                  'assets/is_logo.png',
+                  width: 200,
+                  height: 200,
+                ),
               ),
-              const Text(
-                'Welcome!',
-                style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
-              ),
+              Text('Welcome!', style: GoogleFonts.lato(fontSize: 30)),
               const SizedBox(height: 50),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   FilledButton(
                     onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => SigninChooserPage()));
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => SigninChooserPage(),
+                        ),
+                      );
                     },
                     child: const Text('Login'),
                   ),
                   const SizedBox(width: 20),
                   FilledButton(
                     onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => SignupChooserPage()));
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => SignupChooserPage(),
+                        ),
+                      );
                     },
                     child: const Text('Signup'),
                   ),
@@ -54,7 +66,7 @@ class WelcomePage extends StatelessWidget {
             ],
           ),
         ),
-      )
+      ),
     );
   }
 }
