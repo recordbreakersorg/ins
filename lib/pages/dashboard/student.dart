@@ -24,14 +24,60 @@ class StudentDashboardPage extends StatelessWidget {
           style: GoogleFonts.lato(fontWeight: FontWeight.bold),
         ),
         actions: [
-          CircleAvatar(
-            backgroundImage: NetworkImage(student.profile.getPath()),
-            radius: 16,
+          Builder(
+            builder:
+                (context) => GestureDetector(
+                  onTap: () => Scaffold.of(context).openEndDrawer(),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: CircleAvatar(
+                      backgroundImage: NetworkImage(student.profile.getPath()),
+                      radius: 16,
+                    ),
+                  ),
+                ),
           ),
-          SizedBox(width: 16),
         ],
       ),
       drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            DrawerHeader(
+              decoration: BoxDecoration(color: Theme.of(context).primaryColor),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Navigation',
+                    style: GoogleFonts.lato(
+                      color: Colors.white,
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            ListTile(
+              leading: Icon(Icons.dashboard),
+              title: Text('Dashboard'),
+              onTap: () => Navigator.pop(context),
+            ),
+            ListTile(
+              leading: Icon(Icons.book),
+              title: Text('Courses'),
+              onTap: () => Navigator.pop(context),
+            ),
+            ListTile(
+              leading: Icon(Icons.calendar_today),
+              title: Text('Schedule'),
+              onTap: () => Navigator.pop(context),
+            ),
+          ],
+        ),
+      ),
+      endDrawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
@@ -57,11 +103,6 @@ class StudentDashboardPage extends StatelessWidget {
               ),
             ),
             ListTile(
-              leading: Icon(Icons.dashboard),
-              title: Text('Dashboard'),
-              onTap: () => Navigator.pop(context),
-            ),
-            ListTile(
               leading: Icon(Icons.person),
               title: Text('Profile'),
               onTap: () => Navigator.pop(context),
@@ -69,6 +110,11 @@ class StudentDashboardPage extends StatelessWidget {
             ListTile(
               leading: Icon(Icons.settings),
               title: Text('Settings'),
+              onTap: () => Navigator.pop(context),
+            ),
+            ListTile(
+              leading: Icon(Icons.logout),
+              title: Text('Sign Out'),
               onTap: () => Navigator.pop(context),
             ),
           ],
