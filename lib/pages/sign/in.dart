@@ -101,15 +101,25 @@ class StudentSchoolCard extends StatelessWidget {
                           // Add some spacing between the subtitle and the text
                           Container(height: 5),
                           // Add a text widget to display some text
-                          Text(
-                            "Lycee bilingue de D'Application",
-                            maxLines: 2,
-                            style: GoogleFonts.lato(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w400,
-                            ).copyWith(
-                              color: const Color.fromRGBO(97, 97, 97, 1),
-                            ),
+                          FutureBuilder(
+                            future: user.getSchool(),
+                            builder: (context, snapshot) {
+                              if (!snapshot.hasData) {
+                                return const CircularProgressIndicator();
+                              } else {
+                                final school = snapshot.data!;
+                                return Text(
+                                  school.name,
+                                  maxLines: 2,
+                                  style: GoogleFonts.lato(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w400,
+                                  ).copyWith(
+                                    color: const Color.fromRGBO(97, 97, 97, 1),
+                                  ),
+                                );
+                              }
+                            },
                           ),
                         ],
                       ),

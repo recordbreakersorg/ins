@@ -138,6 +138,25 @@ class School implements Model {
     );
   }
 
+  static Future<School?> get(String id) async {
+    final url = Uri.parse("${get_backend_url()}/api/v1/school/$id");
+    try {
+      final response = await http.get(url);
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        if (data['status'] >= 0) {
+          return School.fromJson(data['school']);
+        }
+        return null;
+      }
+      print("Failed to get school: HTTP ${response.statusCode}");
+      return null;
+    } catch (e) {
+      print("An error occurred: $e");
+      return null;
+    }
+  }
+
   @override
   Map<String, dynamic> toJson() {
     return {
@@ -165,6 +184,10 @@ class User implements Model {
     required this.contact,
     required this.role,
   });
+
+  Future<School?> getSchool() async {
+    return School.get(schoolId);
+  }
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
