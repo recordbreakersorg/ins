@@ -60,6 +60,29 @@ class Session implements Model {
       return null;
     }
   }
+
+  Future<List<Classroom>> getClassrooms() async {
+    final url = Uri.parse("${get_backend_url()}/api/v1/user/classrooms");
+    try {
+      final response = await http.get(
+        url,
+        headers: {'session-id': id, 'session-token': token},
+      );
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        if (data['status'] >= 0) {
+          return data['classrooms']
+              .map((json) => Classroom.fromJson(json))
+              .toList();
+        }
+      }
+      print("Failed to get classrooms: HTTP ${response.statusCode}");
+      return [];
+    } catch (e) {
+      print("An error occurred: $e");
+      return [];
+    }
+  }
 }
 
 class Profile implements Model {
@@ -210,5 +233,80 @@ class User implements Model {
       'contact': contact.toJson(),
       'role': role,
     };
+  }
+
+  static Future<User?> get(String id) async {
+    final url = Uri.parse("${get_backend_url()}/api/v1/user/$id");
+    try {
+      final response = await http.get(url);
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        if (data['status'] >= 0) {
+          return User.fromJson(data['user']);
+        }
+        return null;
+      }
+      print("Failed to get user: HTTP ${response.statusCode}");
+      return null;
+    } catch (e) {
+      print("An error occurred: $e");
+      return null;
+    }
+  }
+}
+
+class Classroom implements Model {
+  final String id;
+  final String name;
+  final String role;
+  final Profile profile;
+  final String schoolId;
+
+  const Classroom({
+    required this.id,
+    required this.name,
+    required this.role,
+    required this.profile,
+    required this.schoolId,
+  });
+
+  @override
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'role': role,
+      'profile': profile.toJson(),
+      'school_id': schoolId,
+    };
+  }
+
+  factory Classroom.fromJson(Map<String, dynamic> json) {
+    return Classroom(
+      id: json['id'],
+      name: json['name'],
+      role: json['role'],
+      profile: Profile.fromJson(json['profile']),
+      schoolId: json['school_id'],
+    );
+  }
+
+  static Future<Classroom?> get(String id) async {
+    final url = Uri.parse("${get_backend_url()}/api/v1/classroom/$id");
+    try {
+      final response = await http.get(url);
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        if (data['status'] >= 0) {
+          return Classroom.fromJson(data['classroom']);
+        }
+        return null;
+      }
+      print("Failed to get classroom: HTTP ${response.statusCode}");
+      return null;
+    } catch (e) {
+      print("An error occurred: $e");
+      return null;
+    }
   }
 }

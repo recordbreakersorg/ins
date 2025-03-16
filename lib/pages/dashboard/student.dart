@@ -2,9 +2,22 @@ import 'package:flutter/material.dart';
 import '../../backend/models.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class StudentDashboardPage extends StatelessWidget {
+class StudentBaseLayout extends StatelessWidget {
+  final Widget body;
+  final String title;
   final User student;
-  const StudentDashboardPage({super.key, required this.student});
+  final Session session;
+  final int currentIndex;
+
+  const StudentBaseLayout({
+    super.key,
+    required this.body,
+    required this.title,
+    required this.student,
+    required this.session,
+    required this.currentIndex,
+  });
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,7 +33,7 @@ class StudentDashboardPage extends StatelessWidget {
           },
         ),
         title: Text(
-          'Dashboard',
+          title,
           style: GoogleFonts.lato(fontWeight: FontWeight.bold),
         ),
         actions: [
@@ -67,21 +80,26 @@ class StudentDashboardPage extends StatelessWidget {
           children: [
             DrawerHeader(
               decoration: BoxDecoration(color: Theme.of(context).primaryColor),
-              child: Column(
+              child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   CircleAvatar(
                     backgroundImage: NetworkImage(student.profile.getPath()),
-                    radius: 40,
+                    radius: 50,
                   ),
-                  SizedBox(height: 10),
-                  Text(
-                    student.name,
-                    style: GoogleFonts.lato(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  SizedBox(width: 10),
+                  Column(
+                    children: [
+                      SizedBox(height: 30),
+                      Text(
+                        student.name,
+                        style: GoogleFonts.lato(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -104,9 +122,10 @@ class StudentDashboardPage extends StatelessWidget {
           ],
         ),
       ),
+      body: body,
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        currentIndex: 0,
+        currentIndex: currentIndex,
         showSelectedLabels: false,
         showUnselectedLabels: false,
         selectedItemColor: Theme.of(context).primaryColor,
@@ -116,11 +135,103 @@ class StudentDashboardPage extends StatelessWidget {
           BottomNavigationBarItem(icon: Icon(Icons.announcement), label: ''),
           BottomNavigationBarItem(icon: Icon(Icons.calendar_month), label: ''),
           BottomNavigationBarItem(icon: Icon(Icons.assignment), label: ''),
+          BottomNavigationBarItem(icon: Icon(Icons.class_), label: ''),
         ],
         onTap: (index) {
-          // TODO: Implement navigation
+          switch (index) {
+            case 0:
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder:
+                      (context) => StudentDashboardPage(
+                        session: session,
+                        student: student,
+                      ),
+                ),
+              );
+              break;
+            case 4:
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder:
+                      (context) => StudentClassroomsPage(
+                        session: session,
+                        student: student,
+                      ),
+                ),
+              );
+              break;
+          }
         },
       ),
+    );
+  }
+}
+
+class StudentDashboardPage extends StatelessWidget {
+  final User student;
+  final Session session;
+
+  const StudentDashboardPage({
+    super.key,
+    required this.student,
+    required this.session,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return StudentBaseLayout(
+      title: 'Dashboard',
+      student: student,
+      session: session,
+      currentIndex: 0,
+      body: Center(child: Text('Dashboard Content')),
+    );
+  }
+}
+
+class StudentClassroomsPage extends StatelessWidget {
+  final Session session;
+  final User student;
+
+  const StudentClassroomsPage({
+    super.key,
+    required this.session,
+    required this.student,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return StudentBaseLayout(
+      title: 'Classrooms',
+      student: student,
+      session: session,
+      currentIndex: 4,
+      body: Center(child: Text('Classrooms Content')),
+    );
+  }
+}
+
+class StudentSchedulePage extends StatelessWidget {
+  final Session session;
+  final User student;
+
+  const StudentSchedulePage({
+    super.key,
+    required this.session,
+    required this.student,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return StudentBaseLayout(
+      title: 'Schedule',
+      student: student,
+      session: session,
+      currentIndex: 2,
+      body: Center(child: Text('Schedule Content')),
     );
   }
 }

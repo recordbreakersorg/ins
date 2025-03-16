@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:ins/backend/models.dart';
 import '../../backend/sessions.dart';
 import '../dashboard/student.dart';
+import './up.dart';
 
 class SigninChooserPage extends StatelessWidget {
   const SigninChooserPage({super.key});
@@ -55,7 +56,12 @@ class SigninChooserPage extends StatelessWidget {
                             SizedBox(height: 24),
                             ElevatedButton(
                               onPressed: () {
-                                Navigator.pushNamed(context, '/signup');
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => SignupChooserPage(),
+                                  ),
+                                );
                               },
                               child: Padding(
                                 padding: const EdgeInsets.symmetric(
@@ -97,7 +103,9 @@ class StudentSchoolCard extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => StudentDashboardPage(student: user),
+                builder:
+                    (context) =>
+                        StudentDashboardPage(session: session, student: user),
               ),
             );
           },
