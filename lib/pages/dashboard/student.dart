@@ -183,11 +183,11 @@ class StudentDashboardPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StudentBaseLayout(
-      title: 'Dashboard',
+      title: 'Dashboards are here',
       student: student,
       session: session,
       currentIndex: 0,
-      body: Center(child: Text('Dashboard Content')),
+      body: Center(child: Card(child: Text("hello"))),
     );
   }
 }

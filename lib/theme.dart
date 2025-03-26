@@ -27,13 +27,9 @@ ThemeData makeTheme() {
       errorContainer: Colors.red[800]!,
       onError: Colors.white,
       onErrorContainer: Colors.red[50]!,
-
-      // Neutral Colors
-      background: Colors.grey[50]!,
-      onBackground: Colors.grey[900]!,
       surface: Colors.white,
       onSurface: Colors.grey[900]!,
-      surfaceVariant: Colors.grey[100]!,
+      surfaceContainerHighest: Colors.grey[100]!,
       onSurfaceVariant: Colors.grey[700]!,
       outline: Colors.grey[400]!,
       outlineVariant: Colors.grey[300]!,
