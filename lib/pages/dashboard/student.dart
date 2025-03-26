@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../backend/models.dart';
 import 'package:google_fonts/google_fonts.dart';
+import './feeds.dart';
 
 class StudentBaseLayout extends StatelessWidget {
   final Widget body;
@@ -59,17 +60,46 @@ class StudentBaseLayout extends StatelessWidget {
             ListTile(
               leading: Icon(Icons.dashboard),
               title: Text('Dashboard'),
-              onTap: () => Navigator.pop(context),
+              onTap:
+                  () => Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder:
+                          (context) => StudentDashboardPage(
+                            session: session,
+                            student: student,
+                          ),
+                    ),
+                  ),
             ),
             ListTile(
               leading: Icon(Icons.book),
               title: Text('Courses'),
-              onTap: () => Navigator.pop(context),
+              onTap: () => Navigator.pop(context) /*Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder:
+                          (context) => StudentCoursesPage(
+                            session: session,
+                            student: student,
+                          ),
+                    ),
+                  ),*/,
             ),
             ListTile(
               leading: Icon(Icons.calendar_today),
               title: Text('Schedule'),
-              onTap: () => Navigator.pop(context),
+              onTap:
+                  () => Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder:
+                          (context) => StudentSchedulePage(
+                            session: session,
+                            student: student,
+                          ),
+                    ),
+                  ),
             ),
           ],
         ),
@@ -183,11 +213,24 @@ class StudentDashboardPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StudentBaseLayout(
-      title: 'Dashboards are here',
+      title: 'Dashboard',
       student: student,
       session: session,
       currentIndex: 0,
-      body: Center(child: Card(child: Text("hello"))),
+      body: Center(
+        child: Column(
+          children: [
+            NotificationFeedView(
+              title: "Ama made an announcement",
+              description:
+                  "Hello USS@Banana academy, just make you notice: *The school will be closed on Monday* due to the weather so please *endeavor to do your assignments before wednesday*, **NO EXCUSE**",
+              imageWebPath:
+                  "http://localhost:8080/profiles/users/67ccaf608c35a17d20904b81.png",
+              time: "12:00",
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
