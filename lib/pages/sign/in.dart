@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ins/backend/models.dart';
 import '../../backend/sessions.dart';
-import '../dashboard/student.dart';
+import '../dashboard/student/dashboard.dart';
 import './up.dart';
 
 class SigninChooserPage extends StatelessWidget {
@@ -193,7 +193,7 @@ class StudentSchoolCard extends StatelessWidget {
             ),
           ),
         );
-      }, //67d32bd5e4a0fa024c191734, ama2025-03-13-20:02:45.179607782-+0100-WAT-m=+546.656327203
+      },
     );
   }
 }
