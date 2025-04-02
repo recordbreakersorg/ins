@@ -20,7 +20,7 @@ class StudentClassroomsPage extends StatelessWidget {
       title: 'Classrooms',
       student: student,
       session: session,
-      currentIndex: 4,
+      currentIndex: 2,
       body: Center(
         child: Padding(
           padding: EdgeInsets.all(10),

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../../../backend/models.dart';
 import './base.dart';
 
-
 class StudentSchedulePage extends StatelessWidget {
   final Session session;
   final User student;
@@ -19,7 +18,7 @@ class StudentSchedulePage extends StatelessWidget {
       title: 'Schedule',
       student: student,
       session: session,
-      currentIndex: 2,
+      currentIndex: 1,
       body: Center(child: Text('Schedule Content')),
     );
   }

@@ -164,11 +164,15 @@ class StudentBaseLayout extends StatelessWidget {
         selectedItemColor: Theme.of(context).primaryColor,
         unselectedItemColor: Colors.grey,
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.dashboard), label: ''),
-          BottomNavigationBarItem(icon: Icon(Icons.announcement), label: ''),
-          BottomNavigationBarItem(icon: Icon(Icons.calendar_month), label: ''),
-          BottomNavigationBarItem(icon: Icon(Icons.assignment), label: ''),
-          BottomNavigationBarItem(icon: Icon(Icons.class_), label: ''),
+          BottomNavigationBarItem(icon: Icon(Icons.dashboard), label: 'Home'),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.calendar_month),
+            label: 'Schedule',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.class_),
+            label: 'Classrooms',
+          ),
         ],
         onTap: (index) {
           switch (index) {
@@ -184,7 +188,19 @@ class StudentBaseLayout extends StatelessWidget {
                 ),
               );
               break;
-            case 4:
+            case 1:
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder:
+                      (context) => StudentSchedulePage(
+                        session: session,
+                        student: student,
+                      ),
+                ),
+              );
+              break;
+            case 2:
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(

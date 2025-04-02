@@ -61,6 +61,38 @@ class StudentClassroomDashboardPage extends StatelessWidget {
                       color: Theme.of(context).colorScheme.outline,
                       thickness: 1,
                     ),
+                    FutureBuilder(
+                      future: classroom.getChatrooms(),
+                      builder: (context, snapshot) {
+                        if (!snapshot.hasData)
+                          return const CircularProgressIndicator();
+                        final chatrooms = snapshot.data!;
+                        return ListView.builder(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          itemCount: chatrooms.length,
+                          itemBuilder: (context, index) {
+                            final chatroom = chatrooms[index];
+                            return ListTile(
+                              title: Text(chatroom.name),
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder:
+                                        (context) => ChatPage(
+                                          session: session,
+                                          student: student,
+                                          chatroom: chatroom,
+                                        ),
+                                  ),
+                                );
+                              },
+                            );
+                          },
+                        );
+                      },
+                    ),
                   ],
                 ),
               ),

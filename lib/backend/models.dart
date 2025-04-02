@@ -61,33 +61,33 @@ class Session implements Model {
     }
   }
 
-Future<List<Classroom>> getClassrooms() async {
-  final url = Uri.parse("${get_backend_url()}/api/v1/user/classrooms");
-  try {
-    final response = await http.get(
-      url,
-      headers: {'session-id': id, 'session-token': token},
-    );
-    if (response.statusCode == 200) {
-      final data = json.decode(response.body);
-      if (data['status'] >= 0) {
-        print("Got the classrooms: ${data['classrooms']}");
-        return (data['classrooms'] as List)
-            .map((json) => Classroom.fromJson(json as Map<String, dynamic>))
-            .toList();
+  Future<List<Classroom>> getClassrooms() async {
+    final url = Uri.parse("${get_backend_url()}/api/v1/user/classrooms");
+    try {
+      final response = await http.get(
+        url,
+        headers: {'session-id': id, 'session-token': token},
+      );
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        if (data['status'] >= 0) {
+          print("Got the classrooms: ${data['classrooms']}");
+          return (data['classrooms'] as List)
+              .map((json) => Classroom.fromJson(json as Map<String, dynamic>))
+              .toList();
+        } else {
+          print("Invalid return status getting classrooms");
+          return List<Classroom>.empty();
+        }
       } else {
-        print("Invalid return status getting classrooms");
+        print("Failed to get classrooms: HTTP ${response.statusCode}");
         return List<Classroom>.empty();
       }
-    } else {
-      print("Failed to get classrooms: HTTP ${response.statusCode}");
+    } catch (e) {
+      print("An error occurred: $e");
       return List<Classroom>.empty();
     }
-  } catch (e) {
-    print("An error occurred: $e");
-    return List<Classroom>.empty();
   }
-}
 }
 
 class Profile implements Model {
@@ -216,7 +216,6 @@ class User implements Model {
   Future<School?> getSchool() async {
     return School.get(schoolId);
   }
-  
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
@@ -319,4 +318,10 @@ class Classroom implements Model {
       return null;
     }
   }
+
+  Future<List<Chatroom>> getChatrooms() {
+    return [];
+  }
 }
+
+class Chatroom extends Model {}
