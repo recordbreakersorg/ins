@@ -427,7 +427,7 @@ class Chatroom extends Model {
       );
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
-        print("----------;;;;;;${data}");
+        print("----------;;;;;;$data");
         if (data['status'] >= 0) {
           return true;
         } else {

@@ -276,26 +276,31 @@ class _MessageCardState extends State<_MessageCard> {
         constraints: BoxConstraints(
           maxWidth: MediaQuery.of(context).size.width * 0.8,
         ),
-        child: Card(
-          color: Colors.grey[200],
-          child: Padding(
-            padding: const EdgeInsets.all(12),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _buildHeader(context),
-                const SizedBox(height: 8),
-                MarkdownBody(
-                  data: widget.message.content,
-                  styleSheet: MarkdownStyleSheet(
-                    p: TextStyle(color: Colors.black, fontSize: 16),
-                  ),
+        child: Column(
+          children: [
+            SizedBox(height: 25),
+            _buildHeader(context),
+            Card(
+              color: Colors.grey[200],
+              child: Padding(
+                padding: const EdgeInsets.all(12),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(height: 8),
+                    MarkdownBody(
+                      data: widget.message.content,
+                      styleSheet: MarkdownStyleSheet(
+                        p: TextStyle(color: Colors.black, fontSize: 16),
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    _buildActionBar(),
+                  ],
                 ),
-                const SizedBox(height: 8),
-                _buildActionBar(),
-              ],
+              ),
             ),
-          ),
+          ],
         ),
       ),
     );
@@ -309,7 +314,7 @@ class _MessageCardState extends State<_MessageCard> {
           builder: (context, snapshot) {
             if (snapshot.hasError) {
               return CircleAvatar(
-                radius: 16,
+                radius: 25,
                 backgroundColor: Color.alphaBlend(
                   Colors.red.withOpacity(0.5),
                   Colors.grey[300]!,
@@ -322,7 +327,7 @@ class _MessageCardState extends State<_MessageCard> {
             }
             if (!snapshot.hasData) {
               return CircleAvatar(
-                radius: 16,
+                radius: 25,
                 backgroundColor: Colors.grey[300],
                 child: Text(
                   widget.message.senderId.substring(0, 2).toUpperCase(),
@@ -331,7 +336,7 @@ class _MessageCardState extends State<_MessageCard> {
               );
             }
             return CircleAvatar(
-              radius: 16,
+              radius: 25,
               backgroundImage: NetworkImage(snapshot.data!.profile.getPath()),
             );
           },
@@ -385,7 +390,7 @@ class _MessageCardState extends State<_MessageCard> {
                 widget.onUpvote();
               },
             ),
-            Text('$_votes'),
+            Text('$_votes', style: TextStyle(fontSize: 20)),
             IconButton(
               icon: const Icon(Icons.arrow_downward),
               onPressed: () {
