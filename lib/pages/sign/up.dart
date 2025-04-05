@@ -19,7 +19,7 @@ class _StudentSignupPageState extends State<StudentSignupPage> {
     _codeController.dispose();
     super.dispose();
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,7 +61,7 @@ class _StudentSignupPageState extends State<StudentSignupPage> {
                     SizedBox(height: 20),
                     FilledButton(
                       onPressed: () async {
-                          try {
+                        try {
                           final session = await sessionManager.signup(
                             _nameController.text,
                             _codeController.text,
@@ -72,13 +72,15 @@ class _StudentSignupPageState extends State<StudentSignupPage> {
                             );
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => SigninChooserPage()),
+                              MaterialPageRoute(
+                                builder: (context) => SigninChooserPage(),
+                              ),
                             );
                           }
                         } catch (e) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text(e.toString())),
-                          );
+                          ScaffoldMessenger.of(
+                            context,
+                          ).showSnackBar(SnackBar(content: Text(e.toString())));
                         }
                       },
                       child: Text('Signup >'),
@@ -106,30 +108,52 @@ class SignupChooserPage extends StatelessWidget {
             image: AssetImage("assets/backgrounds/welcome3.png"),
             fit: BoxFit.cover,
           ),
-        ), 
+        ),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text(
-                'Choose your role',
+                'What are you?',
                 style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 50),
               ElevatedButton(
-                onPressed: null,
-                child: Text("A teacher"),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => StudentSignupPage(),
+                    ),
+                  );
+                },
+                child: Text("A student"),
               ),
               SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => StudentSignupPage()),
+                    MaterialPageRoute(
+                      builder: (context) => StudentSignupPage(),
+                    ),
                   );
                 },
-                child: Text("A student"),
+                child: Text("A parent"),
               ),
+              SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => StudentSignupPage(),
+                    ),
+                  );
+                },
+                child: Text("A teacher"),
+              ),
+              SizedBox(height: 20),
             ],
           ),
         ),

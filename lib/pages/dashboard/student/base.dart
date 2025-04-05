@@ -4,6 +4,8 @@ import '../../../backend/models.dart';
 import './classrooms.dart';
 import './dashboard.dart';
 import './schedule.dart';
+import '../../../backend/sessions.dart';
+import '../../welcome.dart';
 
 class StudentBaseLayout extends StatelessWidget {
   final Widget body;
@@ -150,7 +152,15 @@ class StudentBaseLayout extends StatelessWidget {
             ListTile(
               leading: Icon(Icons.logout),
               title: Text('Sign Out'),
-              onTap: () => Navigator.pop(context),
+              onTap: () {
+                sessionManager.deleteSession(session);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => WelcomePage(title: "Good bye."),
+                  ),
+                );
+              },
             ),
           ],
         ),

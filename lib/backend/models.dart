@@ -68,8 +68,11 @@ class Session implements Model {
         url,
         headers: {'session-id': id, 'session-token': token},
       );
+      print({'session-id': id, 'session-token': token});
+
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
+        print(data);
         if (data['status'] >= 0) {
           print("Got the classrooms: ${data['classrooms']}");
           return (data['classrooms'] as List)
@@ -240,7 +243,7 @@ class User implements Model {
     };
   }
 
-  static Future<User?> get(String id) async {
+  static Future<User?> fromId(String id) async {
     final url = Uri.parse("${get_backend_url()}/api/v1/user/$id");
     try {
       final response = await http.get(url);
@@ -319,9 +322,157 @@ class Classroom implements Model {
     }
   }
 
-  Future<List<Chatroom>> getChatrooms() {
-    return [];
+  Future<List<Chatroom>> getChatrooms(Session session) async {
+    final url = Uri.parse(
+      "${get_backend_url()}/api/v1/classroom/$id/chatrooms",
+    );
+    try {
+      final response = await http.get(
+        url,
+        headers: {'session-id': session.id, 'session-token': session.token},
+      );
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        if (data['status'] >= 0) {
+          print("Got the chatrooms: ${data['chatrooms']}");
+          return (data['chatrooms'] as List)
+              .map((json) => Chatroom.fromJson(json as Map<String, dynamic>))
+              .toList();
+        } else {
+          print("Invalid return status getting chatrooms");
+          return List<Chatroom>.empty();
+        }
+      } else {
+        print("Failed to get chatrooms: HTTP ${response.statusCode}");
+        return List<Chatroom>.empty();
+      }
+    } catch (e) {
+      print("An error occurred: $e");
+      return List<Chatroom>.empty();
+    }
   }
 }
 
-class Chatroom extends Model {}
+class Chatroom extends Model {
+  final String id;
+  final String name;
+  final String classroomId;
+  final String type;
+  final String description;
+  Chatroom({
+    required this.id,
+    required this.name,
+    required this.classroomId,
+    required this.type,
+    required this.description,
+  });
+  factory Chatroom.fromJson(Map<String, dynamic> json) {
+    return Chatroom(
+      id: json['id'],
+      name: json['name'],
+      classroomId: json['classroom_id'],
+      type: json['type'],
+      description: json['description'],
+    );
+  }
+  @override
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'classroom_id': classroomId,
+      'type': type,
+      'description': description,
+    };
+  }
+
+  Future<List<ChatMessage>> getMessages(Session session) async {
+    final url = Uri.parse("${get_backend_url()}/api/v1/chatroom/$id/messages");
+    try {
+      final response = await http.get(
+        url,
+        headers: {'session-id': session.id, 'session-token': session.token},
+      );
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        if (data['status'] >= 0) {
+          print("Got the messages: ${data['messages']}");
+          return (data['messages'] as List)
+              .map((json) => ChatMessage.fromJson(json as Map<String, dynamic>))
+              .toList();
+        } else {
+          print("Invalid return status getting chatrooms");
+          return List<ChatMessage>.empty();
+        }
+      } else {
+        print("Failed to get chatrooms: HTTP ${response.statusCode}");
+        return List<ChatMessage>.empty();
+      }
+    } catch (e) {
+      print("An error occurred: $e");
+      return List<ChatMessage>.empty();
+    }
+  }
+
+  Future<bool> sendMessage(Session session, String content) async {
+    final url = Uri.http(
+      get_backend_base(),
+      "/api/v1/chatroom/$id/message/send",
+      {"content": content, "chatroom_id": id},
+    );
+    try {
+      final response = await http.get(
+        url,
+        headers: {'session-id': session.id, 'session-token': session.token},
+      );
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        print("----------;;;;;;${data}");
+        if (data['status'] >= 0) {
+          return true;
+        } else {
+          return false;
+        }
+      } else {
+        print("Failed to send message: HTTP ${response.statusCode}");
+        return false;
+      }
+    } catch (e) {
+      return false;
+    }
+  }
+}
+
+class ChatMessage extends Model {
+  final String id;
+  final String content;
+  final String senderId;
+  final String chatroomId;
+  final DateTime sent;
+  ChatMessage({
+    required this.id,
+    required this.content,
+    required this.senderId,
+    required this.chatroomId,
+    required this.sent,
+  });
+  factory ChatMessage.fromJson(Map<String, dynamic> json) {
+    return ChatMessage(
+      id: json['id'],
+      content: json['content'],
+      senderId: json['sender_id'],
+      chatroomId: json['chatroom_id'],
+      sent: DateTime.parse(json['sent']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'content': content,
+      'sender_id': senderId,
+      'chatroom_id': chatroomId,
+      'sent': sent.toIso8601String(),
+    };
+  }
+}

@@ -24,11 +24,10 @@ class StudentDashboardPage extends StatelessWidget {
         child: Column(
           children: [
             NotificationFeedView(
-              title: "Ama made an announcement",
+              title: "Paul sent an announcement",
               description:
-                  "Hello USS@Banana academy, just make you notice: *The school will be closed on Monday* due to the weather so please *endeavor to do your assignments before wednesday*, **NO EXCUSE**",
-              imageWebPath:
-                  "http://localhost:8080/profiles/users/67ccaf608c35a17d20904b81.png",
+                  "Just making sure you do not forget the discom on Saturday.",
+              imageWebPath: "http://localhost:8080/profiles/users/paul.jpg",
               time: "12:00",
             ),
           ],

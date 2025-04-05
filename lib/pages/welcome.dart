@@ -47,7 +47,7 @@ class WelcomePage extends StatelessWidget {
                         ),
                       );
                     },
-                    child: const Text('Login'),
+                    child: const Text('Connect'),
                   ),
                   const SizedBox(width: 20),
                   FilledButton(
@@ -59,7 +59,7 @@ class WelcomePage extends StatelessWidget {
                         ),
                       );
                     },
-                    child: const Text('Signup'),
+                    child: const Text('Register'),
                   ),
                 ],
               ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../backend/models.dart';
+import './chatroom.dart';
 
 class StudentClassroomDashboardPage extends StatelessWidget {
   final Classroom classroom;
@@ -56,16 +57,17 @@ class StudentClassroomDashboardPage extends StatelessWidget {
               child: Card.outlined(
                 child: Column(
                   children: [
-                    Text("Classrooms"),
+                    Text("Chatrooms"),
                     VerticalDivider(
                       color: Theme.of(context).colorScheme.outline,
                       thickness: 1,
                     ),
                     FutureBuilder(
-                      future: classroom.getChatrooms(),
+                      future: classroom.getChatrooms(session),
                       builder: (context, snapshot) {
-                        if (!snapshot.hasData)
+                        if (!snapshot.hasData) {
                           return const CircularProgressIndicator();
+                        }
                         final chatrooms = snapshot.data!;
                         return ListView.builder(
                           shrinkWrap: true,
@@ -75,15 +77,18 @@ class StudentClassroomDashboardPage extends StatelessWidget {
                             final chatroom = chatrooms[index];
                             return ListTile(
                               title: Text(chatroom.name),
+                              leading: Icon(Icons.announcement),
+                              subtitle: Text(chatroom.description, maxLines: 2),
                               onTap: () {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                     builder:
-                                        (context) => ChatPage(
+                                        (context) => ChatroomViewPage(
                                           session: session,
                                           student: student,
                                           chatroom: chatroom,
+                                          backMessage: classroom.name,
                                         ),
                                   ),
                                 );
