@@ -15,8 +15,6 @@ class _NameImageEditor extends StatefulWidget {
 }
 
 class _NameImageEditorState extends State<_NameImageEditor> {
-  final TextEditingController _nameController = TextEditingController();
-  bool editingName = false;
   Widget _editProfile() {
     return CircleAvatar(
       radius: 100,
@@ -27,30 +25,15 @@ class _NameImageEditorState extends State<_NameImageEditor> {
   Widget _editName() {
     return Row(
       children: [
-        AnimatedSwitcher(
-          duration: Duration(milliseconds: 400),
-          child:
-              editingName
-                  ? TextField(controller: _nameController)
-                  : Text(widget.student.name),
-        ),
-        IconButton(
-          onPressed: () {
-            setState(() {
-              editingName = !editingName;
-            });
-          },
-          icon: Icon(Icons.edit),
-        ),
+        Text(widget.student.name),
+        IconButton(onPressed: () {}, icon: Icon(Icons.edit)),
       ],
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    setState(() {
-      _nameController.text = widget.student.name;
-    });
+    setState(() {});
     return Card.outlined(
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 10, vertical: 30),
