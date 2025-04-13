@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:ins/backend/models.dart';
+import 'package:ins/backend/model.dart';
 import '../../backend/sessions.dart';
 import '../dashboard/student/dashboard.dart';
 import './up.dart';

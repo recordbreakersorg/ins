@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../backend/models.dart';
+import '../../../backend/model.dart';
 import './base.dart';
 import './feeds.dart';
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../backend/models.dart';
+import '../../../backend/model.dart';
 import './chatroom.dart';
 
 class StudentClassroomDashboardPage extends StatelessWidget {

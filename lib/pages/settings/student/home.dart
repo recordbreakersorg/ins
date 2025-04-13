@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import './base.dart';
-import '../../../backend/models.dart';
+import '../../../backend/model.dart';
 import './profile.dart';
 
 class StudentsSettingsHome extends StatelessWidget {
