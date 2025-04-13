@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import '../../../backend/models/session.dart';
-import '../../backend/models/user.dart';
 import './base.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../../../backend/models/user.dart';
 
 class StudentSchedulePage extends StatelessWidget {
   final Session session;

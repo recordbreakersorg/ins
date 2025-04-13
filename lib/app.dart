@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'pages/welcome.dart';
 import 'theme.dart';
+import './backend/sessions.dart';
 
 class InS extends StatelessWidget {
   const InS({super.key});
@@ -11,8 +12,12 @@ class InS extends StatelessWidget {
     return MaterialApp(
       title: 'Intranet of Schools',
       theme: makeTheme(),
-      home: const WelcomePage(title: 'Welcome to the Intranet of Schools'),
+      home: FutureBuilder(
+        future: sessionManager.loadSession(),
+        builder: (context, snapshot) {
+          return WelcomePage(title: 'Welcome to the Intranet of Schools');
+        },
+      ),
     );
   }
 }
-

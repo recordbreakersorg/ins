@@ -4,7 +4,6 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import './user.dart';
 import './classroom.dart';
-import './school.dart';
 
 class Session implements Model {
   final String token;

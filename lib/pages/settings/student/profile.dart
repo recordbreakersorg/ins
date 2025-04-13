@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import './base.dart';
-import '../../../backend/model.dart';
+
+import '../../../backend/models/user.dart';
+import '../../../backend/models/session.dart';
 
 class _NameImageEditor extends StatefulWidget {
   final Session session;

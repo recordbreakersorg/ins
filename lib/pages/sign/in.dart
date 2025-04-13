@@ -1,17 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:ins/backend/model.dart';
 import '../../backend/sessions.dart';
-import '../dashboard/student/dashboard.dart';
-import './up.dart';
 
-class SigninChooserPage extends StatelessWidget {
-  const SigninChooserPage({super.key});
+class SigninPage extends StatefulWidget {
+  const SigninPage({super.key});
+
+  @override
+  State<SigninPage> createState() => _SigninPageState();
+}
+
+class _SigninPageState extends State<SigninPage> {
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _codeController = TextEditingController();
+
+  @override
+  void dispose() {
+    _nameController.dispose();
+    _codeController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: DecoratedBox(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage("assets/backgrounds/welcome3.png"),
             fit: BoxFit.cover,
@@ -20,66 +32,61 @@ class SigninChooserPage extends StatelessWidget {
         child: Center(
           child: Padding(
             padding: EdgeInsets.all(20.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children:
-                  sessionManager.sessions.isNotEmpty
-                      ? sessionManager.sessions.map((session) {
-                        return StudentSchoolCard(session: session);
-                      }).toList()
-                      : <Widget>[
-                        Column(
-                          children: [
-                            Icon(
-                              Icons.account_circle_outlined,
-                              size: 120,
-                              color: Color.fromARGB(100, 10, 10, 10),
-                            ),
-                            SizedBox(height: 24),
-                            Text(
-                              'No account found',
-                              style: GoogleFonts.lato(
-                                fontSize: 28,
-                                color: Color.fromARGB(100, 10, 10, 10),
-                                fontWeight: FontWeight.bold,
+            child: Card(
+              margin: EdgeInsets.all(20.0),
+              child: Padding(
+                padding: EdgeInsets.all(16.0),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    TextField(
+                      controller: _nameController,
+                      decoration: InputDecoration(
+                        labelText: 'Your Name',
+                        prefixIcon: Icon(Icons.person),
+                        fillColor: Theme.of(context).colorScheme.inversePrimary,
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    TextField(
+                      controller: _codeController,
+                      decoration: InputDecoration(
+                        labelText: 'Your code',
+                        prefixIcon: Icon(Icons.lock),
+                        fillColor: Theme.of(context).colorScheme.inversePrimary,
+                      ),
+                      maxLength: 14,
+                    ),
+                    SizedBox(height: 20),
+                    FilledButton(
+                      onPressed: () async {
+                        try {
+                          final session = await sessionManager.signin(
+                            _nameController.text,
+                            _codeController.text,
+                          );
+                          if (session != null) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text("Successfully signed up")),
+                            );
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => SigninChooserPage(),
                               ),
-                            ),
-                            SizedBox(height: 12),
-                            Text(
-                              'Please go to the signup page to create an account',
-                              textAlign: TextAlign.center,
-                              style: GoogleFonts.lato(
-                                fontSize: 16,
-                                color: Color.fromARGB(100, 10, 10, 10),
-                              ),
-                            ),
-                            SizedBox(height: 24),
-                            ElevatedButton(
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => SignupChooserPage(),
-                                  ),
-                                );
-                              },
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 24,
-                                  vertical: 12,
-                                ),
-                                child: Text(
-                                  'Sign Up',
-                                  style: GoogleFonts.lato(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
+                            );
+                          }
+                        } catch (e) {
+                          ScaffoldMessenger.of(
+                            context,
+                          ).showSnackBar(SnackBar(content: Text(e.toString())));
+                        }
+                      },
+                      child: Text('Signin >'),
+                    ),
+                  ],
+                ),
+              ),
             ),
           ),
         ),
@@ -88,112 +95,62 @@ class SigninChooserPage extends StatelessWidget {
   }
 }
 
-class StudentSchoolCard extends StatelessWidget {
-  final Session session;
-  const StudentSchoolCard({super.key, required this.session});
+class SigninChooserPage extends StatelessWidget {
+  const SigninChooserPage({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: session.getUser(),
-      builder: (context, snapshot) {
-        if (!snapshot.hasData) return const CircularProgressIndicator();
-        final user = snapshot.data!;
-        return GestureDetector(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder:
-                    (context) =>
-                        StudentDashboardPage(session: session, student: user),
-              ),
-            );
-          },
-          child: Card(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(5),
-            ),
-            clipBehavior: Clip.antiAliasWithSaveLayer,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.all(15),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(45),
-                        child: Image.network(
-                          user.profile.getPath(),
-                          height: 100,
-                          width: 100,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      Container(width: 10),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Text(
-                              user.name,
-                              style: GoogleFonts.lato(
-                                fontSize: 20,
-                                fontWeight: FontWeight.w700,
-                              ).copyWith(
-                                color: const Color.fromRGBO(55, 71, 79, 1),
-                              ),
-                            ),
-                            Container(height: 5),
-                            Text(
-                              user.role,
-                              style: GoogleFonts.lato(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w400,
-                              ).copyWith(
-                                color: const Color.fromRGBO(158, 158, 158, 1),
-                              ),
-                            ),
-                            // Add some spacing between the subtitle and the text
-                            Container(height: 5),
-                            // Add a text widget to display some text
-                            FutureBuilder(
-                              future: user.getSchool(),
-                              builder: (context, snapshot) {
-                                if (!snapshot.hasData) {
-                                  return const CircularProgressIndicator();
-                                } else {
-                                  final school = snapshot.data!;
-                                  return Text(
-                                    school.name,
-                                    maxLines: 2,
-                                    style: GoogleFonts.lato(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w400,
-                                    ).copyWith(
-                                      color: const Color.fromRGBO(
-                                        97,
-                                        97,
-                                        97,
-                                        1,
-                                      ),
-                                    ),
-                                  );
-                                }
-                              },
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+    return Scaffold(
+      body: DecoratedBox(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/backgrounds/welcome3.png"),
+            fit: BoxFit.cover,
           ),
-        );
-      },
+        ),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                'What are you?',
+                style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: 50),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => SigninPage()),
+                  );
+                },
+                child: Text("A student"),
+              ),
+              SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => SigninPage()),
+                  );
+                },
+                child: Text("A parent"),
+              ),
+              SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => SigninPage()),
+                  );
+                },
+                child: Text("A teacher"),
+              ),
+              SizedBox(height: 20),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

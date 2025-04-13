@@ -1,27 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import '../../../backend/model.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
+import '../../../backend/models/chatroom.dart';
+import '../../../backend/models/user.dart';
+import '../../../backend/models/session.dart';
 
-class ChatroomViewPage extends StatefulWidget {
+class ChatthreadViewPage extends StatefulWidget {
   final Session session;
   final User student;
   final Chatroom chatroom;
   final String backMessage;
+  final ChatThread thread;
 
-  const ChatroomViewPage({
+  const ChatthreadViewPage({
     super.key,
     required this.session,
     required this.student,
     required this.chatroom,
+    required this.thread,
     required this.backMessage,
   });
 
   @override
-  State<ChatroomViewPage> createState() => _ChatroomViewPageState();
+  State<ChatthreadViewPage> createState() => _ChatthreadViewPageState();
 }
 
-class _ChatroomViewPageState extends State<ChatroomViewPage> {
+class _ChatthreadViewPageState extends State<ChatthreadViewPage> {
   final TextEditingController _messageController = TextEditingController();
   final ScrollController _scrollController = ScrollController();
   final List<ChatMessage> _messages = [];
@@ -33,7 +37,8 @@ class _ChatroomViewPageState extends State<ChatroomViewPage> {
   }
 
   Future<void> _loadInitialMessages() async {
-    final messages = await widget.chatroom.getMessages(widget.session);
+    final mainThread = await widget.chatroom.getThread(widget.session);
+    final messages = await mainThread.getMessages(widget.session);
     setState(() => _messages.addAll(messages));
   }
 
@@ -147,7 +152,7 @@ class _ChatroomViewPageState extends State<ChatroomViewPage> {
   Future<void> _sendMessage() async {
     final content = _messageController.text.trim();
     if (content.isEmpty) return;
-    if (!await widget.chatroom.sendMessage(widget.session, content)) {
+    if (!await widget.thread.sendMessage(widget.session, content)) {
       return;
     }
 
@@ -155,7 +160,8 @@ class _ChatroomViewPageState extends State<ChatroomViewPage> {
       id: widget.student.id,
       content: content,
       senderId: widget.student.id,
-      chatroomId: widget.chatroom.id,
+      threadId: widget.thread.id,
+      childThreadID: null,
       sent: DateTime.now(),
     );
 
@@ -401,6 +407,39 @@ class _MessageCardState extends State<_MessageCard> {
           ],
         ),
       ],
+    );
+  }
+}
+
+class ChatroomViewPage extends StatelessWidget {
+  final User student;
+  final Session session;
+  final Chatroom chatroom;
+  final String backMessage;
+  const ChatroomViewPage({
+    super.key,
+    required this.student,
+    required this.session,
+    required this.chatroom,
+    required this.backMessage,
+  });
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+      future: chatroom.getThread(session),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return ChatthreadViewPage(
+            session: session,
+            student: student,
+            chatroom: chatroom,
+            thread: snapshot.data!,
+            backMessage: backMessage,
+          );
+        } else {
+          return CircularProgressIndicator();
+        }
+      },
     );
   }
 }

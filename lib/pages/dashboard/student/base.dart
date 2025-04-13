@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../../../backend/model.dart';
 import './classrooms.dart';
 import './dashboard.dart';
 import './schedule.dart';
 import '../../../backend/sessions.dart';
 import '../../welcome.dart';
 import '../../settings/student/home.dart';
+import '../../../backend/models/session.dart';
+import '../../../backend/models/user.dart';
 
 AppBar StudentAppBar(String title, Session session, User student) {
   return AppBar(
@@ -165,7 +166,7 @@ class StudentBaseLayout extends StatelessWidget {
               leading: Icon(Icons.logout),
               title: Text('Sign Out'),
               onTap: () {
-                sessionManager.deleteSession(session);
+                sessionManager.clearSession();
                 Navigator.push(
                   context,
                   MaterialPageRoute(

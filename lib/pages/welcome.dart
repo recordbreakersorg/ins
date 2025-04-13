@@ -1,19 +1,15 @@
 import 'package:flutter/material.dart';
-import 'sign/up.dart';
-import 'sign/in.dart';
+import './sign/in.dart';
+import './sign/up.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class WelcomePage extends StatelessWidget {
-  const WelcomePage({super.key, required this.title});
   final String title;
+  const WelcomePage({super.key, required this.title});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //appBar: AppBar(
-      //  backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-      //  title: Text(title),
-      //),
       body: DecoratedBox(
         decoration: BoxDecoration(
           image: DecorationImage(
@@ -42,9 +38,7 @@ class WelcomePage extends StatelessWidget {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(
-                          builder: (context) => SigninChooserPage(),
-                        ),
+                        MaterialPageRoute(builder: (context) => SigninPage()),
                       );
                     },
                     child: const Text('Connect'),
@@ -54,9 +48,7 @@ class WelcomePage extends StatelessWidget {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(
-                          builder: (context) => SignupChooserPage(),
-                        ),
+                        MaterialPageRoute(builder: (context) => SignupPage()),
                       );
                     },
                     child: const Text('Register'),

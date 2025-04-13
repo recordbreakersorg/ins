@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import './base.dart';
-import '../../../backend/model.dart';
 import './profile.dart';
+import '../../../backend/models/user.dart';
+import '../../../backend/models/session.dart';
 
 class StudentsSettingsHome extends StatelessWidget {
   final Session session;

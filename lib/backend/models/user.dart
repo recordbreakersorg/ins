@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import '../backend.dart';
 import '../model.dart';
 import './profile.dart';
+import './school.dart';
 
 class UserContact implements Model {
   final String? email;
@@ -80,6 +81,43 @@ class User implements Model {
     } catch (e) {
       print("An error occurred: $e");
       return null;
+    }
+  }
+
+  static Future<User> create(
+    String username,
+    String name,
+    String password,
+    String role,
+    DateTime dob,
+  ) async {
+    Uri url = Uri.parse("${get_backend_url()}/api/v1/user/create");
+    final queryParams = {
+      'username': username,
+      'name': name,
+      'password': password,
+      'role': role,
+      'dob': dob.toIso8601String(),
+    };
+    url = url.replace(queryParameters: queryParams);
+
+    try {
+      final response = await http.get(
+        url,
+        headers: {'Content-Type': 'application/json'},
+      );
+
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        if (data['status'] >= 0) {
+          return User.fromJson(data['user']);
+        }
+        throw Exception("Failed to create user: ${data['message']}");
+      } else {
+        throw Exception("Failed to create user: HTTP ${response.statusCode}");
+      }
+    } catch (e) {
+      throw Exception("An error occurred: $e");
     }
   }
 }

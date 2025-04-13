@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../dashboard/student/base.dart';
-import '../../../backend/model.dart';
 import '../../dashboard/student/classrooms.dart';
 import '../../dashboard/student/dashboard.dart';
 import '../../dashboard/student/schedule.dart';
 import '../../../backend/sessions.dart';
 import '../../welcome.dart';
+import '../../../backend/models/user.dart';
+import '../../../backend/models/session.dart';
 
 class StudentSettingsBaseLayout extends StatelessWidget {
   final Widget body;
@@ -122,7 +123,7 @@ class StudentSettingsBaseLayout extends StatelessWidget {
               leading: Icon(Icons.logout),
               title: Text('Sign Out'),
               onTap: () {
-                sessionManager.deleteSession(session);
+                sessionManager.clearSession();
                 Navigator.push(
                   context,
                   MaterialPageRoute(

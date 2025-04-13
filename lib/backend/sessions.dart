@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
-import 'model.dart';
+import './models/session.dart';
 
 class SessionManager {
   static const String _sessionKey = 'session';
@@ -85,6 +85,10 @@ class SessionManager {
   Future<void> logout() async {
     _session = null;
     await _saveSession();
+  }
+
+  bool hasSession() {
+    return session != null;
   }
 }
 

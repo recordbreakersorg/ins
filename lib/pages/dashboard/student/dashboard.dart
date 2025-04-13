@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../../backend/model.dart';
 import './base.dart';
 import './feeds.dart';
+import '../../../backend/models/user.dart';
+import '../../../backend/models/session.dart';
 
 class StudentDashboardPage extends StatelessWidget {
   final User student;

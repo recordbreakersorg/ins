@@ -1,9 +1,11 @@
 import 'app.dart';
-import 'backend/sessions.dart';
 import 'package:flutter/material.dart';
 
-void main() {
-  sessionManager.loadSessions().then((_) {
-    runApp(const InS());
-  });
+void main() async {
+  //WidgetsFlutterBinding.ensureInitialized();
+
+  //print("session loaded");
+  //await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  //print("Running");
+  runApp(const InS());
 }
