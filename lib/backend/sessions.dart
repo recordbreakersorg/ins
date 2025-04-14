@@ -1,4 +1,5 @@
 import 'dart:convert';
+import './backend.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import './models/session.dart';
@@ -25,11 +26,15 @@ class SessionManager {
   }
 
   Future<Session?> signin(String name, String password) async {
-    final Uri url = Uri.http('localhost:8080', '/api/v1/session/signin', {
-      'name': name,
-      'password': password,
-    });
-
+    final String backendUrl = get_backend_url();
+    final uri = Uri.parse(backendUrl);
+    final Uri url = Uri(
+      scheme: uri.scheme,
+      host: uri.host,
+      port: uri.port,
+      path: '/api/v1/session/signin',
+      queryParameters: {'name': name, 'password': password},
+    );
     try {
       final http.Response response = await http.get(url);
 

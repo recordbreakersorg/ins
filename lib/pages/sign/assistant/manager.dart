@@ -74,7 +74,8 @@ class SignupAssistantState {
     await prefs.remove('signup_assistant_state');
   }
 
-  Future<User> createAccount() {
+  Future<User> createAccount() async {
+    await Future.delayed(const Duration(seconds: 2));
     return User.create(username!, name!, password!, role!, dob!);
   }
 }

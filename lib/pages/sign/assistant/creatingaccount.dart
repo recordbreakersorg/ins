@@ -1,126 +1,153 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import './base.dart';
 import './manager.dart';
 
 class CreatingAccountPage extends StatefulWidget {
   final SignupAssistantState assistantState;
+
+  const CreatingAccountPage({super.key, required this.assistantState});
+
   @override
   State<CreatingAccountPage> createState() => _CreatingAccountPageState();
-  const CreatingAccountPage({super.key, required this.assistantState});
-  void onAccountCreated(BuildContext context) {
-    // Handle account creation success
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(
-        builder:
-            (context) => AssistantBasePage(
-              body: Center(child: Text('Account created successfully!')),
-              title: Text("Success"),
-            ),
-      ),
-    );
-  }
-
-  void onAccountCreationFailed(BuildContext context) {
-    // Handle account creation failure
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('Failed to create account. Please try again.')),
-    );
-  }
 }
 
 class _CreatingAccountPageState extends State<CreatingAccountPage> {
+  late final Future<void> _createAccountFuture;
   String _currentMessage = 'Setting up your new account...';
+  Timer? _messageTimer;
+  int _messageIndex = 0;
+
+  final List<String> _messages = const [
+    'Preparing your workspace...',
+    'Configuring settings...',
+    'Almost there...',
+    'Just a few more moments...',
+    'Creating your profile...',
+    'Finalizing your account...',
+    'Setting up your preferences...',
+    'Loading your dashboard...',
+  ];
 
   @override
   void initState() {
     super.initState();
+    _createAccountFuture = widget.assistantState.createAccount();
     _startMessageCycle();
   }
 
   void _startMessageCycle() {
-    int messageIndex = 0;
-    final messages = [
-      'Preparing your workspace...',
-      'Configuring settings...',
-      'Almost there...',
-      'Just a few more moments...',
-      'Creating your profile...',
-      'Finalizing your account...',
-      'Setting up your preferences...',
-      'Loading your dashboard...',
-    ];
-
-    Timer.periodic(const Duration(seconds: 3), (timer) {
+    _messageTimer = Timer.periodic(const Duration(seconds: 3), (timer) {
+      if (!mounted) {
+        timer.cancel();
+        return;
+      }
       setState(() {
-        _currentMessage = messages[messageIndex];
-        messageIndex = (messageIndex + 1) % messages.length;
+        _currentMessage = _messages[_messageIndex];
+        _messageIndex = (_messageIndex + 1) % _messages.length;
       });
     });
   }
 
   @override
+  void dispose() {
+    _messageTimer?.cancel();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return AssistantBasePage(
-      title: Text("Creating you account"),
+      title: const Text("Creating your account"),
       body: FutureBuilder(
-        future: widget.assistantState.createAccount(),
+        future: _createAccountFuture,
         builder: (context, snapshot) {
-          if (snapshot.hasError) {
-            widget.onAccountCreationFailed(context);
-            return Center(
-              child: Text(
-                'Error: ${snapshot.error}',
-                style: Theme.of(context).textTheme.titleLarge,
-              ),
-            );
-          }
-          if (!snapshot.hasData) {
-            return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const CircularProgressIndicator(),
-                  const SizedBox(height: 24),
-                  Text(
-                    'Creating your account...',
-                    style: Theme.of(context).textTheme.titleLarge,
-                    textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(height: 16),
-                  Text(
-                    _currentMessage,
-                    style: Theme.of(context).textTheme.bodyMedium,
-                    textAlign: TextAlign.center,
-                  ),
-                ],
-              ),
-            );
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return _buildLoadingContent();
           }
 
-          return Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Icon(Icons.check_circle, size: 64, color: Colors.green),
-                const SizedBox(height: 24),
-                Text(
-                  'Account created successfully!',
-                  style: Theme.of(context).textTheme.titleLarge,
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: 16),
-                Text(
-                  'Welcome to your new account!',
-                  style: Theme.of(context).textTheme.bodyMedium,
-                  textAlign: TextAlign.center,
-                ),
-              ],
-            ),
-          );
+          if (snapshot.hasError) {
+            return _buildErrorContent(snapshot.error);
+          }
+
+          return _buildSuccessContent();
         },
+      ),
+    );
+  }
+
+  Widget _buildLoadingContent() {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const CircularProgressIndicator(),
+          const SizedBox(height: 24),
+          Text(
+            'Creating your account...',
+            style: Theme.of(context).textTheme.titleLarge,
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 16),
+          Text(
+            _currentMessage,
+            style: Theme.of(context).textTheme.bodyMedium,
+            textAlign: TextAlign.center,
+          ),
+          SizedBox(height: 100),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildErrorContent(Object? error) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 26),
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Icon(Icons.error_outline, size: 200, color: Colors.red),
+            const SizedBox(height: 24),
+            Text(
+              'Account creation failed',
+              style: Theme.of(
+                context,
+              ).textTheme.headlineLarge?.copyWith(color: Colors.red),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 16),
+            Text(
+              '$error',
+              style: Theme.of(context).textTheme.bodyMedium,
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(height: 100),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSuccessContent() {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Icon(Icons.check_circle, size: 200, color: Colors.green),
+          const SizedBox(height: 24),
+          Text(
+            'Account created successfully!',
+            style: Theme.of(context).textTheme.titleLarge,
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 16),
+          Text(
+            'Welcome to your new account!',
+            style: Theme.of(context).textTheme.bodyMedium,
+            textAlign: TextAlign.center,
+          ),
+        ],
       ),
     );
   }

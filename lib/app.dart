@@ -11,7 +11,9 @@ class InS extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Intranet of Schools',
-      theme: makeTheme(),
+      darkTheme: themeManager.darkTheme,
+      theme: themeManager.lightTheme,
+      themeMode: themeManager.themeMode,
       home: FutureBuilder(
         future: sessionManager.loadSession(),
         builder: (context, snapshot) {

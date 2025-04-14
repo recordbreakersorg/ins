@@ -3,7 +3,6 @@ import 'package:http/http.dart' as http;
 import '../backend.dart';
 import '../model.dart';
 import './profile.dart';
-import './school.dart';
 
 class UserContact implements Model {
   final String? email;
@@ -21,47 +20,59 @@ class UserContact implements Model {
   }
 }
 
-class User implements Model {
+class UserInfo implements Model {
   final String name;
-  final String id;
-  final String schoolId;
-  final Profile profile;
-  final UserContact contact;
   final String role;
+  final DateTime birth;
+  const UserInfo({required this.name, required this.role, required this.birth});
+  @override
+  Map<String, dynamic> toJson() {
+    return {'name': name, 'role': role, 'birth': birth.toIso8601String()};
+  }
+
+  static UserInfo fromJson(Map<String, dynamic> json) {
+    return UserInfo(
+      name: json['name'],
+      role: json['role'],
+      birth: DateTime.parse(json['birth']),
+    );
+  }
+}
+
+class User implements Model {
+  final String username;
+  final String id;
+  final Profile? profile;
+  final UserContact contact;
+  final UserInfo info;
 
   User({
-    required this.name,
+    required this.username,
     required this.id,
-    required this.schoolId,
     required this.profile,
     required this.contact,
-    required this.role,
+    required this.info,
   });
-
-  Future<School?> getSchool() async {
-    return School.get(schoolId);
-  }
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
-      name: json['name'],
+      username: json['username'],
       id: json['id'],
-      schoolId: json['school_id'],
-      profile: Profile.fromJson(json['profile']),
+      profile:
+          json['profile'] != null ? Profile.fromJson(json['profile']) : null,
       contact: UserContact.fromJson(json['contact']),
-      role: json['role'],
+      info: UserInfo.fromJson(json['info']),
     );
   }
 
   @override
   Map<String, dynamic> toJson() {
     return {
-      'name': name,
+      'username': username,
       'id': id,
-      'school_id': schoolId,
-      'profile': profile.toJson(),
+      'profile': profile?.toJson(),
       'contact': contact.toJson(),
-      'role': role,
+      'info': info.toJson(),
     };
   }
 
@@ -91,33 +102,29 @@ class User implements Model {
     String role,
     DateTime dob,
   ) async {
-    Uri url = Uri.parse("${get_backend_url()}/api/v1/user/create");
-    final queryParams = {
-      'username': username,
-      'name': name,
-      'password': password,
-      'role': role,
-      'dob': dob.toIso8601String(),
-    };
-    url = url.replace(queryParameters: queryParams);
-
+    late http.Response response;
     try {
-      final response = await http.get(
-        url,
-        headers: {'Content-Type': 'application/json'},
-      );
-
-      if (response.statusCode == 200) {
-        final data = json.decode(response.body);
-        if (data['status'] >= 0) {
-          return User.fromJson(data['user']);
-        }
-        throw Exception("Failed to create user: ${data['message']}");
-      } else {
-        throw Exception("Failed to create user: HTTP ${response.statusCode}");
-      }
+      response = await apiRequest("user/create", <String, String>{
+        'name': name,
+        'password': password,
+        'username': username,
+        "role": role,
+        "dob": dob.toIso8601String(),
+      }, null);
     } catch (e) {
-      throw Exception("An error occurred: $e");
+      throw Exception(
+        "An error occurred please check your internet connection: $e",
+      );
+    }
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+      print("Got data $data");
+      if (data['status'] >= 0) {
+        return User.fromJson(data['user']);
+      }
+      throw Exception("Failed to create user: ${data['message']}");
+    } else {
+      throw Exception("Failed to create user server error.");
     }
   }
 }

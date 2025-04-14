@@ -227,10 +227,10 @@ class _PasswordChooserPageState extends State<PasswordChooserPage> {
             _buildValidationItem('Number (0-9)', _hasNumber),
             _buildValidationItem('Special character (!@#...)', _hasSpecial),
             const SizedBox(height: 10),
-            TextButton(
-              onPressed: _showPasswordSuggestions,
-              child: const Text('Suggest a secure password'),
-            ),
+            //TextButton(
+            //  onPressed: _showPasswordSuggestions,
+            //  child: const Text('Suggest a secure password'),
+            //),
             const Spacer(),
             SizedBox(
               width: double.infinity,
