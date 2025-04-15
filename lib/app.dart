@@ -17,7 +17,18 @@ class InS extends StatelessWidget {
       home: FutureBuilder(
         future: sessionManager.loadSession(),
         builder: (context, snapshot) {
-          print("loaded session ${sessionManager.session}");
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Scaffold(
+              body: Center(child: CircularProgressIndicator()),
+            );
+          }
+
+          // Handle error state
+          if (snapshot.hasError) {
+            return Scaffold(
+              body: Center(child: Text('Error: ${snapshot.error}')),
+            );
+          }
           return WelcomePage(title: 'Welcome to the Intranet of Schools');
         },
       ),

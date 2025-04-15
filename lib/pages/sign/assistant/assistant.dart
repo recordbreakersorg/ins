@@ -116,7 +116,9 @@ class _SignupAssistantPageState extends State<SignupAssistantPage> {
       final user = await _assistantState.createAccount();
       await SignupAssistantState.clear();
       if (!mounted) return;
-      models.Session session = await user.setNewSession();
+      models.Session session = await user.setNewSession(
+        _assistantState.password!,
+      );
 
       Navigator.pushReplacement(
         context,

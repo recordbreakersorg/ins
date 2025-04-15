@@ -56,9 +56,10 @@ class User implements Model {
     required this.info,
   });
 
-  Future<Session> setNewSession() async {
+  Future<Session> setNewSession(String password) async {
     final response = await apiQuery("session/create", <String, String>{
-      'user': id,
+      'username': username,
+      'password': password,
     }, null);
     if (response['status'] < 0) {
       throw Exception("Failed to create session: ${response['message']}");
