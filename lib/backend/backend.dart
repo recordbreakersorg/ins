@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
 import './models/session.dart';
 import 'package:http/http.dart' as http;
@@ -12,7 +14,6 @@ String get_backend_url() {
 // ignore: non_constant_identifier_names
 String get_backend_base() {
   if (kDebugMode) {
-    print("Debug mode");
     return "192.168.1.191:8080";
   } else {
     return "ins-backend.up.railway.app";
@@ -35,4 +36,17 @@ Future<http.Response> apiRequest(
       },
     },
   );
+}
+
+Future<Map<String, dynamic>> apiQuery(
+  String url,
+  Map<String, dynamic> data,
+  Session? session,
+) async {
+  final response = await apiRequest(url, data, session);
+  if (response.statusCode == 200) {
+    return jsonDecode(response.body);
+  } else {
+    throw Exception('Failed to load data');
+  }
 }

@@ -1,7 +1,9 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:ins/backend/sessions.dart';
 import '../backend.dart';
 import '../model.dart';
+import './session.dart';
 import './profile.dart';
 
 class UserContact implements Model {
@@ -53,6 +55,18 @@ class User implements Model {
     required this.contact,
     required this.info,
   });
+
+  Future<Session> setNewSession() async {
+    final response = await apiQuery("session/create", <String, String>{
+      'user': id,
+    }, null);
+    if (response['status'] < 0) {
+      throw Exception("Failed to create session: ${response['message']}");
+    }
+    final session = Session.fromJson(response['session']);
+    await sessionManager.setSession(session);
+    return session;
+  }
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(

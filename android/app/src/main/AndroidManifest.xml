@@ -4,7 +4,7 @@
 
     <!-- Network security configuration for HTTP -->
     <application
-        android:label="ins"
+        android:label="IS"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
         android:networkSecurityConfig="@xml/network_security_config">  <!-- Added this line -->

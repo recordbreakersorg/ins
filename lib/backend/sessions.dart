@@ -7,8 +7,7 @@ import './models/session.dart';
 class SessionManager {
   static const String _sessionKey = 'session';
   Session? _session;
-  Session? get sessions => _session;
-  static Session? session;
+  Session? get session => _session;
 
   Future<void> loadSession() async {
     final prefs = await SharedPreferences.getInstance();
@@ -55,32 +54,6 @@ class SessionManager {
     }
   }
 
-  Future<Session?> signup(String name, String password) async {
-    final Uri url = Uri.http('localhost:8080', '/api/v1/session/signup', {
-      'name': name,
-      'password': password,
-    });
-
-    try {
-      final http.Response response = await http.get(url);
-
-      if (response.statusCode == 200) {
-        final jsonData = json.decode(response.body);
-        if (jsonData['status'] < 0) {
-          throw Exception("Failed to signup session: ${jsonData['message']}");
-        }
-        final newSession = Session.fromJson(jsonData['session']);
-        _session = newSession;
-        await _saveSession();
-        return newSession;
-      } else {
-        throw Exception('Request failed with status: ${response.statusCode}');
-      }
-    } catch (e) {
-      throw Exception('An error occurred: $e');
-    } // Construct the URL using http (not https)
-  }
-
   Future<void> clearSession() async {
     _session = null;
     final prefs = await SharedPreferences.getInstance();
@@ -94,6 +67,11 @@ class SessionManager {
 
   bool hasSession() {
     return session != null;
+  }
+
+  Future<void> setSession(Session session) async {
+    _session = session;
+    await _saveSession();
   }
 }
 

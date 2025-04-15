@@ -17,6 +17,7 @@ class InS extends StatelessWidget {
       home: FutureBuilder(
         future: sessionManager.loadSession(),
         builder: (context, snapshot) {
+          print("loaded session ${sessionManager.session}");
           return WelcomePage(title: 'Welcome to the Intranet of Schools');
         },
       ),

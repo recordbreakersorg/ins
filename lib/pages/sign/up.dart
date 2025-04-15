@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import './assistant/home.dart';
+import './assistant/assistant.dart';
 
 class SignupPage extends StatelessWidget {
   const SignupPage({super.key});
@@ -24,8 +24,13 @@ class SignupPage extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
                     FilledButton(
-                      onPressed: () async {
-                        await launchAssistant(context);
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => SignupAssistantPage(),
+                          ),
+                        );
                       },
                       child: Text('Manual Signup >'),
                     ),
