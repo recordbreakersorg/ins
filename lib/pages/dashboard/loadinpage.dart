@@ -1,33 +1,24 @@
+import 'dart:nativewrappers/_internal/vm/lib/async_patch.dart';
+
+import 'package:flutter/material.dart';
 
 class LoadingPage extends StatefulWidget {
-  final SignupAssistantState assistantState;
+  final List<String> messages;
 
-  const CreatingAccountPage({super.key, required this.assistantState});
+  const LoadingPage({super.key, required this.messages});
 
   @override
-  State<CreatingAccountPage> createState() => _CreatingAccountPageState();
+  State<LoadingPage> createState() => _LoadingPageState();
 }
-class LoadinPageState extends State<CreatingAccountPage> {
-  late final Future<User> _createAccountFuture;
+
+class _LoadinPageState extends State<LoadingPage> {
   String _currentMessage = 'Setting up your new account...';
   Timer? _messageTimer;
   int _messageIndex = 0;
 
-  final List<String> _messages = const [
-    'Preparing your workspace...',
-    'Configuring settings...',
-    'Almost there...',
-    'Just a few more moments...',
-    'Creating your profile...',
-    'Finalizing your account...',
-    'Setting up your preferences...',
-    'Loading your dashboard...',
-  ];
-
   @override
   void initState() {
     super.initState();
-    _createAccountFuture = widget.assistantState.createAccount();
     _startMessageCycle();
   }
 
