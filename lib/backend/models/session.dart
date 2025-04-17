@@ -26,26 +26,12 @@ class Session implements Model {
     return {'token': token, 'user_id': userId, 'id': id};
   }
 
-  Future<User?> getUser() async {
-    final url = Uri.parse("${get_backend_url()}/api/v1/user");
-    try {
-      final response = await http.get(
-        url,
-        headers: {'session-id': id, 'session-token': token},
-      );
-      if (response.statusCode == 200) {
-        final data = json.decode(response.body);
-        if (data['status'] >= 0) {
-          return User.fromJson(data['user']);
-        }
-        print("Failed to get user: ${data['message']}");
-        return null;
-      }
-      print("Failed to get user: HTTP ${response.statusCode}");
-      return null;
-    } catch (e) {
-      print("An error occurred: $e");
-      return null;
+  Future<User> getUser() async {
+    final data = await apiQuery("user", {}, this);
+    if (data['status'] >= 0) {
+      return User.fromJson(data['user']);
+    } else {
+      throw Exception("Could not find your user login session, sorry");
     }
   }
 

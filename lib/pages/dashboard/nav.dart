@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ins/pages/dashboard/profile.dart';
 import '../../backend/sessions.dart';
 import './dashboard.dart';
 import '../../backend/models.dart' as models;
+import '../welcome.dart';
 
 Widget dashboardNav(
   BuildContext context,
@@ -28,12 +30,12 @@ Widget dashboardNav(
         ListTile(
           leading: Icon(Icons.book),
           title: Text('Classrooms'),
-          onTap: () => null,
+          onTap: () {},
         ),
         ListTile(
           leading: Icon(Icons.calendar_today),
           title: Text('Schedule'),
-          onTap: () => null,
+          onTap: () {},
         ),
       ],
     ),
@@ -54,10 +56,7 @@ Widget dashboardAccountNav(
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CircleAvatar(
-                backgroundImage: NetworkImage(user.profile!.getPath()),
-                radius: 50,
-              ),
+              profileAvatar(user.profile, 50),
               SizedBox(width: 10),
               Column(
                 children: [
@@ -83,14 +82,20 @@ Widget dashboardAccountNav(
         ListTile(
           leading: Icon(Icons.settings),
           title: Text('Settings'),
-          onTap: () => null,
+          onTap: () {},
         ),
         ListTile(
           leading: Icon(Icons.logout),
           title: Text('Sign Out'),
           onTap: () {
             sessionManager.clearSession();
-            ;
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(
+                builder: (context) => WelcomePage(title: "Welcome back"),
+              ),
+              (route) => false,
+            );
           },
         ),
       ],

@@ -5,6 +5,7 @@ import '../backend.dart';
 import '../model.dart';
 import './session.dart';
 import './profile.dart';
+import './classroom.dart';
 
 class UserContact implements Model {
   final String? email;
@@ -57,6 +58,7 @@ class User implements Model {
   });
 
   Future<Session> setNewSession(String password) async {
+    print("Creating session");
     final response = await apiQuery("session/create", <String, String>{
       'username': username,
       'password': password,
@@ -64,12 +66,16 @@ class User implements Model {
     if (response['status'] < 0) {
       throw Exception("Failed to create session: ${response['message']}");
     }
+    print("Constructing session");
     final session = Session.fromJson(response['session']);
+    print("Constructed $session");
     await sessionManager.setSession(session);
+    print("Did set session");
     return session;
   }
 
   factory User.fromJson(Map<String, dynamic> json) {
+    print("Creating user from object");
     return User(
       username: json['username'],
       id: json['id'],
@@ -110,6 +116,21 @@ class User implements Model {
     }
   }
 
+  static Future<bool> usernameExists(String username) async {
+    final query = await apiQuery('usernameexists', {
+      'username': username,
+    }, null);
+    if (query['status'] == -2) {
+      return false;
+    } else if (query['status'] == 0) {
+      return true;
+    } else if (query['status'] < 0) {
+      throw Exception("Failed to check username: ${query['message']}");
+    } else {
+      throw Exception("Wrong status code");
+    }
+  }
+
   static Future<User> create(
     String username,
     String name,
@@ -141,5 +162,17 @@ class User implements Model {
     } else {
       throw Exception("Failed to create user server error.");
     }
+  }
+
+  Future<List<Classroom>> getClassrooms(Session session) async {
+    final data = await apiQuery("user/classrooms", {}, session);
+    if (data['status'] < 0) {
+      throw Exception("Error geting to your classrooms");
+    }
+    return (data['classrooms'] as List)
+        .map(
+          (classroom) => Classroom.fromJson(classroom as Map<String, dynamic>),
+        )
+        .toList();
   }
 }

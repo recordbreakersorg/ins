@@ -16,6 +16,7 @@ class SessionManager {
       final dynamic jsonData = json.decode(sessionsStr);
       _session = Session.fromJson(jsonData);
     }
+    print("loaded session $_session");
   }
 
   Future<void> _saveSession() async {
@@ -66,7 +67,7 @@ class SessionManager {
   }
 
   bool hasSession() {
-    return session != null;
+    return _session != null;
   }
 
   Future<void> setSession(Session session) async {

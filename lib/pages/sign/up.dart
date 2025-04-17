@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import './assistant/assistant.dart';
+import './assistant/home.dart';
 
 class SignupPage extends StatelessWidget {
   const SignupPage({super.key});
@@ -25,12 +25,7 @@ class SignupPage extends StatelessWidget {
                   children: <Widget>[
                     FilledButton(
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => SignupAssistantPage(),
-                          ),
-                        );
+                        launchAssistant(context);
                       },
                       child: Text('Manual Signup >'),
                     ),

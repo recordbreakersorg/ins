@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:ins/pages/dashboard/profile.dart';
 import '../../backend/models/session.dart';
 import '../../backend/models/user.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 AppBar dashboardAppBar(String title, Session session, User student) {
-  return AppBar(
+  print("building appbar");
+  final bar = AppBar(
     leading: Builder(
       builder: (BuildContext context) {
         return IconButton(
@@ -23,18 +25,12 @@ AppBar dashboardAppBar(String title, Session session, User student) {
               onTap: () => Scaffold.of(context).openEndDrawer(),
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
-                child:
-                    student.profile != null
-                        ? CircleAvatar(
-                          backgroundImage: NetworkImage(
-                            student.profile!.getPath(),
-                          ),
-                          radius: 16,
-                        )
-                        : null,
+                child: profileAvatar(student.profile, 20),
               ),
             ),
       ),
     ],
   );
+  print("built bar");
+  return bar;
 }

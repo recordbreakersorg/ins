@@ -5,14 +5,14 @@ import 'package:flutter_markdown/flutter_markdown.dart';
 class NotificationFeedView extends StatelessWidget {
   final String title;
   final String description;
-  final String? imageWebPath; // a notification may have no image
+  final Widget image; // a notification may have no image
   final String? link; // a notification may have no link
   final String time;
   const NotificationFeedView({
     super.key,
     required this.title,
     required this.description,
-    this.imageWebPath,
+    required this.image,
     this.link,
     required this.time,
   });
@@ -25,10 +25,7 @@ class NotificationFeedView extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
       child: Card(
-        shape: RoundedRectangleBorder(
-          side: BorderSide(color: colorScheme.outline, width: 1),
-          borderRadius: BorderRadius.circular(16),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
@@ -38,14 +35,10 @@ class NotificationFeedView extends StatelessWidget {
                 padding: const EdgeInsets.only(bottom: 12.0),
                 child: Row(
                   children: [
-                    if (imageWebPath != null)
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16),
-                        child: CircleAvatar(
-                          backgroundImage: NetworkImage(imageWebPath!),
-                          radius: 30,
-                        ),
-                      ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: image,
+                    ),
                     Expanded(
                       child: Text(
                         title,
@@ -59,14 +52,13 @@ class NotificationFeedView extends StatelessWidget {
                 ),
               ),
               ClipRRect(
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(2),
                 child: Container(
                   decoration: BoxDecoration(
-                    color: colorScheme.primary.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(5),
                   ),
                   padding: const EdgeInsets.symmetric(
-                    vertical: 12,
+                    vertical: 2,
                     horizontal: 16,
                   ),
                   child: MarkdownBody(

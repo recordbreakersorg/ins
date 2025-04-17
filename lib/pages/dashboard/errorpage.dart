@@ -1,0 +1,50 @@
+import 'package:flutter/material.dart';
+
+class ErrorPage extends StatelessWidget {
+  final String title;
+  final String description;
+  final Widget? icon;
+  const ErrorPage({
+    super.key,
+    required this.title,
+    required this.description,
+    this.icon,
+  });
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.errorContainer,
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            icon ??
+                Icon(
+                  Icons.error_outline,
+                  size: 200,
+                  color: Theme.of(context).colorScheme.error,
+                ),
+            const SizedBox(height: 24),
+            Text(
+              title,
+              style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+                color: Theme.of(context).colorScheme.error,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 16),
+            Text(
+              description,
+              style: Theme.of(context).textTheme.bodyMedium,
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(height: 100),
+          ],
+        ),
+      ),
+    );
+  }
+}
