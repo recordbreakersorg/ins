@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../backend/models.dart';
 import './dashboard.dart';
 import './classrooms.dart';
+import './schools.dart';
 
 Widget dashboardBottomNav(
   BuildContext context,
@@ -45,6 +46,14 @@ Widget dashboardBottomNav(
           );
           break;
         case 2:
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder:
+                  (context) =>
+                      DashboardSchoolsPage(session: session, user: user),
+            ),
+          );
           break;
       }
     },

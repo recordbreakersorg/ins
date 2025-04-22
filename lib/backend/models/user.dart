@@ -6,6 +6,7 @@ import '../model.dart';
 import './session.dart';
 import './profile.dart';
 import './classroom.dart';
+import './school.dart';
 
 class UserContact implements Model {
   final String? email;
@@ -169,10 +170,22 @@ class User implements Model {
     if (data['status'] < 0) {
       throw Exception("Error geting to your classrooms");
     }
+    if (data['classrooms'] == null) return [];
     return (data['classrooms'] as List)
         .map(
           (classroom) => Classroom.fromJson(classroom as Map<String, dynamic>),
         )
+        .toList();
+  }
+
+  Future<List<School>> getSchools(Session session) async {
+    final data = await apiQuery("user/schools", {}, session);
+    if (data['status'] < 0) {
+      throw Exception("Error geting to your classrooms");
+    }
+    if (data['schools'] == null) return [];
+    return (data['schools'] as List)
+        .map((school) => School.fromJson(school as Map<String, dynamic>))
         .toList();
   }
 }
