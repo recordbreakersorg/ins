@@ -6,7 +6,7 @@ CircleAvatar profileAvatar(Profile? profile, double radius) {
     return CircleAvatar(
       backgroundColor: Colors.grey,
       radius: radius,
-      child: Icon(Icons.person, color: Colors.white),
+      child: Icon(Icons.person, color: Colors.white, size: radius),
     );
   }
   return CircleAvatar(
