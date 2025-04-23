@@ -1,5 +1,3 @@
-import 'dart:convert';
-import 'package:http/http.dart' as http;
 import '../model.dart';
 import './profile.dart';
 import '../backend.dart';
@@ -25,23 +23,6 @@ class SchoolMember implements Model {
   @override
   Map<String, dynamic> toJson() {
     return {'id': id, 'user_id': userId, 'school_id': schoolId};
-  }
-
-  static Future<SchoolMember?> fromID(String id) async {
-    final url = Uri.parse("${get_backend_url()}/api/v1/school_member/$id");
-    try {
-      final response = await http.get(url);
-      if (response.statusCode == 200) {
-        final data = json.decode(response.body);
-        if (data['status'] >= 0) {
-          return SchoolMember.fromJson(data['school_member']);
-        }
-        return null;
-      }
-      return null;
-    } catch (e) {
-      return null;
-    }
   }
 }
 
@@ -82,7 +63,7 @@ class School implements Model {
   }
 
   static Future<List<School>> getSchools() async {
-    final res = await apiQuery("schools", {}, null);
+    final res = await cacheableQuery("school/all", "schools", {}, null);
     if (res['status'] < 0) {
       throw Exception(res['message']);
     }

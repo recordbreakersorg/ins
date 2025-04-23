@@ -26,10 +26,10 @@ class Session implements Model {
   Future<User> getUser() async {
     dynamic data;
     try {
-      data = await apiQuery("user", {}, this);
+      data = await cacheableQuery("session/$id/user", "user", {}, this);
     } catch (e) {
       throw Exception(
-        "Error fetching data from backend please check your internet connection.",
+        "Error fetching data from backend please check your internet connection. $e",
       );
     }
     if (data['status'] >= 0) {

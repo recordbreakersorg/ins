@@ -1,5 +1,5 @@
 import 'dart:convert';
-
+import '../data/cachey.dart';
 import 'package:flutter/foundation.dart';
 import './models/session.dart';
 import 'package:http/http.dart' as http;
@@ -48,5 +48,26 @@ Future<Map<String, dynamic>> apiQuery(
     return jsonDecode(response.body);
   } else {
     throw Exception('Failed to load data');
+  }
+}
+
+Future<Map<String, dynamic>> cacheableQuery(
+  String key,
+  String url,
+  Map<String, dynamic> data,
+  Session? session,
+) async {
+  try {
+    final value = await apiQuery(url, data, session);
+    await cache.set(key, jsonEncode(value));
+    return value;
+  } catch (e) {
+    return cache.get(key).then((value) {
+      if (value != null) {
+        return jsonDecode(value);
+      } else {
+        throw Exception(e);
+      }
+    });
   }
 }

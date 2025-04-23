@@ -166,7 +166,12 @@ class User implements Model {
   }
 
   Future<List<Classroom>> getClassrooms(Session session) async {
-    final data = await apiQuery("user/classrooms", {}, session);
+    final data = await cacheableQuery(
+      "user/$id/classrooms",
+      "user/classrooms",
+      {},
+      session,
+    );
     if (data['status'] < 0) {
       throw Exception("Error geting to your classrooms");
     }
@@ -179,7 +184,12 @@ class User implements Model {
   }
 
   Future<List<School>> getSchools(Session session) async {
-    final data = await apiQuery("user/schools", {}, session);
+    final data = await cacheableQuery(
+      "user/$id/schools",
+      "user/schools",
+      {},
+      session,
+    );
     if (data['status'] < 0) {
       throw Exception("Error geting to your classrooms");
     }
