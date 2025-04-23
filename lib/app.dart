@@ -37,11 +37,41 @@ class InS extends StatelessWidget {
               builder: (context, snapshot) {
                 if (snapshot.hasError) {
                   return Scaffold(
-                    body: const ErrorPage(
-                      title: "Error loading your session",
-                      description:
-                          "Unable to load your session, please try again later.",
-                      //icon: Icon(Icons.error_outline_rounded),
+                    body: Container(
+                      color: Theme.of(context).colorScheme.errorContainer,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          ErrorPage(
+                            title: "Error loading your session",
+                            description: snapshot.error!.toString(),
+                            icon: Icon(
+                              Icons.signal_wifi_off,
+                              color: Theme.of(context).colorScheme.error,
+                              size: 200,
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 20,
+                              vertical: 10,
+                            ),
+                            child: Center(
+                              child: ElevatedButton.icon(
+                                onPressed:
+                                    () => Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => const InS(),
+                                      ),
+                                    ),
+                                icon: Icon(Icons.refresh),
+                                label: Text('Reload'),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                     appBar: AppBar(title: Text("Error")),
                   );

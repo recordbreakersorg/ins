@@ -1,9 +1,6 @@
 import '../model.dart';
 import '../backend.dart';
-import 'dart:convert';
-import 'package:http/http.dart' as http;
 import './user.dart';
-import './classroom.dart';
 
 class Session implements Model {
   final String token;
@@ -27,7 +24,14 @@ class Session implements Model {
   }
 
   Future<User> getUser() async {
-    final data = await apiQuery("user", {}, this);
+    dynamic data;
+    try {
+      data = await apiQuery("user", {}, this);
+    } catch (e) {
+      throw Exception(
+        "Error fetching data from backend please check your internet connection.",
+      );
+    }
     if (data['status'] >= 0) {
       return User.fromJson(data['user']);
     } else {

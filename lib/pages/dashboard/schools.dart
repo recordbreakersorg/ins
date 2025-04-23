@@ -1,8 +1,13 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:transparent_image/transparent_image.dart'; // For fade-in
+
+import '../../backend/models.dart' as models;
+import './school_explore.dart';
+
 import './base.dart';
 import './errorpage.dart';
-import '../../backend/models.dart' as models;
 
 class DashboardSchoolsPage extends DashboardBase {
   const DashboardSchoolsPage({
@@ -12,14 +17,15 @@ class DashboardSchoolsPage extends DashboardBase {
     required super.session,
     required super.user,
   });
+
   @override
   Widget buildContent(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
       child: Center(
         child: Column(
           children: [
-            FutureBuilder(
+            FutureBuilder<List<models.School>>(
               future: user.getSchools(session),
               builder: (context, snapshot) {
                 if (snapshot.hasError) {
@@ -34,7 +40,7 @@ class DashboardSchoolsPage extends DashboardBase {
                 } else if (snapshot.data!.isEmpty) {
                   return Card(
                     child: Padding(
-                      padding: EdgeInsets.symmetric(
+                      padding: const EdgeInsets.symmetric(
                         vertical: 20,
                         horizontal: 30,
                       ),
@@ -44,7 +50,7 @@ class DashboardSchoolsPage extends DashboardBase {
                             "No schools",
                             style: Theme.of(context).textTheme.titleLarge,
                           ),
-                          Container(height: 10),
+                          const SizedBox(height: 10),
                           Text(
                             "You are a member of no school yet",
                             style: Theme.of(context).textTheme.bodyMedium,
@@ -54,35 +60,26 @@ class DashboardSchoolsPage extends DashboardBase {
                     ),
                   );
                 } else {
+                  final schools = snapshot.data!;
                   return Center(
                     child: Padding(
-                      padding: EdgeInsets.all(10),
+                      padding: const EdgeInsets.all(10),
                       child: Column(
-                        children: [
-                          FutureBuilder(
-                            future: user.getSchools(session),
-                            builder: (context, snapshot) {
-                              if (!snapshot.hasData) {
-                                return const CircularProgressIndicator();
-                              }
-                              final schools = snapshot.data!;
-                              return Column(
-                                children:
-                                    schools.map((school) {
-                                      return Text(school.name);
-                                    }).toList(),
-                              );
-                            },
-                          ),
-                        ],
+                        // Changed to Column for list layout
+                        children:
+                            schools.map((school) {
+                              return SchoolListCard(
+                                school: school,
+                              ); // Using the new SchoolListCard
+                            }).toList(),
                       ),
                     ),
                   );
                 }
               },
             ),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               child: Center(
                 child: DecoratedBox(
                   decoration: BoxDecoration(
@@ -94,16 +91,27 @@ class DashboardSchoolsPage extends DashboardBase {
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder:
+                              (context) => SchoolExplorePage(
+                                session: session,
+                                user: user,
+                              ),
+                        ),
+                      );
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.transparent,
                       shadowColor: Colors.transparent,
-                      padding: EdgeInsets.symmetric(
+                      padding: const EdgeInsets.symmetric(
                         horizontal: 20,
                         vertical: 12,
                       ),
                     ),
-                    child: Text(
+                    child: const Text(
                       "explore",
                       style: TextStyle(color: Colors.white),
                     ),
@@ -118,72 +126,118 @@ class DashboardSchoolsPage extends DashboardBase {
   }
 }
 
-class StudentSchoolCard extends StatelessWidget {
-  final models.Session session;
-  final models.User student;
+class SchoolListCard extends StatefulWidget {
   final models.School school;
-  const StudentSchoolCard({
-    super.key,
-    required this.session,
-    required this.student,
-    required this.school,
-  });
+
+  const SchoolListCard({super.key, required this.school});
+
+  @override
+  _SchoolListCardState createState() => _SchoolListCardState();
+}
+
+class _SchoolListCardState extends State<SchoolListCard> {
+  final TextEditingController _nameController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _nameController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {},
+    return InkWell(
+      onTap: () {
+        // Navigate to SchoolExplore page
+      },
       child: Card(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-        clipBehavior: Clip.antiAliasWithSaveLayer,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(15),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(45),
-                    child: Image.network(
-                      school.profile.getPath(),
-                      height: 100,
-                      width: 100,
-                      fit: BoxFit.cover,
+        elevation: 2,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        margin: const EdgeInsets.symmetric(vertical: 8),
+        child: Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: Row(
+            children: [
+              Container(
+                width: 120, // Increased width
+                height: 120, // Increased height
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  image: DecorationImage(
+                    image: NetworkImage(widget.school.profile.getPath()),
+                    fit:
+                        BoxFit
+                            .cover, // Ensure image covers the entire container
+                  ),
+                  color: Colors.transparent,
+                  backgroundBlendMode: BlendMode.srcOver,
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+                    child: Container(
+                      color: Colors.transparent,
+                      child: Center(
+                        child: FadeInImage.memoryNetwork(
+                          placeholder: kTransparentImage,
+                          image: widget.school.profile.getPath(),
+                          width: 70, // Increased width
+                          height: 70, // increased height
+                          fit: BoxFit.cover,
+                          imageErrorBuilder: (context, error, stackTrace) {
+                            return Container(
+                              color: Colors.grey.shade300,
+                              child: const Center(
+                                child: Icon(
+                                  Icons.image_not_supported_outlined,
+                                  color: Colors.grey,
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
                     ),
                   ),
-                  Container(width: 10),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Container(height: 20),
-                        Text(
-                          school.name,
-                          style: GoogleFonts.lato(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w700,
-                          ).copyWith(
-                            color: const Color.fromRGBO(55, 71, 79, 1),
-                          ),
-                        ),
-                        Container(height: 5),
-                        Text(
-                          "a school",
-                          style: GoogleFonts.lato(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w400,
-                          ).copyWith(
-                            color: const Color.fromRGBO(158, 158, 158, 1),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
+                ),
               ),
-            ),
-          ],
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      widget.school.info.name,
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    const SizedBox(height: 8),
+                    // Display school.school_name as preformatted text
+                    Text(
+                      "@${widget.school.school_name}",
+                      style: GoogleFonts.sourceCodePro(
+                        // Use a monospace font
+                        fontSize: 12, // Smaller font size
+                        color:
+                            Colors
+                                .grey[700], // Darker grey for preformatted text
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

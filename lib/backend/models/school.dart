@@ -46,62 +46,54 @@ class SchoolMember implements Model {
 }
 
 class SchoolInfo implements Model {
-  const SchoolInfo();
+  final String name;
+  const SchoolInfo({required this.name});
 
   @override
   Map<String, dynamic> toJson() {
-    return {};
+    return {"name": name};
   }
 
   static SchoolInfo fromJson(Map<String, dynamic> json) {
-    return const SchoolInfo();
+    return SchoolInfo(name: json['name']);
   }
 }
 
 class School implements Model {
   final String id;
-  final String name;
+  final String school_name;
   final SchoolInfo info;
   final Profile profile;
 
   const School({
     required this.id,
-    required this.name,
+    required this.school_name,
     required this.info,
     required this.profile,
   });
 
   factory School.fromJson(Map<String, dynamic> json) {
     return School(
-      name: json['name'],
+      school_name: json['school_name'],
       id: json['id'],
       profile: Profile.fromJson(json['profile']),
-      info: SchoolInfo(),
+      info: SchoolInfo.fromJson(json['info']),
     );
   }
 
-  static Future<School?> get(String id) async {
-    final url = Uri.parse("${get_backend_url()}/api/v1/school/$id");
-    try {
-      final response = await http.get(url);
-      if (response.statusCode == 200) {
-        final data = json.decode(response.body);
-        if (data['status'] >= 0) {
-          return School.fromJson(data['school']);
-        }
-        return null;
-      }
-      return null;
-    } catch (e) {
-      return null;
+  static Future<List<School>> getSchools() async {
+    final res = await apiQuery("schools", {}, null);
+    if (res['status'] < 0) {
+      throw Exception(res['message']);
     }
+    return res['schools'].map<School>((json) => School.fromJson(json)).toList();
   }
 
   @override
   Map<String, dynamic> toJson() {
     return {
       'id': id,
-      'name': name,
+      'school_name': school_name,
       'info': info.toJson(),
       'profile': profile.toJson(),
     };
