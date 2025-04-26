@@ -3,155 +3,10 @@ import '../../backend/models.dart' as models;
 import 'package:google_fonts/google_fonts.dart';
 import './school_profile.dart';
 
-class SchoolThumbnailCard extends StatelessWidget {
-  final double rating = 4.4;
-  final models.School school;
-  final VoidCallback? onTap;
-
-  const SchoolThumbnailCard({super.key, required this.school, this.onTap});
-
-  @override
-  Widget build(BuildContext context) {
-    return Card.outlined(
-      elevation: 4,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(26)),
-      child: Container(
-        width: double.infinity,
-        height: 140,
-        decoration: BoxDecoration(borderRadius: BorderRadius.circular(16)),
-        child: Stack(
-          children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(16),
-              child: Image.network(
-                school.profile.getPath(),
-                width: double.infinity,
-                height: double.infinity,
-                fit: BoxFit.cover,
-                errorBuilder: (context, error, stackTrace) {
-                  return Container(
-                    color: Colors.grey[300],
-                    child: const Center(child: Icon(Icons.error_outline)),
-                  );
-                },
-              ),
-            ),
-            Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(16),
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    Colors.black.withOpacity(0.1),
-                    Colors.black.withOpacity(0.5),
-                  ],
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      CircleAvatar(
-                        radius: 25,
-                        backgroundColor: Colors.white,
-                        backgroundImage: NetworkImage(school.profile.getPath()),
-                        onBackgroundImageError: (exception, stackTrace) {
-                          CircleAvatar(
-                            radius: 25,
-                            backgroundColor: Colors.grey[300],
-                            child: const Icon(Icons.error_outline),
-                          );
-                        },
-                      ),
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 8,
-                          vertical: 4,
-                        ),
-                        decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.9),
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Row(
-                          children: [
-                            const Icon(
-                              Icons.star,
-                              color: Colors.amber,
-                              size: 18,
-                            ),
-                            const SizedBox(width: 6),
-                            Text(
-                              rating.toStringAsFixed(1),
-                              style: const TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        school.info.name,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          shadows: [
-                            Shadow(
-                              color: Colors.black87,
-                              blurRadius: 6,
-                              offset: Offset(1, 2),
-                            ),
-                          ],
-                        ),
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      Text(
-                        '@${school.school_name}',
-                        style: GoogleFonts.sourceCodePro(
-                          color: Colors.white.withOpacity(0.8),
-                          fontSize: 12,
-                          shadows: const [
-                            Shadow(
-                              color: Colors.black87,
-                              blurRadius: 6,
-                              offset: Offset(1, 2),
-                            ),
-                          ],
-                        ),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
 class SchoolExplorePage extends StatelessWidget {
   final models.User user;
   final models.Session session;
+
   const SchoolExplorePage({
     super.key,
     required this.user,
@@ -162,50 +17,223 @@ class SchoolExplorePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: const BackButton(),
         title: const Text('Explore Schools'),
+        elevation: 0,
+        backgroundColor: Colors.transparent,
       ),
       body: FutureBuilder<List<models.School>>(
         future: models.School.getSchools(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
-          } else if (snapshot.hasError) {
-            return Center(child: Text('Error: ${snapshot.error}'));
-          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return const Center(child: Text('No schools found.'));
-          } else {
-            final schools = snapshot.data!;
-            return Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: ListView.builder(
-                itemCount: schools.length,
-                itemBuilder: (context, index) {
-                  return GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder:
-                              (context) => SchoolProfilePage(
-                                school: schools[index],
-                                session: session,
-                                user: user,
-                              ),
-                        ),
-                      );
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0),
-                      child: SchoolThumbnailCard(school: schools[index]),
-                    ),
-                  );
-                },
-              ),
-            );
           }
+          return _buildSchoolList(context, snapshot.data ?? []);
         },
       ),
+    );
+  }
+
+  Widget _buildSchoolList(BuildContext context, List<models.School> schools) {
+    return ListView.builder(
+      padding: const EdgeInsets.all(16),
+      itemCount: schools.length,
+      itemBuilder: (context, index) {
+        final school = schools[index];
+        return Padding(
+          padding: const EdgeInsets.only(bottom: 16),
+          child: SchoolThumbnailCard(
+            school: school,
+            onTap: () => _navigateToProfile(context, school),
+          ),
+        );
+      },
+    );
+  }
+
+  void _navigateToProfile(BuildContext context, models.School school) {
+    Navigator.push(
+      context,
+      PageRouteBuilder(
+        pageBuilder:
+            (context, animation, secondaryAnimation) =>
+                SchoolProfilePage(school: school, session: session, user: user),
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          const curve = Curves.easeInOut;
+          final curvedAnimation = CurvedAnimation(
+            parent: animation,
+            curve: curve,
+          );
+          return FadeTransition(opacity: curvedAnimation, child: child);
+        },
+        transitionDuration: const Duration(milliseconds: 400),
+      ),
+    );
+  }
+}
+
+class SchoolThumbnailCard extends StatelessWidget {
+  final models.School school;
+  final VoidCallback? onTap;
+  final double rating = 4.4;
+
+  const SchoolThumbnailCard({super.key, required this.school, this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    return Card.outlined(
+      elevation: 4,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(26)),
+      clipBehavior: Clip.antiAlias,
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          borderRadius: BorderRadius.circular(26),
+          onTap: onTap,
+          child: Container(
+            constraints: BoxConstraints(
+              minHeight: 160,
+              maxHeight: MediaQuery.of(context).size.height * 0.25,
+            ),
+            child: Stack(
+              children: [
+                _buildBackgroundImage(),
+                _buildGradientOverlay(),
+                _buildContent(context),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildBackgroundImage() {
+    return Image.network(
+      school.profile.getPath(),
+      fit: BoxFit.cover,
+      width: double.infinity,
+      height: double.infinity,
+      loadingBuilder: (context, child, loadingProgress) {
+        if (loadingProgress == null) return child;
+        return Center(
+          child: CircularProgressIndicator(
+            value:
+                loadingProgress.expectedTotalBytes != null
+                    ? loadingProgress.cumulativeBytesLoaded /
+                        loadingProgress.expectedTotalBytes!
+                    : null,
+          ),
+        );
+      },
+      errorBuilder:
+          (context, error, stackTrace) => Container(
+            color: Colors.grey[300],
+            child: const Center(child: Icon(Icons.error_outline)),
+          ),
+    );
+  }
+
+  Widget _buildGradientOverlay() {
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            Colors.black.withOpacity(0.1),
+            Colors.black.withOpacity(0.6),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildContent(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Hero(
+                tag: 'school-logo-${school.id}',
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(
+                    maxWidth: 56,
+                    maxHeight: 56,
+                  ),
+                  child: CircleAvatar(
+                    radius: 28,
+                    backgroundColor: Colors.white,
+                    backgroundImage: NetworkImage(school.profile.getPath()),
+                  ),
+                ),
+              ),
+              _buildRatingBadge(context),
+            ],
+          ),
+          _buildSchoolInfo(),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildRatingBadge(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+      constraints: const BoxConstraints(maxHeight: 32),
+      decoration: BoxDecoration(
+        color: Colors.black.withOpacity(0.7),
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const Icon(Icons.star, color: Colors.amber, size: 18),
+          const SizedBox(width: 6),
+          Text(
+            rating.toStringAsFixed(1),
+            style: GoogleFonts.poppins(
+              color: Colors.white,
+              fontSize: 14,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSchoolInfo() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text(
+          school.info.name,
+          style: GoogleFonts.poppins(
+            color: Colors.white,
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ),
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
+        ),
+        const SizedBox(height: 4),
+        Text(
+          '@${school.school_name}',
+          style: GoogleFonts.poppins(
+            color: Colors.white.withOpacity(0.9),
+            fontSize: 12,
+          ),
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+        ),
+      ],
     );
   }
 }

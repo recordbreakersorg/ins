@@ -50,7 +50,7 @@ class _LoadingPageState extends State<LoadingPage> {
           const CircularProgressIndicator(),
           const SizedBox(height: 24),
           Text(
-            'Creating your account...',
+            'Wait a little bit ...',
             style: Theme.of(context).textTheme.titleLarge,
             textAlign: TextAlign.center,
           ),

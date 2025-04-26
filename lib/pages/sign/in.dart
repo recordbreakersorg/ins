@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../backend/sessions.dart';
+import '../dashboard/dashboard.dart';
 
 class SigninPage extends StatefulWidget {
   const SigninPage({super.key});
@@ -69,10 +70,15 @@ class _SigninPageState extends State<SigninPage> {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(content: Text("Successfully signed up")),
                             );
+                            final user = await session.getUser();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => SigninChooserPage(),
+                                builder:
+                                    (context) => DashboardPage(
+                                      session: session,
+                                      user: user,
+                                    ),
                               ),
                             );
                           }
@@ -88,66 +94,6 @@ class _SigninPageState extends State<SigninPage> {
                 ),
               ),
             ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class SigninChooserPage extends StatelessWidget {
-  const SigninChooserPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: DecoratedBox(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage("assets/backgrounds/welcome3.png"),
-            fit: BoxFit.cover,
-          ),
-        ),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text(
-                'What are you?',
-                style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
-              ),
-              SizedBox(height: 50),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => SigninPage()),
-                  );
-                },
-                child: Text("A student"),
-              ),
-              SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => SigninPage()),
-                  );
-                },
-                child: Text("A parent"),
-              ),
-              SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => SigninPage()),
-                  );
-                },
-                child: Text("A teacher"),
-              ),
-              SizedBox(height: 20),
-            ],
           ),
         ),
       ),

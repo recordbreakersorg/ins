@@ -45,6 +45,8 @@ Future<Map<String, dynamic>> apiQuery(
   Session? session,
 ) async {
   final response = await apiRequest(url, data, session);
+  print("made request: $response");
+  print("Response: ${response.statusCode} ${response.body}");
   if (response.statusCode == 200) {
     return jsonDecode(response.body);
   } else {

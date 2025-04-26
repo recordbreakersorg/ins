@@ -36,6 +36,12 @@ class ThemeManager with ChangeNotifier {
 
   // Light Theme Configuration
   static final ThemeData _lightTheme = ThemeData(
+    pageTransitionsTheme: PageTransitionsTheme(
+      builders: {
+        TargetPlatform.android: ZoomPageTransitionsBuilder(),
+        TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+      },
+    ),
     useMaterial3: true,
     colorScheme: ColorScheme.fromSeed(
       seedColor: _primaryColor,
@@ -64,6 +70,12 @@ class ThemeManager with ChangeNotifier {
 
   // Dark Theme Configuration
   static final ThemeData _darkTheme = ThemeData(
+    pageTransitionsTheme: PageTransitionsTheme(
+      builders: {
+        TargetPlatform.android: ZoomPageTransitionsBuilder(),
+        TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+      },
+    ),
     useMaterial3: true,
     colorScheme: ColorScheme.fromSeed(
       seedColor: _primaryColor,
