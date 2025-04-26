@@ -17,6 +17,15 @@ function addgtag(html::String)::String
   html[1:pos] * "\n$gtag\n" * html[pos+1:end]
 end
 
+function copylogo()
+  println("- Copying logo")
+  open("./build/web/favicon.png", "w") do output
+    write(output, open("./logo.png") do input
+      read(input, String)
+    end)
+  end
+end
+
 function main()
   println("- Building for web")
   run(`flutter build web`)
@@ -27,6 +36,7 @@ function main()
   open("./build/web/index.html", "w") do output
     write(output, tag_added)
   end
+  copylogo()
   println("Deploying")
   run(`firebase deploy`)
 end
