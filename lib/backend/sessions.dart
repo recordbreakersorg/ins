@@ -26,33 +26,18 @@ class SessionManager {
   }
 
   Future<Session?> signin(String name, String password) async {
-    final String backendUrl = get_backend_url();
-    final uri = Uri.parse(backendUrl);
-    final Uri url = Uri(
-      scheme: uri.scheme,
-      host: uri.host,
-      port: uri.port,
-      path: '/api/v1/session/signin',
-      queryParameters: {'name': name, 'password': password},
-    );
-    try {
-      final http.Response response = await http.get(url);
-
-      if (response.statusCode == 200) {
-        final jsonData = json.decode(response.body);
-        if (jsonData['status'] < 0) {
-          throw Exception("Failed to signin session: ${jsonData['message']}");
-        }
-        final newSession = Session.fromJson(jsonData['session']);
-        _session = newSession;
-        await _saveSession();
-        return newSession;
-      } else {
-        throw Exception('Request failed with status: ${response.statusCode}');
-      }
-    } catch (e) {
-      throw Exception('An error occurred: $e');
+    final response = await apiQuery("signin", {
+      "username": name,
+      "password": password,
+    }, null);
+    if (response['status'] < 0) {
+      throw Exception("Error: ${response['message']}");
     }
+    final session = Session.fromJson(response['session']);
+
+    setSession(session);
+
+    return session;
   }
 
   Future<void> clearSession() async {

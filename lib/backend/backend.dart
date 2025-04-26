@@ -3,6 +3,7 @@ import '../data/cachey.dart';
 import 'package:flutter/foundation.dart';
 import './models/session.dart';
 import 'package:http/http.dart' as http;
+import 'package:connectivity_plus/connectivity_plus.dart';
 
 // ignore: non_constant_identifier_names
 String get_backend_url() {
@@ -44,6 +45,8 @@ Future<Map<String, dynamic>> apiQuery(
   Session? session,
 ) async {
   final response = await apiRequest(url, data, session);
+  print("made request: $response");
+  print("Response: ${response.statusCode} ${response.body}");
   if (response.statusCode == 200) {
     return jsonDecode(response.body);
   } else {
@@ -58,6 +61,7 @@ Future<Map<String, dynamic>> cacheableQuery(
   Session? session,
 ) async {
   try {
+    if (connectivity.offline) throw Exception("You are not connected");
     final value = await apiQuery(url, data, session);
     await cache.set(key, jsonEncode(value));
     return value;
@@ -71,3 +75,21 @@ Future<Map<String, dynamic>> cacheableQuery(
     });
   }
 }
+
+class Connectif {
+  bool offline = false;
+  Connectif();
+  factory Connectif.listener() {
+    final obj = Connectif();
+    Connectivity().onConnectivityChanged.listen((
+      List<ConnectivityResult> result,
+    ) {
+      for (final x in result) {
+        obj.offline = x == ConnectivityResult.none;
+      }
+    });
+    return obj;
+  }
+}
+
+final connectivity = Connectif.listener();

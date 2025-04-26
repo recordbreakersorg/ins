@@ -48,6 +48,7 @@ dependencies:
   transparent_image: ^2.0.1 # Make sure to use the latest version
   image: ^4.5.4
   flutter_image: ^4.0.4 # Make sure to use the latest version
+  connectivity_plus: ^6.1.4
 dev_dependencies:
   flutter_test:
     sdk: flutter
