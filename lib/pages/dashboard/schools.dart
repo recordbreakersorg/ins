@@ -23,103 +23,108 @@ class DashboardSchoolsPage extends DashboardBase {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
       child: Center(
-        child: Column(
-          children: [
-            FutureBuilder<List<models.School>>(
-              future: user.getSchools(session),
-              builder: (context, snapshot) {
-                if (snapshot.hasError) {
-                  return ErrorPage(
-                    title: "Error",
-                    description: "Unable to load schools ${snapshot.error}",
-                  );
-                } else if (!snapshot.hasData) {
-                  return CircularProgressIndicator(
-                    color: Theme.of(context).primaryColor,
-                  );
-                } else if (snapshot.data!.isEmpty) {
-                  return Card(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 20,
-                        horizontal: 30,
-                      ),
-                      child: Column(
-                        children: [
-                          Text(
-                            "No schools",
-                            style: Theme.of(context).textTheme.titleLarge,
-                          ),
-                          const SizedBox(height: 10),
-                          Text(
-                            "You are a member of no school yet",
-                            style: Theme.of(context).textTheme.bodyMedium,
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                } else {
-                  final schools = snapshot.data!;
-                  return Center(
-                    child: Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: Column(
-                        // Changed to Column for list layout
-                        children:
-                            schools.map((school) {
-                              return SchoolListCard(
-                                school: school,
-                              ); // Using the new SchoolListCard
-                            }).toList(),
-                      ),
-                    ),
-                  );
-                }
-              },
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              child: Center(
-                child: DecoratedBox(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [Colors.purple.shade300, Colors.amber.shade300],
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                    ),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder:
-                              (context) => SchoolExplorePage(
-                                session: session,
-                                user: user,
-                              ),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              FutureBuilder<List<models.School>>(
+                future: user.getSchools(session),
+                builder: (context, snapshot) {
+                  if (snapshot.hasError) {
+                    return ErrorPage(
+                      title: "Error",
+                      description: "Unable to load schools ${snapshot.error}",
+                    );
+                  } else if (!snapshot.hasData) {
+                    return CircularProgressIndicator(
+                      color: Theme.of(context).primaryColor,
+                    );
+                  } else if (snapshot.data!.isEmpty) {
+                    return Card(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 20,
+                          horizontal: 30,
                         ),
-                      );
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.transparent,
-                      shadowColor: Colors.transparent,
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 20,
-                        vertical: 12,
+                        child: Column(
+                          children: [
+                            Text(
+                              "No schools",
+                              style: Theme.of(context).textTheme.titleLarge,
+                            ),
+                            const SizedBox(height: 10),
+                            Text(
+                              "You are a member of no school yet",
+                              style: Theme.of(context).textTheme.bodyMedium,
+                            ),
+                          ],
+                        ),
                       ),
+                    );
+                  } else {
+                    final schools = snapshot.data!;
+                    return Center(
+                      child: Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: Column(
+                          // Changed to Column for list layout
+                          children:
+                              schools.map((school) {
+                                return SchoolListCard(
+                                  school: school,
+                                ); // Using the new SchoolListCard
+                              }).toList(),
+                        ),
+                      ),
+                    );
+                  }
+                },
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 10,
+                ),
+                child: Center(
+                  child: DecoratedBox(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [Colors.purple.shade300, Colors.amber.shade300],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      ),
+                      borderRadius: BorderRadius.circular(8),
                     ),
-                    child: const Text(
-                      "explore",
-                      style: TextStyle(color: Colors.white),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder:
+                                (context) => SchoolExplorePage(
+                                  session: session,
+                                  user: user,
+                                ),
+                          ),
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.transparent,
+                        shadowColor: Colors.transparent,
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 20,
+                          vertical: 12,
+                        ),
+                      ),
+                      child: const Text(
+                        "explore",
+                        style: TextStyle(color: Colors.white),
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

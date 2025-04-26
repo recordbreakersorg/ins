@@ -8,6 +8,40 @@ import './profile.dart';
 import './classroom.dart';
 import './school.dart';
 
+enum UserRole { student, teacher, admin, parent }
+
+extension UserRoleExtension on UserRole {
+  String toJson() {
+    switch (this) {
+      case UserRole.student:
+        return "student";
+      case UserRole.teacher:
+        return "teacher";
+      case UserRole.admin:
+        return "admin";
+      case UserRole.parent:
+        return "parent";
+    }
+  }
+}
+
+extension UserRoleStringExtension on String {
+  UserRole? toUserRole() {
+    switch (this) {
+      case "student":
+        return UserRole.student;
+      case "teacher":
+        return UserRole.teacher;
+      case "admin":
+        return UserRole.admin;
+      case "parent":
+        return UserRole.parent;
+      default:
+        return null;
+    }
+  }
+}
+
 class UserFeed implements Model {
   final String id;
   final String feedType;
@@ -85,18 +119,22 @@ class UserContact implements Model {
 
 class UserInfo implements Model {
   final String name;
-  final String role;
+  final UserRole role;
   final DateTime birth;
   const UserInfo({required this.name, required this.role, required this.birth});
   @override
   Map<String, dynamic> toJson() {
-    return {'name': name, 'role': role, 'birth': birth.toIso8601String()};
+    return {
+      'name': name,
+      'role': role.toJson(),
+      'birth': birth.toIso8601String(),
+    };
   }
 
   static UserInfo fromJson(Map<String, dynamic> json) {
     return UserInfo(
       name: json['name'],
-      role: json['role'],
+      role: json['role'].toString().toUserRole()!,
       birth: DateTime.parse(json['birth']),
     );
   }
