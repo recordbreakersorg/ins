@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import './sign/in.dart';
 import './sign/up.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../analytics.dart' as analytics;
 
 class WelcomePage extends StatelessWidget {
   final String title;
@@ -9,6 +10,7 @@ class WelcomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    analytics.screen("welcome page");
     return Scaffold(
       body: DecoratedBox(
         decoration: BoxDecoration(

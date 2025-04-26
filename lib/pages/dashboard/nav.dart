@@ -56,7 +56,11 @@ Widget dashboardAccountNav(
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              profileAvatar(user.profile, 50),
+              profileAvatar(
+                profile: user.profile,
+                radius: 50,
+                name: user.info.name,
+              ),
               SizedBox(width: 10),
               Column(
                 children: [

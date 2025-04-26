@@ -4,6 +4,7 @@ import './base.dart';
 import './manager.dart';
 import '../../../backend/models.dart';
 import '../../dashboard/dashboard.dart';
+import '../../../analytics.dart' as analytics;
 
 class CreatingAccountPage extends StatefulWidget {
   final SignupAssistantState assistantState;
@@ -82,9 +83,8 @@ class _CreatingAccountPageState extends State<CreatingAccountPage> {
 
   Future<void> _showDashboard(User user) async {
     _messageTimer?.cancel();
-    print("password is ${widget.assistantState.password}");
     final session = await user.setNewSession(widget.assistantState.password!);
-    print("setted new session from user $session");
+    analytics.signup(user.username, "manual");
     Navigator.of(context).pushAndRemoveUntil(
       MaterialPageRoute(
         builder: (context) => DashboardPage(session: session, user: user),

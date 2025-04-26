@@ -15,7 +15,7 @@ String get_backend_url() {
 // ignore: non_constant_identifier_names
 String get_backend_base() {
   if (kDebugMode) {
-    return "192.168.1.191:8080";
+    return "192.168.1.192:8080";
   } else {
     return "ins-backend.up.railway.app";
   }

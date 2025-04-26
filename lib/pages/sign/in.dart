@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../backend/sessions.dart';
 import '../dashboard/dashboard.dart';
+import '../../analytics.dart' as analytics;
 
 class SigninPage extends StatefulWidget {
   const SigninPage({super.key});
@@ -22,6 +23,7 @@ class _SigninPageState extends State<SigninPage> {
 
   @override
   Widget build(BuildContext context) {
+    analytics.screen("signin page");
     return Scaffold(
       body: DecoratedBox(
         decoration: BoxDecoration(
@@ -70,9 +72,10 @@ class _SigninPageState extends State<SigninPage> {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(content: Text("Successfully signed up")),
                             );
+
                             final user = await session.getUser();
-                            Navigator.push(
-                              context,
+                            analytics.signin(user.username, "manual");
+                            Navigator.of(context).pushAndRemoveUntil(
                               MaterialPageRoute(
                                 builder:
                                     (context) => DashboardPage(
@@ -80,6 +83,7 @@ class _SigninPageState extends State<SigninPage> {
                                       user: user,
                                     ),
                               ),
+                              (route) => false,
                             );
                           }
                         } catch (e) {

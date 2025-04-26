@@ -3,19 +3,11 @@ import 'package:ins/firebase_options.dart';
 
 import 'app.dart';
 import 'package:flutter/material.dart';
+import './analytics.dart' as analytics;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
-  //print("session loaded");
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  //print("Running");
-  /*var response = await post(
-    Uri.parse('http://192.168.1.191/api/v1/user/create'),
-    body: {'name': 'engon'},
-  );
-  print('Response status: ${response.statusCode}');
-  print('Response body: ${response.body}');
-*/
+  analytics.intializeAnalytics();
   runApp(const InS());
 }

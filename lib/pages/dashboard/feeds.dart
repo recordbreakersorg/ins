@@ -1,27 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
+import '../../../backend/models.dart' as models;
+import './profile.dart';
 
 class NotificationFeedView extends StatelessWidget {
-  final String title;
-  final String description;
-  final Widget image; // a notification may have no image
-  final String? link; // a notification may have no link
-  final String time;
+  final models.UserFeed feed;
+  final Future<void> Function(models.UserFeed) dismiss;
   const NotificationFeedView({
     super.key,
-    required this.title,
-    required this.description,
-    required this.image,
-    this.link,
-    required this.time,
+    required this.feed,
+    required this.dismiss,
   });
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
-
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
       child: Card(
@@ -37,11 +32,14 @@ class NotificationFeedView extends StatelessWidget {
                   children: [
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16),
-                      child: image,
+                      child: profileAvatar(
+                        radius: 40,
+                        imagePath: feed.imagePath,
+                      ),
                     ),
                     Expanded(
                       child: Text(
-                        title,
+                        feed.title,
                         style: GoogleFonts.lato(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
@@ -62,7 +60,7 @@ class NotificationFeedView extends StatelessWidget {
                     horizontal: 16,
                   ),
                   child: MarkdownBody(
-                    data: description,
+                    data: feed.content,
                     styleSheet: MarkdownStyleSheet.fromTheme(theme).copyWith(
                       p: GoogleFonts.lato(
                         fontSize: 16,
@@ -73,41 +71,73 @@ class NotificationFeedView extends StatelessWidget {
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 16.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(right: 8.0),
-                      child: ElevatedButton(
-                        onPressed: () {},
-                        style: ButtonStyle(
-                          backgroundColor: WidgetStateProperty.all(
-                            colorScheme.error.withOpacity(0.2),
-                          ),
-                          foregroundColor: WidgetStateProperty.all(
-                            colorScheme.error,
-                          ),
-                        ),
-                        child: Text("Dismiss"),
-                      ),
-                    ),
-                    ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: colorScheme.primary,
-                        foregroundColor: colorScheme.onPrimary,
-                      ),
-                      child: Text("View >"),
-                    ),
-                  ],
-                ),
-              ),
+              _buildActionButtons(context),
             ],
           ),
         ),
       ),
     );
+  }
+
+  Widget _buildActionButtons(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    switch (feed.feedType) {
+      case "notification":
+        return Padding(
+          padding: const EdgeInsets.only(top: 16.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(right: 8.0),
+                child: ElevatedButton(
+                  onPressed: () {
+                    dismiss(feed);
+                  },
+                  style: ButtonStyle(
+                    backgroundColor: WidgetStateProperty.all(
+                      colorScheme.error.withOpacity(0.2),
+                    ),
+                    foregroundColor: WidgetStateProperty.all(colorScheme.error),
+                  ),
+                  child: Text("Dismiss"),
+                ),
+              ),
+            ],
+          ),
+        );
+      case "chat-message":
+        return Padding(
+          padding: const EdgeInsets.only(top: 16.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(right: 8.0),
+                child: ElevatedButton(
+                  onPressed: () {},
+                  style: ButtonStyle(
+                    backgroundColor: WidgetStateProperty.all(
+                      colorScheme.error.withOpacity(0.2),
+                    ),
+                    foregroundColor: WidgetStateProperty.all(colorScheme.error),
+                  ),
+                  child: Text("Dismiss"),
+                ),
+              ),
+              ElevatedButton(
+                onPressed: () {},
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: colorScheme.primary,
+                  foregroundColor: colorScheme.onPrimary,
+                ),
+                child: Text("View >"),
+              ),
+            ],
+          ),
+        );
+      default:
+        return Container();
+    }
   }
 }

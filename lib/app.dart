@@ -1,11 +1,11 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:ins/pages/dashboard/errorpage.dart';
 import 'pages/welcome.dart';
 import 'theme.dart';
 import './backend/sessions.dart';
 import './pages/dashboard/dashboard.dart';
-
-
+import './analytics.dart' as analytics;
 
 class InS extends StatelessWidget {
   const InS({super.key});
@@ -14,6 +14,11 @@ class InS extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      navigatorObservers: [
+        ...(analytics.analytics != null
+            ? [FirebaseAnalyticsObserver(analytics: analytics.analytics!)]
+            : []),
+      ],
       title: 'Intranet of Schools',
       darkTheme: themeManager.darkTheme,
       theme: themeManager.lightTheme,
@@ -69,6 +74,27 @@ class InS extends StatelessWidget {
                                     ),
                                 icon: Icon(Icons.refresh),
                                 label: Text('Reload'),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 20,
+                              vertical: 10,
+                            ),
+                            child: Center(
+                              child: TextButton(
+                                onPressed:
+                                    () => Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) {
+                                          sessionManager.clearSession();
+                                          return const InS();
+                                        },
+                                      ),
+                                    ),
+                                child: Text('logout.'),
                               ),
                             ),
                           ),

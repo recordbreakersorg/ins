@@ -53,7 +53,11 @@ AppBar dashboardAppBar(String title, Session session, User student) {
               onTap: () => Scaffold.of(context).openEndDrawer(),
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: profileAvatar(student.profile, 20),
+                child: profileAvatar(
+                  profile: student.profile,
+                  radius: 20,
+                  name: student.info.name,
+                ),
               ),
             ),
       ),
