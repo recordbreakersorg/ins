@@ -73,6 +73,14 @@ Future<void> schoolProfile(String schoolName) async {
     name: 'view_school_profile',
     parameters: {'school_name': schoolName},
   );
+  await FirebaseAnalytics.instance.logBeginCheckout(
+    value: 10.0,
+    currency: 'USD',
+    items: [
+      AnalyticsEventItem(itemName: 'Socks', itemId: 'xjw73ndnw', price: 10.0),
+    ],
+    coupon: '10PERCENTOFF',
+  );
 }
 
 Future<void> schoolApply(String schoolName) async {

@@ -1,6 +1,8 @@
 import '../model.dart';
 import './profile.dart';
 import '../backend.dart';
+import './user.dart';
+import './session.dart';
 
 class SchoolApplicationFormQuestion implements Model {
   final int number;
@@ -155,6 +157,17 @@ class School implements Model {
       throw Exception(res['message']);
     }
     return res['schools'].map<School>((json) => School.fromJson(json)).toList();
+  }
+
+  Future<SchoolMember> getMember(Session session) async {
+    final response = await cacheableQuery(
+      "school/$id/member",
+      "school/$id/member",
+      {},
+      session,
+    );
+    if (response['status'] < 0) throw Exception(response['message']);
+    return SchoolMember.fromJson(response['member']);
   }
 
   Future<SchoolApplicationForm?> getApplicationForm() async {
