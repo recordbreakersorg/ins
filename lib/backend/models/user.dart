@@ -8,6 +8,99 @@ import './profile.dart';
 import './classroom.dart';
 import './school.dart';
 
+enum UserRole { student, teacher, admin, parent }
+
+extension UserRoleExtension on UserRole {
+  String toJson() {
+    switch (this) {
+      case UserRole.student:
+        return "student";
+      case UserRole.teacher:
+        return "teacher";
+      case UserRole.admin:
+        return "admin";
+      case UserRole.parent:
+        return "parent";
+    }
+  }
+}
+
+extension UserRoleStringExtension on String {
+  UserRole? toUserRole() {
+    switch (this) {
+      case "student":
+        return UserRole.student;
+      case "teacher":
+        return UserRole.teacher;
+      case "admin":
+        return UserRole.admin;
+      case "parent":
+        return UserRole.parent;
+      default:
+        return null;
+    }
+  }
+}
+
+class UserFeed implements Model {
+  final String id;
+  final String feedType;
+  final String content;
+  final String title;
+  final String? imagePath;
+  final String? link;
+  final Map<String, dynamic> data;
+  final DateTime created;
+  final bool dismissed;
+
+  UserFeed({
+    required this.id,
+    required this.content,
+    required this.feedType,
+    required this.data,
+    required this.created,
+    required this.title,
+    required this.dismissed,
+    this.imagePath,
+    this.link,
+  });
+  Future<void> dismiss(Session session) async {
+    final response = await apiQuery("user/feed/$id/dismiss", {}, session);
+    if (response['status'] < 0) {
+      throw Exception("Failed to dismiss feed: ${response['message']}");
+    }
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'content': content,
+      'feed_type': feedType,
+      'data': data,
+      'created': created.toIso8601String(),
+      'title': title,
+      'image_path': imagePath,
+      'link': link,
+      'dismissed': dismissed,
+    };
+  }
+
+  static UserFeed fromJson(Map<String, dynamic> json) {
+    return UserFeed(
+      id: json['id'],
+      content: json['content'],
+      feedType: json['feed_type'],
+      data: json['data'],
+      created: DateTime.parse(json['created']),
+      imagePath: json['image_path'],
+      link: json['link'],
+      title: json['title'],
+      dismissed: json['dismissed'] ?? false,
+    );
+  }
+}
+
 class UserContact implements Model {
   final String? email;
   final String? phone;
@@ -26,18 +119,22 @@ class UserContact implements Model {
 
 class UserInfo implements Model {
   final String name;
-  final String role;
+  final UserRole role;
   final DateTime birth;
   const UserInfo({required this.name, required this.role, required this.birth});
   @override
   Map<String, dynamic> toJson() {
-    return {'name': name, 'role': role, 'birth': birth.toIso8601String()};
+    return {
+      'name': name,
+      'role': role.toJson(),
+      'birth': birth.toIso8601String(),
+    };
   }
 
   static UserInfo fromJson(Map<String, dynamic> json) {
     return UserInfo(
       name: json['name'],
-      role: json['role'],
+      role: json['role'].toString().toUserRole()!,
       birth: DateTime.parse(json['birth']),
     );
   }
@@ -59,7 +156,6 @@ class User implements Model {
   });
 
   Future<Session> setNewSession(String password) async {
-    print("Creating session");
     final response = await apiQuery("session/create", <String, String>{
       'username': username,
       'password': password,
@@ -67,16 +163,12 @@ class User implements Model {
     if (response['status'] < 0) {
       throw Exception("Failed to create session: ${response['message']}");
     }
-    print("Constructing session");
     final session = Session.fromJson(response['session']);
-    print("Constructed $session");
     await sessionManager.setSession(session);
-    print("Did set session");
     return session;
   }
 
   factory User.fromJson(Map<String, dynamic> json) {
-    print("Creating user from object");
     return User(
       username: json['username'],
       id: json['id'],
@@ -96,25 +188,6 @@ class User implements Model {
       'contact': contact.toJson(),
       'info': info.toJson(),
     };
-  }
-
-  static Future<User?> fromId(String id) async {
-    final url = Uri.parse("${get_backend_url()}/api/v1/user/$id");
-    try {
-      final response = await http.get(url);
-      if (response.statusCode == 200) {
-        final data = json.decode(response.body);
-        if (data['status'] >= 0) {
-          return User.fromJson(data['user']);
-        }
-        return null;
-      }
-      print("Failed to get user: HTTP ${response.statusCode}");
-      return null;
-    } catch (e) {
-      print("An error occurred: $e");
-      return null;
-    }
   }
 
   static Future<bool> usernameExists(String username) async {
@@ -196,6 +269,22 @@ class User implements Model {
     if (data['schools'] == null) return [];
     return (data['schools'] as List)
         .map((school) => School.fromJson(school as Map<String, dynamic>))
+        .toList();
+  }
+
+  Future<List<UserFeed>> getFeeds(Session session) async {
+    final data = await cacheableQuery(
+      "user/$id/feeds",
+      "user/feeds",
+      {},
+      session,
+    );
+    if (data['status'] < 0) {
+      throw Exception("Error geting to your feeds");
+    }
+    if (data['feeds'] == null) return [];
+    return (data['feeds'] as List)
+        .map((feed) => UserFeed.fromJson(feed as Map<String, dynamic>))
         .toList();
   }
 }

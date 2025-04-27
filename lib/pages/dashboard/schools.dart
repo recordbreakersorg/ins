@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:transparent_image/transparent_image.dart'; // For fade-in
 
-import '../../backend/models.dart' as models;
+import 'package:ins/backend/models.dart' as models;
 import './school_explore.dart';
 
 import './base.dart';
-import './errorpage.dart';
+import 'package:ins/errorpage.dart';
+import './school/home.dart';
 
 class DashboardSchoolsPage extends DashboardBase {
   const DashboardSchoolsPage({
@@ -23,138 +24,132 @@ class DashboardSchoolsPage extends DashboardBase {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
       child: Center(
-        child: Column(
-          children: [
-            FutureBuilder<List<models.School>>(
-              future: user.getSchools(session),
-              builder: (context, snapshot) {
-                if (snapshot.hasError) {
-                  return ErrorPage(
-                    title: "Error",
-                    description: "Unable to load schools ${snapshot.error}",
-                  );
-                } else if (!snapshot.hasData) {
-                  return CircularProgressIndicator(
-                    color: Theme.of(context).primaryColor,
-                  );
-                } else if (snapshot.data!.isEmpty) {
-                  return Card(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 20,
-                        horizontal: 30,
-                      ),
-                      child: Column(
-                        children: [
-                          Text(
-                            "No schools",
-                            style: Theme.of(context).textTheme.titleLarge,
-                          ),
-                          const SizedBox(height: 10),
-                          Text(
-                            "You are a member of no school yet",
-                            style: Theme.of(context).textTheme.bodyMedium,
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                } else {
-                  final schools = snapshot.data!;
-                  return Center(
-                    child: Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: Column(
-                        // Changed to Column for list layout
-                        children:
-                            schools.map((school) {
-                              return SchoolListCard(
-                                school: school,
-                              ); // Using the new SchoolListCard
-                            }).toList(),
-                      ),
-                    ),
-                  );
-                }
-              },
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              child: Center(
-                child: DecoratedBox(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [Colors.purple.shade300, Colors.amber.shade300],
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                    ),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder:
-                              (context) => SchoolExplorePage(
-                                session: session,
-                                user: user,
-                              ),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              FutureBuilder<List<models.School>>(
+                future: user.getSchools(session),
+                builder: (context, snapshot) {
+                  if (snapshot.hasError) {
+                    return ErrorPage(
+                      title: "Error",
+                      description: "Unable to load schools ${snapshot.error}",
+                    );
+                  } else if (!snapshot.hasData) {
+                    return CircularProgressIndicator(
+                      color: Theme.of(context).primaryColor,
+                    );
+                  } else if (snapshot.data!.isEmpty) {
+                    return Card(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 20,
+                          horizontal: 30,
                         ),
-                      );
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.transparent,
-                      shadowColor: Colors.transparent,
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 20,
-                        vertical: 12,
+                        child: Column(
+                          children: [
+                            Text(
+                              "No schools",
+                              style: Theme.of(context).textTheme.titleLarge,
+                            ),
+                            const SizedBox(height: 10),
+                            Text(
+                              "You are a member of no school yet",
+                              style: Theme.of(context).textTheme.bodyMedium,
+                            ),
+                          ],
+                        ),
                       ),
+                    );
+                  } else {
+                    final schools = snapshot.data!;
+                    return Center(
+                      child: Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: Column(
+                          // Changed to Column for list layout
+                          children:
+                              schools.map((school) {
+                                return SchoolListCard(
+                                  school: school,
+                                  onTap: () {
+                                    launchSchoolDashboard(
+                                      context,
+                                      school,
+                                      user,
+                                      session,
+                                    );
+                                  },
+                                ); // Using the new SchoolListCard
+                              }).toList(),
+                        ),
+                      ),
+                    );
+                  }
+                },
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 10,
+                ),
+                child: Center(
+                  child: DecoratedBox(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [Colors.purple.shade300, Colors.amber.shade300],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      ),
+                      borderRadius: BorderRadius.circular(8),
                     ),
-                    child: const Text(
-                      "explore",
-                      style: TextStyle(color: Colors.white),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder:
+                                (context) => SchoolExplorePage(
+                                  session: session,
+                                  user: user,
+                                ),
+                          ),
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.transparent,
+                        shadowColor: Colors.transparent,
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 20,
+                          vertical: 12,
+                        ),
+                      ),
+                      child: const Text(
+                        "explore",
+                        style: TextStyle(color: Colors.white),
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
   }
 }
 
-class SchoolListCard extends StatefulWidget {
+class SchoolListCard extends StatelessWidget {
   final models.School school;
+  final void Function() onTap;
 
-  const SchoolListCard({super.key, required this.school});
-
-  @override
-  _SchoolListCardState createState() => _SchoolListCardState();
-}
-
-class _SchoolListCardState extends State<SchoolListCard> {
-  final TextEditingController _nameController = TextEditingController();
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _nameController.dispose();
-    super.dispose();
-  }
+  const SchoolListCard({super.key, required this.school, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        // Navigate to SchoolExplore page
-      },
+      onTap: onTap,
       child: Card(
         elevation: 2,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
@@ -169,7 +164,7 @@ class _SchoolListCardState extends State<SchoolListCard> {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   image: DecorationImage(
-                    image: NetworkImage(widget.school.profile.getPath()),
+                    image: NetworkImage(school.profile.getPath()),
                     fit:
                         BoxFit
                             .cover, // Ensure image covers the entire container
@@ -186,7 +181,7 @@ class _SchoolListCardState extends State<SchoolListCard> {
                       child: Center(
                         child: FadeInImage.memoryNetwork(
                           placeholder: kTransparentImage,
-                          image: widget.school.profile.getPath(),
+                          image: school.profile.getPath(),
                           width: 70, // Increased width
                           height: 70, // increased height
                           fit: BoxFit.cover,
@@ -213,7 +208,7 @@ class _SchoolListCardState extends State<SchoolListCard> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      widget.school.info.name,
+                      school.info.name,
                       style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
@@ -224,7 +219,7 @@ class _SchoolListCardState extends State<SchoolListCard> {
                     const SizedBox(height: 8),
                     // Display school.school_name as preformatted text
                     Text(
-                      "@${widget.school.school_name}",
+                      "@${school.school_name}",
                       style: GoogleFonts.sourceCodePro(
                         // Use a monospace font
                         fontSize: 12, // Smaller font size

@@ -7,7 +7,7 @@ import './questions.dart';
 class ApplicationFormInstructionsPage extends AssistantBasePage {
   const ApplicationFormInstructionsPage({
     super.key,
-    super.title = const Text("Instructions"),
+    super.title = "Instructions",
     required super.session,
     required super.user,
     required super.school,

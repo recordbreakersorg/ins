@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import '../../../backend/models.dart';
-import './appbar.dart';
+import 'package:ins/backend/models.dart';
+import 'appbar.dart';
 import './nav.dart';
 import './dashboardnav.dart';
+import '../../analytics.dart' as analytics;
 
 class DashboardBase extends StatelessWidget {
   final Session session;
@@ -22,6 +23,7 @@ class DashboardBase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    analytics.screen("Dashboard:$title");
     return Scaffold(
       appBar: dashboardAppBar(title, session, user),
       drawer: dashboardNav(context, session, user),

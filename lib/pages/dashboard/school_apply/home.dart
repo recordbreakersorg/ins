@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:ins/pages/dashboard/school_apply/manager.dart';
 import '../../../backend/models.dart' as models;
-import '../loadingpage.dart';
+import '../../../loadingpage.dart';
 import './instructions.dart';
+import '../../../analytics.dart' as analytics;
 
 Future<models.SchoolApplicationForm> loadApplicationForm(
   models.School school,
@@ -22,6 +23,7 @@ void launchApplicationForm(
   models.Session session,
   models.User user,
 ) async {
+  analytics.schoolApply(school.school_name);
   Navigator.push(
     context,
     MaterialPageRoute(

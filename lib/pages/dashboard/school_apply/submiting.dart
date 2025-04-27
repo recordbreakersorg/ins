@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:ins/analytics.dart' as analytics;
 import '../../../backend/models.dart' as models;
-import '../loadingpage.dart';
+import '../../../loadingpage.dart';
 import './manager.dart';
 import './base.dart';
 
 class SubmitingFormPage extends AssistantBasePage {
   const SubmitingFormPage({
     super.key,
-    super.title = const Text("Submitting"),
+    super.title = "Submitting",
     required super.session,
     required super.user,
     required super.school,
@@ -17,6 +18,7 @@ class SubmitingFormPage extends AssistantBasePage {
 
   @override
   Widget buildContent(BuildContext context) {
+    analytics.schoolApplySubmit(school.school_name);
     return _SubmitingFormView(
       assistantState: assistantState,
       session: session,
@@ -65,10 +67,12 @@ class _SubmitingFormViewState extends State<_SubmitingFormView> {
 
   String _parseErrorMessage(String error) {
     // Custom error message parsing can be added here
-    if (error.contains('timeout'))
+    if (error.contains('timeout')) {
       return 'Request timed out. Please check your connection.';
-    if (error.contains('network'))
+    }
+    if (error.contains('network')) {
       return 'Network error. Please check your internet connection.';
+    }
     return 'Submission failed. Please try again.';
   }
 

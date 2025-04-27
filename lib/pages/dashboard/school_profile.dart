@@ -1,9 +1,12 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:transparent_image/transparent_image.dart';
 import '../../backend/models.dart' as models;
 import './school_apply/home.dart';
+import '../../analytics.dart' as analytics;
 
 class SchoolProfilePage extends StatelessWidget {
   final models.School school;
@@ -19,6 +22,7 @@ class SchoolProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    analytics.schoolProfile(school.id);
     return Scaffold(
       body: Stack(
         children: [
@@ -31,17 +35,32 @@ class SchoolProfilePage extends StatelessWidget {
   }
 
   Widget _buildHeroBackground() {
-    return Hero(
-      tag: 'school-bg-${school.id}',
-      child: FadeInImage.memoryNetwork(
-        placeholder: kTransparentImage,
-        image: school.profile.getPath(),
-        fit: BoxFit.cover,
-        imageErrorBuilder:
-            (context, error, stackTrace) => Container(
-              color: Colors.grey.shade300,
-              child: const Center(child: Icon(Icons.error)),
+    return Positioned.fill(
+      child: Hero(
+        tag: 'school-bg-${school.id}',
+        child: Stack(
+          fit: StackFit.expand,
+          children: [
+            FadeInImage.memoryNetwork(
+              placeholder: kTransparentImage,
+              image: school.profile.getPath(),
+              fit: BoxFit.cover,
+              imageErrorBuilder:
+                  (context, error, stackTrace) => Container(
+                    color: Colors.grey.shade300,
+                    child: const Center(child: Icon(Icons.error)),
+                  ),
             ),
+            BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 16, sigmaY: 16),
+              child: Container(
+                color: Colors.black.withOpacity(
+                  0,
+                ), // keep transparent for blur only
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -195,14 +214,17 @@ class SchoolProfilePage extends StatelessWidget {
                             fontSize: 18,
                             fontWeight: FontWeight.w600,
                           ),
+                          disabledBackgroundColor: Colors.grey.shade400,
                         ),
                         onPressed:
-                            () => launchApplicationForm(
-                              context,
-                              school,
-                              session,
-                              user,
-                            ),
+                            snapshot.data == true
+                                ? () => launchApplicationForm(
+                                  context,
+                                  school,
+                                  session,
+                                  user,
+                                )
+                                : null,
                       ),
                     )
                     : const CircularProgressIndicator(),

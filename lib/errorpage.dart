@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../analytics.dart' as analytics;
 
 class ErrorPage extends StatelessWidget {
   final String title;
@@ -12,6 +13,11 @@ class ErrorPage extends StatelessWidget {
   });
   @override
   Widget build(BuildContext context) {
+    analytics.screen("ErrorPage");
+    analytics.logEvent(
+      name: "ErrorPage",
+      parameters: {"title": title, "description": description},
+    );
     return Container(
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.errorContainer,

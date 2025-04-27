@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:ins/offline.dart';
 import '../../backend/models.dart' as models;
 import 'package:google_fonts/google_fonts.dart';
 import './school_profile.dart';
+import '../../analytics.dart' as analytics;
 
 class SchoolExplorePage extends StatelessWidget {
   final models.User user;
@@ -15,12 +17,9 @@ class SchoolExplorePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    analytics.screen("Explore Schools");
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Explore Schools'),
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-      ),
+      appBar: AppBar(title: appBarTitle('Explore Schools'), elevation: 0),
       body: FutureBuilder<List<models.School>>(
         future: models.School.getSchools(),
         builder: (context, snapshot) {
@@ -108,28 +107,31 @@ class SchoolThumbnailCard extends StatelessWidget {
   }
 
   Widget _buildBackgroundImage() {
-    return Image.network(
-      school.profile.getPath(),
-      fit: BoxFit.cover,
-      width: double.infinity,
-      height: double.infinity,
-      loadingBuilder: (context, child, loadingProgress) {
-        if (loadingProgress == null) return child;
-        return Center(
-          child: CircularProgressIndicator(
-            value:
-                loadingProgress.expectedTotalBytes != null
-                    ? loadingProgress.cumulativeBytesLoaded /
-                        loadingProgress.expectedTotalBytes!
-                    : null,
-          ),
-        );
-      },
-      errorBuilder:
-          (context, error, stackTrace) => Container(
-            color: Colors.grey[300],
-            child: const Center(child: Icon(Icons.error_outline)),
-          ),
+    return Hero(
+      tag: 'school-bg-${school.id}',
+      child: Image.network(
+        school.profile.getPath(),
+        fit: BoxFit.cover,
+        width: double.infinity,
+        height: double.infinity,
+        loadingBuilder: (context, child, loadingProgress) {
+          if (loadingProgress == null) return child;
+          return Center(
+            child: CircularProgressIndicator(
+              value:
+                  loadingProgress.expectedTotalBytes != null
+                      ? loadingProgress.cumulativeBytesLoaded /
+                          loadingProgress.expectedTotalBytes!
+                      : null,
+            ),
+          );
+        },
+        errorBuilder:
+            (context, error, stackTrace) => Container(
+              color: Colors.grey[300],
+              child: const Center(child: Icon(Icons.error_outline)),
+            ),
+      ),
     );
   }
 
