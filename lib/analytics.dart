@@ -1,5 +1,7 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
 
+Future<void> deactivate() async {}
+
 FirebaseAnalytics? analytics;
 Future<void> intializeAnalytics() async {
   analytics = FirebaseAnalytics.instance;
@@ -87,6 +89,14 @@ Future<void> schoolApply(String schoolName) async {
   if (analytics == null) {
     return;
   }
+  await FirebaseAnalytics.instance.logBeginCheckout(
+    value: 10.0,
+    currency: 'USD',
+    items: [
+      AnalyticsEventItem(itemName: 'Socks', itemId: 'xjw73ndnw', price: 10.0),
+    ],
+    coupon: '10PERCENTOFF',
+  );
   await analytics!.logEvent(
     name: 'school_apply',
     parameters: {'school_name': schoolName},
@@ -97,6 +107,14 @@ Future<void> schoolApplySubmit(String schoolName) async {
   if (analytics == null) {
     return;
   }
+  await FirebaseAnalytics.instance.logBeginCheckout(
+    value: 10.0,
+    currency: 'USD',
+    items: [
+      AnalyticsEventItem(itemName: 'Socks', itemId: 'xjw73ndnw', price: 10.0),
+    ],
+    coupon: '10PERCENTOFF',
+  );
   await analytics!.logEvent(
     name: 'school_apply',
     parameters: {'school_name': schoolName},

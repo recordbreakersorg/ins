@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import '../../../backend/models.dart' as models;
+import 'package:ins/backend/models.dart' as models;
+import 'package:ins/offline.dart';
 import './manager.dart';
 
 class AssistantBasePage extends StatelessWidget {
-  final Widget title;
+  final String title;
   final models.Session session;
   final models.User user;
   final models.School school;
@@ -27,7 +28,7 @@ class AssistantBasePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(leading: BackButton(), title: title),
+      appBar: AppBar(leading: BackButton(), title: appBarTitle(title)),
       body: buildContent(context),
     );
   }

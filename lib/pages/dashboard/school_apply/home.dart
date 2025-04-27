@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ins/pages/dashboard/school_apply/manager.dart';
 import '../../../backend/models.dart' as models;
-import '../loadingpage.dart';
+import '../../../loadingpage.dart';
 import './instructions.dart';
 import '../../../analytics.dart' as analytics;
 

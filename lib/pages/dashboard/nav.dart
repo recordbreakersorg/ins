@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:ins/pages/dashboard/profile.dart';
+import 'package:ins/profile.dart';
 import '../../backend/sessions.dart';
 import './dashboard.dart';
 import '../../backend/models.dart' as models;
 import '../welcome.dart';
+import 'package:ins/theme.dart';
 
 Widget dashboardNav(
   BuildContext context,
@@ -15,6 +16,7 @@ Widget dashboardNav(
     child: ListView(
       padding: EdgeInsets.zero,
       children: [
+        DrawerHeader(child: Container()),
         ListTile(
           leading: Icon(Icons.dashboard),
           title: Text('Dashboard'),
@@ -73,6 +75,8 @@ Widget dashboardAccountNav(
                       fontWeight: FontWeight.bold,
                     ),
                   ),
+                  SizedBox(height: 30),
+                  ThemeSwitcherWidget(),
                 ],
               ),
             ],

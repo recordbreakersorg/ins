@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../analytics.dart' as analytics;
+import '../analytics.dart' as analytics;
 
 class ErrorPage extends StatelessWidget {
   final String title;

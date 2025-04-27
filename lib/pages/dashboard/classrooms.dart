@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import './base.dart';
-import './errorpage.dart';
+import '../../errorpage.dart';
 import '../../backend/models.dart' as models;
 
 class DashboardClassroomsPage extends DashboardBase {

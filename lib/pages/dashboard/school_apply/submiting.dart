@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:ins/analytics.dart' as analytics;
 import '../../../backend/models.dart' as models;
-import '../loadingpage.dart';
+import '../../../loadingpage.dart';
 import './manager.dart';
 import './base.dart';
 
 class SubmitingFormPage extends AssistantBasePage {
   const SubmitingFormPage({
     super.key,
-    super.title = const Text("Submitting"),
+    super.title = "Submitting",
     required super.session,
     required super.user,
     required super.school,

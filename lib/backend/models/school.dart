@@ -1,8 +1,41 @@
 import '../model.dart';
 import './profile.dart';
 import '../backend.dart';
-import './user.dart';
 import './session.dart';
+
+enum SchoolMemberRole { student, teacher, admin, parent }
+
+extension SchoolMemberRoleExtension on SchoolMemberRole {
+  String toJson() {
+    switch (this) {
+      case SchoolMemberRole.student:
+        return "student";
+      case SchoolMemberRole.teacher:
+        return "teacher";
+      case SchoolMemberRole.admin:
+        return "admin";
+      case SchoolMemberRole.parent:
+        return "parent";
+    }
+  }
+}
+
+extension SchoolMemberRoleStringExtension on String {
+  SchoolMemberRole? toSchoolMemberRole() {
+    switch (this) {
+      case "student":
+        return SchoolMemberRole.student;
+      case "teacher":
+        return SchoolMemberRole.teacher;
+      case "admin":
+        return SchoolMemberRole.admin;
+      case "parent":
+        return SchoolMemberRole.parent;
+      default:
+        return null;
+    }
+  }
+}
 
 class SchoolApplicationFormQuestion implements Model {
   final int number;
@@ -89,10 +122,12 @@ class SchoolMember implements Model {
   final String id;
   final String userId;
   final String schoolId;
+  final SchoolMemberRole role;
   const SchoolMember({
     required this.id,
     required this.userId,
     required this.schoolId,
+    required this.role,
   });
 
   factory SchoolMember.fromJson(Map<String, dynamic> json) {
@@ -100,12 +135,15 @@ class SchoolMember implements Model {
       id: json['id'],
       userId: json['user_id'],
       schoolId: json['school_id'],
+      role:
+          json['role'].toString().toSchoolMemberRole() ??
+          SchoolMemberRole.student,
     );
   }
 
   @override
   Map<String, dynamic> toJson() {
-    return {'id': id, 'user_id': userId, 'school_id': schoolId};
+    return {'id': id, 'user_id': userId, 'school_id': schoolId, 'role': role};
   }
 }
 

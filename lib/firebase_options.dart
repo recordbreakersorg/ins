@@ -25,15 +25,9 @@ class DefaultFirebaseOptions {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for macos - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return macos;
       case TargetPlatform.windows:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for windows - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return windows;
       case TargetPlatform.linux:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for linux - '
@@ -70,8 +64,29 @@ class DefaultFirebaseOptions {
     messagingSenderId: '825679026565',
     projectId: 'intranet-of-schools',
     storageBucket: 'intranet-of-schools.firebasestorage.app',
-    iosClientId: '825679026565-ofd8h39r51kdcp8m0kjureq8o88jsfc0.apps.googleusercontent.com',
+    iosClientId:
+        '825679026565-ofd8h39r51kdcp8m0kjureq8o88jsfc0.apps.googleusercontent.com',
     iosBundleId: 'com.example.ins',
   );
 
+  static const FirebaseOptions macos = FirebaseOptions(
+    apiKey: 'AIzaSyD4dSFrcgD1grtcOPRAHVH24uguRNv1CHs',
+    appId: '1:825679026565:ios:5c0543657f25fc6751ccec',
+    messagingSenderId: '825679026565',
+    projectId: 'intranet-of-schools',
+    storageBucket: 'intranet-of-schools.firebasestorage.app',
+    iosClientId:
+        '825679026565-ofd8h39r51kdcp8m0kjureq8o88jsfc0.apps.googleusercontent.com',
+    iosBundleId: 'com.example.ins',
+  );
+
+  static const FirebaseOptions windows = FirebaseOptions(
+    apiKey: 'AIzaSyD46bEORPmEdAwt3qmknaI-NOdjLeyzkqI',
+    appId: '1:825679026565:web:5feefc884170b88c51ccec',
+    messagingSenderId: '825679026565',
+    projectId: 'intranet-of-schools',
+    authDomain: 'intranet-of-schools.firebaseapp.com',
+    storageBucket: 'intranet-of-schools.firebasestorage.app',
+    measurementId: 'G-PXRCW0SJQ0',
+  );
 }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import '../../../backend/models.dart' as models;
-import './profile.dart';
+import '../../profile.dart';
 
 class NotificationFeedView extends StatelessWidget {
   final models.UserFeed feed;

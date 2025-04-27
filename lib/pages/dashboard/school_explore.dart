@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ins/offline.dart';
 import '../../backend/models.dart' as models;
 import 'package:google_fonts/google_fonts.dart';
 import './school_profile.dart';
@@ -18,7 +19,7 @@ class SchoolExplorePage extends StatelessWidget {
   Widget build(BuildContext context) {
     analytics.screen("Explore Schools");
     return Scaffold(
-      appBar: AppBar(title: const Text('Explore Schools'), elevation: 0),
+      appBar: AppBar(title: appBarTitle('Explore Schools'), elevation: 0),
       body: FutureBuilder<List<models.School>>(
         future: models.School.getSchools(),
         builder: (context, snapshot) {

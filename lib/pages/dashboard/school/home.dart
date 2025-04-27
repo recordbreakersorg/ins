@@ -10,7 +10,7 @@ Future<void> launchSchoolDashboard(
 ) async {
   final member = await school.getMember(session);
   switch (member.role) {
-    case models.UserRole.student:
+    case models.SchoolMemberRole.student:
       launchStudentSchoolView(
         context: context,
         school: school,
@@ -19,23 +19,14 @@ Future<void> launchSchoolDashboard(
         session: session,
       );
       break;
-    case models.UserRole.teacher:
+    case models.SchoolMemberRole.teacher:
       //launchTeacherDashboard(context, school, user, member);
       break;
-    case models.UserRole.parent:
+    case models.SchoolMemberRole.parent:
       //launchParentDashboard(context, school, user, member);
       break;
-    case models.UserRole.admin:
+    case models.SchoolMemberRole.admin:
       //launchAdminDashboard(context, school, user, member);
-      break;
-    default:
-      // Handle unknown role
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text("Unknown role: ${member.role}"),
-          duration: const Duration(seconds: 2),
-        ),
-      );
       break;
   }
 }

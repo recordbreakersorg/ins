@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import './feeds.dart';
 import './base.dart';
 import '../../backend/models.dart' as models;
-import './loadingpage.dart';
-import './errorpage.dart';
+import '../../loadingpage.dart';
+import '../../errorpage.dart';
 
 class DashboardPage extends DashboardBase {
   const DashboardPage({

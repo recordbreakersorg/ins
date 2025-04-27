@@ -9,7 +9,7 @@ import './submiting.dart';
 class QuestionsPage extends AssistantBasePage {
   const QuestionsPage({
     super.key,
-    super.title = const Text("Application Form"),
+    super.title = "Application Form",
     required super.session,
     required super.user,
     required super.school,

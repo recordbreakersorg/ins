@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../backend/models.dart';
-import './appbar.dart';
+import 'package:ins/backend/models.dart';
+import 'appbar.dart';
 import './nav.dart';
 import './dashboardnav.dart';
 import '../../analytics.dart' as analytics;
