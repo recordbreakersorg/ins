@@ -6,6 +6,7 @@ import 'theme.dart';
 import './backend/sessions.dart';
 import './pages/dashboard/dashboard.dart';
 import './analytics.dart' as analytics;
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 class InS extends StatelessWidget {
   const InS({super.key});
@@ -26,6 +27,12 @@ class InS extends StatelessWidget {
           darkTheme: themeManager.darkTheme,
           theme: themeManager.lightTheme,
           themeMode: themeManager.themeMode,
+          localizationsDelegates: [
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: [Locale('en'), Locale('fr')],
           home: FutureBuilder(
             future: sessionManager.loadSession(),
             builder: (context, snapshot) {

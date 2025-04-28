@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:provider/provider.dart';
 
 const Color primaryColor = Color(0xFFE65100); // #E65100
 
@@ -126,13 +125,6 @@ class ThemeManager with ChangeNotifier {
         TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
       },
     ),
-    extensions: <ThemeExtension<dynamic>>[
-      _CustomThemeExtension(
-        subtleText: Color(0xFF8B7868),
-        successColor: Color(0xFF4CAF50),
-        warningColor: Color(0xFFFF9800),
-      ),
-    ],
   );
   // Dark Theme Configuration
   static final ThemeData _darkTheme = ThemeData(
@@ -224,35 +216,7 @@ class ThemeManager with ChangeNotifier {
         TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
       },
     ),
-    extensions: <ThemeExtension<dynamic>>[
-      _CustomThemeExtension(
-        subtleText: Color(0xFF8A8A8A),
-        successColor: Color(0xFF81C784),
-        warningColor: Color(0xFFFFB74D),
-      ),
-    ],
   );
-}
-
-class _CustomThemeExtension extends ThemeExtension<_CustomThemeExtension> {
-  final Color subtleText;
-  final Color successColor;
-  final Color warningColor;
-
-  const _CustomThemeExtension({
-    required this.subtleText,
-    required this.successColor,
-    required this.warningColor,
-  });
-
-  @override
-  ThemeExtension<_CustomThemeExtension> copyWith() => this;
-
-  @override
-  ThemeExtension<_CustomThemeExtension> lerp(
-    covariant ThemeExtension<_CustomThemeExtension>? other,
-    double t,
-  ) => this;
 }
 
 final themeManager = ThemeManager();

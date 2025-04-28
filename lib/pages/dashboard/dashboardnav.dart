@@ -13,17 +13,14 @@ Widget dashboardBottomNav(
   return BottomNavigationBar(
     type: BottomNavigationBarType.fixed,
     currentIndex: index,
-    showSelectedLabels: false,
-    showUnselectedLabels: false,
-    selectedItemColor: Theme.of(context).primaryColor,
-    unselectedItemColor: Colors.grey,
+    // showSelectedLabels: false,
+    // showUnselectedLabels: false,
+    selectedItemColor: Theme.of(context).colorScheme.primary,
+    unselectedItemColor: Colors.grey.shade600,
     items: const [
       BottomNavigationBarItem(icon: Icon(Icons.dashboard), label: 'Home'),
-      BottomNavigationBarItem(
-        icon: Icon(Icons.calendar_month),
-        label: 'Schedule',
-      ),
       BottomNavigationBarItem(icon: Icon(Icons.class_), label: 'Classrooms'),
+      BottomNavigationBarItem(icon: Icon(Icons.school), label: 'Schools'),
     ],
     onTap: (index) {
       switch (index) {
