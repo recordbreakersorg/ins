@@ -24,7 +24,7 @@ class InS extends StatelessWidget {
                 ? [FirebaseAnalyticsObserver(analytics: analytics.analytics!)]
                 : []),
           ],
-          title: AppLocalizations.of(context)!.intranetOfSchools,
+          title: "Intranet of Schools",
           darkTheme: themeManager.darkTheme,
           theme: themeManager.lightTheme,
           themeMode: themeManager.themeMode,
@@ -151,7 +151,12 @@ class InS extends StatelessWidget {
                   },
                 );
               } else {
-                return WelcomePage(title: AppLocalizations.of(context)!.welcomeToTheIntranetOfSchools);
+                return WelcomePage(
+                  title:
+                      AppLocalizations.of(
+                        context,
+                      )!.welcomeToTheIntranetOfSchools,
+                );
               }
             },
           ),

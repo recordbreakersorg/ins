@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ins/pages/sign/assistant/base.dart';
 import 'package:ins/pages/sign/assistant/manager.dart';
 import './namechooser.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class RoleChooser extends StatelessWidget {
   final SignupAssistantState assistantState;
@@ -27,7 +28,7 @@ class RoleChooser extends StatelessWidget {
           child: Column(
             children: [
               Text(
-                "What role best fits you?",
+                AppLocalizations.of(context)!.whatRoleBestFitsYou,
                 style: Theme.of(context).textTheme.titleLarge,
               ),
               Spacer(),
@@ -38,7 +39,7 @@ class RoleChooser extends StatelessWidget {
                     child: FloatingActionButton.extended(
                       onPressed: () => _next(context, 'student'),
                       icon: Icon(Icons.school, size: 32),
-                      label: Text("Student", style: TextStyle(fontSize: 18)),
+                      label: Text(AppLocalizations.of(context)!.student, style: TextStyle(fontSize: 18)),
                       extendedPadding: EdgeInsets.symmetric(
                         horizontal: 42,
                         vertical: 16,
@@ -51,7 +52,7 @@ class RoleChooser extends StatelessWidget {
                     child: FloatingActionButton.extended(
                       onPressed: () => _next(context, 'instructor'),
                       icon: Icon(Icons.person, size: 32),
-                      label: Text("Instructor", style: TextStyle(fontSize: 18)),
+                      label: Text(AppLocalizations.of(context)!.instructor, style: TextStyle(fontSize: 18)),
                       extendedPadding: EdgeInsets.symmetric(
                         horizontal: 32,
                         vertical: 16,
@@ -65,7 +66,7 @@ class RoleChooser extends StatelessWidget {
                       onPressed: () => _next(context, 'administrator'),
                       icon: Icon(Icons.admin_panel_settings, size: 32),
                       label: Text(
-                        "Administrator",
+                        AppLocalizations.of(context)!.administrator,
                         style: TextStyle(fontSize: 18),
                       ),
                       extendedPadding: EdgeInsets.symmetric(
@@ -80,7 +81,7 @@ class RoleChooser extends StatelessWidget {
                     child: FloatingActionButton.extended(
                       onPressed: () => _next(context, 'parent'),
                       icon: Icon(Icons.family_restroom, size: 32),
-                      label: Text("Parent", style: TextStyle(fontSize: 18)),
+                      label: Text(AppLocalizations.of(context)!.parent, style: TextStyle(fontSize: 18)),
                       extendedPadding: EdgeInsets.symmetric(
                         horizontal: 32,
                         vertical: 16,
@@ -93,7 +94,7 @@ class RoleChooser extends StatelessWidget {
           ),
         ),
       ),
-      title: Text("Role"),
+      title: Text(AppLocalizations.of(context)!.role),
     );
   }
 }

@@ -1,3 +1,4 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import './base.dart';
@@ -20,8 +21,10 @@ class DashboardClassroomsPage extends DashboardBase {
         builder: (context, snapshot) {
           if (snapshot.hasError) {
             return ErrorPage(
-              title: "Error",
-              description: "Unable to load classrooms ${snapshot.error}",
+              title: AppLocalizations.of(context)!.error,
+              description:
+                  AppLocalizations.of(context)!.unableToLoadClassrooms +
+                  snapshot.error.toString(),
             );
           } else if (!snapshot.hasData) {
             return CircularProgressIndicator(
@@ -34,12 +37,14 @@ class DashboardClassroomsPage extends DashboardBase {
                 child: Column(
                   children: [
                     Text(
-                      "No classrooms",
+                      AppLocalizations.of(context)!.noClassrooms,
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
                     Container(height: 10),
                     Text(
-                      "We could not find a classroom you were a member. If you are member of one please check your internet connection. If the problem persists contact your administrators.",
+                      AppLocalizations.of(
+                        context,
+                      )!.youAreNotAMemberOfAnyClassroomYet,
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
                   ],
@@ -66,7 +71,9 @@ class DashboardClassroomsPage extends DashboardBase {
                                 child: Column(
                                   children: [
                                     Text(
-                                      "No classrooms",
+                                      AppLocalizations.of(
+                                        context,
+                                      )!.noClassrooms,
                                       style:
                                           Theme.of(
                                             context,
@@ -74,7 +81,9 @@ class DashboardClassroomsPage extends DashboardBase {
                                     ),
                                     Container(height: 10),
                                     Text(
-                                      "We could not find a classroom you were a member. If you are member of one please check your internet connection. If the problem persists contact your administrators.",
+                                      AppLocalizations.of(
+                                        context,
+                                      )!.youAreNotAMemberOfAnyClassroomYet,
                                       style:
                                           Theme.of(
                                             context,

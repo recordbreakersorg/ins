@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LoadingPage extends StatefulWidget {
   final List<String> messages;
@@ -50,7 +51,7 @@ class _LoadingPageState extends State<LoadingPage> {
           const CircularProgressIndicator(),
           const SizedBox(height: 24),
           Text(
-            'Wait a little bit ...',
+            AppLocalizations.of(context)!.waitALittleBit,
             style: Theme.of(context).textTheme.titleLarge,
             textAlign: TextAlign.center,
           ),

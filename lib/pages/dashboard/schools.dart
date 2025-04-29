@@ -2,7 +2,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:transparent_image/transparent_image.dart'; // For fade-in
-import 'package:flutter_localizations/'
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:ins/backend/models.dart' as models;
 import './school_explore.dart';
@@ -50,12 +50,12 @@ class DashboardSchoolsPage extends DashboardBase {
                         child: Column(
                           children: [
                             Text(
-                              "No schools",
+                              AppLocalizations.of(context)!.noSchools,
                               style: Theme.of(context).textTheme.titleLarge,
                             ),
                             const SizedBox(height: 10),
                             Text(
-                              "You are a member of no school yet",
+                              AppLocalizations.of(context)!.youAreAMemberOfNoSchoolYet,
                               style: Theme.of(context).textTheme.bodyMedium,
                             ),
                           ],

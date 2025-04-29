@@ -1,3 +1,4 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -23,7 +24,7 @@ class ApplicationFormInstructionsPage extends AssistantBasePage {
         children: [
           SizedBox(height: 10),
           Text(
-            "Instructions",
+            AppLocalizations.of(context)!.instructions,
             style: Theme.of(context).textTheme.headlineLarge,
           ),
           Padding(
@@ -51,24 +52,10 @@ class ApplicationFormInstructionsPage extends AssistantBasePage {
                   ),
                 );
               },
-              child: const Text('Next'),
+              child: Text(AppLocalizations.of(context)!.next),
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class NextStepPlaceholderPage extends StatelessWidget {
-  const NextStepPlaceholderPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text("Next Step")),
-      body: const Center(
-        child: Text("Next step of the application goes here."),
       ),
     );
   }

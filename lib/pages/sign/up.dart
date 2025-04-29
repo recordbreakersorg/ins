@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import './assistant/home.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SignupPage extends StatelessWidget {
   const SignupPage({super.key});
@@ -27,7 +28,7 @@ class SignupPage extends StatelessWidget {
                       onPressed: () {
                         launchAssistant(context);
                       },
-                      child: Text('Manual Signup >'),
+                      child: Text(AppLocalizations.of(context)!.manualSignup),
                     ),
                   ],
                 ),

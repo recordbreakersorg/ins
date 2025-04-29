@@ -1,3 +1,4 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:intl/intl.dart';
@@ -70,8 +71,8 @@ class _QuestionsViewState extends State<_QuestionsView>
     super.dispose();
   }
 
-  void _nextQuestion() async {
-    if (!_validateCurrentQuestion()) return;
+  void _nextQuestion(BuildContext context) async {
+    if (!_validateCurrentQuestion(context)) return;
 
     await _animationController.forward();
     if (_currentQuestionIndex < widget.form.questions.length - 1) {
@@ -85,12 +86,16 @@ class _QuestionsViewState extends State<_QuestionsView>
     }
   }
 
-  bool _validateCurrentQuestion() {
+  bool _validateCurrentQuestion(BuildContext context) {
     final question = widget.form.questions[_currentQuestionIndex];
     final answer = widget.assistantState.answers[question.number];
 
     if (question.required && (answer == null || answer.isEmpty)) {
-      setState(() => _currentError = 'This question is required');
+      setState(
+        () =>
+            _currentError =
+                AppLocalizations.of(context)!.thisQuestionIsRequired,
+      );
       return false;
     }
     return true;
@@ -184,7 +189,10 @@ class _QuestionsViewState extends State<_QuestionsView>
             Row(
               children: [
                 Text(
-                  'Question ${_currentQuestionIndex + 1} of ${widget.form.questions.length}',
+                  AppLocalizations.of(context)!.questionXofX(
+                    _currentQuestionIndex + 1,
+                    widget.form.questions.length,
+                  ),
                   style: Theme.of(
                     context,
                   ).textTheme.bodySmall?.copyWith(color: Colors.grey.shade600),
@@ -235,7 +243,7 @@ class _QuestionsViewState extends State<_QuestionsView>
             text: currentValue?.toString() ?? '',
           ),
           decoration: InputDecoration(
-            labelText: 'Enter your answer',
+            labelText: AppLocalizations.of(context)!.enterYourAnswer,
             border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
             filled: true,
             floatingLabelBehavior: FloatingLabelBehavior.auto,
@@ -243,7 +251,7 @@ class _QuestionsViewState extends State<_QuestionsView>
           validator:
               (value) =>
                   question.required && (value == null || value.isEmpty)
-                      ? 'This field is required'
+                      ? AppLocalizations.of(context)!.thisFieldIsRequired
                       : null,
         );
       case 'date':
@@ -262,7 +270,7 @@ class _QuestionsViewState extends State<_QuestionsView>
           },
           child: InputDecorator(
             decoration: InputDecoration(
-              labelText: 'Select date',
+              labelText: AppLocalizations.of(context)!.selectDate,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
               ),
@@ -272,7 +280,7 @@ class _QuestionsViewState extends State<_QuestionsView>
             child: Text(
               date != null
                   ? DateFormat('MMM dd, yyyy').format(date)
-                  : 'Tap to select date',
+                  : AppLocalizations.of(context)!.tapToSelectDate,
               style: Theme.of(context).textTheme.bodyLarge,
             ),
           ),
@@ -283,7 +291,7 @@ class _QuestionsViewState extends State<_QuestionsView>
           onChanged: (value) => _onAnswerChanged(question, value),
           controller: TextEditingController(text: currentValue ?? ''),
           decoration: InputDecoration(
-            labelText: 'Enter your answer',
+            labelText: AppLocalizations.of(context)!.enterYourAnswer,
             border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
             filled: true,
             floatingLabelBehavior: FloatingLabelBehavior.auto,
@@ -291,7 +299,7 @@ class _QuestionsViewState extends State<_QuestionsView>
           validator:
               (value) =>
                   question.required && (value == null || value.isEmpty)
-                      ? 'This field is required'
+                      ? AppLocalizations.of(context)!.thisFieldIsRequired
                       : null,
         );
     }
@@ -339,14 +347,14 @@ class _QuestionsViewState extends State<_QuestionsView>
                     borderRadius: BorderRadius.circular(12),
                   ),
                 ),
-                onPressed: _nextQuestion,
+                onPressed: () => _nextQuestion(context),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
                       _currentQuestionIndex < widget.form.questions.length - 1
-                          ? 'Continue'
-                          : 'Submit Application',
+                          ? AppLocalizations.of(context)!.continuer
+                          : AppLocalizations.of(context)!.submitApplication,
                     ),
                     if (_currentQuestionIndex <
                         widget.form.questions.length - 1)

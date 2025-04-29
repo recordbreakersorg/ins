@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../backend/sessions.dart';
 import '../dashboard/dashboard.dart';
 import '../../analytics.dart' as analytics;
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SigninPage extends StatefulWidget {
   const SigninPage({super.key});
@@ -45,7 +46,7 @@ class _SigninPageState extends State<SigninPage> {
                     TextField(
                       controller: _nameController,
                       decoration: InputDecoration(
-                        labelText: 'Your Name',
+                        labelText: AppLocalizations.of(context)!.yourName,
                         prefixIcon: Icon(Icons.person),
                         fillColor: Theme.of(context).colorScheme.inversePrimary,
                       ),
@@ -54,7 +55,7 @@ class _SigninPageState extends State<SigninPage> {
                     TextField(
                       controller: _codeController,
                       decoration: InputDecoration(
-                        labelText: 'Your code',
+                        labelText: AppLocalizations.of(context)!.yourPassword,
                         prefixIcon: Icon(Icons.lock),
                         fillColor: Theme.of(context).colorScheme.inversePrimary,
                       ),
@@ -70,7 +71,13 @@ class _SigninPageState extends State<SigninPage> {
                           );
                           if (session != null) {
                             ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text("Successfully signed up")),
+                              SnackBar(
+                                content: Text(
+                                  AppLocalizations.of(
+                                    context,
+                                  )!.successfullySignedUp,
+                                ),
+                              ),
                             );
 
                             final user = await session.getUser();
@@ -92,7 +99,7 @@ class _SigninPageState extends State<SigninPage> {
                           ).showSnackBar(SnackBar(content: Text(e.toString())));
                         }
                       },
-                      child: Text('Signin >'),
+                      child: Text(AppLocalizations.of(context)!.signin),
                     ),
                   ],
                 ),

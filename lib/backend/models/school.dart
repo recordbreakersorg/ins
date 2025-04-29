@@ -75,11 +75,13 @@ class SchoolApplicationForm implements Model {
   final String userId;
   final String status;
   final String description;
+  final String title;
   final String instructions;
   final List<SchoolApplicationFormQuestion> questions;
   const SchoolApplicationForm({
     required this.id,
     required this.schoolId,
+    required this.title,
     required this.userId,
     required this.status,
     required this.description,
@@ -90,6 +92,7 @@ class SchoolApplicationForm implements Model {
   factory SchoolApplicationForm.fromJson(Map<String, dynamic> json) {
     return SchoolApplicationForm(
       id: json['id'],
+      title: json['title'],
       schoolId: json['school_id'],
       userId: json['user_id'],
       status: json['status'],
@@ -109,6 +112,7 @@ class SchoolApplicationForm implements Model {
     return {
       'id': id,
       'school_id': schoolId,
+      'title': title,
       'user_id': userId,
       'status': status,
       'description': description,
@@ -208,24 +212,27 @@ class School implements Model {
     return SchoolMember.fromJson(response['member']);
   }
 
-  Future<SchoolApplicationForm?> getApplicationForm() async {
-    final res = await cacheableQuery(
-      "school/$id/application",
-      "school/$id/applicationform",
-      {},
-      null,
-    );
-    if (res['status'] < 0) {
-      throw Exception(res['message']);
+  Future<List<SchoolApplicationForm>> getApplicationForms() async {
+    try {
+      final res = await cacheableQuery(
+        "school/$id/applications",
+        "school/$id/applicationforms",
+        {},
+        null,
+      );
+      if (res['status'] < 0) {
+        throw Exception(res['message']);
+      }
+      if (res['status'] == 11) {
+        return [];
+      }
+      return ((res['applications'] as List).map(
+        (application) => SchoolApplicationForm.fromJson(application),
+      )).toList();
+    } catch (e) {
+      print(e);
+      return [];
     }
-    if (res['status'] == 11) {
-      return null;
-    }
-    return SchoolApplicationForm.fromJson(res['application']);
-  }
-
-  Future<bool> hasApplicationForm() async {
-    return await getApplicationForm() != null;
   }
 
   @override

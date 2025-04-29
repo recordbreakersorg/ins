@@ -1,3 +1,4 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
 import './base.dart';
@@ -17,20 +18,11 @@ class CreatingAccountPage extends StatefulWidget {
 
 class _CreatingAccountPageState extends State<CreatingAccountPage> {
   late final Future<User> _createAccountFuture;
-  String _currentMessage = 'Setting up your new account...';
+  String _currentMessage = "...";
   Timer? _messageTimer;
   int _messageIndex = 0;
 
-  final List<String> _messages = const [
-    'Preparing your workspace...',
-    'Configuring settings...',
-    'Almost there...',
-    'Just a few more moments...',
-    'Creating your profile...',
-    'Finalizing your account...',
-    'Setting up your preferences...',
-    'Loading your dashboard...',
-  ];
+  final List<String> _messages = ["..."];
 
   @override
   void initState() {
@@ -60,8 +52,18 @@ class _CreatingAccountPageState extends State<CreatingAccountPage> {
 
   @override
   Widget build(BuildContext context) {
+    _messages.addAll([
+      AppLocalizations.of(context)!.preparingYourWorkspace,
+      AppLocalizations.of(context)!.configuringSettings,
+      AppLocalizations.of(context)!.almostThere,
+      AppLocalizations.of(context)!.justAFewMoreMoments,
+      AppLocalizations.of(context)!.creatingYourProfile,
+      AppLocalizations.of(context)!.finalizingYourAccount,
+      AppLocalizations.of(context)!.settingUpYourPreferences,
+      AppLocalizations.of(context)!.loadingYourDashboard,
+    ]);
     return AssistantBasePage(
-      title: const Text("Creating your account"),
+      title: Text(AppLocalizations.of(context)!.creatingYourAccount),
       body: FutureBuilder(
         future: _createAccountFuture,
         builder: (context, snapshot) {
@@ -101,7 +103,7 @@ class _CreatingAccountPageState extends State<CreatingAccountPage> {
           const CircularProgressIndicator(),
           const SizedBox(height: 24),
           Text(
-            'Creating your account...',
+            AppLocalizations.of(context)!.creatingYourAccount,
             style: Theme.of(context).textTheme.titleLarge,
             textAlign: TextAlign.center,
           ),
@@ -127,7 +129,7 @@ class _CreatingAccountPageState extends State<CreatingAccountPage> {
             const Icon(Icons.error_outline, size: 200, color: Colors.red),
             const SizedBox(height: 24),
             Text(
-              'Account creation failed',
+              AppLocalizations.of(context)!.accountCreationFailed,
               style: Theme.of(
                 context,
               ).textTheme.headlineLarge?.copyWith(color: Colors.red),
@@ -154,13 +156,13 @@ class _CreatingAccountPageState extends State<CreatingAccountPage> {
           const Icon(Icons.check_circle, size: 200, color: Colors.green),
           const SizedBox(height: 24),
           Text(
-            'Account created successfully!',
+            AppLocalizations.of(context)!.accountCreatedSuccessfully,
             style: Theme.of(context).textTheme.titleLarge,
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 16),
           Text(
-            'Welcome to your new account!',
+            AppLocalizations.of(context)!.welcomeToYourNewAccount,
             style: Theme.of(context).textTheme.bodyMedium,
             textAlign: TextAlign.center,
           ),

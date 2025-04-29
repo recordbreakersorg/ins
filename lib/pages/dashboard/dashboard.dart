@@ -1,3 +1,4 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import './feeds.dart';
 import './base.dart';
@@ -19,16 +20,16 @@ class DashboardPage extends DashboardBase {
       future: user.getFeeds(session),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const LoadingPage(
+          return LoadingPage(
             messages: [
-              "Loading your feeds...",
-              "Please wait",
-              "Cross your fingers",
+              AppLocalizations.of(context)!.loadingYourFeeds,
+              AppLocalizations.of(context)!.pleaseWait,
+              AppLocalizations.of(context)!.crossYourFingers,
             ],
           );
         } else if (snapshot.hasError) {
           return ErrorPage(
-            title: "Error loading your feeds",
+            title: AppLocalizations.of(context)!.errorLoadingYourFeeds,
             description: snapshot.error.toString(),
             icon: Icon(
               Icons.signal_wifi_off,
@@ -79,7 +80,7 @@ class _FeedsViewState extends State<FeedsView> {
             const SizedBox(height: 24),
 
             Text(
-              "All caught up!",
+              AppLocalizations.of(context)!.allCaughtUp,
               style: Theme.of(context).textTheme.headlineLarge,
             ),
           ],

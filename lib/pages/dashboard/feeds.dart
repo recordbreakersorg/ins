@@ -1,3 +1,4 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
@@ -100,7 +101,7 @@ class NotificationFeedView extends StatelessWidget {
                     ),
                     foregroundColor: WidgetStateProperty.all(colorScheme.error),
                   ),
-                  child: Text("Dismiss"),
+                  child: Text(AppLocalizations.of(context)!.dismiss),
                 ),
               ),
             ],
@@ -122,7 +123,7 @@ class NotificationFeedView extends StatelessWidget {
                     ),
                     foregroundColor: WidgetStateProperty.all(colorScheme.error),
                   ),
-                  child: Text("Dismiss"),
+                  child: Text(AppLocalizations.of(context)!.dismiss),
                 ),
               ),
               ElevatedButton(
@@ -131,7 +132,7 @@ class NotificationFeedView extends StatelessWidget {
                   backgroundColor: colorScheme.primary,
                   foregroundColor: colorScheme.onPrimary,
                 ),
-                child: Text("View >"),
+                child: Text(AppLocalizations.of(context)!.view),
               ),
             ],
           ),
