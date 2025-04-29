@@ -7,6 +7,7 @@ import './backend/sessions.dart';
 import './pages/dashboard/dashboard.dart';
 import './analytics.dart' as analytics;
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class InS extends StatelessWidget {
   const InS({super.key});
@@ -23,12 +24,13 @@ class InS extends StatelessWidget {
                 ? [FirebaseAnalyticsObserver(analytics: analytics.analytics!)]
                 : []),
           ],
-          title: 'Intranet of Schools',
+          title: AppLocalizations.of(context)!.intranetOfSchools,
           darkTheme: themeManager.darkTheme,
           theme: themeManager.lightTheme,
           themeMode: themeManager.themeMode,
           localizationsDelegates: [
             GlobalMaterialLocalizations.delegate,
+            AppLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate,
           ],
@@ -48,7 +50,6 @@ class InS extends StatelessWidget {
                 );
               }
               if (sessionManager.hasSession()) {
-                print(" has session${sessionManager.session}");
                 return FutureBuilder(
                   future: sessionManager.session!.getUser(),
                   builder: (context, snapshot) {
@@ -60,7 +61,10 @@ class InS extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               ErrorPage(
-                                title: "Error loading your session",
+                                title:
+                                    AppLocalizations.of(
+                                      context,
+                                    )!.errorLoadingYourSession,
                                 description: snapshot.error!.toString(),
                                 icon: Icon(
                                   Icons.signal_wifi_off,
@@ -83,7 +87,9 @@ class InS extends StatelessWidget {
                                           ),
                                         ),
                                     icon: Icon(Icons.refresh),
-                                    label: Text('Reload'),
+                                    label: Text(
+                                      AppLocalizations.of(context)!.reload,
+                                    ),
                                   ),
                                 ),
                               ),
@@ -104,14 +110,18 @@ class InS extends StatelessWidget {
                                             },
                                           ),
                                         ),
-                                    child: Text('logout.'),
+                                    child: Text(
+                                      AppLocalizations.of(context)!.logout,
+                                    ),
                                   ),
                                 ),
                               ),
                             ],
                           ),
                         ),
-                        appBar: AppBar(title: Text("Error")),
+                        appBar: AppBar(
+                          title: Text(AppLocalizations.of(context)!.error),
+                        ),
                       );
                     } else if (!snapshot.hasData) {
                       return Scaffold(
@@ -123,15 +133,16 @@ class InS extends StatelessWidget {
                                 color: Theme.of(context).primaryColor,
                               ),
                               SizedBox(height: 30),
-                              Text("Loading your online accounts..."),
+                              Text(
+                                AppLocalizations.of(
+                                  context,
+                                )!.loadingYourOnlineAccounts,
+                              ),
                             ],
                           ),
                         ),
                       );
                     } else {
-                      print(
-                        "User: ${snapshot.data}, session ${sessionManager.session}",
-                      );
                       return DashboardPage(
                         session: sessionManager.session!,
                         user: snapshot.data!,
@@ -140,7 +151,7 @@ class InS extends StatelessWidget {
                   },
                 );
               } else {
-                return WelcomePage(title: 'Welcome to the Intranet of Schools');
+                return WelcomePage(title: AppLocalizations.of(context)!.welcomeToTheIntranetOfSchools);
               }
             },
           ),

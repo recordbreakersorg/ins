@@ -1,3 +1,25 @@
 {
-    "helloWorld": "BOnjour le monde"
+  "helloWorld": "BOnjour le monde",
+  "errorLoadingYourSession": "Error loading your session",
+  "reload": "Reload",
+  "logout": "logout",
+  "error": "Error",
+  "loadingYourOnlineAccounts": "Loading your online accounts...",
+  "welcomeToTheIntranetOfSchools": "Welcome to the Intranet of Schools",
+  "errorSnapshotError": "Error: ${error}",
+  "yourSchools": "Your schools",
+  "dashboard": "Dashboard",
+  "schedule": "Schedule",
+  "classrooms": "Classrooms",
+  "profile": "Profile",
+  "settings": "Settings",
+  "signOut": "Sign Out",
+  "welcomeBack": "Welcome back",
+  "dashboardBaseContent": "Dashboard Base Content",
+  "welcome": "Welcome!",
+  "connect": "Connect",
+  "register": "Register",
+  "schools": "Schools",
+  "home": "Home",
+  "intranetOfSchools": "Intranet of Schools"
 }

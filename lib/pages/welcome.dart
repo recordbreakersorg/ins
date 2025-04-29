@@ -3,6 +3,7 @@ import './sign/in.dart';
 import './sign/up.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../analytics.dart' as analytics;
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class WelcomePage extends StatelessWidget {
   final String title;
@@ -31,7 +32,10 @@ class WelcomePage extends StatelessWidget {
                   height: 200,
                 ),
               ),
-              Text('Welcome!', style: GoogleFonts.lato(fontSize: 30)),
+              Text(
+                AppLocalizations.of(context)!.welcome,
+                style: GoogleFonts.lato(fontSize: 30),
+              ),
               const SizedBox(height: 50),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -43,7 +47,7 @@ class WelcomePage extends StatelessWidget {
                         MaterialPageRoute(builder: (context) => SigninPage()),
                       );
                     },
-                    child: const Text('Connect'),
+                    child: Text(AppLocalizations.of(context)!.connect),
                   ),
                   const SizedBox(width: 20),
                   FilledButton(
@@ -53,7 +57,7 @@ class WelcomePage extends StatelessWidget {
                         MaterialPageRoute(builder: (context) => SignupPage()),
                       );
                     },
-                    child: const Text('Register'),
+                    child: Text(AppLocalizations.of(context)!.register),
                   ),
                 ],
               ),

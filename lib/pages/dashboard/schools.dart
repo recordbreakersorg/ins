@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:transparent_image/transparent_image.dart'; // For fade-in
+import 'package:flutter_localizations/'
 
 import 'package:ins/backend/models.dart' as models;
 import './school_explore.dart';
@@ -32,7 +33,7 @@ class DashboardSchoolsPage extends DashboardBase {
                 builder: (context, snapshot) {
                   if (snapshot.hasError) {
                     return ErrorPage(
-                      title: "Error",
+                      title: AppLocalizations.of(context)!.error,
                       description: "Unable to load schools ${snapshot.error}",
                     );
                   } else if (!snapshot.hasData) {
