@@ -1,3 +1,4 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:ins/analytics.dart' as analytics;
 import '../../../backend/models.dart' as models;
@@ -22,7 +23,7 @@ class SubmitingFormPage extends AssistantBasePage {
     return _SubmitingFormView(
       assistantState: assistantState,
       session: session,
-      formName: "Application Form",
+      formName: form.title,
     );
   }
 }
@@ -60,20 +61,24 @@ class _SubmitingFormViewState extends State<_SubmitingFormView> {
       await widget.assistantState.submit(widget.session);
     } catch (e) {
       setState(() {
-        _error = _parseErrorMessage(e.toString());
+        _error = _parseErrorMessage(e.toString(), context);
       });
     }
   }
 
-  String _parseErrorMessage(String error) {
+  String _parseErrorMessage(String error, BuildContext context) {
     // Custom error message parsing can be added here
     if (error.contains('timeout')) {
-      return 'Request timed out. Please check your connection.';
+      return AppLocalizations.of(
+        context,
+      )!.requestTimedOutPleaseCheckYourConnection;
     }
     if (error.contains('network')) {
-      return 'Network error. Please check your internet connection.';
+      return AppLocalizations.of(
+        context,
+      )!.networkErrorPleaseCheckYourInternetConnection;
     }
-    return 'Submission failed. Please try again.';
+    return AppLocalizations.of(context)!.submissionFailedPleaseTryAgain;
   }
 
   @override
@@ -92,17 +97,17 @@ class _SubmitingFormViewState extends State<_SubmitingFormView> {
             _error == null) {
           return _buildSuccessState(context, colorScheme);
         }
-        return _buildLoadingState();
+        return _buildLoadingState(context);
       },
     );
   }
 
-  Widget _buildLoadingState() {
+  Widget _buildLoadingState(BuildContext context) {
     return LoadingPage(
       messages: [
-        'Submitting ${widget.formName}...',
-        'Almost there! Processing your information...',
-        'Finalizing your submission...',
+        AppLocalizations.of(context)!.submittingForm,
+        AppLocalizations.of(context)!.almostThereProcessingYourInformation,
+        AppLocalizations.of(context)!.finalizingYourSubmission,
       ],
     );
   }
@@ -121,7 +126,7 @@ class _SubmitingFormViewState extends State<_SubmitingFormView> {
             ),
             const SizedBox(height: 24),
             Text(
-              'Submission Successful!',
+              AppLocalizations.of(context)!.submissionSuccessful,
               style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                 fontWeight: FontWeight.bold,
                 color: colorScheme.onSurface,
@@ -129,13 +134,17 @@ class _SubmitingFormViewState extends State<_SubmitingFormView> {
             ),
             const SizedBox(height: 16),
             Text(
-              'Your ${widget.formName} has been submitted successfully.',
+              AppLocalizations.of(
+                context,
+              )!.yourFormHasBeenSubmittedSuccessfully,
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.bodyLarge,
             ),
             const SizedBox(height: 8),
             Text(
-              'You will receive a confirmation email shortly.',
+              AppLocalizations.of(
+                context,
+              )!.youWillReceiveAConfirmationEmailShortly,
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                 color: colorScheme.onSurface.withOpacity(0.6),
@@ -146,7 +155,7 @@ class _SubmitingFormViewState extends State<_SubmitingFormView> {
               onPressed: () {
                 Navigator.of(context).popUntil((route) => route.isFirst);
               },
-              child: const Text('Return to Dashboard'),
+              child: Text(AppLocalizations.of(context)!.returnToDashboard),
             ),
           ],
         ),
@@ -164,7 +173,7 @@ class _SubmitingFormViewState extends State<_SubmitingFormView> {
             Icon(Icons.error_outline, color: colorScheme.error, size: 80),
             const SizedBox(height: 24),
             Text(
-              'Submission Failed',
+              AppLocalizations.of(context)!.submissionFailed,
               style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                 fontWeight: FontWeight.bold,
                 color: colorScheme.onSurface,
@@ -180,7 +189,9 @@ class _SubmitingFormViewState extends State<_SubmitingFormView> {
             ),
             const SizedBox(height: 8),
             Text(
-              'Please check your information and try again.',
+              AppLocalizations.of(
+                context,
+              )!.pleaseCheckYourInformationAndTryAgain,
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.bodyMedium,
             ),
@@ -195,14 +206,14 @@ class _SubmitingFormViewState extends State<_SubmitingFormView> {
                       _submitFuture = _submit();
                     });
                   },
-                  child: const Text('Try Again'),
+                  child: Text(AppLocalizations.of(context)!.tryAgain),
                 ),
                 const SizedBox(width: 16),
                 TextButton(
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
-                  child: const Text('Go Back'),
+                  child: Text(AppLocalizations.of(context)!.goBack),
                 ),
               ],
             ),

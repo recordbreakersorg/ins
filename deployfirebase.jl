@@ -38,7 +38,11 @@ function main()
   end
   copylogo()
   println("Deploying")
-  run(`firebase deploy`)
+  try
+    run(`firebase deploy --non-interactive`)
+  catch
+    print("faild")
+  end
 end
 
 if (@__MODULE__) == Main

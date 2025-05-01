@@ -1,0 +1,283 @@
+{
+  "helloWorld": "Bonjour le monde",
+  "@helloWorld": {
+    "description": "The conventional greeting"
+  },
+  "errorLoadingYourSession": "Erreur lors du chargement de votre session",
+  "@errorLoadingYourSession": {
+    "description": "Error message when the user's session fails to load"
+  },
+  "reload": "Recharger",
+  "@reload": {
+    "description": "Action to reload the current page or data"
+  },
+  "logout": "Se déconnecter",
+  "@logout": {
+    "description": "Action to log out the user"
+  },
+  "error": "Erreur",
+  "@error": {
+    "description": "Generic error message"
+  },
+  "loadingYourOnlineAccounts": "Chargement de vos comptes en ligne...",
+  "@loadingYourOnlineAccounts": {
+    "description": "Message indicating that the user's online accounts are being loaded"
+  },
+  "welcomeToTheIntranetOfSchools": "Bienvenue sur l'Intranet des Écoles",
+  "@welcomeToTheIntranetOfSchools": {
+    "description": "Welcome message for the Intranet of Schools platform"
+  },
+  "errorSnapshotError": "Erreur : ${error}",
+  "@errorSnapshotError": {
+    "description": "Error message including a snapshot of the error"
+  },
+  "yourSchools": "Vos écoles",
+  "@yourSchools": {
+    "description": "Label for the user's schools"
+  },
+  "dashboard": "Tableau de bord",
+  "@dashboard": {
+    "description": "Label for the main dashboard"
+  },
+  "schedule": "Emploi du temps",
+  "@schedule": {
+    "description": "Label for the schedule section"
+  },
+  "classrooms": "Salles de classe",
+  "@classrooms": {
+    "description": "Label for the classrooms section"
+  },
+  "profile": "Profil",
+  "@profile": {
+    "description": "Label for the user's profile"
+  },
+  "settings": "Paramètres",
+  "@settings": {
+    "description": "Label for the application settings"
+  },
+  "signOut": "Se déconnecter",
+  "@signOut": {
+    "description": "Action to sign out"
+  },
+  "welcomeBack": "Bon retour",
+  "@welcomeBack": {
+    "description": "Welcome back message"
+  },
+  "dashboardBaseContent": "Contenu de base du tableau de bord",
+  "@dashboardBaseContent": {
+    "description": "Base content for the dashboard"
+  },
+  "welcome": "Bienvenue !",
+  "@welcome": {
+    "description": "Generic welcome"
+  },
+  "connect": "Se connecter",
+  "@connect": {
+    "description": "Label to connect"
+  },
+  "register": "S'inscrire",
+  "@register": {
+    "description": "Label to register"
+  },
+  "schools": "Écoles",
+  "@schools": {
+    "description": "Label for schools"
+  },
+  "home": "Accueil",
+  "@home": {
+    "description": "Label for home"
+  },
+  "intranetOfSchools": "Intranet des Écoles",
+  "@intranetOfSchools": {
+    "description": "Label for Intranet of Schools"
+  },
+  "noSchools": "Aucune école",
+  "@noSchools": {
+    "description": "Message when there are no schools"
+  },
+  "noSchoolMembership": "Vous n'êtes membre d'aucune école pour l'instant",
+  "@noSchoolMembership": {
+    "description": "Message when the user is not a member of any school"
+  },
+  "explore": "Explorer",
+  "@explore": {
+    "description": "Label to explore"
+  },
+  "youAreAMemberOfNoSchoolYet": "Vous n'êtes membre d'aucune école pour l'instant",
+  "@youAreAMemberOfNoSchoolYet": {
+    "description": "Message indicating the user is not a member of a school"
+  },
+  "waitALittleBit": "Patientez un instant...",
+  "@waitALittleBit": {
+    "description": "Message indicating a waiting period"
+  },
+  "manualSignup": "Inscription manuelle >",
+  "@manualSignup": {
+    "description": "Label for manual signup"
+  },
+  "successfullySignedUp": "Inscription réussie",
+  "@successfullySignedUp": {
+    "description": "Message after successful signup"
+  },
+  "yourName": "Votre nom",
+  "@yourName": {
+    "description": "Label for name input"
+  },
+  "yourPassword": "Votre mot de passe",
+  "@yourPassword": {
+    "description": "Label for password input"
+  },
+  "signin": "Se connecter >",
+  "@signin": {
+    "description": "Label for sign in"
+  },
+  "whatRoleBestFitsYou": "Quel rôle vous correspond le mieux ?",
+  "@whatRoleBestFitsYou": {
+    "description": "Question asking the user's role"
+  },
+  "student": "Étudiant",
+  "@student": {
+    "description": "Label for student role"
+  },
+  "instructor": "Instructeur",
+  "@instructor": {
+    "description": "Label for instructor role"
+  },
+  "administrator": "Administrateur",
+  "@administrator": {
+    "description": "Label for administrator role"
+  },
+  "parent": "Parent",
+  "@parent": {
+    "description": "Label for parent role"
+  },
+  "role": "Rôle",
+  "@role": {
+    "description": "Label for role selection"
+  },
+  "weak": "Faible",
+  "@weak": {
+    "description": "Label for weak password strength"
+  },
+  "moderate": "Modéré",
+  "@moderate": {
+    "description": "Label for moderate password strength"
+  },
+  "strong": "Fort",
+  "@strong": {
+    "description": "Label for strong password strength"
+  },
+  "suggestedPassword": "Mot de passe suggéré",
+  "@suggestedPassword": {
+    "description": "Label for suggested password"
+  },
+  "cancel": "Annuler",
+  "@cancel": {
+    "description": "Label to cancel"
+  },
+  "copy": "Copier",
+  "@copy": {
+    "description": "Label to copy"
+  },
+  "useThis": "Utiliser",
+  "@useThis": {
+    "description": "Label to use"
+  },
+  "password": "Mot de passe",
+  "@password": {
+    "description": "Label for password"
+  },
+  "generatePassword": "Générer un mot de passe",
+  "@generatePassword": {
+    "description": "Label to generate password"
+  },
+  "minimum8Characters": "Minimum 8 caractères",
+  "@minimum8Characters": {
+    "description": "Label for minimum password length"
+  },
+  "number09": "Chiffre (0-9)",
+  "@number09": {
+    "description": "Label for number requirement in password"
+  },
+  "lowercaseLetterAZ": "Lettre minuscule (a-z)",
+  "@lowercaseLetterAZ": {
+    "description": "Label for lowercase requirement in password"
+  },
+  "specialCharacter": "Caractère spécial (!@#...)",
+  "@specialCharacter": {
+    "description": "Label for special character requirement in password"
+  },
+  "uppercaseLetterAZ": "Lettre majuscule (A-Z)",
+  "@uppercaseLetterAZ": {
+    "description": "Label for uppercase requirement in password"
+  },
+  "continuer": "Continuer",
+  "@continuer": {
+    "description": "Label to continue"
+  },
+  "requestTimedOutPleaseCheckYourConnection": "La requête a expiré. Veuillez vérifier votre connexion.",
+  "@requestTimedOutPleaseCheckYourConnection": {
+    "description": "Error message for timed out request"
+  },
+  "networkErrorPleaseCheckYourInternetConnection": "Erreur réseau. Veuillez vérifier votre connexion internet.",
+  "@networkErrorPleaseCheckYourInternetConnection": {
+    "description": "Error message for network error"
+  },
+  "submissionFailedPleaseTryAgain": "La soumission a échoué. Veuillez réessayer.",
+  "@submissionFailedPleaseTryAgain": {
+    "description": "Error message for failed submission"
+  },
+  "submittingForm": "Soumission du formulaire...",
+  "@submittingForm": {
+    "description": "Message indicating form submission"
+  },
+  "almostThereProcessingYourInformation": "Presque là ! Traitement de vos informations...",
+  "@almostThereProcessingYourInformation": {
+    "description": "Message indicating information processing"
+  },
+  "finalizingYourSubmission": "Finalisation de votre soumission...",
+  "@finalizingYourSubmission": {
+    "description": "Message indicating submission finalization"
+  },
+  "submissionSuccessful": "Soumission réussie !",
+  "@submissionSuccessful": {
+    "description": "Message after successful submission"
+  },
+  "yourFormHasBeenSubmittedSuccessfully": "Votre formulaire a été soumis avec succès.",
+  "@yourFormHasBeenSubmittedSuccessfully": {
+    "description": "Message indicating successful form submission"
+  },
+  "youWillReceiveAConfirmationEmailShortly": "Vous recevrez un e-mail de confirmation sous peu.",
+  "@youWillReceiveAConfirmationEmailShortly": {
+    "description": "Message indicating a confirmation email will be sent"
+  },
+  "returnToDashboard": "Retour au tableau de bord",
+  "@returnToDashboard": {
+    "description": "Label to return to dashboard"
+  },
+  "submissionFailed": "Échec de la soumission",
+  "@submissionFailed": {
+    "description": "Message indicating submission failure"
+  },
+  "pleaseCheckYourInformationAndTryAgain": "Veuillez vérifier vos informations et réessayer.",
+  "@pleaseCheckYourInformationAndTryAgain": {
+    "description": "Message prompting user to check information and try again"
+  },
+  "tryAgain": "Réessayer",
+  "@tryAgain": {
+    "description": "Label to try again"
+  },
+  "goBack": "Retour",
+  "@goBack": {
+    "description": "Label to go back"
+  },
+  "errorLoadingApplicationForm": "Erreur lors du chargement du formulaire de candidature",
+  "@errorLoadingApplicationForm": {
+    "description": "Error message when the application form fails to load"
+  },
+  "selectApplicationForm": "Sélectionner un formulaire de candidature",
+  "@selectApplicationForm": {
+    "description": "Message to select an application form"
+  },
+  "banana": "banana"
+}

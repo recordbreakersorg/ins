@@ -3,6 +3,7 @@ import '../../backend/models.dart';
 import './dashboard.dart';
 import './classrooms.dart';
 import './schools.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 Widget dashboardBottomNav(
   BuildContext context,
@@ -13,17 +14,17 @@ Widget dashboardBottomNav(
   return BottomNavigationBar(
     type: BottomNavigationBarType.fixed,
     currentIndex: index,
-    showSelectedLabels: false,
-    showUnselectedLabels: false,
-    selectedItemColor: Theme.of(context).primaryColor,
-    unselectedItemColor: Colors.grey,
-    items: const [
-      BottomNavigationBarItem(icon: Icon(Icons.dashboard), label: 'Home'),
+    // showSelectedLabels: false,
+    // showUnselectedLabels: false,
+    selectedItemColor: Theme.of(context).colorScheme.primary,
+    unselectedItemColor: Colors.grey.shade600,
+    items: [
+      BottomNavigationBarItem(icon: Icon(Icons.dashboard), label: AppLocalizations.of(context)!.home),
+      BottomNavigationBarItem(icon: Icon(Icons.class_), label: AppLocalizations.of(context)!.classrooms),
       BottomNavigationBarItem(
-        icon: Icon(Icons.calendar_month),
-        label: 'Schedule',
+        icon: Icon(Icons.school),
+        label: AppLocalizations.of(context)!.schools,
       ),
-      BottomNavigationBarItem(icon: Icon(Icons.class_), label: 'Classrooms'),
     ],
     onTap: (index) {
       switch (index) {

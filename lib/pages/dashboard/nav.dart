@@ -6,6 +6,7 @@ import './dashboard.dart';
 import '../../backend/models.dart' as models;
 import '../welcome.dart';
 import 'package:ins/theme.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 Widget dashboardNav(
   BuildContext context,
@@ -19,7 +20,7 @@ Widget dashboardNav(
         DrawerHeader(child: Container()),
         ListTile(
           leading: Icon(Icons.dashboard),
-          title: Text('Dashboard'),
+          title: Text(AppLocalizations.of(context)!.dashboard),
           onTap:
               () => Navigator.pushReplacement(
                 context,
@@ -31,12 +32,12 @@ Widget dashboardNav(
         ),
         ListTile(
           leading: Icon(Icons.book),
-          title: Text('Classrooms'),
+          title: Text(AppLocalizations.of(context)!.classrooms),
           onTap: () {},
         ),
         ListTile(
           leading: Icon(Icons.calendar_today),
-          title: Text('Schedule'),
+          title: Text(AppLocalizations.of(context)!.schedule),
           onTap: () {},
         ),
       ],
@@ -84,23 +85,23 @@ Widget dashboardAccountNav(
         ),
         ListTile(
           leading: Icon(Icons.person),
-          title: Text('Profile'),
+          title: Text(AppLocalizations.of(context)!.profile),
           onTap: () => Navigator.pop(context),
         ),
         ListTile(
           leading: Icon(Icons.settings),
-          title: Text('Settings'),
+          title: Text(AppLocalizations.of(context)!.settings),
           onTap: () {},
         ),
         ListTile(
           leading: Icon(Icons.logout),
-          title: Text('Sign Out'),
+          title: Text(AppLocalizations.of(context)!.signOut),
           onTap: () {
             sessionManager.clearSession();
             Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(
-                builder: (context) => WelcomePage(title: "Welcome back"),
+                builder: (context) => WelcomePage(title: AppLocalizations.of(context)!.welcomeBack),
               ),
               (route) => false,
             );

@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import './manager.dart';
 import './base.dart';
 import './dobchooser.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PasswordChooserPage extends StatefulWidget {
   final SignupAssistantState assistantState;
@@ -89,13 +90,13 @@ class _PasswordChooserPageState extends State<PasswordChooserPage> {
 
       // Determine strength label and color
       if (_passwordStrength < 0.4) {
-        _strengthLabel = 'Weak';
+        _strengthLabel = AppLocalizations.of(context)!.weak;
         _strengthColor = Colors.red;
       } else if (_passwordStrength < 0.75) {
-        _strengthLabel = 'Moderate';
+        _strengthLabel = AppLocalizations.of(context)!.moderate;
         _strengthColor = Colors.orange;
       } else {
-        _strengthLabel = 'Strong';
+        _strengthLabel = AppLocalizations.of(context)!.strong;
         _strengthColor = Colors.green;
       }
 
@@ -145,32 +146,32 @@ class _PasswordChooserPageState extends State<PasswordChooserPage> {
         password.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'));
   }
 
-  void _showPasswordSuggestions() {
+  void _showPasswordSuggestions(BuildContext context) {
     final generatedPassword = _generateStrongPassword();
     showDialog(
       context: context,
       builder:
           (context) => AlertDialog(
-            title: const Text('Suggested Password'),
+            title: Text(AppLocalizations.of(context)!.suggestedPassword),
             content: SelectableText(generatedPassword),
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context),
-                child: const Text('Cancel'),
+                child: Text(AppLocalizations.of(context)!.cancel),
               ),
               TextButton(
                 onPressed: () {
                   Clipboard.setData(ClipboardData(text: generatedPassword));
                   Navigator.pop(context);
                 },
-                child: const Text('Copy'),
+                child: Text(AppLocalizations.of(context)!.copy),
               ),
               FilledButton(
                 onPressed: () {
                   _passwordController.text = generatedPassword;
                   Navigator.pop(context);
                 },
-                child: const Text('Use This'),
+                child: Text(AppLocalizations.of(context)!.useThis),
               ),
             ],
           ),
@@ -181,7 +182,7 @@ class _PasswordChooserPageState extends State<PasswordChooserPage> {
   Widget build(BuildContext context) {
     _validatePassword();
     return AssistantBasePage(
-      title: const Text('Password'),
+      title: Text(AppLocalizations.of(context)!.password),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -190,15 +191,15 @@ class _PasswordChooserPageState extends State<PasswordChooserPage> {
             TextField(
               controller: _passwordController,
               decoration: InputDecoration(
-                labelText: 'Password',
+                labelText: AppLocalizations.of(context)!.password,
                 border: const OutlineInputBorder(),
                 suffixIcon: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     IconButton(
                       icon: const Icon(Icons.autorenew),
-                      onPressed: _showPasswordSuggestions,
-                      tooltip: 'Generate password',
+                      onPressed: () => _showPasswordSuggestions(context),
+                      tooltip: AppLocalizations.of(context)!.generatePassword,
                     ),
                     IconButton(
                       icon: Icon(
@@ -221,11 +222,26 @@ class _PasswordChooserPageState extends State<PasswordChooserPage> {
             const SizedBox(height: 20),
             _buildStrengthIndicator(),
             const SizedBox(height: 15),
-            _buildValidationItem('Minimum 8 characters', _hasMinLength),
-            _buildValidationItem('Uppercase letter (A-Z)', _hasUpper),
-            _buildValidationItem('Lowercase letter (a-z)', _hasLower),
-            _buildValidationItem('Number (0-9)', _hasNumber),
-            _buildValidationItem('Special character (!@#...)', _hasSpecial),
+            _buildValidationItem(
+              AppLocalizations.of(context)!.minimum8Characters,
+              _hasMinLength,
+            ),
+            _buildValidationItem(
+              AppLocalizations.of(context)!.uppercaseLetterAZ,
+              _hasUpper,
+            ),
+            _buildValidationItem(
+              AppLocalizations.of(context)!.lowercaseLetterAZ,
+              _hasLower,
+            ),
+            _buildValidationItem(
+              AppLocalizations.of(context)!.number09,
+              _hasNumber,
+            ),
+            _buildValidationItem(
+              AppLocalizations.of(context)!.specialCharacter,
+              _hasSpecial,
+            ),
             const SizedBox(height: 10),
             //TextButton(
             //  onPressed: _showPasswordSuggestions,
@@ -242,7 +258,7 @@ class _PasswordChooserPageState extends State<PasswordChooserPage> {
                           _passwordController.text,
                         )
                         : null,
-                child: const Text('Continue'),
+                child: Text(AppLocalizations.of(context)!.continuer),
               ),
             ),
           ],
@@ -256,7 +272,7 @@ class _PasswordChooserPageState extends State<PasswordChooserPage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          '$_strengthLabel password',
+          "$_strengthLabel${AppLocalizations.of(context)!.password}",
           style: TextStyle(color: _strengthColor, fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 5),

@@ -5,6 +5,8 @@ import './nav.dart';
 import './dashboardnav.dart';
 import '../../analytics.dart' as analytics;
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class DashboardBase extends StatelessWidget {
   final Session session;
   final User user;
@@ -18,7 +20,9 @@ class DashboardBase extends StatelessWidget {
     required this.title,
   });
   Widget buildContent(BuildContext context) {
-    return const Center(child: Text('Dashboard Base Content'));
+    return Center(
+      child: Text(AppLocalizations.of(context)!.dashboardBaseContent),
+    );
   }
 
   @override

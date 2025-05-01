@@ -156,7 +156,7 @@ class User implements Model {
   });
 
   Future<Session> setNewSession(String password) async {
-    final response = await apiQuery("session/create", <String, String>{
+    final response = await apiQuery("signin", <String, String>{
       'username': username,
       'password': password,
     }, null);

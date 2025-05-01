@@ -48,11 +48,12 @@ class AssistantState {
           .toList(),
     );
     final response = await apiQuery(
-      "school/${form.schoolId}/applicationform/submit",
+      "school/${form.schoolId}/applicationform/${form.id}/submit",
       {"answers": oanswers},
       session,
     );
     if (response['status'] < 0) {
+      print("Error:${response['status']}: ${response['message']}");
       throw Exception("Error: ${response['message']}");
     }
   }

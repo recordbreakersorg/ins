@@ -1,3 +1,4 @@
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:ins/pages/dashboard/school_apply/manager.dart';
 import '../../../backend/models.dart' as models;
@@ -5,23 +6,12 @@ import '../../../loadingpage.dart';
 import './instructions.dart';
 import '../../../analytics.dart' as analytics;
 
-Future<models.SchoolApplicationForm> loadApplicationForm(
-  models.School school,
-) async {
-  await Future.delayed(const Duration(seconds: 3));
-  final form = await school.getApplicationForm();
-  if (form != null) {
-    return form;
-  } else {
-    throw Exception('No application form found');
-  }
-}
-
 void launchApplicationForm(
   BuildContext context,
   models.School school,
   models.Session session,
   models.User user,
+  models.SchoolApplicationForm form,
 ) async {
   analytics.schoolApply(school.school_name);
   Navigator.push(
@@ -30,13 +20,16 @@ void launchApplicationForm(
       builder:
           (context) => Scaffold(
             body: LoadingPage(
-              messages: ['Loading...', 'Getting form...', 'Please wait...'],
+              messages: [
+                AppLocalizations.of(context)!.loading,
+                AppLocalizations.of(context)!.gettingForm,
+                AppLocalizations.of(context)!.pleaseWait,
+              ],
             ),
           ),
     ),
   );
-  final form = await school.getApplicationForm();
-  final state = await AssistantState.loadOrCreate(form!);
+  final state = await AssistantState.loadOrCreate(form);
   Navigator.pushReplacement(
     context,
     MaterialPageRoute(
