@@ -48,7 +48,9 @@ Future<Map<String, dynamic>> apiQuery(
   if (response.statusCode == 200) {
     return jsonDecode(response.body);
   } else {
-    throw Exception('Failed to load data');
+    throw Exception(
+      'Failed to load data at $url status: ${response.statusCode}',
+    );
   }
 }
 

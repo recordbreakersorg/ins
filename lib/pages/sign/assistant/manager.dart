@@ -6,7 +6,6 @@ class SignupAssistantState {
   String? name;
   String? username;
   String? password;
-  String? role;
   DateTime? dob;
   SignupAssistantState();
   Map<String, dynamic> toJson() {
@@ -14,7 +13,6 @@ class SignupAssistantState {
       "name": name,
       "username": username,
       "password": password,
-      "role": role,
       "dob": dob?.toIso8601String(),
     };
   }
@@ -30,18 +28,12 @@ class SignupAssistantState {
               ..name = data['name']
               ..username = data['username']
               ..password = data['password']
-              ..dob = data['dob'] != null ? DateTime.parse(data['dob']) : null
-              ..role = data['role'];
+              ..dob = data['dob'] != null ? DateTime.parse(data['dob']) : null;
 
         return state;
       } catch (_) {}
     }
     return SignupAssistantState();
-  }
-
-  Future<void> setRole(String role) async {
-    this.role = role;
-    await save();
   }
 
   Future<void> setName(String name) async {
@@ -76,6 +68,6 @@ class SignupAssistantState {
 
   Future<User> createAccount() async {
     await Future.delayed(const Duration(seconds: 2));
-    return User.create(username!, name!, password!, role!, dob!);
+    return User.create(username!, name!, password!, dob!);
   }
 }

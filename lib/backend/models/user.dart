@@ -119,24 +119,15 @@ class UserContact implements Model {
 
 class UserInfo implements Model {
   final String name;
-  final UserRole role;
   final DateTime birth;
-  const UserInfo({required this.name, required this.role, required this.birth});
+  const UserInfo({required this.name, required this.birth});
   @override
   Map<String, dynamic> toJson() {
-    return {
-      'name': name,
-      'role': role.toJson(),
-      'birth': birth.toIso8601String(),
-    };
+    return {'name': name, 'birth': birth.toIso8601String()};
   }
 
   static UserInfo fromJson(Map<String, dynamic> json) {
-    return UserInfo(
-      name: json['name'],
-      role: json['role'].toString().toUserRole()!,
-      birth: DateTime.parse(json['birth']),
-    );
+    return UserInfo(name: json['name'], birth: DateTime.parse(json['birth']));
   }
 }
 
@@ -209,7 +200,6 @@ class User implements Model {
     String username,
     String name,
     String password,
-    String role,
     DateTime dob,
   ) async {
     late http.Response response;
@@ -218,7 +208,6 @@ class User implements Model {
         'name': name,
         'password': password,
         'username': username,
-        "role": role,
         "dob": dob.toIso8601String(),
       }, null);
     } catch (e) {
@@ -232,7 +221,7 @@ class User implements Model {
       if (data['status'] >= 0) {
         return User.fromJson(data['user']);
       }
-      throw Exception("Failed to create user: ${data['message']}");
+      throw Exception("${data['message']}");
     } else {
       throw Exception("Failed to create user server error.");
     }

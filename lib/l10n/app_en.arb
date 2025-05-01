@@ -501,5 +501,21 @@
   "@selectApplicationForm": {
     "description": "Message to select an application form"
   },
-  "banana": "banana"
+  "banana": "banana",
+  "schoolApplications": "School Applications",
+  "gettingAllSchoolMembers": "Getting all school members...",
+  "crunchingDatabaseRecords": "Crunching database records...",
+  "schoolMembers": "School Members",
+  "exit": "Exit",
+  "gettingAllSchoolApplications": "Getting all school applications",
+  "errorGettingApplicationsAttempts": "Error getting applications attempts",
+  "applicationAccepted": "Application accepted.",
+  "applicationDeclined": "Application declined.",
+  "reviewApplication": "Review Application",
+  "noAnswer": "(No answer)",
+  "accept": "Accept",
+  "decline": "Decline",
+  "selectTheRoleForTheNewUser": "Select the role for the new user:",
+  "teacher": "Teacher",
+  "admin": "Admin"
 }

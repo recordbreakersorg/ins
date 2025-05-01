@@ -17,7 +17,7 @@ AppBar dashboardAppBar(String title, Session session, User student) {
       },
     ),
     title: appBarTitle(title),
-    actions: [
+      actions: [
       Builder(
         builder:
             (context) => GestureDetector(
