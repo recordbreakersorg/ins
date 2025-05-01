@@ -9,15 +9,33 @@ Future<void> launchStudentSchoolView({
   required models.SchoolMember member,
   required models.Session session,
 }) async {
-  Navigator.of(context).push(
-    MaterialPageRoute(
-      builder:
-          (context) => StudentSchoolDashboardPage(
-            school: school,
-            member: member,
-            session: session,
-            user: user,
+  Navigator.push(
+    context,
+    PageRouteBuilder(
+      pageBuilder:
+          (context, animation, secondaryAnimation) =>
+              StudentSchoolDashboardPage(
+                school: school,
+                member: member,
+                session: session,
+                user: user,
+              ),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        return SlideTransition(
+          position: Tween<Offset>(
+            begin: const Offset(1.0, 0.0),
+            end: Offset.zero,
+          ).animate(
+            CurvedAnimation(
+              parent: animation,
+              curve: Curves.easeInOut,
+              reverseCurve: Curves.easeInOut.flipped,
+            ),
           ),
+          child: child,
+        );
+      },
+      transitionDuration: const Duration(milliseconds: 400),
     ),
   );
 }

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:ins/pages/dashboard/school/admin/users.dart';
 import './base.dart';
 
-class AdminSchoolDashboardPage extends StudentSchoolViewBase {
+class AdminSchoolDashboardPage extends AdminSchoolViewBase {
   const AdminSchoolDashboardPage({
     super.key,
     super.index = 0,
@@ -37,6 +38,18 @@ class AdminSchoolDashboardPage extends StudentSchoolViewBase {
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder:
+                                (context) => AdminSchoolUsersPage(
+                                  school: school,
+                                  member: member,
+                                  session: session,
+                                  user: user,
+                                ),
+                          ),
+                        );
                         // Handle button press
                       },
                       child: Text("Manage Users"),

@@ -6,7 +6,7 @@ import 'package:ins/errorpage.dart';
 import 'package:ins/backend/models.dart' as models;
 import './application_form_review.dart';
 
-class AdminSchoolUsersPage extends StudentSchoolViewBase {
+class AdminSchoolUsersPage extends AdminSchoolViewBase {
   const AdminSchoolUsersPage({
     super.key,
     super.index = 1,
@@ -191,6 +191,7 @@ class AdminSchoolUsersPage extends StudentSchoolViewBase {
                                                           session: session,
                                                           member: member,
                                                           user: user,
+                                                          school: school,
                                                         ),
                                               ),
                                             );

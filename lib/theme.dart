@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-const Color primaryColor = Color(0xFFE65100); // #E65100
+const Color primaryColor = Color(0xFFF57C00); // Improved primary
 
 class ThemeManager with ChangeNotifier {
   static final ThemeManager _instance = ThemeManager._internal();
@@ -35,39 +35,32 @@ class ThemeManager with ChangeNotifier {
     notifyListeners();
   }
 
-  // Light Theme Configuration
+  // Light Theme (Improved contrast)
   static final ThemeData _lightTheme = ThemeData(
     useMaterial3: true,
     brightness: Brightness.light,
     colorScheme: ColorScheme(
       brightness: Brightness.light,
-      // Primary colors
-      primary: Color(0xFFC66900), // Deep orange
+      primary: Color(0xFFF57C00),
       onPrimary: Colors.white,
-      primaryContainer: Color(0xFFFFD9B3),
-      onPrimaryContainer: Color(0xFF3A2600),
-
-      // Secondary colors
-      secondary: Color(0xFF4F9A94), // Muted teal
+      primaryContainer: Color(0xFFFFE0B2),
+      onPrimaryContainer: Color(0xFF311B00),
+      secondary: Color(0xFF4F9A94),
       onSecondary: Colors.white,
       secondaryContainer: Color(0xFFB2DFDB),
-      onSecondaryContainer: Color(0xFF0A1F1D), // 90% black
-      surface: Color(0xFFFFF8F2), // Elevated surfaces
+      onSecondaryContainer: Color(0xFF0A1F1D),
+      surface: Color(0xFFFFF8F2),
       onSurface: Color(0xFF1F1B16),
-
-      // Error colors
       error: Color(0xFFBA1A1A),
       onError: Colors.white,
-
-      // Neutral colors
-      surfaceContainerHighest: Color(0xFFF3E9E1), // For cards/dialogs
-      outline: Color(0xFF857369), // Borders/dividers
+      surfaceContainerHighest: Color(0xFFF3E9E1),
+      outline: Color(0xFF857369),
     ),
     textTheme: TextTheme(
       displayLarge: GoogleFonts.robotoFlex(
         fontSize: 32,
         fontWeight: FontWeight.w800,
-        color: Color(0xFF7A4A00), // Warm accent
+        color: Color(0xFF7A4A00),
       ),
       headlineMedium: GoogleFonts.robotoFlex(
         fontSize: 24,
@@ -83,7 +76,7 @@ class ThemeManager with ChangeNotifier {
       bodyMedium: GoogleFonts.merriweather(
         fontSize: 16,
         height: 1.6,
-        color: Color(0xFF5C4D42), // Warm gray
+        color: Color(0xFF5C4D42),
       ),
       labelLarge: GoogleFonts.robotoFlex(
         fontSize: 14,
@@ -105,7 +98,7 @@ class ThemeManager with ChangeNotifier {
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        backgroundColor: Color(0xFFC66900),
+        backgroundColor: Color(0xFFF57C00),
         foregroundColor: Colors.white,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       ),
@@ -126,58 +119,55 @@ class ThemeManager with ChangeNotifier {
       },
     ),
   );
-  // Dark Theme Configuration
+
+  // Dark Theme (Improved visibility)
   static final ThemeData _darkTheme = ThemeData(
     useMaterial3: true,
     brightness: Brightness.dark,
     colorScheme: ColorScheme(
       brightness: Brightness.dark,
-      // Primary colors
-      primary: Color(0xFFFF9E40), // Softer orange
+      primary: Color(0xFFFFA726),
       onPrimary: Colors.black,
-      primaryContainer: Color(0xFFB26F20), // Darker orange container
-      onPrimaryContainer: Color(0xFFFFD9B3),
-
-      // Secondary colors
-      secondary: Color(0xFF80CBC4), // Soothing teal
+      primaryContainer: Color(0xFFB26F20),
+      onPrimaryContainer: Color(0xFFFFECB3),
+      secondary: Color(0xFF80CBC4),
       onSecondary: Colors.black,
       secondaryContainer: Color(0xFF4A635F),
-      onSecondaryContainer: Color(0xFFB2DFDB), // 87% white
-      surface: Color(0xFF1E1E1E), // Elevated surfaces
-      onSurface: Color(0xFFE0E0E0),
-
-      // Error colors
+      onSecondaryContainer: Color(0xFFB2DFDB),
+      surface: Color(0xFF121212),
+      onSurface: Color(0xFFEDEDED),
       error: Color(0xFFCF6679),
       onError: Colors.black,
-
-      // Neutral colors
-      surfaceContainerHighest: Color(0xFF2D2D2D), // For cards/dialogs
-      outline: Color(0xFF404040), // Borders/dividers
+      surfaceContainerHighest: Color(0xFF2D2D2D),
+      outline: Color(0xFF595959),
     ),
     textTheme: TextTheme(
       displayLarge: GoogleFonts.robotoFlex(
         fontSize: 32,
         fontWeight: FontWeight.w800,
-        color: Color(0xFFFFB77A), // Warm highlight
+        color: Color(0xFFFFB74D),
       ),
       headlineMedium: GoogleFonts.robotoFlex(
         fontSize: 24,
         fontWeight: FontWeight.w700,
         letterSpacing: 0.25,
+        color: Color(0xFFE0E0E0),
       ),
       titleLarge: GoogleFonts.robotoFlex(
         fontSize: 20,
         fontWeight: FontWeight.w600,
+        color: Color(0xFFE0E0E0),
       ),
       bodyMedium: GoogleFonts.merriweather(
         fontSize: 16,
         height: 1.6,
-        color: Color(0xFFCCCCCC), // Soft gray for body
+        color: Color(0xFFDEDEDE),
       ),
       labelLarge: GoogleFonts.robotoFlex(
         fontSize: 14,
         fontWeight: FontWeight.w500,
         letterSpacing: 0.1,
+        color: Color(0xFFB0B0B0),
       ),
     ),
     appBarTheme: AppBarTheme(
@@ -187,14 +177,14 @@ class ThemeManager with ChangeNotifier {
       titleTextStyle: GoogleFonts.robotoFlex(
         fontSize: 20,
         fontWeight: FontWeight.w600,
-        color: Color(0xFFFFB77A),
+        color: Color(0xFFFFB74D),
       ),
-      iconTheme: IconThemeData(color: Color(0xFFFFB77A)),
+      iconTheme: IconThemeData(color: Color(0xFFFFB74D)),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        backgroundColor: Color(0xFFB26F20),
-        foregroundColor: Color(0xFFFFD9B3),
+        backgroundColor: Color(0xFFFFA726),
+        foregroundColor: Colors.black,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       ),
     ),
@@ -275,7 +265,7 @@ class _ThemeSwitcherWidgetState extends State<ThemeSwitcherWidget>
             height: 40,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
-              color: isDark ? Colors.grey[800] : Colors.blueGrey[200],
+              color: isDark ? Color(0xFF2D2D2D) : Color(0xFFF3E9E1),
             ),
             child: Stack(
               children: [
@@ -290,7 +280,7 @@ class _ThemeSwitcherWidgetState extends State<ThemeSwitcherWidget>
                     height: 32,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: isDark ? Colors.grey[200] : Colors.amber,
+                      color: isDark ? Color(0xFFFFA726) : Color(0xFFF57C00),
                       boxShadow: [
                         BoxShadow(
                           color: Colors.black.withOpacity(0.1),
@@ -303,8 +293,16 @@ class _ThemeSwitcherWidgetState extends State<ThemeSwitcherWidget>
                       duration: const Duration(milliseconds: 300),
                       child:
                           isDark
-                              ? const Icon(Icons.nightlight_round, size: 20)
-                              : const Icon(Icons.wb_sunny, size: 20),
+                              ? Icon(
+                                Icons.nightlight_round,
+                                size: 20,
+                                color: Colors.black,
+                              ) // Visible in dark mode
+                              : Icon(
+                                Icons.wb_sunny,
+                                size: 20,
+                                color: Colors.white,
+                              ),
                     ),
                   ),
                 ),

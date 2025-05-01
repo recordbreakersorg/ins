@@ -158,44 +158,48 @@ class SchoolListCard extends StatelessWidget {
           padding: const EdgeInsets.all(12.0),
           child: Row(
             children: [
-              Container(
-                width: 120, // Increased width
-                height: 120, // Increased height
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  image: DecorationImage(
-                    image: NetworkImage(school.profile.getPath()),
-                    fit:
-                        BoxFit
-                            .cover, // Ensure image covers the entire container
+              Hero(
+                tag: school.profile.getPath(),
+                transitionOnUserGestures: true,
+                child: Container(
+                  width: 150, // Increased width
+                  height: 150, // Increased height
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    image: DecorationImage(
+                      image: NetworkImage(school.profile.getPath()),
+                      fit:
+                          BoxFit
+                              .cover, // Ensure image covers the entire container
+                    ),
+                    color: Colors.transparent,
+                    backgroundBlendMode: BlendMode.srcOver,
                   ),
-                  color: Colors.transparent,
-                  backgroundBlendMode: BlendMode.srcOver,
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: BackdropFilter(
-                    filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
-                    child: Container(
-                      color: Colors.transparent,
-                      child: Center(
-                        child: FadeInImage.memoryNetwork(
-                          placeholder: kTransparentImage,
-                          image: school.profile.getPath(),
-                          width: 70, // Increased width
-                          height: 70, // increased height
-                          fit: BoxFit.cover,
-                          imageErrorBuilder: (context, error, stackTrace) {
-                            return Container(
-                              color: Colors.grey.shade300,
-                              child: const Center(
-                                child: Icon(
-                                  Icons.image_not_supported_outlined,
-                                  color: Colors.grey,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: BackdropFilter(
+                      filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+                      child: Container(
+                        color: Colors.transparent,
+                        child: Center(
+                          child: FadeInImage.memoryNetwork(
+                            placeholder: kTransparentImage,
+                            image: school.profile.getPath(),
+                            width: 70, // Increased width
+                            height: 70, // increased height
+                            fit: BoxFit.cover,
+                            imageErrorBuilder: (context, error, stackTrace) {
+                              return Container(
+                                color: Colors.grey.shade300,
+                                child: const Center(
+                                  child: Icon(
+                                    Icons.image_not_supported_outlined,
+                                    color: Colors.grey,
+                                  ),
                                 ),
-                              ),
-                            );
-                          },
+                              );
+                            },
+                          ),
                         ),
                       ),
                     ),

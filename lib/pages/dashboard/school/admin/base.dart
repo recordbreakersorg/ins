@@ -9,13 +9,13 @@ import 'package:ins/theme.dart';
 import './dashboard.dart';
 import './users.dart';
 
-class StudentSchoolViewBase extends StatelessWidget {
+class AdminSchoolViewBase extends StatelessWidget {
   final models.Session session;
   final models.User user;
   final models.School school;
   final models.SchoolMember member;
   final int index;
-  const StudentSchoolViewBase({
+  const AdminSchoolViewBase({
     super.key,
     required this.session,
     required this.user,
@@ -98,7 +98,9 @@ class StudentSchoolViewBase extends StatelessWidget {
             ListTile(
               leading: Icon(Icons.settings),
               title: Text("Settings"),
-              onTap: () {},
+              onTap: () {
+                Navigator.pop(context);
+              },
             ),
             ListTile(
               leading: Icon(Icons.logout),
@@ -127,7 +129,7 @@ class StudentSchoolViewBase extends StatelessWidget {
         unselectedItemColor: Colors.grey.shade600,
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: "Users"),
           BottomNavigationBarItem(
             icon: Icon(Icons.class_),
             label: "Classrooms",
