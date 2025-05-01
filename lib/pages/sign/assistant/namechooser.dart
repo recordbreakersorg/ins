@@ -4,7 +4,6 @@ import 'dart:async';
 import 'package:ins/pages/sign/assistant/base.dart';
 import './manager.dart';
 import './passwordchooser.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../backend/models.dart';
 
 class LowerCaseTextFormatter extends TextInputFormatter {
@@ -168,14 +167,14 @@ class _NameChooserPageState extends State<NameChooserPage> {
           children: [
             const SizedBox(height: 20),
             Text(
-              AppLocalizations.of(context)!.createYourProfile,
+              "Create Your Profile",
               style: Theme.of(context).textTheme.headlineLarge,
             ),
             const SizedBox(height: 30),
             TextField(
               controller: _nameController,
-              decoration: InputDecoration(
-                labelText: AppLocalizations.of(context)!.fullName,
+              decoration: const InputDecoration(
+                labelText: "Full Name",
                 hintText: 'John Doe',
                 border: OutlineInputBorder(),
               ),
@@ -188,7 +187,7 @@ class _NameChooserPageState extends State<NameChooserPage> {
             TextField(
               controller: _usernameController,
               decoration: InputDecoration(
-                labelText: AppLocalizations.of(context)!.username,
+                labelText: "Username",
                 hintText: 'john_doe123',
                 border: const OutlineInputBorder(),
                 suffixIcon:
@@ -229,20 +228,20 @@ class _NameChooserPageState extends State<NameChooserPage> {
                           _usernameController.text.trim(),
                         )
                         : null,
-                child: Text(AppLocalizations.of(context)!.continuer),
+                child: const Text("Continue"),
               ),
             ),
           ],
         ),
       ),
-      title: Text(AppLocalizations.of(context)!.profileSetup),
+      title: const Text("Profile Setup"),
     );
   }
 
   Widget _buildUsernameStatus() {
     if (_isCheckingUsername) {
       return Text(
-        AppLocalizations.of(context)!.checkingUsernameAvailability,
+        "Checking username availability...",
         style: Theme.of(
           context,
         ).textTheme.bodySmall?.copyWith(color: Colors.blue),
@@ -251,9 +250,7 @@ class _NameChooserPageState extends State<NameChooserPage> {
 
     if (!_isUsernameValid) {
       return Text(
-        AppLocalizations.of(
-          context,
-        )!.usernameMustBeAtLeast3CharactersAndCanOnlyContainNlowercaseLettersNumbersUnderscoresAndPeriods,
+        "Username must be at least 3 characters and can only contain lowercase letters, numbers, underscores, and periods.",
         style: Theme.of(
           context,
         ).textTheme.bodySmall?.copyWith(color: Colors.red),
@@ -262,7 +259,7 @@ class _NameChooserPageState extends State<NameChooserPage> {
 
     if (!_isUsernameAvailable) {
       return Text(
-        AppLocalizations.of(context)!.thisUsernameIsAlreadyTaken,
+        "This username is already taken",
         style: Theme.of(
           context,
         ).textTheme.bodySmall?.copyWith(color: Colors.red),

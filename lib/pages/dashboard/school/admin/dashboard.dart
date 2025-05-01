@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import './base.dart';
 
 class AdminSchoolDashboardPage extends StudentSchoolViewBase {
@@ -13,7 +12,7 @@ class AdminSchoolDashboardPage extends StudentSchoolViewBase {
   });
   @override
   String getTitle(BuildContext context) {
-    return AppLocalizations.of(context)!.dashboard;
+    return "Dashboard";
   }
 
   @override

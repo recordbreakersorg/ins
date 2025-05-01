@@ -1,4 +1,3 @@
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:ins/profile.dart';
 import './base.dart';
@@ -19,7 +18,7 @@ class AdminSchoolUsersPage extends StudentSchoolViewBase {
 
   @override
   String getTitle(BuildContext context) {
-    return AppLocalizations.of(context)!.schoolMembers;
+    return "School Members";
   }
 
   @override
@@ -49,13 +48,9 @@ class AdminSchoolUsersPage extends StudentSchoolViewBase {
                             ConnectionState.waiting) {
                           return LoadingPage(
                             messages: [
-                              AppLocalizations.of(
-                                context,
-                              )!.gettingAllSchoolMembers,
-                              AppLocalizations.of(
-                                context,
-                              )!.crunchingDatabaseRecords,
-                              AppLocalizations.of(context)!.pleaseWait,
+                              "Getting all school members...",
+                              "Crunching database records...",
+                              "Please wait...",
                             ],
                           );
                         } else if (snapshot.hasError) {
@@ -128,18 +123,13 @@ class AdminSchoolUsersPage extends StudentSchoolViewBase {
                             ConnectionState.waiting) {
                           return LoadingPage(
                             messages: [
-                              AppLocalizations.of(
-                                context,
-                              )!.gettingAllSchoolApplications,
-                              AppLocalizations.of(context)!.pleaseWait,
+                              "Getting all school applications...",
+                              "Please wait...",
                             ],
                           );
                         } else if (snapshot.hasError) {
                           return ErrorPage(
-                            title:
-                                AppLocalizations.of(
-                                  context,
-                                )!.errorGettingApplicationsAttempts,
+                            title: "Error getting applications attempts",
                             description: snapshot.error.toString(),
                           );
                         } else if (snapshot.hasData) {

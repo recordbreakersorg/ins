@@ -1,4 +1,3 @@
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:ins/backend/models.dart' as models;
 
@@ -41,24 +40,24 @@ class _ApplicationFormReviewPageState extends State<ApplicationFormReviewPage> {
               children: [
                 SizedBox(height: 10),
                 Text(
-                  AppLocalizations.of(context)!.selectTheRoleForTheNewUser,
+                  "Select the role for the new user:",
                   style: Theme.of(context).textTheme.headlineMedium,
                 ),
                 SizedBox(height: 16),
                 ListTile(
-                  title: Text(AppLocalizations.of(context)!.student),
+                  title: Text("Student"),
                   onTap: () => Navigator.pop(context, 'student'),
                 ),
                 ListTile(
-                  title: Text(AppLocalizations.of(context)!.teacher),
+                  title: Text("Teacher"),
                   onTap: () => Navigator.pop(context, 'teacher'),
                 ),
                 ListTile(
-                  title: Text(AppLocalizations.of(context)!.parent),
+                  title: Text("Parent"),
                   onTap: () => Navigator.pop(context, 'parent'),
                 ),
                 ListTile(
-                  title: Text(AppLocalizations.of(context)!.admin),
+                  title: Text("Admin"),
                   onTap: () => Navigator.pop(context, 'admin'),
                 ),
               ],
@@ -81,9 +80,7 @@ class _ApplicationFormReviewPageState extends State<ApplicationFormReviewPage> {
     setState(() {
       _isProcessing = false;
       _resultMessage =
-          accepted
-              ? AppLocalizations.of(context)!.applicationAccepted
-              : AppLocalizations.of(context)!.applicationDeclined;
+          accepted ? "Application accepted." : "Application declined.";
     });
   }
 
@@ -92,9 +89,7 @@ class _ApplicationFormReviewPageState extends State<ApplicationFormReviewPage> {
     final answers = widget.attempt.answers;
     final questions = widget.form.questions;
     return Scaffold(
-      appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.reviewApplication),
-      ),
+      appBar: AppBar(title: Text("Review Application")),
       body:
           _isProcessing
               ? const Center(child: CircularProgressIndicator())
@@ -125,9 +120,7 @@ class _ApplicationFormReviewPageState extends State<ApplicationFormReviewPage> {
                               ),
                             ),
                             subtitle: Text(
-                              a.content.isNotEmpty
-                                  ? a.content
-                                  : AppLocalizations.of(context)!.noAnswer,
+                              a.content.isNotEmpty ? a.content : "(No answer)",
                             ),
                           );
                         },
@@ -147,7 +140,7 @@ class _ApplicationFormReviewPageState extends State<ApplicationFormReviewPage> {
                       children: [
                         ElevatedButton.icon(
                           icon: const Icon(Icons.check),
-                          label: Text(AppLocalizations.of(context)!.accept),
+                          label: Text("Accept"),
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.green,
                           ),
@@ -158,7 +151,7 @@ class _ApplicationFormReviewPageState extends State<ApplicationFormReviewPage> {
                         ),
                         ElevatedButton.icon(
                           icon: const Icon(Icons.close),
-                          label: Text(AppLocalizations.of(context)!.decline),
+                          label: Text("Decline"),
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.red,
                           ),

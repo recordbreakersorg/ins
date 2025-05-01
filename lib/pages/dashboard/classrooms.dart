@@ -1,4 +1,3 @@
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import './base.dart';
@@ -21,10 +20,9 @@ class DashboardClassroomsPage extends DashboardBase {
         builder: (context, snapshot) {
           if (snapshot.hasError) {
             return ErrorPage(
-              title: AppLocalizations.of(context)!.error,
+              title: "Error",
               description:
-                  AppLocalizations.of(context)!.unableToLoadClassrooms +
-                  snapshot.error.toString(),
+                  "Unable to load classrooms " + snapshot.error.toString(),
             );
           } else if (!snapshot.hasData) {
             return CircularProgressIndicator(
@@ -37,14 +35,12 @@ class DashboardClassroomsPage extends DashboardBase {
                 child: Column(
                   children: [
                     Text(
-                      AppLocalizations.of(context)!.noClassrooms,
+                      "No classrooms",
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
                     Container(height: 10),
                     Text(
-                      AppLocalizations.of(
-                        context,
-                      )!.youAreNotAMemberOfAnyClassroomYet,
+                      "You are not a member of any classroom yet",
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
                   ],
@@ -71,9 +67,7 @@ class DashboardClassroomsPage extends DashboardBase {
                                 child: Column(
                                   children: [
                                     Text(
-                                      AppLocalizations.of(
-                                        context,
-                                      )!.noClassrooms,
+                                      "No classrooms",
                                       style:
                                           Theme.of(
                                             context,
@@ -81,9 +75,7 @@ class DashboardClassroomsPage extends DashboardBase {
                                     ),
                                     Container(height: 10),
                                     Text(
-                                      AppLocalizations.of(
-                                        context,
-                                      )!.youAreNotAMemberOfAnyClassroomYet,
+                                      "You are not a member of any classroom yet",
                                       style:
                                           Theme.of(
                                             context,

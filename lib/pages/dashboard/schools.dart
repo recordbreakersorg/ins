@@ -2,7 +2,6 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:transparent_image/transparent_image.dart'; // For fade-in
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:ins/backend/models.dart' as models;
 import './school_explore.dart';
@@ -33,8 +32,9 @@ class DashboardSchoolsPage extends DashboardBase {
                 builder: (context, snapshot) {
                   if (snapshot.hasError) {
                     return ErrorPage(
-                      title: AppLocalizations.of(context)!.error,
-                      description: "Unable to load schools ${snapshot.error}",
+                      title: "Error",
+                      description:
+                          "Unable to load schools " + snapshot.error.toString(),
                     );
                   } else if (!snapshot.hasData) {
                     return CircularProgressIndicator(
@@ -50,12 +50,12 @@ class DashboardSchoolsPage extends DashboardBase {
                         child: Column(
                           children: [
                             Text(
-                              AppLocalizations.of(context)!.noSchools,
+                              "No schools",
                               style: Theme.of(context).textTheme.titleLarge,
                             ),
                             const SizedBox(height: 10),
                             Text(
-                              AppLocalizations.of(context)!.youAreAMemberOfNoSchoolYet,
+                              "You are a member of no school yet",
                               style: Theme.of(context).textTheme.bodyMedium,
                             ),
                           ],
@@ -68,7 +68,6 @@ class DashboardSchoolsPage extends DashboardBase {
                       child: Padding(
                         padding: const EdgeInsets.all(10),
                         child: Column(
-                          // Changed to Column for list layout
                           children:
                               schools.map((school) {
                                 return SchoolListCard(
@@ -81,7 +80,7 @@ class DashboardSchoolsPage extends DashboardBase {
                                       session,
                                     );
                                   },
-                                ); // Using the new SchoolListCard
+                                );
                               }).toList(),
                         ),
                       ),

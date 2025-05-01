@@ -1,4 +1,3 @@
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -24,7 +23,7 @@ class ApplicationFormInstructionsPage extends AssistantBasePage {
         children: [
           SizedBox(height: 10),
           Text(
-            AppLocalizations.of(context)!.instructions,
+            "Instructions",
             style: Theme.of(context).textTheme.headlineLarge,
           ),
           Padding(
@@ -52,7 +51,7 @@ class ApplicationFormInstructionsPage extends AssistantBasePage {
                   ),
                 );
               },
-              child: Text(AppLocalizations.of(context)!.next),
+              child: Text("Next"),
             ),
           ),
         ],

@@ -1,4 +1,3 @@
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:ins/pages/dashboard/school_apply/manager.dart';
 import '../../../backend/models.dart' as models;
@@ -20,11 +19,7 @@ void launchApplicationForm(
       builder:
           (context) => Scaffold(
             body: LoadingPage(
-              messages: [
-                AppLocalizations.of(context)!.loading,
-                AppLocalizations.of(context)!.gettingForm,
-                AppLocalizations.of(context)!.pleaseWait,
-              ],
+              messages: ["Loading...", "Getting form...", "Please wait..."],
             ),
           ),
     ),
