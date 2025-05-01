@@ -100,7 +100,7 @@ class _PasswordChooserPageState extends State<PasswordChooserPage> {
         _strengthColor = Colors.green;
       }
 
-      _isValid = _passwordStrength >= 0.75 && _isNotCommon;
+      _isValid = _passwordStrength >= 0.5 && _isNotCommon;
     });
   }
 

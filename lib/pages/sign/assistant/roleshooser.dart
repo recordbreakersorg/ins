@@ -10,7 +10,7 @@ class RoleChooser extends StatelessWidget {
   const RoleChooser({super.key, required this.assistantState});
 
   void _next(BuildContext context, String choice) {
-    assistantState.setRole(choice);
+    //assistantState.setRole(choice);
     Navigator.push(
       context,
       MaterialPageRoute(
@@ -39,7 +39,10 @@ class RoleChooser extends StatelessWidget {
                     child: FloatingActionButton.extended(
                       onPressed: () => _next(context, 'student'),
                       icon: Icon(Icons.school, size: 32),
-                      label: Text(AppLocalizations.of(context)!.student, style: TextStyle(fontSize: 18)),
+                      label: Text(
+                        AppLocalizations.of(context)!.student,
+                        style: TextStyle(fontSize: 18),
+                      ),
                       extendedPadding: EdgeInsets.symmetric(
                         horizontal: 42,
                         vertical: 16,
@@ -52,7 +55,10 @@ class RoleChooser extends StatelessWidget {
                     child: FloatingActionButton.extended(
                       onPressed: () => _next(context, 'instructor'),
                       icon: Icon(Icons.person, size: 32),
-                      label: Text(AppLocalizations.of(context)!.instructor, style: TextStyle(fontSize: 18)),
+                      label: Text(
+                        AppLocalizations.of(context)!.instructor,
+                        style: TextStyle(fontSize: 18),
+                      ),
                       extendedPadding: EdgeInsets.symmetric(
                         horizontal: 32,
                         vertical: 16,
@@ -81,7 +87,10 @@ class RoleChooser extends StatelessWidget {
                     child: FloatingActionButton.extended(
                       onPressed: () => _next(context, 'parent'),
                       icon: Icon(Icons.family_restroom, size: 32),
-                      label: Text(AppLocalizations.of(context)!.parent, style: TextStyle(fontSize: 18)),
+                      label: Text(
+                        AppLocalizations.of(context)!.parent,
+                        style: TextStyle(fontSize: 18),
+                      ),
                       extendedPadding: EdgeInsets.symmetric(
                         horizontal: 32,
                         vertical: 16,

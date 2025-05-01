@@ -1,283 +1,521 @@
 {
-  "helloWorld": "Bonjour le monde",
+  "helloWorld": "Bonjour le monde !",
   "@helloWorld": {
-    "description": "The conventional greeting"
+    "description": "Le message de salutation conventionnel du nouveau programmeur"
   },
   "errorLoadingYourSession": "Erreur lors du chargement de votre session",
   "@errorLoadingYourSession": {
-    "description": "Error message when the user's session fails to load"
+    "description": "Message d'erreur lorsque le chargement de la session de l'utilisateur échoue"
   },
   "reload": "Recharger",
   "@reload": {
-    "description": "Action to reload the current page or data"
+    "description": "Action pour recharger la page ou les données actuelles"
   },
   "logout": "Se déconnecter",
   "@logout": {
-    "description": "Action to log out the user"
+    "description": "Action pour déconnecter l'utilisateur"
   },
   "error": "Erreur",
   "@error": {
-    "description": "Generic error message"
+    "description": "Message d'erreur générique"
   },
   "loadingYourOnlineAccounts": "Chargement de vos comptes en ligne...",
   "@loadingYourOnlineAccounts": {
-    "description": "Message indicating that the user's online accounts are being loaded"
+    "description": "Message indiquant que les comptes en ligne de l'utilisateur sont en cours de chargement"
   },
   "welcomeToTheIntranetOfSchools": "Bienvenue sur l'Intranet des Écoles",
   "@welcomeToTheIntranetOfSchools": {
-    "description": "Welcome message for the Intranet of Schools platform"
+    "description": "Message de bienvenue pour la plateforme Intranet des Écoles"
   },
-  "errorSnapshotError": "Erreur : ${error}",
+  "errorSnapshotError": "Erreur : {error}",
   "@errorSnapshotError": {
-    "description": "Error message including a snapshot of the error"
+    "description": "Message d'erreur incluant un aperçu de l'erreur",
+    "placeholders": {
+      "error": {
+        "example": "Erreur inconnue"
+      }
+    }
   },
   "yourSchools": "Vos écoles",
   "@yourSchools": {
-    "description": "Label for the user's schools"
+    "description": "Libellé pour les écoles de l'utilisateur"
   },
   "dashboard": "Tableau de bord",
   "@dashboard": {
-    "description": "Label for the main dashboard"
+    "description": "Libellé pour le tableau de bord principal"
   },
   "schedule": "Emploi du temps",
   "@schedule": {
-    "description": "Label for the schedule section"
+    "description": "Libellé pour la section de l'emploi du temps"
   },
   "classrooms": "Salles de classe",
   "@classrooms": {
-    "description": "Label for the classrooms section"
+    "description": "Libellé pour la section des salles de classe"
   },
   "profile": "Profil",
   "@profile": {
-    "description": "Label for the user's profile"
+    "description": "Libellé pour le profil de l'utilisateur"
   },
   "settings": "Paramètres",
   "@settings": {
-    "description": "Label for the application settings"
+    "description": "Libellé pour les paramètres de l'application"
   },
   "signOut": "Se déconnecter",
   "@signOut": {
-    "description": "Action to sign out"
+    "description": "Action pour se déconnecter"
   },
   "welcomeBack": "Bon retour",
   "@welcomeBack": {
-    "description": "Welcome back message"
+    "description": "Message de bienvenue de retour"
   },
   "dashboardBaseContent": "Contenu de base du tableau de bord",
   "@dashboardBaseContent": {
-    "description": "Base content for the dashboard"
+    "description": "Contenu de base pour le tableau de bord"
   },
   "welcome": "Bienvenue !",
   "@welcome": {
-    "description": "Generic welcome"
+    "description": "Bienvenue générique"
   },
   "connect": "Se connecter",
   "@connect": {
-    "description": "Label to connect"
+    "description": "Libellé pour se connecter"
   },
   "register": "S'inscrire",
   "@register": {
-    "description": "Label to register"
+    "description": "Libellé pour s'inscrire"
   },
   "schools": "Écoles",
   "@schools": {
-    "description": "Label for schools"
+    "description": "Libellé pour les écoles"
   },
-  "home": "Accueil",
+  "home": "Home",
   "@home": {
-    "description": "Label for home"
+    "description": "Libellé pour l'accueil"
   },
   "intranetOfSchools": "Intranet des Écoles",
   "@intranetOfSchools": {
-    "description": "Label for Intranet of Schools"
+    "description": "Libellé pour l'Intranet des Écoles"
   },
   "noSchools": "Aucune école",
   "@noSchools": {
-    "description": "Message when there are no schools"
+    "description": "Message lorsqu'il n'y a pas d'écoles"
   },
-  "noSchoolMembership": "Vous n'êtes membre d'aucune école pour l'instant",
+  "noSchoolMembership": "Vous n'êtes membre d'aucune école pour le moment",
   "@noSchoolMembership": {
-    "description": "Message when the user is not a member of any school"
+    "description": "Message lorsque l'utilisateur n'est membre d'aucune école"
   },
   "explore": "Explorer",
   "@explore": {
-    "description": "Label to explore"
+    "description": "Libellé pour explorer"
   },
-  "youAreAMemberOfNoSchoolYet": "Vous n'êtes membre d'aucune école pour l'instant",
+  "youAreAMemberOfNoSchoolYet": "Vous n'êtes membre d'aucune école pour le moment",
   "@youAreAMemberOfNoSchoolYet": {
-    "description": "Message indicating the user is not a member of a school"
+    "description": "Message indiquant que l'utilisateur n'est membre d'aucune école"
   },
   "waitALittleBit": "Patientez un instant...",
   "@waitALittleBit": {
-    "description": "Message indicating a waiting period"
+    "description": "Message indiquant une période d'attente"
   },
   "manualSignup": "Inscription manuelle >",
   "@manualSignup": {
-    "description": "Label for manual signup"
+    "description": "Libellé pour l'inscription manuelle"
   },
   "successfullySignedUp": "Inscription réussie",
   "@successfullySignedUp": {
-    "description": "Message after successful signup"
+    "description": "Message après une inscription réussie"
   },
   "yourName": "Votre nom",
   "@yourName": {
-    "description": "Label for name input"
+    "description": "Libellé pour la saisie du nom"
   },
   "yourPassword": "Votre mot de passe",
   "@yourPassword": {
-    "description": "Label for password input"
+    "description": "Libellé pour la saisie du mot de passe"
   },
   "signin": "Se connecter >",
   "@signin": {
-    "description": "Label for sign in"
+    "description": "Libellé pour se connecter"
   },
   "whatRoleBestFitsYou": "Quel rôle vous correspond le mieux ?",
   "@whatRoleBestFitsYou": {
-    "description": "Question asking the user's role"
+    "description": "Question demandant le rôle de l'utilisateur"
   },
-  "student": "Étudiant",
+  "student": "Student",
   "@student": {
-    "description": "Label for student role"
+    "description": "Libellé pour le rôle d'étudiant"
   },
-  "instructor": "Instructeur",
+  "instructor": "Professeur",
   "@instructor": {
-    "description": "Label for instructor role"
+    "description": "Libellé pour le rôle de professeur"
   },
   "administrator": "Administrateur",
   "@administrator": {
-    "description": "Label for administrator role"
+    "description": "Libellé pour le rôle d'administrateur"
   },
   "parent": "Parent",
   "@parent": {
-    "description": "Label for parent role"
+    "description": "Libellé pour le rôle de parent"
   },
   "role": "Rôle",
   "@role": {
-    "description": "Label for role selection"
+    "description": "Libellé pour la sélection du rôle"
   },
   "weak": "Faible",
   "@weak": {
-    "description": "Label for weak password strength"
+    "description": "Libellé pour la force du mot de passe faible"
   },
-  "moderate": "Modéré",
+  "moderate": "Moyen",
   "@moderate": {
-    "description": "Label for moderate password strength"
+    "description": "Libellé pour la force du mot de passe moyenne"
   },
   "strong": "Fort",
   "@strong": {
-    "description": "Label for strong password strength"
+    "description": "Libellé pour la force du mot de passe forte"
   },
   "suggestedPassword": "Mot de passe suggéré",
   "@suggestedPassword": {
-    "description": "Label for suggested password"
+    "description": "Libellé pour le mot de passe suggéré"
   },
   "cancel": "Annuler",
   "@cancel": {
-    "description": "Label to cancel"
+    "description": "Libellé pour annuler"
   },
   "copy": "Copier",
   "@copy": {
-    "description": "Label to copy"
+    "description": "Libellé pour copier"
   },
   "useThis": "Utiliser",
   "@useThis": {
-    "description": "Label to use"
+    "description": "Libellé pour utiliser"
   },
   "password": "Mot de passe",
   "@password": {
-    "description": "Label for password"
+    "description": "Libellé pour le mot de passe"
   },
   "generatePassword": "Générer un mot de passe",
   "@generatePassword": {
-    "description": "Label to generate password"
+    "description": "Libellé pour générer un mot de passe"
   },
   "minimum8Characters": "Minimum 8 caractères",
   "@minimum8Characters": {
-    "description": "Label for minimum password length"
+    "description": "Libellé pour la longueur minimale du mot de passe"
   },
   "number09": "Chiffre (0-9)",
   "@number09": {
-    "description": "Label for number requirement in password"
+    "description": "Libellé pour l'exigence de chiffre dans le mot de passe"
   },
   "lowercaseLetterAZ": "Lettre minuscule (a-z)",
   "@lowercaseLetterAZ": {
-    "description": "Label for lowercase requirement in password"
+    "description": "Libellé pour l'exigence de minuscule dans le mot de passe"
   },
   "specialCharacter": "Caractère spécial (!@#...)",
   "@specialCharacter": {
-    "description": "Label for special character requirement in password"
+    "description": "Libellé pour l'exigence de caractère spécial dans le mot de passe"
   },
   "uppercaseLetterAZ": "Lettre majuscule (A-Z)",
   "@uppercaseLetterAZ": {
-    "description": "Label for uppercase requirement in password"
+    "description": "Libellé pour l'exigence de majuscule dans le mot de passe"
   },
   "continuer": "Continuer",
   "@continuer": {
-    "description": "Label to continue"
+    "description": "Libellé pour continuer"
+  },
+  "strengthlabelPassword": "Mot de passe $_strengthLabel",
+  "@strengthlabelPassword": {
+    "description": "Libellé pour la force du mot de passe",
+    "placeholders": {
+      "_strengthLabel": {
+        "example": "Force"
+      }
+    }
+  },
+  "createYourProfile": "Créer votre profil",
+  "@createYourProfile": {
+    "description": "Libellé pour créer le profil utilisateur"
+  },
+  "fullName": "Nom complet",
+  "@fullName": {
+    "description": "Libellé pour la saisie du nom complet"
+  },
+  "username": "Nom d'utilisateur",
+  "@username": {
+    "description": "Libellé pour la saisie du nom d'utilisateur"
+  },
+  "profileSetup": "Configuration du profil",
+  "@profileSetup": {
+    "description": "Libellé pour la section de configuration du profil"
+  },
+  "checkingUsernameAvailability": "Vérification de la disponibilité du nom d'utilisateur...",
+  "@checkingUsernameAvailability": {
+    "description": "Message indiquant la vérification de la disponibilité du nom d'utilisateur"
+  },
+  "usernameMustBeAtLeast3CharactersAndCanOnlyContainNlowercaseLettersNumbersUnderscoresAndPeriods": "Le nom d'utilisateur doit comporter au moins 3 caractères et ne peut contenir que :\ndes lettres minuscules, des chiffres, des underscores (_) et des points (.)",
+  "@usernameMustBeAtLeast3CharactersAndCanOnlyContainNlowercaseLettersNumbersUnderscoresAndPeriods": {
+    "description": "Message indiquant les exigences du nom d'utilisateur"
+  },
+  "thisUsernameIsAlreadyTaken": "Ce nom d'utilisateur est déjà pris",
+  "@thisUsernameIsAlreadyTaken": {
+    "description": "Message indiquant que le nom d'utilisateur est déjà pris"
+  },
+  "pleaseSelectADateOfBirth": "Veuillez sélectionner une date de naissance.",
+  "@pleaseSelectADateOfBirth": {
+    "description": "Message invitant l'utilisateur à sélectionner sa date de naissance"
+  },
+  "dateOfBirth": "Date de naissance",
+  "@dateOfBirth": {
+    "description": "Libellé pour la date de naissance"
+  },
+  "chooseYourDateOfBirth": "Choisissez votre date de naissance",
+  "@chooseYourDateOfBirth": {
+    "description": "Libellé pour choisir la date de naissance"
+  },
+  "selectDate": "Sélectionner une date",
+  "@selectDate": {
+    "description": "Libellé pour sélectionner une date"
+  },
+  "settingUpYourNewAccount": "Configuration de votre nouveau compte...",
+  "@settingUpYourNewAccount": {
+    "description": "Message indiquant la configuration du nouveau compte"
+  },
+  "preparingYourWorkspace": "Préparation de votre espace de travail...",
+  "@preparingYourWorkspace": {
+    "description": "Message indiquant la préparation de l'espace de travail"
+  },
+  "configuringSettings": "Configuration des paramètres...",
+  "@configuringSettings": {
+    "description": "Message indiquant la configuration des paramètres"
+  },
+  "almostThere": "Presque là...",
+  "@almostThere": {
+    "description": "Message indiquant que l'on approche de la fin"
+  },
+  "justAFewMoreMoments": "Encore quelques instants...",
+  "@justAFewMoreMoments": {
+    "description": "Message indiquant une courte attente"
+  },
+  "creatingYourProfile": "Création de votre profil...",
+  "@creatingYourProfile": {
+    "description": "Message indiquant la création du profil"
+  },
+  "settingUpYourPreferences": "Configuration de vos préférences...",
+  "@settingUpYourPreferences": {
+    "description": "Message indiquant la configuration des préférences"
+  },
+  "finalizingYourAccount": "Finalisation de votre compte...",
+  "@finalizingYourAccount": {
+    "description": "Message indiquant la finalisation du compte"
+  },
+  "loadingYourDashboard": "Chargement de votre tableau de bord...",
+  "@loadingYourDashboard": {
+    "description": "Message indiquant le chargement du tableau de bord"
+  },
+  "creatingYourAccount": "Création de votre compte",
+  "@creatingYourAccount": {
+    "description": "Message indiquant la création du compte"
+  },
+  "accountCreationFailed": "La création du compte a échoué",
+  "@accountCreationFailed": {
+    "description": "Message indiquant l'échec de la création du compte"
+  },
+  "accountCreatedSuccessfully": "Compte créé avec succès !",
+  "@accountCreatedSuccessfully": {
+    "description": "Message indiquant la création réussie du compte"
+  },
+  "welcomeToYourNewAccount": "Bienvenue sur votre nouveau compte !",
+  "@welcomeToYourNewAccount": {
+    "description": "Message de bienvenue à l'utilisateur sur son nouveau compte"
+  },
+  "somewhere": "Quelque part",
+  "@somewhere": {
+    "description": "Localisation générique"
+  },
+  "startApplication": "Démarrer l'application",
+  "@startApplication": {
+    "description": "Libellé pour démarrer une application"
+  },
+  "exploreSchools": "Explorer les écoles",
+  "@exploreSchools": {
+    "description": "Libellé pour explorer les écoles"
+  },
+  "dismiss": "Ignorer",
+  "@dismiss": {
+    "description": "Libellé pour ignorer"
+  },
+  "view": "Voir >",
+  "@view": {
+    "description": "Libellé pour afficher"
+  },
+  "loadingYourFeeds": "Chargement de vos flux...",
+  "@loadingYourFeeds": {
+    "description": "Message indiquant le chargement des flux"
+  },
+  "crossYourFingers": "Croisez les doigts",
+  "@crossYourFingers": {
+    "description": "Message indiquant de croiser les doigts"
+  },
+  "pleaseWait": "Please wait...",
+  "@pleaseWait": {
+    "description": "Message indiquant d'attendre"
+  },
+  "errorLoadingYourFeeds": "Erreur lors du chargement de vos flux",
+  "@errorLoadingYourFeeds": {
+    "description": "Message d'erreur lorsque le chargement des flux échoue"
+  },
+  "allCaughtUp": "Tout est à jour !",
+  "@allCaughtUp": {
+    "description": "Message indiquant que tout le contenu a été consulté"
+  },
+  "unableToLoadClassrooms": "Impossible de charger les salles de classe",
+  "@unableToLoadClassrooms": {
+    "description": "Message d'erreur lorsque le chargement des salles de classe échoue"
+  },
+  "noClassrooms": "Aucune salle de classe",
+  "@noClassrooms": {
+    "description": "Message indiquant l'absence de salles de classe"
+  },
+  "youAreNotAMemberOfAnyClassroomYet": "Vous n'êtes membre d'aucune salle de classe pour le moment",
+  "@youAreNotAMemberOfAnyClassroomYet": {
+    "description": "Message indiquant que l'utilisateur n'est membre d'aucune salle de classe"
+  },
+  "loading": "Chargement...",
+  "@loading": {
+    "description": "Message de chargement générique"
+  },
+  "gettingForm": "Récupération du formulaire...",
+  "@gettingForm": {
+    "description": "Message indiquant la récupération du formulaire"
+  },
+  "instructions": "Instructions",
+  "@instructions": {
+    "description": "Libellé pour les instructions"
+  },
+  "next": "Suivant",
+  "@next": {
+    "description": "Libellé pour l'action suivante"
+  },
+  "nextStep": "Étape suivante",
+  "@nextStep": {
+    "description": "Libellé pour l'étape suivante"
+  },
+  "nextStepOfTheApplicationGoesHere": "La prochaine étape de la demande se trouve ici.",
+  "@nextStepOfTheApplicationGoesHere": {
+    "description": "Message indiquant l'étape suivante de la demande"
+  },
+  "thisQuestionIsRequired": "Cette question est obligatoire",
+  "@thisQuestionIsRequired": {
+    "description": "Message indiquant une question obligatoire"
+  },
+  "enterYourAnswer": "Entrez votre réponse",
+  "@enterYourAnswer": {
+    "description": "Message invitant l'utilisateur à entrer sa réponse"
+  },
+  "thisFieldIsRequired": "Ce champ est obligatoire",
+  "@thisFieldIsRequired": {
+    "description": "Message indiquant un champ obligatoire"
+  },
+  "tapToSelectDate": "Appuyez pour sélectionner la date",
+  "@tapToSelectDate": {
+    "description": "Message indiquant d'appuyer pour sélectionner une date"
+  },
+  "submitApplication": "Soumettre la demande",
+  "@submitApplication": {
+    "description": "Libellé pour soumettre la demande"
+  },
+  "questionXofX": "Question {index} sur {length}",
+  "@questionXofX": {
+    "description": "Affiche le numéro de la question actuelle et le nombre total de questions",
+    "placeholders": {
+      "index": {
+        "description": "Le numéro de la question actuelle",
+        "example": "1",
+        "type": "int"
+      },
+      "length": {
+        "description": "Le nombre total de questions",
+        "example": "10",
+        "type": "int"
+      }
+    }
   },
   "requestTimedOutPleaseCheckYourConnection": "La requête a expiré. Veuillez vérifier votre connexion.",
   "@requestTimedOutPleaseCheckYourConnection": {
-    "description": "Error message for timed out request"
+    "description": "Message d'erreur pour une requête expirée"
   },
-  "networkErrorPleaseCheckYourInternetConnection": "Erreur réseau. Veuillez vérifier votre connexion internet.",
+  "networkErrorPleaseCheckYourInternetConnection": "Erreur réseau. Veuillez vérifier votre connexion Internet.",
   "@networkErrorPleaseCheckYourInternetConnection": {
-    "description": "Error message for network error"
+    "description": "Message d'erreur pour une erreur réseau"
   },
   "submissionFailedPleaseTryAgain": "La soumission a échoué. Veuillez réessayer.",
   "@submissionFailedPleaseTryAgain": {
-    "description": "Error message for failed submission"
+    "description": "Message d'erreur pour une soumission échouée"
   },
   "submittingForm": "Soumission du formulaire...",
   "@submittingForm": {
-    "description": "Message indicating form submission"
+    "description": "Message indiquant la soumission du formulaire"
   },
   "almostThereProcessingYourInformation": "Presque là ! Traitement de vos informations...",
   "@almostThereProcessingYourInformation": {
-    "description": "Message indicating information processing"
+    "description": "Message indiquant le traitement des informations"
   },
   "finalizingYourSubmission": "Finalisation de votre soumission...",
   "@finalizingYourSubmission": {
-    "description": "Message indicating submission finalization"
+    "description": "Message indiquant la finalisation de la soumission"
   },
   "submissionSuccessful": "Soumission réussie !",
   "@submissionSuccessful": {
-    "description": "Message after successful submission"
+    "description": "Message après une soumission réussie"
   },
   "yourFormHasBeenSubmittedSuccessfully": "Votre formulaire a été soumis avec succès.",
   "@yourFormHasBeenSubmittedSuccessfully": {
-    "description": "Message indicating successful form submission"
+    "description": "Message indiquant la soumission réussie du formulaire"
   },
   "youWillReceiveAConfirmationEmailShortly": "Vous recevrez un e-mail de confirmation sous peu.",
   "@youWillReceiveAConfirmationEmailShortly": {
-    "description": "Message indicating a confirmation email will be sent"
+    "description": "Message indiquant qu'un e-mail de confirmation sera envoyé"
   },
   "returnToDashboard": "Retour au tableau de bord",
   "@returnToDashboard": {
-    "description": "Label to return to dashboard"
+    "description": "Libellé pour retourner au tableau de bord"
   },
   "submissionFailed": "Échec de la soumission",
   "@submissionFailed": {
-    "description": "Message indicating submission failure"
+    "description": "Message indiquant un échec de soumission"
   },
   "pleaseCheckYourInformationAndTryAgain": "Veuillez vérifier vos informations et réessayer.",
   "@pleaseCheckYourInformationAndTryAgain": {
-    "description": "Message prompting user to check information and try again"
+    "description": "Message invitant l'utilisateur à vérifier ses informations et à réessayer"
   },
   "tryAgain": "Réessayer",
   "@tryAgain": {
-    "description": "Label to try again"
+    "description": "Libellé pour réessayer"
   },
-  "goBack": "Retour",
+  "goBack": "Retourner",
   "@goBack": {
-    "description": "Label to go back"
+    "description": "Libellé pour retourner"
   },
-  "errorLoadingApplicationForm": "Erreur lors du chargement du formulaire de candidature",
+  "errorLoadingApplicationForm": "Erreur lors du chargement du formulaire de demande",
   "@errorLoadingApplicationForm": {
-    "description": "Error message when the application form fails to load"
+    "description": "Message d'erreur lorsque le chargement du formulaire de demande échoue"
   },
-  "selectApplicationForm": "Sélectionner un formulaire de candidature",
+  "selectApplicationForm": "Sélectionner le formulaire de demande",
   "@selectApplicationForm": {
-    "description": "Message to select an application form"
+    "description": "Message pour sélectionner un formulaire de demande"
   },
-  "banana": "banana"
+  "banana": "banana",
+  "schoolApplications": "School Applications",
+  "gettingAllSchoolMembers": "Getting all school members...",
+  "crunchingDatabaseRecords": "Crunching database records...",
+  "schoolMembers": "School Members",
+  "exit": "Exit",
+  "gettingAllSchoolApplications": "Getting all school applications",
+  "errorGettingApplicationsAttempts": "Error getting applications attempts",
+  "applicationAccepted": "Application accepted.",
+  "applicationDeclined": "Application declined.",
+  "reviewApplication": "Review Application",
+  "noAnswer": "(No answer)",
+  "accept": "Accept",
+  "decline": "Decline",
+  "selectTheRoleForTheNewUser": "Select the role for the new user:",
+  "teacher": "Teacher",
+  "admin": "Admin"
 }
