@@ -3,3 +3,4 @@ template-arb-file: app_en.arb
 output-localization-file: app_localizations.dart
 import-line: "import 'package:flutter_gen/gen_l10n/app_localizations.dart';" 
 translate: false   
+synthetic-package: false

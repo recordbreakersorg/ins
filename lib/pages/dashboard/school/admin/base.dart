@@ -1,4 +1,3 @@
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:ins/offline.dart';
 import 'package:ins/backend/models.dart' as models;
@@ -10,13 +9,13 @@ import 'package:ins/theme.dart';
 import './dashboard.dart';
 import './users.dart';
 
-class StudentSchoolViewBase extends StatelessWidget {
+class AdminSchoolViewBase extends StatelessWidget {
   final models.Session session;
   final models.User user;
   final models.School school;
   final models.SchoolMember member;
   final int index;
-  const StudentSchoolViewBase({
+  const AdminSchoolViewBase({
     super.key,
     required this.session,
     required this.user,
@@ -30,7 +29,7 @@ class StudentSchoolViewBase extends StatelessWidget {
   }
 
   String getTitle(BuildContext context) {
-    return AppLocalizations.of(context)!.dashboard;
+    return "Dashboard";
   }
 
   @override
@@ -93,24 +92,26 @@ class StudentSchoolViewBase extends StatelessWidget {
             ),
             ListTile(
               leading: Icon(Icons.person),
-              title: Text(AppLocalizations.of(context)!.profile),
+              title: Text("Profile"),
               onTap: () => Navigator.pop(context),
             ),
             ListTile(
               leading: Icon(Icons.settings),
-              title: Text(AppLocalizations.of(context)!.settings),
-              onTap: () {},
+              title: Text("Settings"),
+              onTap: () {
+                Navigator.pop(context);
+              },
             ),
             ListTile(
               leading: Icon(Icons.logout),
-              title: Text(AppLocalizations.of(context)!.exit),
+              title: Text("Exit"),
               onTap: () {
                 Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(
                     builder:
                         (context) => dashboard.DashboardPage(
-                          title: AppLocalizations.of(context)!.welcomeBack,
+                          title: "Welcome back",
                           session: session,
                           user: user,
                         ),
@@ -127,21 +128,15 @@ class StudentSchoolViewBase extends StatelessWidget {
         selectedItemColor: Theme.of(context).colorScheme.primary,
         unselectedItemColor: Colors.grey.shade600,
         items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: AppLocalizations.of(context)!.home,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: AppLocalizations.of(context)!.profile,
-          ),
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: "Users"),
           BottomNavigationBarItem(
             icon: Icon(Icons.class_),
-            label: AppLocalizations.of(context)!.classrooms,
+            label: "Classrooms",
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.apps),
-            label: AppLocalizations.of(context)!.schoolApplications,
+            label: "School Applications",
           ),
         ],
         currentIndex: index,

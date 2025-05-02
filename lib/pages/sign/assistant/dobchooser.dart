@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import './creatingaccount.dart';
 import './base.dart';
 import './manager.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DobChooser extends StatelessWidget {
   final SignupAssistantState assistantState;
@@ -11,11 +10,9 @@ class DobChooser extends StatelessWidget {
 
   void _next(BuildContext context) {
     if (assistantState.dob == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(AppLocalizations.of(context)!.pleaseSelectADateOfBirth),
-        ),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text("Please select a date of birth.")));
       return;
     }
     Navigator.push(
@@ -45,7 +42,7 @@ class DobChooser extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AssistantBasePage(
-      title: Text(AppLocalizations.of(context)!.dateOfBirth),
+      title: Text("Date of Birth"),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 20, vertical: 50),
         child: Center(
@@ -53,7 +50,7 @@ class DobChooser extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Text(
-                AppLocalizations.of(context)!.chooseYourDateOfBirth,
+                "Choose your date of birth",
                 style: Theme.of(context).textTheme.headlineSmall,
               ),
               const SizedBox(height: 20),
@@ -62,13 +59,13 @@ class DobChooser extends StatelessWidget {
                 child: Text(
                   assistantState.dob != null
                       ? assistantState.dob!.toString().split(' ')[0]
-                      : AppLocalizations.of(context)!.selectDate,
+                      : "Select date",
                 ),
               ),
               Spacer(),
               FilledButton(
                 onPressed: () => _next(context),
-                child: Text(AppLocalizations.of(context)!.continuer),
+                child: Text("Continue"),
               ),
             ],
           ),

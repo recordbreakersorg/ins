@@ -1,4 +1,3 @@
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:ins/analytics.dart' as analytics;
 import '../../../backend/models.dart' as models;
@@ -69,16 +68,12 @@ class _SubmitingFormViewState extends State<_SubmitingFormView> {
   String _parseErrorMessage(String error, BuildContext context) {
     // Custom error message parsing can be added here
     if (error.contains('timeout')) {
-      return AppLocalizations.of(
-        context,
-      )!.requestTimedOutPleaseCheckYourConnection;
+      return "Request timed out. Please check your connection.";
     }
     if (error.contains('network')) {
-      return AppLocalizations.of(
-        context,
-      )!.networkErrorPleaseCheckYourInternetConnection;
+      return "Network error. Please check your internet connection.";
     }
-    return AppLocalizations.of(context)!.submissionFailedPleaseTryAgain;
+    return "Submission failed. Please try again.";
   }
 
   @override
@@ -105,9 +100,9 @@ class _SubmitingFormViewState extends State<_SubmitingFormView> {
   Widget _buildLoadingState(BuildContext context) {
     return LoadingPage(
       messages: [
-        AppLocalizations.of(context)!.submittingForm,
-        AppLocalizations.of(context)!.almostThereProcessingYourInformation,
-        AppLocalizations.of(context)!.finalizingYourSubmission,
+        "Submitting form...",
+        "Almost there! Processing your information...",
+        "Finalizing your submission...",
       ],
     );
   }
@@ -126,7 +121,7 @@ class _SubmitingFormViewState extends State<_SubmitingFormView> {
             ),
             const SizedBox(height: 24),
             Text(
-              AppLocalizations.of(context)!.submissionSuccessful,
+              "Submission Successful!",
               style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                 fontWeight: FontWeight.bold,
                 color: colorScheme.onSurface,
@@ -134,17 +129,13 @@ class _SubmitingFormViewState extends State<_SubmitingFormView> {
             ),
             const SizedBox(height: 16),
             Text(
-              AppLocalizations.of(
-                context,
-              )!.yourFormHasBeenSubmittedSuccessfully,
+              "Your form has been submitted successfully.",
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.bodyLarge,
             ),
             const SizedBox(height: 8),
             Text(
-              AppLocalizations.of(
-                context,
-              )!.youWillReceiveAConfirmationEmailShortly,
+              "You will receive a confirmation email shortly.",
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                 color: colorScheme.onSurface.withOpacity(0.6),
@@ -155,7 +146,7 @@ class _SubmitingFormViewState extends State<_SubmitingFormView> {
               onPressed: () {
                 Navigator.of(context).popUntil((route) => route.isFirst);
               },
-              child: Text(AppLocalizations.of(context)!.returnToDashboard),
+              child: Text("Return to Dashboard"),
             ),
           ],
         ),
@@ -173,7 +164,7 @@ class _SubmitingFormViewState extends State<_SubmitingFormView> {
             Icon(Icons.error_outline, color: colorScheme.error, size: 80),
             const SizedBox(height: 24),
             Text(
-              AppLocalizations.of(context)!.submissionFailed,
+              "Submission Failed",
               style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                 fontWeight: FontWeight.bold,
                 color: colorScheme.onSurface,
@@ -189,9 +180,7 @@ class _SubmitingFormViewState extends State<_SubmitingFormView> {
             ),
             const SizedBox(height: 8),
             Text(
-              AppLocalizations.of(
-                context,
-              )!.pleaseCheckYourInformationAndTryAgain,
+              "Please check your information and try again.",
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.bodyMedium,
             ),
@@ -206,14 +195,14 @@ class _SubmitingFormViewState extends State<_SubmitingFormView> {
                       _submitFuture = _submit();
                     });
                   },
-                  child: Text(AppLocalizations.of(context)!.tryAgain),
+                  child: Text("Try Again"),
                 ),
                 const SizedBox(width: 16),
                 TextButton(
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
-                  child: Text(AppLocalizations.of(context)!.goBack),
+                  child: Text("Go Back"),
                 ),
               ],
             ),

@@ -7,7 +7,6 @@ import './backend/sessions.dart';
 import './pages/dashboard/dashboard.dart';
 import './analytics.dart' as analytics;
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class InS extends StatelessWidget {
   const InS({super.key});
@@ -30,7 +29,6 @@ class InS extends StatelessWidget {
           themeMode: themeManager.themeMode,
           localizationsDelegates: [
             GlobalMaterialLocalizations.delegate,
-            AppLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate,
           ],
@@ -61,10 +59,7 @@ class InS extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               ErrorPage(
-                                title:
-                                    AppLocalizations.of(
-                                      context,
-                                    )!.errorLoadingYourSession,
+                                title: "Error loading your session",
                                 description: snapshot.error!.toString(),
                                 icon: Icon(
                                   Icons.signal_wifi_off,
@@ -87,9 +82,7 @@ class InS extends StatelessWidget {
                                           ),
                                         ),
                                     icon: Icon(Icons.refresh),
-                                    label: Text(
-                                      AppLocalizations.of(context)!.reload,
-                                    ),
+                                    label: Text("Reload"),
                                   ),
                                 ),
                               ),
@@ -110,18 +103,14 @@ class InS extends StatelessWidget {
                                             },
                                           ),
                                         ),
-                                    child: Text(
-                                      AppLocalizations.of(context)!.logout,
-                                    ),
+                                    child: Text("logout"),
                                   ),
                                 ),
                               ),
                             ],
                           ),
                         ),
-                        appBar: AppBar(
-                          title: Text(AppLocalizations.of(context)!.error),
-                        ),
+                        appBar: AppBar(title: Text("Error")),
                       );
                     } else if (!snapshot.hasData) {
                       return Scaffold(
@@ -133,11 +122,7 @@ class InS extends StatelessWidget {
                                 color: Theme.of(context).primaryColor,
                               ),
                               SizedBox(height: 30),
-                              Text(
-                                AppLocalizations.of(
-                                  context,
-                                )!.loadingYourOnlineAccounts,
-                              ),
+                              Text("Loading your online accounts..."),
                             ],
                           ),
                         ),
@@ -151,12 +136,7 @@ class InS extends StatelessWidget {
                   },
                 );
               } else {
-                return WelcomePage(
-                  title:
-                      AppLocalizations.of(
-                        context,
-                      )!.welcomeToTheIntranetOfSchools,
-                );
+                return WelcomePage(title: "Welcome to the Intranet of Schools");
               }
             },
           ),

@@ -1,4 +1,3 @@
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:intl/intl.dart';
@@ -91,11 +90,7 @@ class _QuestionsViewState extends State<_QuestionsView>
     final answer = widget.assistantState.answers[question.number];
 
     if (question.required && (answer == null || answer.isEmpty)) {
-      setState(
-        () =>
-            _currentError =
-                AppLocalizations.of(context)!.thisQuestionIsRequired,
-      );
+      setState(() => _currentError = "This question is required");
       return false;
     }
     return true;
@@ -189,10 +184,10 @@ class _QuestionsViewState extends State<_QuestionsView>
             Row(
               children: [
                 Text(
-                  AppLocalizations.of(context)!.questionXofX(
-                    _currentQuestionIndex + 1,
-                    widget.form.questions.length,
-                  ),
+                  "question " +
+                      (_currentQuestionIndex + 1).toString() +
+                      " of " +
+                      widget.form.questions.length.toString(),
                   style: Theme.of(
                     context,
                   ).textTheme.bodySmall?.copyWith(color: Colors.grey.shade600),
@@ -243,7 +238,7 @@ class _QuestionsViewState extends State<_QuestionsView>
             text: currentValue?.toString() ?? '',
           ),
           decoration: InputDecoration(
-            labelText: AppLocalizations.of(context)!.enterYourAnswer,
+            labelText: "Enter your answer",
             border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
             filled: true,
             floatingLabelBehavior: FloatingLabelBehavior.auto,
@@ -251,7 +246,7 @@ class _QuestionsViewState extends State<_QuestionsView>
           validator:
               (value) =>
                   question.required && (value == null || value.isEmpty)
-                      ? AppLocalizations.of(context)!.thisFieldIsRequired
+                      ? "This field is required"
                       : null,
         );
       case 'date':
@@ -270,7 +265,7 @@ class _QuestionsViewState extends State<_QuestionsView>
           },
           child: InputDecorator(
             decoration: InputDecoration(
-              labelText: AppLocalizations.of(context)!.selectDate,
+              labelText: "Select date",
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
               ),
@@ -280,7 +275,7 @@ class _QuestionsViewState extends State<_QuestionsView>
             child: Text(
               date != null
                   ? DateFormat('MMM dd, yyyy').format(date)
-                  : AppLocalizations.of(context)!.tapToSelectDate,
+                  : "Tap to select date",
               style: Theme.of(context).textTheme.bodyLarge,
             ),
           ),
@@ -291,7 +286,7 @@ class _QuestionsViewState extends State<_QuestionsView>
           onChanged: (value) => _onAnswerChanged(question, value),
           controller: TextEditingController(text: currentValue ?? ''),
           decoration: InputDecoration(
-            labelText: AppLocalizations.of(context)!.enterYourAnswer,
+            labelText: "Enter your answer",
             border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
             filled: true,
             floatingLabelBehavior: FloatingLabelBehavior.auto,
@@ -299,7 +294,7 @@ class _QuestionsViewState extends State<_QuestionsView>
           validator:
               (value) =>
                   question.required && (value == null || value.isEmpty)
-                      ? AppLocalizations.of(context)!.thisFieldIsRequired
+                      ? "This field is required"
                       : null,
         );
     }
@@ -353,8 +348,8 @@ class _QuestionsViewState extends State<_QuestionsView>
                   children: [
                     Text(
                       _currentQuestionIndex < widget.form.questions.length - 1
-                          ? AppLocalizations.of(context)!.continuer
-                          : AppLocalizations.of(context)!.submitApplication,
+                          ? "Continue"
+                          : "Submit application",
                     ),
                     if (_currentQuestionIndex <
                         widget.form.questions.length - 1)

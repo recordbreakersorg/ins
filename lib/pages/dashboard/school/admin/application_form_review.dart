@@ -1,4 +1,3 @@
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:ins/backend/models.dart' as models;
 
@@ -8,6 +7,7 @@ class ApplicationFormReviewPage extends StatefulWidget {
   final models.Session session;
   final models.SchoolMember member;
   final models.User user;
+  final models.School school;
   const ApplicationFormReviewPage({
     super.key,
     required this.attempt,
@@ -15,6 +15,7 @@ class ApplicationFormReviewPage extends StatefulWidget {
     required this.session,
     required this.member,
     required this.user,
+    required this.school,
   });
 
   @override
@@ -32,48 +33,185 @@ class _ApplicationFormReviewPageState extends State<ApplicationFormReviewPage> {
       _resultMessage = null;
     });
     if (accepted) {
-      final role = await showModalBottomSheet<String>(
-        context: context,
-        builder: (context) {
-          return SafeArea(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                SizedBox(height: 10),
-                Text(
-                  AppLocalizations.of(context)!.selectTheRoleForTheNewUser,
-                  style: Theme.of(context).textTheme.headlineMedium,
-                ),
-                SizedBox(height: 16),
-                ListTile(
-                  title: Text(AppLocalizations.of(context)!.student),
-                  onTap: () => Navigator.pop(context, 'student'),
-                ),
-                ListTile(
-                  title: Text(AppLocalizations.of(context)!.teacher),
-                  onTap: () => Navigator.pop(context, 'teacher'),
-                ),
-                ListTile(
-                  title: Text(AppLocalizations.of(context)!.parent),
-                  onTap: () => Navigator.pop(context, 'parent'),
-                ),
-                ListTile(
-                  title: Text(AppLocalizations.of(context)!.admin),
-                  onTap: () => Navigator.pop(context, 'admin'),
-                ),
-              ],
-            ),
-          );
-        },
-      );
-      if (role != null) {
-        await widget.attempt.accept(widget.session, role);
+      try {
+        final role = await showModalBottomSheet<String>(
+          context: context,
+          builder: (context) {
+            return SafeArea(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  SizedBox(height: 10),
+                  Text(
+                    "Select the role for the new user:",
+                    style: Theme.of(context).textTheme.headlineMedium,
+                  ),
+                  SizedBox(height: 16),
+                  ListTile(
+                    title: Text("Student"),
+                    onTap: () => Navigator.pop(context, 'student'),
+                  ),
+                  ListTile(
+                    title: Text("Teacher"),
+                    onTap: () => Navigator.pop(context, 'teacher'),
+                  ),
+                  ListTile(
+                    title: Text("Parent"),
+                    onTap: () => Navigator.pop(context, 'parent'),
+                  ),
+                  ListTile(
+                    title: Text("Admin"),
+                    onTap: () => Navigator.pop(context, 'admin'),
+                  ),
+                ],
+              ),
+            );
+          },
+        );
+        if (role == null) {
+          setState(() {
+            _isProcessing = false;
+          });
+          return;
+        }
+        // Step 2: Select classrooms
+        final classrooms = await widget.school.getClassrooms(widget.session);
+        final selectedClassrooms = await showModalBottomSheet<List<String>>(
+          context: context,
+          isScrollControlled: true,
+          builder: (context) {
+            final List<String> selected = <String>[];
+            return StatefulBuilder(
+              builder: (context, setModalState) {
+                return SafeArea(
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                      bottom: MediaQuery.of(context).viewInsets.bottom,
+                    ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        SizedBox(height: 10),
+                        Text(
+                          "Select classroom(s):",
+                          style: Theme.of(context).textTheme.headlineMedium,
+                        ),
+                        SizedBox(height: 16),
+                        ...classrooms.map<Widget>(
+                          (c) => CheckboxListTile(
+                            title: Text(c.info.name),
+                            value: selected.contains(c.id),
+                            onChanged: (v) {
+                              setModalState(() {
+                                if (v == true) {
+                                  selected.add(c.id);
+                                } else {
+                                  selected.remove(c.id);
+                                }
+                              });
+                            },
+                          ),
+                        ),
+
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 10,
+                            vertical: 20,
+                          ),
+                          child: ElevatedButton(
+                            child: Text("Continue"),
+                            onPressed:
+                                () => Navigator.pop(context, selected.toList()),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
+            );
+          },
+        );
+        if (selectedClassrooms == null || selectedClassrooms.isEmpty) {
+          setState(() {
+            _isProcessing = false;
+          });
+          return;
+        }
+        // Step 3: Select tags
+        final possibleTags = [
+          'prefect',
+          'monitor',
+          'sports',
+          'music',
+          'science',
+        ];
+        final selectedTags = await showModalBottomSheet<List<String>>(
+          context: context,
+          isScrollControlled: true,
+          builder: (context) {
+            final selected = <String>{};
+            return StatefulBuilder(
+              builder: (context, setModalState) {
+                return SafeArea(
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                      bottom: MediaQuery.of(context).viewInsets.bottom,
+                    ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        SizedBox(height: 10),
+                        Text(
+                          "Select tags (optional):",
+                          style: Theme.of(context).textTheme.headlineMedium,
+                        ),
+                        SizedBox(height: 16),
+                        ...possibleTags.map(
+                          (tag) => CheckboxListTile(
+                            title: Text(tag),
+                            value: selected.contains(tag),
+                            onChanged: (v) {
+                              setModalState(() {
+                                if (v == true) {
+                                  selected.add(tag);
+                                } else {
+                                  selected.remove(tag);
+                                }
+                              });
+                            },
+                          ),
+                        ),
+                        ElevatedButton(
+                          child: Text("Finish"),
+                          onPressed:
+                              () => Navigator.pop(context, selected.toList()),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
+            );
+          },
+        );
+        // Call accept with all info
+        await widget.attempt.accept(
+          widget.session,
+          role,
+          selectedClassrooms,
+          selectedTags ?? [],
+        );
         Navigator.of(context).pop();
-        Navigator.of(context).pop();
+      } catch (e) {
+        setState(() {
+          _isProcessing = false;
+          _resultMessage = "Error: ${e.toString()}";
+        });
+        return;
       }
     } else {
       await widget.attempt.decline(widget.session);
-      Navigator.of(context).pop();
       Navigator.of(context).pop();
       return;
     }
@@ -81,9 +219,7 @@ class _ApplicationFormReviewPageState extends State<ApplicationFormReviewPage> {
     setState(() {
       _isProcessing = false;
       _resultMessage =
-          accepted
-              ? AppLocalizations.of(context)!.applicationAccepted
-              : AppLocalizations.of(context)!.applicationDeclined;
+          accepted ? "Application accepted." : "Application declined.";
     });
   }
 
@@ -92,9 +228,7 @@ class _ApplicationFormReviewPageState extends State<ApplicationFormReviewPage> {
     final answers = widget.attempt.answers;
     final questions = widget.form.questions;
     return Scaffold(
-      appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.reviewApplication),
-      ),
+      appBar: AppBar(title: Text("Review Application")),
       body:
           _isProcessing
               ? const Center(child: CircularProgressIndicator())
@@ -125,9 +259,7 @@ class _ApplicationFormReviewPageState extends State<ApplicationFormReviewPage> {
                               ),
                             ),
                             subtitle: Text(
-                              a.content.isNotEmpty
-                                  ? a.content
-                                  : AppLocalizations.of(context)!.noAnswer,
+                              a.content.isNotEmpty ? a.content : "(No answer)",
                             ),
                           );
                         },
@@ -138,7 +270,12 @@ class _ApplicationFormReviewPageState extends State<ApplicationFormReviewPage> {
                         padding: const EdgeInsets.symmetric(vertical: 8.0),
                         child: Text(
                           _resultMessage!,
-                          style: const TextStyle(color: Colors.green),
+                          style: TextStyle(
+                            color:
+                                _resultMessage!.startsWith("Error")
+                                    ? Colors.red
+                                    : Colors.green,
+                          ),
                         ),
                       ),
                     ],
@@ -147,7 +284,7 @@ class _ApplicationFormReviewPageState extends State<ApplicationFormReviewPage> {
                       children: [
                         ElevatedButton.icon(
                           icon: const Icon(Icons.check),
-                          label: Text(AppLocalizations.of(context)!.accept),
+                          label: Text("Accept"),
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.green,
                           ),
@@ -158,7 +295,7 @@ class _ApplicationFormReviewPageState extends State<ApplicationFormReviewPage> {
                         ),
                         ElevatedButton.icon(
                           icon: const Icon(Icons.close),
-                          label: Text(AppLocalizations.of(context)!.decline),
+                          label: Text("Decline"),
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.red,
                           ),

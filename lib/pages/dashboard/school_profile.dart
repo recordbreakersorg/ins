@@ -1,4 +1,3 @@
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -151,10 +150,7 @@ class SchoolProfilePage extends StatelessWidget {
         children: [
           _buildStatItem(Icons.star, "4.4"),
           _buildStatItem(Icons.people, "0"),
-          _buildStatItem(
-            Icons.location_city,
-            AppLocalizations.of(context)!.somewhere,
-          ),
+          _buildStatItem(Icons.location_city, "Somewhere"),
         ],
       ),
     );
@@ -210,9 +206,7 @@ class SchoolProfilePage extends StatelessWidget {
                     ? Center(
                       child: ElevatedButton.icon(
                         icon: const Icon(Icons.edit_document),
-                        label: Text(
-                          AppLocalizations.of(context)!.startApplication,
-                        ),
+                        label: Text("Start Application"),
                         style: ElevatedButton.styleFrom(
                           padding: const EdgeInsets.symmetric(
                             horizontal: 32,
@@ -314,7 +308,7 @@ Future<void> _selectApplicationForm(
                 ),
                 const SizedBox(height: 16),
                 Text(
-                  AppLocalizations.of(context)!.selectApplicationForm,
+                  "Select application form",
                   style: GoogleFonts.poppins(
                     fontSize: 22,
                     fontWeight: FontWeight.w600,

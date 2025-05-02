@@ -1,4 +1,3 @@
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
 import './base.dart';
@@ -53,17 +52,17 @@ class _CreatingAccountPageState extends State<CreatingAccountPage> {
   @override
   Widget build(BuildContext context) {
     _messages.addAll([
-      AppLocalizations.of(context)!.preparingYourWorkspace,
-      AppLocalizations.of(context)!.configuringSettings,
-      AppLocalizations.of(context)!.almostThere,
-      AppLocalizations.of(context)!.justAFewMoreMoments,
-      AppLocalizations.of(context)!.creatingYourProfile,
-      AppLocalizations.of(context)!.finalizingYourAccount,
-      AppLocalizations.of(context)!.settingUpYourPreferences,
-      AppLocalizations.of(context)!.loadingYourDashboard,
+      "Preparing your workspace...",
+      "Configuring settings...",
+      "Almost there...",
+      "Just a few more moments...",
+      "Creating your profile...",
+      "Finalizing your account...",
+      "Setting up your preferences...",
+      "Loading your dashboard...",
     ]);
     return AssistantBasePage(
-      title: Text(AppLocalizations.of(context)!.creatingYourAccount),
+      title: Text("Creating your account"),
       body: FutureBuilder(
         future: _createAccountFuture,
         builder: (context, snapshot) {
@@ -103,7 +102,7 @@ class _CreatingAccountPageState extends State<CreatingAccountPage> {
           const CircularProgressIndicator(),
           const SizedBox(height: 24),
           Text(
-            AppLocalizations.of(context)!.creatingYourAccount,
+            "Creating your account",
             style: Theme.of(context).textTheme.titleLarge,
             textAlign: TextAlign.center,
           ),
@@ -129,7 +128,7 @@ class _CreatingAccountPageState extends State<CreatingAccountPage> {
             const Icon(Icons.error_outline, size: 200, color: Colors.red),
             const SizedBox(height: 24),
             Text(
-              AppLocalizations.of(context)!.accountCreationFailed,
+              "Account creation failed",
               style: Theme.of(
                 context,
               ).textTheme.headlineLarge?.copyWith(color: Colors.red),
@@ -156,13 +155,13 @@ class _CreatingAccountPageState extends State<CreatingAccountPage> {
           const Icon(Icons.check_circle, size: 200, color: Colors.green),
           const SizedBox(height: 24),
           Text(
-            AppLocalizations.of(context)!.accountCreatedSuccessfully,
+            "Account created successfully!",
             style: Theme.of(context).textTheme.titleLarge,
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 16),
           Text(
-            AppLocalizations.of(context)!.welcomeToYourNewAccount,
+            "Welcome to your new account!",
             style: Theme.of(context).textTheme.bodyMedium,
             textAlign: TextAlign.center,
           ),
