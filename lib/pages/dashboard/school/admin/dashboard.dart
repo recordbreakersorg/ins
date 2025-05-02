@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:ins/pages/dashboard/school/admin/users.dart';
 import './base.dart';
 
-class AdminSchoolDashboardPage extends StudentSchoolViewBase {
+class AdminSchoolDashboardPage extends AdminSchoolViewBase {
   const AdminSchoolDashboardPage({
     super.key,
     super.index = 0,
@@ -13,7 +13,7 @@ class AdminSchoolDashboardPage extends StudentSchoolViewBase {
   });
   @override
   String getTitle(BuildContext context) {
-    return AppLocalizations.of(context)!.dashboard;
+    return "Dashboard";
   }
 
   @override
@@ -38,6 +38,18 @@ class AdminSchoolDashboardPage extends StudentSchoolViewBase {
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder:
+                                (context) => AdminSchoolUsersPage(
+                                  school: school,
+                                  member: member,
+                                  session: session,
+                                  user: user,
+                                ),
+                          ),
+                        );
                         // Handle button press
                       },
                       child: Text("Manage Users"),

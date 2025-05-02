@@ -235,7 +235,7 @@ class User implements Model {
       session,
     );
     if (data['status'] < 0) {
-      throw Exception("Error geting to your classrooms");
+      throw Exception("Error geting your classrooms, ${data['message']}");
     }
     if (data['classrooms'] == null) return [];
     return (data['classrooms'] as List)

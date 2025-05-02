@@ -1,4 +1,3 @@
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:ins/offline.dart';
 import '../../backend/models.dart' as models;
@@ -20,7 +19,7 @@ class SchoolExplorePage extends StatelessWidget {
   Widget build(BuildContext context) {
     analytics.screen("Explore Schools");
     return Scaffold(
-      appBar: AppBar(title: appBarTitle(AppLocalizations.of(context)!.exploreSchools), elevation: 0),
+      appBar: AppBar(title: appBarTitle("Explore Schools"), elevation: 0),
       body: FutureBuilder<List<models.School>>(
         future: models.School.getSchools(),
         builder: (context, snapshot) {
