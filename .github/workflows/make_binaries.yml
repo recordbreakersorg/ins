@@ -27,7 +27,7 @@ jobs:
     - name: Build Web Version
       run: flutter build web --release --dart-define=APP_ENV=prod
     - name: Accept Android SDK licenses
-      run: yes | sdkmanager --licenses
+      run: echo yes | sdkmanager --licenses
 
     - name: Build APK
       run: |
