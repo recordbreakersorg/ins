@@ -308,8 +308,8 @@ class _DayTile extends StatelessWidget {
                 isToday
                     ? Border.all(color: colors.primary, width: 2)
                     : periods != null
-                    ? Border.all(color: colors.outline.withOpacity(0.1))
-                    : null,
+                    ? Border.all(color: colors.outline.withOpacity(0.3))
+                    : Border.all(color: colors.outline.withOpacity(0.3)),
             boxShadow:
                 isToday
                     ? [
