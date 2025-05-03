@@ -77,4 +77,35 @@ class SchoolMember implements Model {
   Map<String, dynamic> toJson() {
     return {'id': id, 'user_id': userId, 'school_id': schoolId, 'role': role};
   }
+
+  Future<List<SchoolMember>> getTutoring(Session session) async {
+    final res = await cacheableQuery(
+      "schoolmember/$id/tutoring",
+      "schoolmember/$id/tutoring",
+      {},
+      session,
+    );
+    if (res['status'] < 0) {
+      throw Exception(res['message']);
+    }
+    return (res['tutoring'] as List)
+        .map((t) => SchoolMember.fromJson(t))
+        .toList();
+  }
+
+  Future<List<SchoolMemberNUser>> getTutoringNUsers(Session session) async {
+    final tutorings = await getTutoring(session);
+    List<SchoolMemberNUser> mnu = [];
+    for (final tutoring in tutorings) {
+      final user = await tutoring.getUser(session);
+      mnu.add(SchoolMemberNUser(user: user, member: tutoring));
+    }
+    return mnu;
+  }
+}
+
+class SchoolMemberNUser {
+  final SchoolMember member;
+  final User user;
+  const SchoolMemberNUser({required this.user, required this.member});
 }

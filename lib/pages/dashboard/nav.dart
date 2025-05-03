@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:ins/pages/dashboard/classrooms.dart';
 import 'package:ins/pages/dashboard/schools.dart';
 import 'package:ins/profile.dart';
 import '../../backend/sessions.dart';
@@ -30,20 +29,6 @@ Widget dashboardNav(
                       (context) => DashboardPage(session: session, user: user),
                 ),
               ),
-        ),
-        ListTile(
-          leading: Icon(Icons.book),
-          title: Text("Classrooms"),
-          onTap: () {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                builder:
-                    (context) =>
-                        DashboardClassroomsPage(session: session, user: user),
-              ),
-            );
-          },
         ),
         ListTile(
           leading: Icon(Icons.calendar_today),

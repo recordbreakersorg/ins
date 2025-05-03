@@ -13,7 +13,7 @@ import './school/home.dart';
 class DashboardSchoolsPage extends DashboardBase {
   const DashboardSchoolsPage({
     super.key,
-    super.navIndex = 2,
+    super.navIndex = 1,
     super.title = "Your schools",
     required super.session,
     required super.user,
@@ -157,6 +157,8 @@ class SchoolListCard extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(12.0),
           child: Row(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Hero(
                 tag: school.profile.getPath(),
@@ -208,31 +210,34 @@ class SchoolListCard extends StatelessWidget {
               ),
               const SizedBox(width: 12),
               Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      school.info.name,
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
+                child: Hero(
+                  tag: "school-name-n-school_name-${school.id}",
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        school.info.name,
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
                       ),
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    const SizedBox(height: 8),
-                    // Display school.school_name as preformatted text
-                    Text(
-                      "@${school.school_name}",
-                      style: GoogleFonts.sourceCodePro(
-                        // Use a monospace font
-                        fontSize: 12, // Smaller font size
-                        color:
-                            Colors
-                                .grey[700], // Darker grey for preformatted text
+                      const SizedBox(height: 8),
+                      // Display school.school_name as preformatted text
+                      Text(
+                        "@${school.school_name}",
+                        style: GoogleFonts.sourceCodePro(
+                          // Use a monospace font
+                          fontSize: 12, // Smaller font size
+                          color:
+                              Colors
+                                  .grey[700], // Darker grey for preformatted text
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ],

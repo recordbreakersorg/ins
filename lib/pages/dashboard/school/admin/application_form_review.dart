@@ -26,57 +26,65 @@ class ApplicationFormReviewPage extends StatefulWidget {
 class _ApplicationFormReviewPageState extends State<ApplicationFormReviewPage> {
   bool _isProcessing = false;
   String? _resultMessage;
+  List<String>? _selectedClassroomIds;
+  List<models.SchoolMember>? _selectedChildren;
 
   Future<void> _handleDecision(bool accepted) async {
     setState(() {
       _isProcessing = true;
       _resultMessage = null;
     });
+
     if (accepted) {
-      try {
-        final role = await showModalBottomSheet<String>(
-          context: context,
-          builder: (context) {
-            return SafeArea(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  SizedBox(height: 10),
-                  Text(
-                    "Select the role for the new user:",
-                    style: Theme.of(context).textTheme.headlineMedium,
-                  ),
-                  SizedBox(height: 16),
-                  ListTile(
-                    title: Text("Student"),
-                    onTap: () => Navigator.pop(context, 'student'),
-                  ),
-                  ListTile(
-                    title: Text("Teacher"),
-                    onTap: () => Navigator.pop(context, 'teacher'),
-                  ),
-                  ListTile(
-                    title: Text("Parent"),
-                    onTap: () => Navigator.pop(context, 'parent'),
-                  ),
-                  ListTile(
-                    title: Text("Admin"),
-                    onTap: () => Navigator.pop(context, 'admin'),
-                  ),
-                ],
-              ),
-            );
-          },
-        );
-        if (role == null) {
-          setState(() {
-            _isProcessing = false;
-          });
-          return;
-        }
-        // Step 2: Select classrooms
+      // Step 1: Select Role
+      final role = await showModalBottomSheet<String>(
+        context: context,
+        builder: (context) {
+          return SafeArea(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const SizedBox(height: 20),
+                Text(
+                  "Select the role for the new user:",
+                  style: Theme.of(context).textTheme.titleLarge,
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 16),
+                ListTile(
+                  title: const Text("Student"),
+                  onTap: () => Navigator.pop(context, 'student'),
+                ),
+                ListTile(
+                  title: const Text("Teacher"),
+                  onTap: () => Navigator.pop(context, 'teacher'),
+                ),
+                ListTile(
+                  title: const Text("Parent"),
+                  onTap: () => Navigator.pop(context, 'parent'),
+                ),
+                ListTile(
+                  title: const Text("Admin"),
+                  onTap: () => Navigator.pop(context, 'admin'),
+                ),
+                const SizedBox(height: 20),
+              ],
+            ),
+          );
+        },
+      );
+
+      if (role == null) {
+        setState(() {
+          _isProcessing = false;
+        });
+        return;
+      }
+
+      if (role == 'student') {
+        // Step 2: Select Classrooms for Student
         final classrooms = await widget.school.getClassrooms(widget.session);
-        final selectedClassrooms = await showModalBottomSheet<List<String>>(
+        final selectedClassroomIds = await showModalBottomSheet<List<String>>(
           context: context,
           isScrollControlled: true,
           builder: (context) {
@@ -91,12 +99,13 @@ class _ApplicationFormReviewPageState extends State<ApplicationFormReviewPage> {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        SizedBox(height: 10),
+                        const SizedBox(height: 20),
                         Text(
                           "Select classroom(s):",
-                          style: Theme.of(context).textTheme.headlineMedium,
+                          style: Theme.of(context).textTheme.titleLarge,
+                          textAlign: TextAlign.center,
                         ),
-                        SizedBox(height: 16),
+                        const SizedBox(height: 16),
                         ...classrooms.map<Widget>(
                           (c) => CheckboxListTile(
                             title: Text(c.info.name),
@@ -112,18 +121,23 @@ class _ApplicationFormReviewPageState extends State<ApplicationFormReviewPage> {
                             },
                           ),
                         ),
-
                         Padding(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 10,
-                            vertical: 20,
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 24,
                           ),
                           child: ElevatedButton(
-                            child: Text("Continue"),
                             onPressed:
-                                () => Navigator.pop(context, selected.toList()),
+                                selected.isNotEmpty
+                                    ? () => Navigator.pop(
+                                      context,
+                                      selected.toList(),
+                                    )
+                                    : null,
+                            child: const Text("Continue"),
                           ),
                         ),
+                        const SizedBox(height: 20),
                       ],
                     ),
                   ),
@@ -132,25 +146,34 @@ class _ApplicationFormReviewPageState extends State<ApplicationFormReviewPage> {
             );
           },
         );
-        if (selectedClassrooms == null || selectedClassrooms.isEmpty) {
+
+        if (selectedClassroomIds == null || selectedClassroomIds.isEmpty) {
           setState(() {
             _isProcessing = false;
           });
           return;
         }
-        // Step 3: Select tags
-        final possibleTags = [
-          'prefect',
-          'monitor',
-          'sports',
-          'music',
-          'science',
-        ];
-        final selectedTags = await showModalBottomSheet<List<String>>(
+        _selectedClassroomIds = selectedClassroomIds;
+        // Proceed to accept with selectedClassroomIds
+        await _acceptApplication(
+          role,
+          _selectedClassroomIds,
+          null,
+        ); // Pass the role here
+      } else if (role == 'parent') {
+        // Step 2: Select Children for Parent
+        final schoolMembers = await widget.school.getMembers(widget.session);
+        final children =
+            schoolMembers
+                .where((m) => m.role == models.SchoolMemberRole.student)
+                .toList();
+        final selectedChildren = await showModalBottomSheet<
+          List<models.SchoolMember>
+        >(
           context: context,
           isScrollControlled: true,
           builder: (context) {
-            final selected = <String>{};
+            final List<models.SchoolMember> selected = <models.SchoolMember>[];
             return StatefulBuilder(
               builder: (context, setModalState) {
                 return SafeArea(
@@ -161,12 +184,167 @@ class _ApplicationFormReviewPageState extends State<ApplicationFormReviewPage> {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        SizedBox(height: 10),
+                        const SizedBox(height: 20),
+                        Text(
+                          "Select child(ren):",
+                          style: Theme.of(context).textTheme.titleLarge,
+                          textAlign: TextAlign.center,
+                        ),
+                        const SizedBox(height: 16),
+                        if (children.isEmpty)
+                          const Padding(
+                            padding: EdgeInsets.all(16.0),
+                            child: Text(
+                              "No students available to select as children.",
+                            ),
+                          )
+                        else
+                          ...children.map<Widget>(
+                            (child) => CheckboxListTile(
+                              title: FutureBuilder<models.User>(
+                                future: child.getUser(widget.session),
+                                builder: (context, snapshot) {
+                                  if (!snapshot.hasData)
+                                    return const CircularProgressIndicator();
+                                  else
+                                    return Text(snapshot.data!.info.name);
+                                },
+                              ),
+                              value: selected.contains(child),
+                              onChanged: (v) {
+                                setModalState(() {
+                                  if (v == true) {
+                                    selected.add(child);
+                                  } else {
+                                    selected.remove(child);
+                                  }
+                                });
+                              },
+                            ),
+                          ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 24,
+                          ),
+                          child: ElevatedButton(
+                            onPressed:
+                                selected.isNotEmpty
+                                    ? () => Navigator.pop(
+                                      context,
+                                      selected.toList(),
+                                    )
+                                    : null,
+                            child: const Text("Continue"),
+                          ),
+                        ),
+                        const SizedBox(height: 20),
+                      ],
+                    ),
+                  ),
+                );
+              },
+            );
+          },
+        );
+
+        if (selectedChildren == null || selectedChildren.isEmpty) {
+          setState(() {
+            _isProcessing = false;
+          });
+          return;
+        }
+        _selectedChildren = selectedChildren;
+        // Proceed to accept with selectedChildren
+        await _acceptApplication(
+          role,
+          null,
+          _selectedChildren,
+        ); // Pass the role here
+      } else {
+        // Step 2 & 3: Select Classrooms (optional) and Tags for other roles
+        final classrooms = await widget.school.getClassrooms(widget.session);
+        final selectedClassroomIds = await showModalBottomSheet<List<String>>(
+          context: context,
+          isScrollControlled: true,
+          builder: (context) {
+            final List<String> selected = <String>[];
+            return StatefulBuilder(
+              builder: (context, setModalState) {
+                return SafeArea(
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                      bottom: MediaQuery.of(context).viewInsets.bottom,
+                    ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const SizedBox(height: 20),
+                        Text(
+                          "Select classroom(s) (optional):",
+                          style: Theme.of(context).textTheme.titleLarge,
+                          textAlign: TextAlign.center,
+                        ),
+                        const SizedBox(height: 16),
+                        ...classrooms.map<Widget>(
+                          (c) => CheckboxListTile(
+                            title: Text(c.info.name),
+                            value: selected.contains(c.id),
+                            onChanged: (v) {
+                              setModalState(() {
+                                if (v == true) {
+                                  selected.add(c.id);
+                                } else {
+                                  selected.remove(c.id);
+                                }
+                              });
+                            },
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 24,
+                          ),
+                          child: ElevatedButton(
+                            onPressed:
+                                () => Navigator.pop(context, selected.toList()),
+                            child: const Text("Continue"),
+                          ),
+                        ),
+                        const SizedBox(height: 20),
+                      ],
+                    ),
+                  ),
+                );
+              },
+            );
+          },
+        );
+
+        final possibleTags = ['prefect'];
+        final selectedTags = await showModalBottomSheet<List<String>>(
+          context: context,
+          isScrollControlled: true,
+          builder: (context) {
+            final Set<String> selected = <String>{};
+            return StatefulBuilder(
+              builder: (context, setModalState) {
+                return SafeArea(
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                      bottom: MediaQuery.of(context).viewInsets.bottom,
+                    ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const SizedBox(height: 20),
                         Text(
                           "Select tags (optional):",
-                          style: Theme.of(context).textTheme.headlineMedium,
+                          style: Theme.of(context).textTheme.titleLarge,
+                          textAlign: TextAlign.center,
                         ),
-                        SizedBox(height: 16),
+                        const SizedBox(height: 16),
                         ...possibleTags.map(
                           (tag) => CheckboxListTile(
                             title: Text(tag),
@@ -182,11 +360,18 @@ class _ApplicationFormReviewPageState extends State<ApplicationFormReviewPage> {
                             },
                           ),
                         ),
-                        ElevatedButton(
-                          child: Text("Finish"),
-                          onPressed:
-                              () => Navigator.pop(context, selected.toList()),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 24,
+                          ),
+                          child: ElevatedButton(
+                            onPressed:
+                                () => Navigator.pop(context, selected.toList()),
+                            child: const Text("Finish"),
+                          ),
                         ),
+                        const SizedBox(height: 20),
                       ],
                     ),
                   ),
@@ -195,26 +380,20 @@ class _ApplicationFormReviewPageState extends State<ApplicationFormReviewPage> {
             );
           },
         );
-        // Call accept with all info
-        await widget.attempt.accept(
-          widget.session,
-          role,
-          selectedClassrooms,
-          selectedTags ?? [],
+        // Call accept with selectedClassroomIds and selectedTags
+        await _acceptApplication(
+          role, // Pass the role here
+          selectedClassroomIds,
+          null,
+          tags: selectedTags ?? [],
         );
-        Navigator.of(context).pop();
-      } catch (e) {
-        setState(() {
-          _isProcessing = false;
-          _resultMessage = "Error: ${e.toString()}";
-        });
-        return;
       }
     } else {
       await widget.attempt.decline(widget.session);
       Navigator.of(context).pop();
       return;
     }
+
     await Future.delayed(const Duration(seconds: 1));
     setState(() {
       _isProcessing = false;
@@ -223,12 +402,36 @@ class _ApplicationFormReviewPageState extends State<ApplicationFormReviewPage> {
     });
   }
 
+  Future<void> _acceptApplication(
+    String role,
+    List<String>? classroomIds,
+    List<models.SchoolMember>? children, {
+    List<String>? tags,
+  }) async {
+    // This is the function that was missing.
+    try {
+      await widget.attempt.accept(
+        widget.session,
+        role,
+        classroomIds ?? [],
+        tags ?? [],
+        children != null ? children.map((e) => e.id).toList() : [],
+      );
+      Navigator.of(context).pop();
+    } catch (e) {
+      setState(() {
+        _isProcessing = false;
+        _resultMessage = "Error: ${e.toString()}";
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final answers = widget.attempt.answers;
     final questions = widget.form.questions;
     return Scaffold(
-      appBar: AppBar(title: Text("Review Application")),
+      appBar: AppBar(title: const Text("Review Application")),
       body:
           _isProcessing
               ? const Center(child: CircularProgressIndicator())
@@ -284,7 +487,7 @@ class _ApplicationFormReviewPageState extends State<ApplicationFormReviewPage> {
                       children: [
                         ElevatedButton.icon(
                           icon: const Icon(Icons.check),
-                          label: Text("Accept"),
+                          label: const Text("Accept"),
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.green,
                           ),
@@ -295,7 +498,7 @@ class _ApplicationFormReviewPageState extends State<ApplicationFormReviewPage> {
                         ),
                         ElevatedButton.icon(
                           icon: const Icon(Icons.close),
-                          label: Text("Decline"),
+                          label: const Text("Decline"),
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.red,
                           ),

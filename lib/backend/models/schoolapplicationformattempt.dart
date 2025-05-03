@@ -98,11 +98,13 @@ class SchoolApplicationFormAttempt implements Model {
     String role,
     List<String> classroomsIds,
     List<String> tags,
+    List<String> children,
   ) async {
     final res = await apiQuery("schoolapplicationformattempt/$id/accept", {
       'role': role,
       'classrooms': jsonEncode(classroomsIds),
       'tags': jsonEncode(tags),
+      'children': jsonEncode(children),
     }, session);
     if (res['status'] < 0) {
       throw Exception(res['message']);
