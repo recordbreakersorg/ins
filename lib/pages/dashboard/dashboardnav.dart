@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../backend/models.dart';
 import './dashboard.dart';
-import './classrooms.dart';
 import './schools.dart';
 
 Widget dashboardBottomNav(
@@ -13,13 +12,10 @@ Widget dashboardBottomNav(
   return BottomNavigationBar(
     type: BottomNavigationBarType.fixed,
     currentIndex: index,
-    // showSelectedLabels: false,
-    // showUnselectedLabels: false,
     selectedItemColor: Theme.of(context).colorScheme.primary,
     unselectedItemColor: Colors.grey.shade600,
     items: [
       BottomNavigationBarItem(icon: Icon(Icons.dashboard), label: "Home"),
-      BottomNavigationBarItem(icon: Icon(Icons.class_), label: "Classrooms"),
       BottomNavigationBarItem(icon: Icon(Icons.school), label: "Schools"),
     ],
     onTap: (index) {
@@ -33,16 +29,6 @@ Widget dashboardBottomNav(
           );
           break;
         case 1:
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder:
-                  (context) =>
-                      DashboardClassroomsPage(session: session, user: user),
-            ),
-          );
-          break;
-        case 2:
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(

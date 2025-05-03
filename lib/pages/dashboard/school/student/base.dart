@@ -6,8 +6,9 @@ import 'package:ins/analytics.dart' as analytics;
 import 'package:ins/profile.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ins/theme.dart';
-import './dashboard.dart';
-import './chatrooms.dart';
+import 'dashboard.dart';
+import 'chatrooms.dart';
+import 'attendance.dart';
 
 class StudentSchoolViewBase extends StatelessWidget {
   final models.Session session;
@@ -134,8 +135,8 @@ class StudentSchoolViewBase extends StatelessWidget {
             label: "Chatrooms",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.notifications),
-            label: "Notifications",
+            icon: Icon(Icons.calendar_today_outlined),
+            label: "Attendance",
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.account_circle),
@@ -174,6 +175,19 @@ class StudentSchoolViewBase extends StatelessWidget {
                 ),
               );
               break;
+            case 2:
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder:
+                      (context) => StudentAttendanceSchoolPage(
+                        session: session,
+                        user: user,
+                        school: school,
+                        member: member,
+                      ),
+                ),
+              );
           }
         },
       ),
