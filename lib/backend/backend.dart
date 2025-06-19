@@ -75,3 +75,16 @@ Future<Map<String, dynamic>> cacheableQuery(
     });
   }
 }
+
+Future<String?> getTerms() async {
+  try {
+    final response = await cacheableQuery("terms", "terms", {}, null);
+    if (response["status"] >= 0) {
+      return response["terms"];
+    } else {
+      return null;
+    }
+  } catch (e) {
+    return null;
+  }
+}

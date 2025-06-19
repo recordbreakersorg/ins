@@ -45,7 +45,7 @@ class _SigninPageState extends State<SigninPage> {
                     TextField(
                       controller: _nameController,
                       decoration: InputDecoration(
-                        labelText: "Your Name",
+                        labelText: "Your username",
                         prefixIcon: Icon(Icons.person),
                         fillColor: Theme.of(context).colorScheme.inversePrimary,
                       ),
@@ -87,9 +87,13 @@ class _SigninPageState extends State<SigninPage> {
                             );
                           }
                         } catch (e) {
-                          ScaffoldMessenger.of(
-                            context,
-                          ).showSnackBar(SnackBar(content: Text(e.toString())));
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                "Error creating your account, please check your internet connection.",
+                              ),
+                            ),
+                          );
                         }
                       },
                       child: Text("Signin >"),

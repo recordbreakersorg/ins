@@ -14,7 +14,9 @@ void main() async {
       options: DefaultFirebaseOptions.currentPlatform,
     );
     analytics.intializeAnalytics();
+    print("Analytics succesfully launched");
   } catch (e) {
+    print("Error starting analytics, deactivating: $e");
     analytics.deactivate();
   }
   runApp(const InS());

@@ -9,6 +9,7 @@ import 'package:ins/theme.dart';
 import 'dashboard.dart';
 import 'chatrooms.dart';
 import 'attendance.dart';
+import 'classrooms.dart';
 
 class StudentSchoolViewBase extends StatelessWidget {
   final models.Session session;
@@ -130,6 +131,7 @@ class StudentSchoolViewBase extends StatelessWidget {
         unselectedItemColor: Colors.grey.shade600,
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+          BottomNavigationBarItem(icon: Icon(Icons.class_sharp), label: "Home"),
           BottomNavigationBarItem(
             icon: Icon(Icons.message),
             label: "Chatrooms",
@@ -166,7 +168,7 @@ class StudentSchoolViewBase extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder:
-                      (context) => StudentChatroomsPage(
+                      (context) => StudentClassroomsPage(
                         session: session,
                         user: user,
                         school: school,
@@ -176,6 +178,20 @@ class StudentSchoolViewBase extends StatelessWidget {
               );
               break;
             case 2:
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder:
+                      (context) => StudentChatroomsPage(
+                        session: session,
+                        user: user,
+                        school: school,
+                        member: member,
+                      ),
+                ),
+              );
+              break;
+            case 3:
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(

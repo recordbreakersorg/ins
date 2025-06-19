@@ -8,7 +8,7 @@ class StudentChatroomsPage extends StudentSchoolViewBase {
     required super.member,
     required super.session,
     required super.user,
-    super.index = 1,
+    super.index = 2,
   });
 
   @override

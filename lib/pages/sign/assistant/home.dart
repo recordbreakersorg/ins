@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import './manager.dart';
-import './namechooser.dart';
+import './terms.dart';
 import '../../../analytics.dart' as analytics;
 
 Future<void> launchAssistant(BuildContext context) async {
@@ -10,12 +10,12 @@ Future<void> launchAssistant(BuildContext context) async {
   Navigator.push(
     context,
     MaterialPageRoute(
-      builder: (context) => NameChooserPage(assistantState: assistantState),
+      builder: (context) => TermsPage(assistantState: assistantState),
     ),
   );
 }
 
 Future<Widget> assistant(BuildContext context) async {
   final assistantState = await SignupAssistantState.loadOrCreate();
-  return NameChooserPage(assistantState: assistantState);
+  return TermsPage(assistantState: assistantState);
 }

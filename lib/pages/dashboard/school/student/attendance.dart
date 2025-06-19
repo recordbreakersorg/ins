@@ -11,7 +11,7 @@ class StudentAttendanceSchoolPage extends StudentSchoolViewBase {
     required super.user,
     required super.member,
     required super.school,
-    super.index = 2,
+    super.index = 3,
   });
 
   @override

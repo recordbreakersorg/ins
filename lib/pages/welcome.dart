@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ins/pages/sign/assistant/home.dart';
 import './sign/in.dart';
 import './sign/up.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -48,10 +49,11 @@ class WelcomePage extends StatelessWidget {
                   const SizedBox(width: 20),
                   FilledButton(
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => SignupPage()),
-                      );
+                      //Navigator.push(
+                      //  context,
+                      //  MaterialPageRoute(builder: (context) => SignupPage()),
+                      //);
+                      launchAssistant(context);
                     },
                     child: Text("Register"),
                   ),

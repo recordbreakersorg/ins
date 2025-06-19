@@ -1,7 +1,10 @@
 import 'dart:convert';
 
+import 'package:ins/backend/backend.dart';
+
 import '../model.dart';
 import './profile.dart';
+import './session.dart';
 
 class ClassroomMember implements Model {
   final String id;
@@ -23,6 +26,10 @@ class ClassroomMember implements Model {
   @override
   Map<String, dynamic> toJson() {
     return {'id': id, 'member_id': memberId, 'classroom_id': classroomId};
+  }
+
+  Future<Classroom> getClassroom(Session session) {
+    return Classroom.fromId(session, classroomId);
   }
 }
 
@@ -71,6 +78,20 @@ class Classroom implements Model {
       'tags': tags,
       'info': info.toJson(),
     };
+  }
+
+  static Future<Classroom> fromId(Session session, String classroomId) async {
+    final response = await cacheableQuery(
+      "classroom/$classroomId",
+      "classroom/$classroomId",
+      {},
+      session,
+    );
+    if (response["status"] >= 0) {
+      return Classroom.fromJson(response["classroom"]);
+    } else {
+      throw Exception(response["message"]);
+    }
   }
 
   factory Classroom.fromJson(Map<String, dynamic> json) {

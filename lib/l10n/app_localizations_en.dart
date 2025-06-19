@@ -27,7 +27,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get loadingYourOnlineAccounts => 'Loading your online accounts...';
 
   @override
-  String get welcomeToTheIntranetOfSchools => 'Welcome to the Intranet of Schools';
+  String get welcomeToTheIntranetOfSchools =>
+      'Welcome to the Intranet of Schools';
 
   @override
   String errorSnapshotError(Object error) {
@@ -190,10 +191,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get profileSetup => 'Profile Setup';
 
   @override
-  String get checkingUsernameAvailability => 'Checking username availability...';
+  String get checkingUsernameAvailability =>
+      'Checking username availability...';
 
   @override
-  String get usernameMustBeAtLeast3CharactersAndCanOnlyContainNlowercaseLettersNumbersUnderscoresAndPeriods => 'Username must be at least 3 characters and can only contain:\\nlowercase letters, numbers, underscores (_), and periods (.)';
+  String
+  get usernameMustBeAtLeast3CharactersAndCanOnlyContainNlowercaseLettersNumbersUnderscoresAndPeriods =>
+      'Username must be at least 3 characters and can only contain:\\nlowercase letters, numbers, underscores (_), and periods (.)';
 
   @override
   String get thisUsernameIsAlreadyTaken => 'This username is already taken';
@@ -286,7 +290,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get noClassrooms => 'No classrooms';
 
   @override
-  String get youAreNotAMemberOfAnyClassroomYet => 'You are not a member of any classroom yet';
+  String get youAreNotAMemberOfAnyClassroomYet =>
+      'You are not a member of any classroom yet';
 
   @override
   String get loading => 'Loading...';
@@ -304,7 +309,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get nextStep => 'Next Step';
 
   @override
-  String get nextStepOfTheApplicationGoesHere => 'Next step of the application goes here.';
+  String get nextStepOfTheApplicationGoesHere =>
+      'Next step of the application goes here.';
 
   @override
   String get thisQuestionIsRequired => 'This question is required';
@@ -327,19 +333,23 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get requestTimedOutPleaseCheckYourConnection => 'Request timed out. Please check your connection.';
+  String get requestTimedOutPleaseCheckYourConnection =>
+      'Request timed out. Please check your connection.';
 
   @override
-  String get networkErrorPleaseCheckYourInternetConnection => 'Network error. Please check your internet connection.';
+  String get networkErrorPleaseCheckYourInternetConnection =>
+      'Network error. Please check your internet connection.';
 
   @override
-  String get submissionFailedPleaseTryAgain => 'Submission failed. Please try again.';
+  String get submissionFailedPleaseTryAgain =>
+      'Submission failed. Please try again.';
 
   @override
   String get submittingForm => 'Submitting form...';
 
   @override
-  String get almostThereProcessingYourInformation => 'Almost there! Processing your information...';
+  String get almostThereProcessingYourInformation =>
+      'Almost there! Processing your information...';
 
   @override
   String get finalizingYourSubmission => 'Finalizing your submission...';
@@ -348,10 +358,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get submissionSuccessful => 'Submission Successful!';
 
   @override
-  String get yourFormHasBeenSubmittedSuccessfully => 'Your form has been submitted successfully.';
+  String get yourFormHasBeenSubmittedSuccessfully =>
+      'Your form has been submitted successfully.';
 
   @override
-  String get youWillReceiveAConfirmationEmailShortly => 'You will receive a confirmation email shortly.';
+  String get youWillReceiveAConfirmationEmailShortly =>
+      'You will receive a confirmation email shortly.';
 
   @override
   String get returnToDashboard => 'Return to Dashboard';
@@ -360,7 +372,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get submissionFailed => 'Submission Failed';
 
   @override
-  String get pleaseCheckYourInformationAndTryAgain => 'Please check your information and try again.';
+  String get pleaseCheckYourInformationAndTryAgain =>
+      'Please check your information and try again.';
 
   @override
   String get tryAgain => 'Try Again';
@@ -396,7 +409,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get gettingAllSchoolApplications => 'Getting all school applications';
 
   @override
-  String get errorGettingApplicationsAttempts => 'Error getting applications attempts';
+  String get errorGettingApplicationsAttempts =>
+      'Error getting applications attempts';
 
   @override
   String get applicationAccepted => 'Application accepted.';

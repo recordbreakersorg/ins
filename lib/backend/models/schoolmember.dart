@@ -2,6 +2,7 @@ import '../backend.dart';
 import '../model.dart';
 import './session.dart';
 import './user.dart';
+import './classroom.dart';
 
 enum SchoolMemberRole { student, teacher, admin, parent }
 
@@ -101,6 +102,25 @@ class SchoolMember implements Model {
       mnu.add(SchoolMemberNUser(user: user, member: tutoring));
     }
     return mnu;
+  }
+
+  Future<List<ClassroomMember>> getClassroomMemberships(Session session) async {
+    final memberships = await cacheableQuery(
+      "schoolmember/$id/classrooms",
+      "schoolmember/$id/classrooms",
+      {},
+      session,
+    );
+    if (memberships["status"] >= 0) {
+      final members = memberships["members"];
+      if (members == null) {
+        return [];
+      } else {
+        return members.map((elt) => ClassroomMember.fromJson(elt)).toList();
+      }
+    } else {
+      throw Exception("Error connecting to backend.");
+    }
   }
 }
 

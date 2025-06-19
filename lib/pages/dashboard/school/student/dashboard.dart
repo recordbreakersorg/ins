@@ -29,8 +29,8 @@ class StudentSchoolDashboardPage extends StudentSchoolViewBase {
                           tag: school.profile.getPath(),
                           child: Image.network(
                             school.profile.getPath(),
-                            width: 200,
-                            height: 200,
+                            width: 150,
+                            height: 150,
                           ),
                         ),
                         SizedBox(width: 20),
@@ -41,7 +41,7 @@ class StudentSchoolDashboardPage extends StudentSchoolViewBase {
                             Text(
                               school.info.name,
                               style: TextStyle(
-                                fontSize: 20,
+                                fontSize: 16,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),

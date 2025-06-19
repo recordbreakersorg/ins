@@ -103,7 +103,7 @@ class ThemeManager with ChangeNotifier {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       ),
     ),
-    cardTheme: CardTheme(
+    cardTheme: CardThemeData(
       color: Colors.white,
       elevation: 0,
       shape: RoundedRectangleBorder(
@@ -188,7 +188,7 @@ class ThemeManager with ChangeNotifier {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       ),
     ),
-    cardTheme: CardTheme(
+    cardTheme: CardThemeData(
       color: Color(0xFF2D2D2D),
       elevation: 0,
       shape: RoundedRectangleBorder(

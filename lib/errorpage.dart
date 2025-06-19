@@ -19,10 +19,7 @@ class ErrorPage extends StatelessWidget {
       parameters: {"title": title, "description": description},
     );
     return Container(
-      decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.errorContainer,
-        borderRadius: BorderRadius.circular(16),
-      ),
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(16)),
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

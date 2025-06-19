@@ -12,7 +12,8 @@ class AppLocalizationsFr extends AppLocalizations {
   String get helloWorld => 'Bonjour le monde !';
 
   @override
-  String get errorLoadingYourSession => 'Erreur lors du chargement de votre session';
+  String get errorLoadingYourSession =>
+      'Erreur lors du chargement de votre session';
 
   @override
   String get reload => 'Recharger';
@@ -24,10 +25,12 @@ class AppLocalizationsFr extends AppLocalizations {
   String get error => 'Erreur';
 
   @override
-  String get loadingYourOnlineAccounts => 'Chargement de vos comptes en ligne...';
+  String get loadingYourOnlineAccounts =>
+      'Chargement de vos comptes en ligne...';
 
   @override
-  String get welcomeToTheIntranetOfSchools => 'Bienvenue sur l\'Intranet des Écoles';
+  String get welcomeToTheIntranetOfSchools =>
+      'Bienvenue sur l\'Intranet des Écoles';
 
   @override
   String errorSnapshotError(Object error) {
@@ -83,13 +86,15 @@ class AppLocalizationsFr extends AppLocalizations {
   String get noSchools => 'Aucune école';
 
   @override
-  String get noSchoolMembership => 'Vous n\'êtes membre d\'aucune école pour le moment';
+  String get noSchoolMembership =>
+      'Vous n\'êtes membre d\'aucune école pour le moment';
 
   @override
   String get explore => 'Explorer';
 
   @override
-  String get youAreAMemberOfNoSchoolYet => 'Vous n\'êtes membre d\'aucune école pour le moment';
+  String get youAreAMemberOfNoSchoolYet =>
+      'Vous n\'êtes membre d\'aucune école pour le moment';
 
   @override
   String get waitALittleBit => 'Patientez un instant...';
@@ -190,16 +195,21 @@ class AppLocalizationsFr extends AppLocalizations {
   String get profileSetup => 'Configuration du profil';
 
   @override
-  String get checkingUsernameAvailability => 'Vérification de la disponibilité du nom d\'utilisateur...';
+  String get checkingUsernameAvailability =>
+      'Vérification de la disponibilité du nom d\'utilisateur...';
 
   @override
-  String get usernameMustBeAtLeast3CharactersAndCanOnlyContainNlowercaseLettersNumbersUnderscoresAndPeriods => 'Le nom d\'utilisateur doit comporter au moins 3 caractères et ne peut contenir que :\ndes lettres minuscules, des chiffres, des underscores (_) et des points (.)';
+  String
+  get usernameMustBeAtLeast3CharactersAndCanOnlyContainNlowercaseLettersNumbersUnderscoresAndPeriods =>
+      'Le nom d\'utilisateur doit comporter au moins 3 caractères et ne peut contenir que :\ndes lettres minuscules, des chiffres, des underscores (_) et des points (.)';
 
   @override
-  String get thisUsernameIsAlreadyTaken => 'Ce nom d\'utilisateur est déjà pris';
+  String get thisUsernameIsAlreadyTaken =>
+      'Ce nom d\'utilisateur est déjà pris';
 
   @override
-  String get pleaseSelectADateOfBirth => 'Veuillez sélectionner une date de naissance.';
+  String get pleaseSelectADateOfBirth =>
+      'Veuillez sélectionner une date de naissance.';
 
   @override
   String get dateOfBirth => 'Date de naissance';
@@ -211,10 +221,12 @@ class AppLocalizationsFr extends AppLocalizations {
   String get selectDate => 'Sélectionner une date';
 
   @override
-  String get settingUpYourNewAccount => 'Configuration de votre nouveau compte...';
+  String get settingUpYourNewAccount =>
+      'Configuration de votre nouveau compte...';
 
   @override
-  String get preparingYourWorkspace => 'Préparation de votre espace de travail...';
+  String get preparingYourWorkspace =>
+      'Préparation de votre espace de travail...';
 
   @override
   String get configuringSettings => 'Configuration des paramètres...';
@@ -280,13 +292,15 @@ class AppLocalizationsFr extends AppLocalizations {
   String get allCaughtUp => 'Tout est à jour !';
 
   @override
-  String get unableToLoadClassrooms => 'Impossible de charger les salles de classe';
+  String get unableToLoadClassrooms =>
+      'Impossible de charger les salles de classe';
 
   @override
   String get noClassrooms => 'Aucune salle de classe';
 
   @override
-  String get youAreNotAMemberOfAnyClassroomYet => 'Vous n\'êtes membre d\'aucune salle de classe pour le moment';
+  String get youAreNotAMemberOfAnyClassroomYet =>
+      'Vous n\'êtes membre d\'aucune salle de classe pour le moment';
 
   @override
   String get loading => 'Chargement...';
@@ -304,7 +318,8 @@ class AppLocalizationsFr extends AppLocalizations {
   String get nextStep => 'Étape suivante';
 
   @override
-  String get nextStepOfTheApplicationGoesHere => 'La prochaine étape de la demande se trouve ici.';
+  String get nextStepOfTheApplicationGoesHere =>
+      'La prochaine étape de la demande se trouve ici.';
 
   @override
   String get thisQuestionIsRequired => 'Cette question est obligatoire';
@@ -327,19 +342,23 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get requestTimedOutPleaseCheckYourConnection => 'La requête a expiré. Veuillez vérifier votre connexion.';
+  String get requestTimedOutPleaseCheckYourConnection =>
+      'La requête a expiré. Veuillez vérifier votre connexion.';
 
   @override
-  String get networkErrorPleaseCheckYourInternetConnection => 'Erreur réseau. Veuillez vérifier votre connexion Internet.';
+  String get networkErrorPleaseCheckYourInternetConnection =>
+      'Erreur réseau. Veuillez vérifier votre connexion Internet.';
 
   @override
-  String get submissionFailedPleaseTryAgain => 'La soumission a échoué. Veuillez réessayer.';
+  String get submissionFailedPleaseTryAgain =>
+      'La soumission a échoué. Veuillez réessayer.';
 
   @override
   String get submittingForm => 'Soumission du formulaire...';
 
   @override
-  String get almostThereProcessingYourInformation => 'Presque là ! Traitement de vos informations...';
+  String get almostThereProcessingYourInformation =>
+      'Presque là ! Traitement de vos informations...';
 
   @override
   String get finalizingYourSubmission => 'Finalisation de votre soumission...';
@@ -348,10 +367,12 @@ class AppLocalizationsFr extends AppLocalizations {
   String get submissionSuccessful => 'Soumission réussie !';
 
   @override
-  String get yourFormHasBeenSubmittedSuccessfully => 'Votre formulaire a été soumis avec succès.';
+  String get yourFormHasBeenSubmittedSuccessfully =>
+      'Votre formulaire a été soumis avec succès.';
 
   @override
-  String get youWillReceiveAConfirmationEmailShortly => 'Vous recevrez un e-mail de confirmation sous peu.';
+  String get youWillReceiveAConfirmationEmailShortly =>
+      'Vous recevrez un e-mail de confirmation sous peu.';
 
   @override
   String get returnToDashboard => 'Retour au tableau de bord';
@@ -360,7 +381,8 @@ class AppLocalizationsFr extends AppLocalizations {
   String get submissionFailed => 'Échec de la soumission';
 
   @override
-  String get pleaseCheckYourInformationAndTryAgain => 'Veuillez vérifier vos informations et réessayer.';
+  String get pleaseCheckYourInformationAndTryAgain =>
+      'Veuillez vérifier vos informations et réessayer.';
 
   @override
   String get tryAgain => 'Réessayer';
@@ -369,7 +391,8 @@ class AppLocalizationsFr extends AppLocalizations {
   String get goBack => 'Retourner';
 
   @override
-  String get errorLoadingApplicationForm => 'Erreur lors du chargement du formulaire de demande';
+  String get errorLoadingApplicationForm =>
+      'Erreur lors du chargement du formulaire de demande';
 
   @override
   String get selectApplicationForm => 'Sélectionner le formulaire de demande';
@@ -396,7 +419,8 @@ class AppLocalizationsFr extends AppLocalizations {
   String get gettingAllSchoolApplications => 'Getting all school applications';
 
   @override
-  String get errorGettingApplicationsAttempts => 'Error getting applications attempts';
+  String get errorGettingApplicationsAttempts =>
+      'Error getting applications attempts';
 
   @override
   String get applicationAccepted => 'Application accepted.';
