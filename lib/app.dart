@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:ins/theme.dart';
+import 'package:ins/pages/home.dart';
 
 class ISApp extends StatelessWidget {
   const ISApp({super.key});
@@ -7,8 +9,8 @@ class ISApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'IS',
-      theme: ThemeData(),
-      home: Center(child: Text("Hello RB")),
+      theme: themeManager.getTheme(),
+      home: getPage(),
     );
   }
 }
