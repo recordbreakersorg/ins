@@ -1,37 +1,37 @@
 {
-  "name": "Intranet of Schools",
-  "short_name": "IS",
-  "start_url": ".",
-  "display": "standalone",
-  "background_color": "#5C8DC5",
-  "theme_color": "#5C8DC5",
-  "version": "1.0.0",
-  "omnibox": "is",
-  "description": "The Intranet of Schools.",
-  "orientation": "portrait-primary",
-  "prefer_related_applications": false,
-  "icons": [
-    {
-      "src": "icons/Icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png"
-    },
-    {
-      "src": "icons/Icon-512.png",
-      "sizes": "512x512",
-      "type": "image/png"
-    },
-    {
-      "src": "icons/Icon-maskable-192.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "maskable"
-    },
-    {
-      "src": "icons/Icon-maskable-512.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "maskable"
-    }
-  ]
+    "name": "Intranet of Schools",
+    "short_name": "IS",
+    "start_url": ".",
+    "display": "standalone",
+    "background_color": "#909EAE",
+    "theme_color": "#5C8DC5",
+    "version": "1.0.0",
+    "omnibox": "is",
+    "description": "The Intranet of Schools.",
+    "orientation": "portrait-primary",
+    "prefer_related_applications": false,
+    "icons": [
+        {
+            "src": "icons/Icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "icons/Icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        },
+        {
+            "src": "icons/Icon-maskable-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "maskable"
+        },
+        {
+            "src": "icons/Icon-maskable-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "maskable"
+        }
+    ]
 }
