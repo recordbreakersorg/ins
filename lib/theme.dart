@@ -18,16 +18,16 @@ Color darken(Color color, [double amount = .1]) {
 
 const List<Color> harbourHazePalette = [
   Color(
-    0xFF909EAE,
+    0xFF909EAE, // #909EAE
   ), // sage (Cool Grayish Blue/Green) - Good for secondary, backgrounds, muted accents
   Color(
-    0xFF5C8DC5,
+    0xFF5C8DC5, // #5C8DC5
   ), // blue (Moderate, slightly desaturated Blue) - Good for primary
   Color(
-    0xFFAD9E90,
+    0xFFAD9E90, // #AD9E90
   ), // brightGrayBrown (Light, warm Gray/Beige) - Good for surfaces, containers
   Color(
-    0xFF736F60,
+    0xFF736F60, // #736F60
   ), // brown (Muted, earthy Brown) - Good for text, outlines, darker accents
 ];
 final Color hhSage = harbourHazePalette[0];
