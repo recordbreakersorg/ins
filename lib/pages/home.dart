@@ -17,21 +17,12 @@ Widget getPage() {
           switchInterval: Duration(seconds: 3),
         );
       } else if (snapshot.hasData) {
-        //final appState = snapshot.data!;
-        return Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text('Welcome to the App!'),
-              ElevatedButton(
-                onPressed: () {
-                  // Navigate to home page or perform some action
-                },
-                child: const Text('Go to Home Page'),
-              ),
-            ],
-          ),
-        );
+        final appState = snapshot.data!;
+        if (appState.session == null) {
+          return const WelcomePage();
+        } else {
+          return const Center(child: Text('Home Page Placeholder'));
+        }
       } else {
         return Center(child: Text('Error: ${snapshot.error}'));
       }

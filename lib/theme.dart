@@ -63,7 +63,7 @@ ThemeData _buildHarbourHazeTheme() {
 
     primary: primaryColor,
     onPrimary: onPrimaryColor,
-    primaryContainer: lighten(primaryColor, 0.3),
+    primaryContainer: lighten(primaryColor, 0.5),
     onPrimaryContainer: darken(
       primaryColor,
       0.3,
@@ -87,8 +87,10 @@ ThemeData _buildHarbourHazeTheme() {
     surface: surfaceColor, // Main surfaces like cards, dialogs
     onSurface: onSurfaceColor, // Text on surface
 
-    surfaceContainerHighest:
-        hhBrightGrayBrown, // For elements like Card backgrounds, chip backgrounds
+    surfaceContainerHighest: lighten(
+      hhBrightGrayBrown,
+      0.3,
+    ), // For elements like Card backgrounds, chip backgrounds
     onSurfaceVariant: hhBrown, // Text on surfaceVariant
 
     outline: hhBrown.withAlpha(128),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ins/pages/sign/signup/launcher.dart';
 
 class WelcomePage extends StatelessWidget {
   const WelcomePage({super.key});
@@ -8,15 +9,48 @@ class WelcomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('Welcome')),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text('Welcome to the App!'),
-            ElevatedButton(
-              onPressed: () {},
-              child: const Text('Go to Home Page'),
-            ),
-          ],
+        child: SizedBox(
+          width: 300,
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CircleAvatar(
+                    backgroundImage: AssetImage('assets/icon/is.png'),
+                    radius: 100,
+                  ),
+                ],
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      FilledButton.tonal(
+                        onPressed: () {},
+                        child: Text("Connect account"),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 150),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      FilledButton.tonal(
+                        onPressed: () {
+                          launchSignupAssistant(context);
+                        },
+                        child: Text("Create account"),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
