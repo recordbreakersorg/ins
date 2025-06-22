@@ -1,0 +1,36 @@
+import 'model.dart';
+import 'user.dart';
+
+class Session extends Model {
+  final int id;
+  final int userId;
+  final DateTime createdAt;
+  final String token;
+  Session({
+    required this.id,
+    required this.userId,
+    required this.createdAt,
+    required this.token,
+  });
+  @override
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'userId': userId,
+      'createdAt': createdAt.toIso8601String(),
+      'token': token,
+    };
+  }
+
+  factory Session.fromJson(Map<String, dynamic> json) {
+    return Session(
+      id: json['id'] as int,
+      userId: json['userId'] as int,
+      createdAt: DateTime.parse(json['createdAt'] as String),
+      token: json['token'] as String,
+    );
+  }
+  Future<User> getUser() {
+    return User.getByID(userId);
+  }
+}
