@@ -9,6 +9,7 @@ class AppState {
   final models.User? user;
   const AppState({this.session, this.user});
   static Future<AppState> load() async {
+    await Future.delayed(Duration(seconds: 5));
     final prefs = await SharedPreferences.getInstance();
     final appStateJson = prefs.getString(appStateKey);
     if (appStateJson != null) {

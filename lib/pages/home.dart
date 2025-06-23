@@ -8,13 +8,18 @@ Widget getPage() {
     future: AppState.load(),
     builder: (context, snapshot) {
       if (snapshot.connectionState == ConnectionState.waiting) {
-        return const LoadingWidget(
-          messages: [
-            "Loading app state...",
-            "Please wait...",
-            "Almost there...",
-          ],
-          switchInterval: Duration(seconds: 3),
+        return const Scaffold(
+          body: LoadingWidget(
+            messages: [
+              "Loading app state...",
+              "Verifying user details...",
+              "Getting permissions from your schools..",
+              "Verifying the age on your birth certificate...",
+              "Please wait...",
+              "Almost there...",
+            ],
+            switchInterval: Duration(seconds: 1),
+          ),
         );
       } else if (snapshot.hasData) {
         final appState = snapshot.data!;

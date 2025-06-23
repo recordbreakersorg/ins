@@ -19,7 +19,7 @@ class WelcomePage extends StatelessWidget {
                 children: [
                   CircleAvatar(
                     backgroundImage: AssetImage('assets/icon/is.png'),
-                    radius: 100,
+                    radius: 150,
                   ),
                 ],
               ),
@@ -35,7 +35,7 @@ class WelcomePage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(height: 150),
+                  SizedBox(height: 325),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [

@@ -12,17 +12,24 @@ Future<Map<String, dynamic>> query(
   Map<String, dynamic> data,
   models.Session? session,
 ) async {
-  final response = await http.post(
-    Uri.parse("${getBackendBase()}/api/$url"),
-    body: data,
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-      if (session != null) ...{
-        'session-token': session.token,
-        'session-id': session.id.toString(),
+  late http.Response response;
+  try {
+    response = await http.post(
+      Uri.parse("${getBackendBase()}/api/$url"),
+      body: data,
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+        if (session != null) ...{
+          'session-token': session.token,
+          'session-id': session.id.toString(),
+        },
       },
-    },
-  );
+    );
+  } catch (e) {
+    throw Exception(
+      'Could not connect to backend, check your internet connection.',
+    );
+  }
   if (response.statusCode == 200) {
     return jsonDecode(response.body);
   } else {
