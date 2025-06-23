@@ -2,11 +2,13 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:ins/animations/page/slide.dart';
 import 'package:ins/models.dart' as models;
 import 'package:ins/utils/username.dart';
 
 import 'base.dart';
 import 'form.dart';
+import 'extlinked.dart';
 
 class NamePasswordPage extends StatefulWidget {
   final SignupForm form;
@@ -42,12 +44,6 @@ class _NamePasswordPageState extends State<NamePasswordPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 20),
-              Text(
-                "Choose a name",
-                style: Theme.of(context).textTheme.headlineLarge,
-              ),
-              const SizedBox(height: 30),
               TextField(
                 controller: _nameController,
                 decoration: const InputDecoration(
@@ -107,11 +103,6 @@ class _NamePasswordPageState extends State<NamePasswordPage> {
                 },
               ),
 
-              const SizedBox(height: 40),
-              Text(
-                "And a password",
-                style: Theme.of(context).textTheme.headlineLarge,
-              ),
               const SizedBox(height: 30),
               TextField(
                 controller: _passwordController,
@@ -181,11 +172,7 @@ class _NamePasswordPageState extends State<NamePasswordPage> {
       showNextButton: true,
       next: !(_isNameValid && _isPasswordValid && _arePasswordMatching)
           ? null
-          : () {
-              //Navigator.of(
-              //  context,
-              //).push(MaterialPageRoute(builder: (context) => null));
-            },
+          : () => _next(context),
     );
   }
 
@@ -302,5 +289,14 @@ class _NamePasswordPageState extends State<NamePasswordPage> {
       );
     }
     return null;
+  }
+
+  void _next(BuildContext context) {
+    widget.form.fullname = _nameController.text;
+    widget.form.username = _usernameController.text;
+    widget.form.password = _passwordController.text;
+    Navigator.of(
+      context,
+    ).push(SlidePageRoute(child: ExtraLinkedPage(form: widget.form)));
   }
 }

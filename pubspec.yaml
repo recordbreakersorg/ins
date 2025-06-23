@@ -38,6 +38,7 @@ dependencies:
   flutter_launcher_icons: ^0.14.4
   cached_network_image: ^3.4.1
   http: ^1.4.0
+  intl_phone_number_input: ^0.7.4
 
 dev_dependencies:
   flutter_test:

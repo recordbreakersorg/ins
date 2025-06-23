@@ -5,9 +5,9 @@ import 'dart:convert';
 const appStateKey = "app-state";
 
 class AppState {
-  final models.Session? session;
-  final models.User? user;
-  const AppState({this.session, this.user});
+  models.Session? session;
+  models.User? user;
+  AppState({this.session, this.user});
   static Future<AppState> load() async {
     await Future.delayed(Duration(seconds: 5));
     final prefs = await SharedPreferences.getInstance();
