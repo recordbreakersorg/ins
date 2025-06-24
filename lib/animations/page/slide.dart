@@ -40,8 +40,10 @@ class SlidePageRoute extends PageRouteBuilder {
                    beginOffset = Offset(-1, 0);
                    break;
                }
+               final endOffset = Offset(-beginOffset.dx, -beginOffset.dy);
 
                final tween = Tween(begin: beginOffset, end: Offset.zero);
+               final previousTween = Tween(begin: Offset.zero, end: endOffset);
                final curvedAnimation = CurvedAnimation(
                  parent: animation,
                  curve: Curves.easeInOut, // Choose your curve

@@ -32,24 +32,28 @@ class SignupAssistantBase extends StatelessWidget {
       extendBodyBehindAppBar: true, // Allow body to extend behind AppBar
       body: Stack(
         children: [
-          // 1. Background Image
-          Positioned.fill(
-            child: Image.asset(
-              "assets/icon/is-transparent-crop.png", // Ensure this path is correct
-              fit: BoxFit.cover,
-              errorBuilder: (context, error, stackTrace) {
-                // Fallback if image fails to load
-                return Container(
-                  color: Theme.of(context).colorScheme.secondary,
-                );
-              },
-            ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: EdgeInsetsGeometry.all(100),
+                child: Image.asset(
+                  "assets/icon/is-transparent-crop.png", // Ensure this path is correct
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) {
+                    // Fallback if image fails to load
+                    return Container(
+                      color: Theme.of(context).colorScheme.secondary,
+                    );
+                  },
+                ),
+              ),
+            ],
           ),
 
-          // 2. Blur Overlay
           Positioned.fill(
             child: BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+              filter: ImageFilter.blur(sigmaX: 20, sigmaY: 15),
               child: Container(
                 // Add a subtle tint to the blur for better text contrast if needed
                 color: Colors.black.withOpacity(0.1),
@@ -69,11 +73,7 @@ class SignupAssistantBase extends StatelessWidget {
                   return Row(
                     children: [
                       // Left pane (can be empty, show another graphic, or branding)
-                      const Expanded(
-                        flex: 1, // Adjust flex to change proportions
-                        child:
-                            SizedBox(), // This will show the blurred background
-                      ),
+                      Expanded(flex: 1, child: _buildLeftPane(context)),
                       // Right pane (form content)
                       Expanded(
                         flex: 1, // Adjust flex
@@ -132,6 +132,51 @@ class SignupAssistantBase extends StatelessWidget {
                 ],
               ],
             ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildLeftPane(BuildContext context) {
+    return SizedBox(
+      height: 470,
+      width: 400,
+      child: Card(
+        margin: EdgeInsets.zero,
+        shape: RoundedSuperellipseBorder(
+          borderRadius: BorderRadius.only(
+            topRight: Radius.circular(5),
+            bottomRight: Radius.circular(5),
+          ),
+        ),
+        color: Theme.of(context).colorScheme.primaryContainer.withAlpha(200),
+        child: Padding(
+          padding: EdgeInsets.symmetric(vertical: 40, horizontal: 30),
+          child: Column(
+            children: [
+              Center(
+                child: Column(
+                  children: [
+                    Text(
+                      "Welcome to IS",
+                      style: Theme.of(context).textTheme.displayLarge,
+                    ),
+                    const SizedBox(height: 30),
+                    Text(
+                      " Empowering connections, empowering futures ",
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                        color: Theme.of(
+                          context,
+                        ).colorScheme.onSecondaryContainer.withAlpha(128),
+                        fontStyle: FontStyle.italic,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
         ),
       ),

@@ -36,3 +36,9 @@ Future<Map<String, dynamic>> query(
     throw Exception('Failed to load data from backend(Invalid status code)');
   }
 }
+
+class Status {
+  static const notFound = -5;
+  static const error = -1;
+  static const ok = 0;
+}

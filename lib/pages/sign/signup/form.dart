@@ -8,8 +8,23 @@ class SignupForm {
   String? fullname;
   String? password;
   String? phone;
-  Future<SignupFormSubmitResult> submit() {
-    throw "Error signin you up";
+  Future<SignupFormSubmitResult> submit() async {
+    final result = await backend.query("signup", {
+      "username": username,
+      "email": email,
+      "fullname": fullname,
+      "password": password,
+      "phone": phone,
+    }, null);
+    if (result["status"] < 0) {
+      throw result["message"];
+    }
+    return SignupFormSubmitResult(
+      session: models.Session.fromJson(
+        result["session"] as Map<String, dynamic>,
+      ),
+      user: models.User.fromJson(result["user"] as Map<String, dynamic>),
+    );
   }
 }
 

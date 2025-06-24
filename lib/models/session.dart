@@ -1,12 +1,12 @@
 import 'model.dart';
 import 'user.dart';
 
-class Session extends Model {
+class Session implements Model {
   final int id;
   final int userId;
   final DateTime createdAt;
   final String token;
-  Session({
+  const Session({
     required this.id,
     required this.userId,
     required this.createdAt,
@@ -30,7 +30,7 @@ class Session extends Model {
       token: json['token'] as String,
     );
   }
-  Future<User> getUser() {
-    return User.getByID(userId);
+  Future<User> getUser(Session? session) {
+    return User.getByID(session, userId);
   }
 }

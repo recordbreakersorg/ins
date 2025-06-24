@@ -3,6 +3,8 @@ import 'form.dart';
 import 'base.dart';
 import 'package:ins/utils/email.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
+import 'submit.dart';
+import 'package:ins/animations/page/slide.dart';
 
 class ExtraLinkedPage extends StatefulWidget {
   final SignupForm form;
@@ -140,5 +142,8 @@ class _ExtraLinkedPageState extends State<ExtraLinkedPage> {
     if (_phoneController.text.isNotEmpty) {
       widget.form.phone = _phoneController.text;
     }
+    Navigator.of(
+      context,
+    ).push(SlidePageRoute(child: SubmitingPage(form: widget.form)));
   }
 }

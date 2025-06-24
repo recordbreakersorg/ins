@@ -131,9 +131,6 @@ class _NamePasswordPageState extends State<NamePasswordPage> {
                 autofocus: true,
                 keyboardType: TextInputType.visiblePassword,
                 textCapitalization: TextCapitalization.none,
-                inputFormatters: [
-                  FilteringTextInputFormatter.deny(RegExp(r'\s')),
-                ],
               ),
               const SizedBox(height: 20),
               TextField(
@@ -160,9 +157,6 @@ class _NamePasswordPageState extends State<NamePasswordPage> {
                 autofocus: true,
                 keyboardType: TextInputType.visiblePassword,
                 textCapitalization: TextCapitalization.none,
-                inputFormatters: [
-                  FilteringTextInputFormatter.deny(RegExp(r'\s')),
-                ],
               ),
             ],
           ),
