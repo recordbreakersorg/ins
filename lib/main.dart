@@ -4,9 +4,10 @@ import 'package:ins/theme.dart' as theme;
 import 'package:ins/locale.dart' as locale;
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   try {
     await theme.init();
-    await locale.init();
+    locale.init();
   } catch (e) {
     // nothing
   }

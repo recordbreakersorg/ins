@@ -25,5 +25,6 @@
   "retry": "Reessayer",
   "accountCreatedSuccesfuly": "Compte cree avec succes",
   "openDashboard": "Ouvrir le tableaux de bord",
-  "waitingMessages": "Nous ourons bientot fini...|Attendez encore un peu...|Tout ce passe bien...|...|Un peu plus de temps...|Quelques instants d'attente..."
+  "waitingMessages": "Nous ourons bientot fini...|Attendez encore un peu...|Tout ce passe bien...|...|Un peu plus de temps...|Quelques instants d'attente...",
+  "continueGt": "Continuer >"
 }

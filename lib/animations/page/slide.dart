@@ -8,7 +8,7 @@ class SlidePageRoute extends PageRouteBuilder {
   SlidePageRoute({
     super.settings,
     required this.child,
-    this.duration = const Duration(milliseconds: 400),
+    this.duration = const Duration(milliseconds: 100),
     this.direction = AxisDirection.left,
   }) : super(
          pageBuilder:

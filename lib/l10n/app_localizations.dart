@@ -259,6 +259,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'We\'re getting this done...|Please wait a little more...|Things are going as expected...|...|Wait once more...|A few moments...'**
   String get waitingMessages;
+
+  /// No description provided for @continueGt.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue >'**
+  String get continueGt;
 }
 
 class _AppLocalizationsDelegate

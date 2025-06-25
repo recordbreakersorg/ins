@@ -1,13 +1,14 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:ins/l10n/app_localizations.dart';
+import 'package:ins/widgets/locale_chooser.dart';
 
 class SignupAssistantBase extends StatelessWidget {
   final Widget title;
   final Widget body;
   final Function()? next;
   final bool showNextButton;
-  final String nextText;
+  final String? nextText;
 
   const SignupAssistantBase({
     super.key,
@@ -15,7 +16,7 @@ class SignupAssistantBase extends StatelessWidget {
     required this.body,
     this.showNextButton = false,
     this.next,
-    this.nextText = "Continue >",
+    this.nextText,
   });
 
   // Define a breakpoint for wide screens
@@ -29,6 +30,7 @@ class SignupAssistantBase extends StatelessWidget {
         leading: const BackButton(),
         backgroundColor: Colors.transparent, // Make AppBar transparent
         elevation: 0, // No shadow for AppBar
+        actions: const [LocaleChooserWidget(), SizedBox(width: 30)],
       ),
       extendBodyBehindAppBar: true, // Allow body to extend behind AppBar
       body: Stack(
@@ -105,7 +107,7 @@ class SignupAssistantBase extends StatelessWidget {
         elevation: 8.0,
         borderRadius: BorderRadius.circular(16.0),
         // Make card background slightly transparent to blend with blurred background
-        color: Theme.of(context).colorScheme.surface.withOpacity(0.85),
+        color: Theme.of(context).colorScheme.surface.withAlpha(200),
         child: SingleChildScrollView(
           // Allows content to scroll if it's too long
           padding: const EdgeInsets.all(24.0),
@@ -128,7 +130,7 @@ class SignupAssistantBase extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(vertical: 16.0),
                       textStyle: Theme.of(context).textTheme.labelLarge,
                     ),
-                    child: Text(nextText),
+                    child: Text(AppLocalizations.of(context)!.continueGt),
                   ),
                 ],
               ],

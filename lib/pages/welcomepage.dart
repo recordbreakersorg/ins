@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ins/l10n/app_localizations.dart';
 import 'package:ins/pages/sign/signup/launcher.dart';
+import 'package:ins/widgets/locale_chooser.dart';
 
 class WelcomePage extends StatelessWidget {
   const WelcomePage({super.key});
@@ -11,8 +12,6 @@ class WelcomePage extends StatelessWidget {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
     final screenWidth = MediaQuery.of(context).size.width;
 
-    // Responsive radius for the CircleAvatar
-    // Clamped between a min and max radius for better control and appearance.
     final double avatarRadius = (screenWidth * 0.22).clamp(70.0, 110.0);
 
     return Scaffold(
@@ -20,6 +19,7 @@ class WelcomePage extends StatelessWidget {
         title: Text(AppLocalizations.of(context)!.welcomeExcl),
         backgroundColor: Colors.transparent,
         elevation: 0,
+        actions: const [LocaleChooserWidget(), SizedBox(width: 20)],
       ),
       body: SafeArea(
         child: Center(

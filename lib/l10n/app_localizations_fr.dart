@@ -97,4 +97,7 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get waitingMessages =>
       'Nous ourons bientot fini...|Attendez encore un peu...|Tout ce passe bien...|...|Un peu plus de temps...|Quelques instants d\'attente...';
+
+  @override
+  String get continueGt => 'Continuer >';
 }

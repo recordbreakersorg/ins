@@ -25,5 +25,6 @@
   "retry": "Retry",
   "accountCreatedSuccesfuly": "Account created succesfuly",
   "openDashboard": "Open dashboard",
-  "waitingMessages": "We're getting this done...|Please wait a little more...|Things are going as expected...|...|Wait once more...|A few moments..."
+  "waitingMessages": "We're getting this done...|Please wait a little more...|Things are going as expected...|...|Wait once more...|A few moments...",
+  "continueGt": "Continue >"
 }

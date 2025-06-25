@@ -94,4 +94,7 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get waitingMessages =>
       'We\'re getting this done...|Please wait a little more...|Things are going as expected...|...|Wait once more...|A few moments...';
+
+  @override
+  String get continueGt => 'Continue >';
 }
