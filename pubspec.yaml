@@ -1,5 +1,5 @@
 name: ins
-description: "A new Flutter project."
+description: "The intranet of schools."
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
