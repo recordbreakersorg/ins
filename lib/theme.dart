@@ -384,3 +384,7 @@ class ThemeManager with ChangeNotifier {
 }
 
 final themeManager = ThemeManager();
+
+Future<void> init() async {
+  themeManager.initialize();
+}
