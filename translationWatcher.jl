@@ -10,13 +10,13 @@ end
 function checktimer()::Channel{Nothing}
   Channel{Nothing}() do channel
     while true
-      sleep(5)
+      sleep(10)
       put!(channel, nothing)
     end
   end
 end
 function rebuildLocalizations()
-  run(`flutter pub get`)
+  run(`flutter gen-l10n`)
 end
 function watchchanges()::Channel{String}
   println("Watching for changes...")

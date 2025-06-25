@@ -1,6 +1,29 @@
 {
-  "helloWorld": "Hello World!",
-  "@helloWorld": {
-    "description": "The conventional newborn programmer greeting"
-  }
+  "homeLoadingMessages": "Loading app state...|Verifying user details...|Getting permissions from your schools..|Verifying the age on your birth certificate...|Please wait...|Almost there...",
+  "welcomeExcl": "Welcome!",
+  "welcomeToIS": "Welcome to IS",
+  "welcomeConnectOrCreateAccount": "Connect an existing account or create a new one to embark on your journey with us",
+  "connectAccount": "Connect account",
+  "createAccount": "Create an account",
+  "sloganShort": "Empowering connections, empowering futures",
+  "optionalInformations": "Optional information",
+  "emailAddress": "Email address",
+  "phoneNumber": "Phone number",
+  "signupAssistant_phoneNumberError": "Phone number should be 9 digits long (without country code)",
+  "addEmailaoPhoneNumber": "Add email and/or phone number",
+  "fullName": "Full name",
+  "username": "Username",
+  "usernameDesc": "A short public name visible by others",
+  "password": "Password",
+  "reenterPassword": "Reenter password",
+  "loginInformations": "Login information",
+  "passwordsDoNotMatch": "Password do not match",
+  "passwordShouldHaveAtleast8Characters": "Password should have atleast 8 characters length",
+  "usernameMustHaveBetween4And20Characters": "Username must have between 3 and 20 characters",
+  "thisUsernameIsAlreadyTaken": "This username is already taken",
+  "creatingYourAccount": "Creating you account",
+  "retry": "Retry",
+  "accountCreatedSuccesfuly": "Account created succesfuly",
+  "openDashboard": "Open dashboard",
+  "waitingMessages": "We're getting this done...|Please wait a little more...|Things are going as expected...|...|Wait once more...|A few moments..."
 }

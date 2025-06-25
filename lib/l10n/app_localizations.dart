@@ -98,11 +98,167 @@ abstract class AppLocalizations {
     Locale('fr'),
   ];
 
-  /// The conventional newborn programmer greeting
+  /// No description provided for @homeLoadingMessages.
   ///
   /// In en, this message translates to:
-  /// **'Hello World!'**
-  String get helloWorld;
+  /// **'Loading app state...|Verifying user details...|Getting permissions from your schools..|Verifying the age on your birth certificate...|Please wait...|Almost there...'**
+  String get homeLoadingMessages;
+
+  /// No description provided for @welcomeExcl.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome!'**
+  String get welcomeExcl;
+
+  /// No description provided for @welcomeToIS.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome to IS'**
+  String get welcomeToIS;
+
+  /// No description provided for @welcomeConnectOrCreateAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Connect an existing account or create a new one to embark on your journey with us'**
+  String get welcomeConnectOrCreateAccount;
+
+  /// No description provided for @connectAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Connect account'**
+  String get connectAccount;
+
+  /// No description provided for @createAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Create an account'**
+  String get createAccount;
+
+  /// No description provided for @sloganShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Empowering connections, empowering futures'**
+  String get sloganShort;
+
+  /// No description provided for @optionalInformations.
+  ///
+  /// In en, this message translates to:
+  /// **'Optional information'**
+  String get optionalInformations;
+
+  /// No description provided for @emailAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'Email address'**
+  String get emailAddress;
+
+  /// No description provided for @phoneNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone number'**
+  String get phoneNumber;
+
+  /// No description provided for @signupAssistant_phoneNumberError.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone number should be 9 digits long (without country code)'**
+  String get signupAssistant_phoneNumberError;
+
+  /// No description provided for @addEmailaoPhoneNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Add email and/or phone number'**
+  String get addEmailaoPhoneNumber;
+
+  /// No description provided for @fullName.
+  ///
+  /// In en, this message translates to:
+  /// **'Full name'**
+  String get fullName;
+
+  /// No description provided for @username.
+  ///
+  /// In en, this message translates to:
+  /// **'Username'**
+  String get username;
+
+  /// No description provided for @usernameDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'A short public name visible by others'**
+  String get usernameDesc;
+
+  /// No description provided for @password.
+  ///
+  /// In en, this message translates to:
+  /// **'Password'**
+  String get password;
+
+  /// No description provided for @reenterPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Reenter password'**
+  String get reenterPassword;
+
+  /// No description provided for @loginInformations.
+  ///
+  /// In en, this message translates to:
+  /// **'Login information'**
+  String get loginInformations;
+
+  /// No description provided for @passwordsDoNotMatch.
+  ///
+  /// In en, this message translates to:
+  /// **'Password do not match'**
+  String get passwordsDoNotMatch;
+
+  /// No description provided for @passwordShouldHaveAtleast8Characters.
+  ///
+  /// In en, this message translates to:
+  /// **'Password should have atleast 8 characters length'**
+  String get passwordShouldHaveAtleast8Characters;
+
+  /// No description provided for @usernameMustHaveBetween4And20Characters.
+  ///
+  /// In en, this message translates to:
+  /// **'Username must have between 3 and 20 characters'**
+  String get usernameMustHaveBetween4And20Characters;
+
+  /// No description provided for @thisUsernameIsAlreadyTaken.
+  ///
+  /// In en, this message translates to:
+  /// **'This username is already taken'**
+  String get thisUsernameIsAlreadyTaken;
+
+  /// No description provided for @creatingYourAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Creating you account'**
+  String get creatingYourAccount;
+
+  /// No description provided for @retry.
+  ///
+  /// In en, this message translates to:
+  /// **'Retry'**
+  String get retry;
+
+  /// No description provided for @accountCreatedSuccesfuly.
+  ///
+  /// In en, this message translates to:
+  /// **'Account created succesfuly'**
+  String get accountCreatedSuccesfuly;
+
+  /// No description provided for @openDashboard.
+  ///
+  /// In en, this message translates to:
+  /// **'Open dashboard'**
+  String get openDashboard;
+
+  /// No description provided for @waitingMessages.
+  ///
+  /// In en, this message translates to:
+  /// **'We\'re getting this done...|Please wait a little more...|Things are going as expected...|...|Wait once more...|A few moments...'**
+  String get waitingMessages;
 }
 
 class _AppLocalizationsDelegate

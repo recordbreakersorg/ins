@@ -2,22 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:ins/appstate.dart';
 import 'package:ins/widgets/loading.dart';
 import 'welcomepage.dart';
+import 'package:ins/l10n/app_localizations.dart';
 
 Widget getPage() {
   return FutureBuilder<AppState>(
     future: AppState.load(),
     builder: (context, snapshot) {
       if (snapshot.connectionState == ConnectionState.waiting) {
-        return const Scaffold(
+        return Scaffold(
           body: LoadingWidget(
-            messages: [
-              "Loading app state...",
-              "Verifying user details...",
-              "Getting permissions from your schools..",
-              "Verifying the age on your birth certificate...",
-              "Please wait...",
-              "Almost there...",
-            ],
+            messages: AppLocalizations.of(
+              context,
+            )!.homeLoadingMessages.split("|"),
             switchInterval: Duration(seconds: 1),
           ),
         );

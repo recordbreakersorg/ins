@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ins/l10n/app_localizations.dart';
 import 'package:ins/pages/sign/signup/launcher.dart';
 
 class WelcomePage extends StatelessWidget {
@@ -16,7 +17,7 @@ class WelcomePage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Welcome'),
+        title: Text(AppLocalizations.of(context)!.welcomeExcl),
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
@@ -44,7 +45,7 @@ class WelcomePage extends StatelessWidget {
                 const SizedBox(height: 32.0),
 
                 Text(
-                  "Welcome to IS!",
+                  AppLocalizations.of(context)!.welcomeToIS,
                   style: textTheme.headlineMedium?.copyWith(
                     fontWeight: FontWeight.bold,
                     color: colorScheme.primary,
@@ -57,7 +58,7 @@ class WelcomePage extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: Text(
-                    "Connect an existing account or create a new one to embark on your journey with us.",
+                    AppLocalizations.of(context)!.welcomeConnectOrCreateAccount,
                     style: textTheme.bodyLarge?.copyWith(
                       color: colorScheme.onSurfaceVariant,
                     ),
@@ -69,7 +70,7 @@ class WelcomePage extends StatelessWidget {
 
                 _buildWelcomeButton(
                   context: context,
-                  text: "Connect account",
+                  text: AppLocalizations.of(context)!.connectAccount,
                   onPressed: () {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
@@ -86,7 +87,7 @@ class WelcomePage extends StatelessWidget {
 
                 _buildWelcomeButton(
                   context: context,
-                  text: "Create account",
+                  text: AppLocalizations.of(context)!.createAccount,
                   onPressed: () {
                     launchSignupAssistant(context);
                   },

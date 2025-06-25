@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:ins/l10n/app_localizations.dart';
 
 class SignupAssistantBase extends StatelessWidget {
   final Widget title;
@@ -159,12 +160,12 @@ class SignupAssistantBase extends StatelessWidget {
                 child: Column(
                   children: [
                     Text(
-                      "Welcome to IS",
+                      AppLocalizations.of(context)!.welcomeToIS,
                       style: Theme.of(context).textTheme.displayLarge,
                     ),
                     const SizedBox(height: 30),
                     Text(
-                      " Empowering connections, empowering futures ",
+                      AppLocalizations.of(context)!.sloganShort,
                       textAlign: TextAlign.center,
                       style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                         color: Theme.of(

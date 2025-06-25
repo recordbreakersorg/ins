@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ins/l10n/app_localizations.dart';
 import 'package:ins/widgets/imsg.dart';
 import 'form.dart';
 import 'package:ins/widgets/loading.dart';
@@ -9,7 +10,9 @@ class SubmitingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Creating your account")),
+      appBar: AppBar(
+        title: Text(AppLocalizations.of(context)!.creatingYourAccount),
+      ),
       body: FutureBuilder(
         future: form.submit(),
         builder: (context, snapshot) {
@@ -32,7 +35,7 @@ class SubmitingPage extends StatelessWidget {
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
-                    child: Text("Retry"),
+                    child: Text(AppLocalizations.of(context)!.retry),
                   ),
                 ),
               ),
@@ -49,24 +52,21 @@ class SubmitingPage extends StatelessWidget {
                     size: 200,
                     color: Colors.greenAccent,
                   ),
-                  message: Text("Account created succesfully"),
+                  message: Text(
+                    AppLocalizations.of(context)!.accountCreatedSuccesfuly,
+                  ),
                   actions: OutlinedButton(
                     onPressed: () => _openDashboard(context),
-                    child: const Text("Open dashboard"),
+                    child: Text(AppLocalizations.of(context)!.openDashboard),
                   ),
                 ),
               ),
             );
           } else {
             return LoadingWidget(
-              messages: [
-                "Creating your account..",
-                "Adding your preferences..",
-                "Updating our database...",
-                "Putting in your contact information..",
-                "Looking for potential reelatives...",
-                "Generating your dashboard",
-              ],
+              messages: AppLocalizations.of(
+                context,
+              )!.waitingMessages.split("|"),
             );
           }
         },

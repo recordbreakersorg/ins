@@ -5,6 +5,7 @@ import 'package:ins/utils/email.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'submit.dart';
 import 'package:ins/animations/page/slide.dart';
+import 'package:ins/l10n/app_localizations.dart';
 
 class ExtraLinkedPage extends StatefulWidget {
   final SignupForm form;
@@ -33,7 +34,7 @@ class _ExtraLinkedPageState extends State<ExtraLinkedPage> {
             children: [
               const SizedBox(height: 30),
               Text(
-                "Optional information.",
+                AppLocalizations.of(context)!.optionalInformations,
                 style: Theme.of(context).textTheme.headlineLarge,
               ),
               const SizedBox(height: 30),
@@ -41,7 +42,7 @@ class _ExtraLinkedPageState extends State<ExtraLinkedPage> {
                 controller: _emailController,
                 decoration: InputDecoration(
                   prefixIcon: Icon(Icons.person_outline),
-                  labelText: "Email Address",
+                  labelText: AppLocalizations.of(context)!.emailAddress,
                   hintText: 'temexvironie12@ama.co',
                   border: OutlineInputBorder(),
                   suffixIcon: _emailError == null
@@ -87,12 +88,14 @@ class _ExtraLinkedPageState extends State<ExtraLinkedPage> {
                   decimal: true,
                 ),
                 inputDecoration: InputDecoration(
-                  labelText: 'Phone Number',
+                  labelText: AppLocalizations.of(context)!.phoneNumber,
                   border: OutlineInputBorder(),
                   error: _phoneValid
                       ? null
                       : Text(
-                          "Phone number should be 9 digits long (without country code)",
+                          AppLocalizations.of(
+                            context,
+                          )!.signupAssistant_phoneNumberError,
                           style: Theme.of(
                             context,
                           ).textTheme.bodySmall?.copyWith(color: Colors.red),
@@ -104,7 +107,7 @@ class _ExtraLinkedPageState extends State<ExtraLinkedPage> {
           ),
         ),
       ),
-      title: const Text("Add email and/or phone number"),
+      title: Text(AppLocalizations.of(context)!.addEmailaoPhoneNumber),
       showNextButton: true,
       next:
           (_emailError == null || _emailController.text.isEmpty) &&

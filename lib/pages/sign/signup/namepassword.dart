@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ins/animations/page/slide.dart';
+import 'package:ins/l10n/app_localizations.dart';
 import 'package:ins/models.dart' as models;
 import 'package:ins/utils/username.dart';
 
@@ -46,12 +47,11 @@ class _NamePasswordPageState extends State<NamePasswordPage> {
             children: [
               TextField(
                 controller: _nameController,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   prefixIcon: Icon(Icons.person),
-                  labelText: "Full Name",
+                  labelText: AppLocalizations.of(context)!.fullName,
                   hintText: 'Temex Vironie',
                   border: OutlineInputBorder(),
-                  helperText: "Your private name, not shown to others",
                 ),
                 autofocus: true,
                 keyboardType: TextInputType.name,
@@ -66,10 +66,10 @@ class _NamePasswordPageState extends State<NamePasswordPage> {
                 controller: _usernameController,
                 decoration: InputDecoration(
                   prefixIcon: Icon(Icons.person_outline),
-                  labelText: "Username",
+                  labelText: AppLocalizations.of(context)!.username,
                   hintText: 'temexvironie12',
                   border: OutlineInputBorder(),
-                  helperText: "A short, public username for your profile",
+                  helperText: AppLocalizations.of(context)!.usernameDesc,
                   suffixIcon: _isCheckingUsername
                       ? const Padding(
                           padding: EdgeInsets.all(8.0),
@@ -108,7 +108,7 @@ class _NamePasswordPageState extends State<NamePasswordPage> {
                 controller: _passwordController,
                 decoration: InputDecoration(
                   prefixIcon: Icon(Icons.lock),
-                  labelText: "Password",
+                  labelText: AppLocalizations.of(context)!.password,
                   border: const OutlineInputBorder(),
                   error: _buildPasswordError(),
                   suffixIcon: Row(
@@ -137,7 +137,7 @@ class _NamePasswordPageState extends State<NamePasswordPage> {
                 controller: _password2Controller,
                 decoration: InputDecoration(
                   prefixIcon: Icon(Icons.lock),
-                  labelText: "Reenter password",
+                  labelText: AppLocalizations.of(context)!.reenterPassword,
                   border: const OutlineInputBorder(),
                   error: _password2Controller.text.isNotEmpty
                       ? _buildPassword2Error()
@@ -162,7 +162,7 @@ class _NamePasswordPageState extends State<NamePasswordPage> {
           ),
         ),
       ),
-      title: const Text("Profile Setup"),
+      title: Text(AppLocalizations.of(context)!.loginInformations),
       showNextButton: true,
       next: !(_isNameValid && _isPasswordValid && _arePasswordMatching)
           ? null
@@ -231,7 +231,7 @@ class _NamePasswordPageState extends State<NamePasswordPage> {
     if (_password2Controller.text.isEmpty) return null;
     if (!_arePasswordMatching) {
       return Text(
-        "Password do not match",
+        AppLocalizations.of(context)!.passwordsDoNotMatch,
         style: Theme.of(
           context,
         ).textTheme.bodySmall?.copyWith(color: Colors.red),
@@ -244,7 +244,7 @@ class _NamePasswordPageState extends State<NamePasswordPage> {
     if (_passwordController.text.isEmpty) return null;
     if (!_isPasswordValid) {
       return Text(
-        "Password must have atleast 8 characters",
+        AppLocalizations.of(context)!.passwordShouldHaveAtleast8Characters,
         style: Theme.of(
           context,
         ).textTheme.bodySmall?.copyWith(color: Colors.red),
@@ -267,7 +267,7 @@ class _NamePasswordPageState extends State<NamePasswordPage> {
     if (_wasUsernameEdited) {
       if (username.length < 3 || username.length > 20) {
         return Text(
-          "Username must be between 3 and 20 characters",
+          AppLocalizations.of(context)!.usernameMustHaveBetween4And20Characters,
           style: Theme.of(
             context,
           ).textTheme.bodySmall?.copyWith(color: Colors.red),
@@ -276,7 +276,7 @@ class _NamePasswordPageState extends State<NamePasswordPage> {
     }
     if (!_isUserNameAvailable) {
       return Text(
-        "Username is already taken",
+        AppLocalizations.of(context)!.thisUsernameIsAlreadyTaken,
         style: Theme.of(
           context,
         ).textTheme.bodySmall?.copyWith(color: Colors.red),
