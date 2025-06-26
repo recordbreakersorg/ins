@@ -7,6 +7,10 @@ import 'package:ins/locale.dart' as locale_manager; // Aliased
 import 'package:provider/provider.dart';
 import 'package:ins/widgets/loading.dart';
 
+final version = "v1.0.0";
+final versionShort = "v1.0";
+final apiVersion = "v1";
+
 class ISApp extends StatelessWidget {
   const ISApp({super.key});
 
