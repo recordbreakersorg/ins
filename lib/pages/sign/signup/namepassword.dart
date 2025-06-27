@@ -203,16 +203,14 @@ class _NamePasswordPageState extends State<NamePasswordPage> {
 
   Future<void> verifyUsername() async {
     if (_isCheckingUsername || _usernameController.text.isEmpty) {
-      return; // Prevent multiple checks
+      return;
     }
     setState(() {
       _isCheckingUsername = true;
     });
-    await Future.delayed(const Duration(milliseconds: 2000));
+    //await Future.delayed(const Duration(milliseconds: 2000));
     try {
-      final usenameInfo = await models.User.usernameInfo(
-        _usernameController.text,
-      );
+      final usenameInfo = await usernameInfo(_usernameController.text);
       setState(() {
         _isUserNameAvailable = !usenameInfo.isTaken;
         _usernameCheckError = null;

@@ -8,25 +8,44 @@ import 'session.dart';
 class User implements Model {
   final int id;
   final String username;
-  final String email;
+  final String? email;
   final String fullname;
-  final NetImage? profile;
+  final String? profilePicture;
+  final String? phone;
+  final bool phoneVerified;
+  final bool emailVerified;
+  final DateTime? birthdate;
+  final DateTime? joinedDate;
+  final String? bio;
+  final Map<String, dynamic> socialLinks;
   const User({
     required this.id,
     required this.username,
     required this.email,
+    required this.emailVerified,
+    required this.phone,
+    required this.phoneVerified,
     required this.fullname,
-    this.profile,
+    required this.birthdate,
+    required this.joinedDate,
+    required this.profilePicture,
+    required this.bio,
+    required this.socialLinks,
   });
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
       id: json['id'] as int,
       username: json['username'] as String,
-      email: json['email'] as String,
+      email: json['email'] as String?,
+      emailVerified: json['email_verified'] as bool,
       fullname: json['fullname'] as String,
-      profile: json['profile'] != null
-          ? NetImage(url: json['profile'] as String)
-          : null,
+      phone: json['phone'] as String?,
+      phoneVerified: json['phone_verified'] as bool,
+      profilePicture: json['profile_picture'] as String?,
+      birthdate: DateTime.tryParse(json['birthdate'] as String? ?? ""),
+      joinedDate: DateTime.tryParse(json['joined_date'] as String),
+      socialLinks: json['social_links'] as Map<String, dynamic>? ?? {},
+      bio: json['bio'] as String?,
     );
   }
   @override
@@ -35,8 +54,15 @@ class User implements Model {
       "id": id,
       "username": username,
       "email": email,
+      "email_verified": emailVerified,
       "fullname": fullname,
-      "profile": profile?.url,
+      "phone": phone,
+      "phone_verified": phoneVerified,
+      "birthdate": birthdate?.toIso8601String(),
+      "joined_date": joinedDate?.toIso8601String(),
+      "profile_picture": profilePicture,
+      "bio": bio,
+      "social_links": socialLinks,
     };
   }
 
@@ -48,16 +74,6 @@ class User implements Model {
       throw Exception("Failed to get user by ID: ${data["message"]}");
     }
     return User.fromJson(data["user"] as Map<String, dynamic>);
-  }
-
-  static Future<UsernameInfo> usernameInfo(String name) async {
-    final data = await backend.query("v1/username/info", {
-      "username": name,
-    }, null);
-    if (data['status'] < 0) {
-      throw Exception("Failed to check username: ${data['message']}");
-    }
-    return UsernameInfo.fromJson(data['info'] as Map<String, dynamic>);
   }
 
   Future<SchoolUser?> getSchoolUserBySchoolID(Session? session, int schoolId) {
@@ -74,17 +90,5 @@ class User implements Model {
     return (data["users"] as List<Map<String, dynamic>>)
         .map(SchoolUser.fromJson)
         .toList();
-  }
-}
-
-class UsernameInfo {
-  final bool isValid;
-  final bool isTaken;
-  const UsernameInfo({required this.isValid, required this.isTaken});
-  factory UsernameInfo.fromJson(Map<String, dynamic> json) {
-    return UsernameInfo(
-      isValid: json['is_valid'] as bool,
-      isTaken: json['is_taken'] as bool,
-    );
   }
 }

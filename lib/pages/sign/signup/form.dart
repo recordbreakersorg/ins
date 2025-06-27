@@ -9,7 +9,7 @@ class SignupForm {
   String? password;
   String? phone;
   Future<SignupFormSubmitResult> submit() async {
-    final result = await backend.query("signup", {
+    final result = await backend.query("v1/signup", {
       "username": username,
       "email": email,
       "fullname": fullname,

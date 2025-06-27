@@ -16,8 +16,8 @@ class Session implements Model {
   Map<String, dynamic> toJson() {
     return {
       'id': id,
-      'userId': userId,
-      'createdAt': createdAt.toIso8601String(),
+      'user_id': userId,
+      'created_at': createdAt.toIso8601String(),
       'token': token,
     };
   }
@@ -25,8 +25,8 @@ class Session implements Model {
   factory Session.fromJson(Map<String, dynamic> json) {
     return Session(
       id: json['id'] as int,
-      userId: json['userId'] as int,
-      createdAt: DateTime.parse(json['createdAt'] as String),
+      userId: json['user_id'] as int,
+      createdAt: DateTime.parse(json['created_at'] as String),
       token: json['token'] as String,
     );
   }
