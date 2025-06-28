@@ -7,7 +7,9 @@ const appStateKey = "app-state";
 class AppState {
   models.Session? session;
   models.User? user;
-  AppState({this.session, this.user});
+  models.SchoolUser? schoolUser;
+  models.School? school;
+  AppState({this.session, this.user, this.schoolUser, this.school});
   static Future<AppState> load() async {
     final prefs = await SharedPreferences.getInstance();
     final appStateJson = prefs.getString(appStateKey);
@@ -26,11 +28,28 @@ class AppState {
 
   factory AppState.fromJson(Map<String, dynamic> data) {
     return AppState(
-      session: models.Session.fromJson(data["session"] as Map<String, dynamic>),
-      user: models.User.fromJson(data["user"] as Map<String, dynamic>),
+      session: data["session"] != null
+          ? models.Session.fromJson(data["session"] as Map<String, dynamic>)
+          : null,
+      user: data["user"] != null
+          ? models.User.fromJson(data["user"] as Map<String, dynamic>)
+          : null,
+      schoolUser: data["school_user"] != null
+          ? models.SchoolUser.fromJson(
+              data["school_user"] as Map<String, dynamic>,
+            )
+          : null,
+      school: data["school"] != null
+          ? models.School.fromJson(data["school"] as Map<String, dynamic>)
+          : null,
     );
   }
   Map<String, dynamic> toJson() {
-    return {"session": session?.toJson(), "user": user?.toJson()};
+    return {
+      "session": session?.toJson(),
+      "user": user?.toJson(),
+      "school_user": schoolUser?.toJson(),
+      "school": school?.toJson(),
+    };
   }
 }
