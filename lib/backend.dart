@@ -9,7 +9,7 @@ String getBackendBase() {
 
 Future<Map<String, dynamic>> query(
   String url,
-  Map<String, dynamic> data,
+  Map<String, String?> data,
   models.Session? session,
 ) async {
   late http.Response response;
@@ -27,7 +27,7 @@ Future<Map<String, dynamic>> query(
     );
   } catch (e) {
     throw Exception(
-      'Could not connect to backend, check your internet connection.',
+      'Could not connect to backend, check your internet connection. $e',
     );
   }
   if (response.statusCode == 200) {

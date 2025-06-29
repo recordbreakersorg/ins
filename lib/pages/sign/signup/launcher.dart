@@ -6,5 +6,8 @@ import 'package:ins/animations/page/slide.dart';
 void launchSignupAssistant(BuildContext context) {
   SignupForm form = SignupForm();
 
-  Navigator.push(context, SlidePageRoute(child: TermsPage(form: form)));
+  Navigator.push(
+    context,
+    SlidePageRoute(builder: (_) => TermsPage(form: form)),
+  );
 }

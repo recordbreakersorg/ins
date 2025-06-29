@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ins/appstate.dart';
+import 'package:ins/pages/school/explore.dart';
 
 class BlankDashboard extends StatelessWidget {
   final AppState appState;
@@ -39,7 +40,12 @@ class BlankDashboard extends StatelessWidget {
                   text: "Browse Schools",
                   color: Colors.green,
                   onPressed: () {
-                    // TODO: Implement browse schools functionality
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            SchoolExplorePage(appState: appState),
+                      ),
+                    );
                   },
                 ),
               ],

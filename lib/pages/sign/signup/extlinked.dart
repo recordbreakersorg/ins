@@ -147,6 +147,6 @@ class _ExtraLinkedPageState extends State<ExtraLinkedPage> {
     }
     Navigator.of(
       context,
-    ).push(SlidePageRoute(child: SubmitingPage(form: widget.form)));
+    ).push(SlidePageRoute(builder: (_) => SubmitingPage(form: widget.form)));
   }
 }

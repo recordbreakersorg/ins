@@ -41,7 +41,7 @@ class Thread implements Model {
   ) async {
     final response = await backend.query("v1/message/send", {
       "content": content,
-      "thread_id": id,
+      "thread_id": id.toString(),
       if (repliesTo != null) ...{"replies_to": repliesTo.toString()},
     }, session);
     if (response['status'] as int < 0) {

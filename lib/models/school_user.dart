@@ -50,8 +50,8 @@ class SchoolUser implements Model {
     int userId,
   ) async {
     final data = await backend.query("v1/school/getuser", {
-      "user_id": userId,
-      "school_id": userId,
+      "user_id": userId.toString(),
+      "school_id": userId.toString(),
     }, session);
     if ((data["status"] as int) < 0) {
       if ((data["status"] as int) == backend.Status.notFound) {

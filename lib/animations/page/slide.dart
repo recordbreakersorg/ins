@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
 class SlidePageRoute extends PageRouteBuilder {
-  final Widget child;
+  final Function(BuildContext) builder;
   final AxisDirection direction;
   final Duration duration;
 
   SlidePageRoute({
     super.settings,
-    required this.child,
+    required this.builder,
     this.duration = const Duration(milliseconds: 100),
     this.direction = AxisDirection.left,
   }) : super(
@@ -16,7 +16,7 @@ class SlidePageRoute extends PageRouteBuilder {
                BuildContext context,
                Animation<double> animation,
                Animation<double> secondaryAnimation,
-             ) => child,
+             ) => builder(context),
          transitionDuration: duration, // Adjust duration as needed
          transitionsBuilder:
              (

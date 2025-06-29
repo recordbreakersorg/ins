@@ -43,7 +43,9 @@ class Class implements Model {
     );
   }
   static Future<Class> getById(Session? session, int id) async {
-    final data = await backend.query("v1/class/get", {"id": id}, session);
+    final data = await backend.query("v1/class/get", {
+      "id": id.toString(),
+    }, session);
     if (data['status'] as int < 0) {
       throw "Error fetching class with id $id: ${data['message'] as String}";
     }
@@ -52,7 +54,7 @@ class Class implements Model {
 
   Future<List<SchoolUser>> getMembers(Session? session) async {
     final data = await backend.query("v1/class/getmembers", {
-      "class_id": id,
+      "class_id": id.toString(),
     }, session);
     if (data['status'] as int < 0) {
       throw "Error getting members of '$fullname', ${data['message'] as String}";

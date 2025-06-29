@@ -18,7 +18,9 @@ class Chatserver implements Model {
     );
   }
   static Future<Chatserver> getById(Session? session, int id) async {
-    final data = await backend.query("v1/chatserver/get", {"id": id}, session);
+    final data = await backend.query("v1/chatserver/get", {
+      "id": id.toString(),
+    }, session);
     if (data['status'] as int < 0) {
       throw "Error getting charserver $id: ${data['message'] as String}";
     }

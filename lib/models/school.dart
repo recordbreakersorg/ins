@@ -5,6 +5,8 @@ import 'package:ins/backend.dart' as backend;
 import 'session.dart';
 
 class School implements Model {
+  final String? logoUrl;
+  final String? address;
   final int id;
   final String schoolname;
   final String fullname;
@@ -16,6 +18,9 @@ class School implements Model {
     required this.fullname,
     required this.description,
     required this.chatserverId,
+    this.logoUrl =
+        "http://localhost:8123/is.png", //"https://sintranet.vercel.app/is_logo.png",
+    this.address = "Somewhere",
   });
   @override
   Map<String, dynamic> toJson() {
@@ -39,7 +44,9 @@ class School implements Model {
   }
 
   static Future<School> getByID(Session? session, int id) async {
-    final data = await backend.query("school/get", {"id": id}, session);
+    final data = await backend.query("school/get", {
+      "id": id.toString(),
+    }, session);
     if (data["status"] < 0) {
       throw data["message"];
     }
@@ -48,5 +55,28 @@ class School implements Model {
 
   Future<SchoolUser?> getUserById(Session? session, int userId) {
     return SchoolUser.getFromIds(session, id, userId);
+  }
+
+  static Future<List<School>> getAllSchools(
+    Session? session,
+    int offset,
+    int limit,
+  ) async {
+    final response = await backend.query("v1/school/all", {
+      "offset": offset.toString(),
+      "limit": limit.toString(),
+    }, session);
+    if (response['status'] as int < 0) {
+      throw Exception(response['message']);
+    }
+    return response['schools'] != null
+        ? (response['schools'] as List<dynamic>)
+              .map((school) => School.fromJson(school as Map<String, dynamic>))
+              .toList()
+        : [];
+  }
+
+  double computeRating() {
+    return 3.2;
   }
 }

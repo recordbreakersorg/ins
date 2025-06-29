@@ -82,7 +82,7 @@ class User implements Model {
 
   Future<List<SchoolUser>> getSchoolUsers(Session? session) async {
     final data = await backend.query("v1/user/getchoolusers", {
-      "user_id": id,
+      "user_id": id.toString(),
     }, session);
     if (data['status'] as int < 0) {
       throw "Error getting school users ${data['message'] as String}";

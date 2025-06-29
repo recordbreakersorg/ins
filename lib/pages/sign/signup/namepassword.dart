@@ -289,6 +289,6 @@ class _NamePasswordPageState extends State<NamePasswordPage> {
     widget.form.password = _passwordController.text;
     Navigator.of(
       context,
-    ).push(SlidePageRoute(child: ExtraLinkedPage(form: widget.form)));
+    ).push(SlidePageRoute(builder: (_) => ExtraLinkedPage(form: widget.form)));
   }
 }

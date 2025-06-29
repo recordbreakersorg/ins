@@ -43,7 +43,9 @@ class Chatroom implements Model {
   }
 
   static Future<Chatroom> getById(Session? session, int id) async {
-    final data = await backend.query("v1/chatroom/get", {"id": id}, session);
+    final data = await backend.query("v1/chatroom/get", {
+      "id": id.toString(),
+    }, session);
     if (data['status'] as int < 0) {
       throw "Error getting chatroom $id: ${data['message'] as String}";
     }
