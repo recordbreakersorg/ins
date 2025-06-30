@@ -1,10 +1,7 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ins/models.dart' as models;
-import 'package:transparent_image/transparent_image.dart';
 import 'package:ins/appstate.dart';
 
 class SchoolProfilePage extends StatelessWidget {
@@ -20,13 +17,13 @@ class SchoolProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: LayoutBuilder(
         builder: (context, constraints) {
-          if (constraints.maxWidth > 800) {
-            return _buildWideLayout(context);
-          } else {
-            return _buildNarrowLayout(context);
-          }
+          final isWide = constraints.maxWidth > 800;
+          return isWide
+              ? _buildWideLayout(context)
+              : _buildNarrowLayout(context);
         },
       ),
     );
@@ -36,66 +33,76 @@ class SchoolProfilePage extends StatelessWidget {
     return Row(
       children: [
         Expanded(
-          flex: 2,
+          flex: 3,
           child: SingleChildScrollView(
-            padding: const EdgeInsets.all(32),
+            padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 48),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 _buildAppBar(context, onWideLayout: true),
-                const SizedBox(height: 24),
+                const SizedBox(height: 40),
                 _buildSchoolHeader(onWideLayout: true),
-                const SizedBox(height: 24),
-                _buildStatsRow(context),
-                const SizedBox(height: 24),
+                const SizedBox(height: 40),
                 _buildDescription(onWideLayout: true),
-                const SizedBox(height: 32),
-                _buildApplyButton(context),
-                const SizedBox(height: 24),
-                _buildAdditionalInfo(onWideLayout: true),
               ],
             ),
           ),
         ),
-        if (school.logoUrl != null)
-          Expanded(
-            flex: 3,
-            child: FadeInImage.memoryNetwork(
-              placeholder: kTransparentImage,
-              image: school.logoUrl!,
-              fit: BoxFit.cover,
-              height: double.infinity,
-              imageErrorBuilder: (context, error, stackTrace) => Container(
-                color: Colors.grey.shade300,
-                child: const Center(child: Icon(Icons.error)),
-              ),
+        Expanded(
+          flex: 2,
+          child: Container(
+            color: Colors.grey.shade50,
+            padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Text(
+                  "At a Glance",
+                  style: GoogleFonts.poppins(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 24),
+                _buildStatsRow(context, onWideLayout: true),
+                const Divider(height: 48, thickness: 0.5),
+                _buildAdditionalInfo(onWideLayout: true),
+                const Spacer(),
+                _buildApplyButton(context),
+              ],
             ),
           ),
+        ),
       ],
     );
   }
 
   Widget _buildNarrowLayout(BuildContext context) {
-    return Stack(
-      children: [
-        _buildHeroBackground(),
-        _buildScrim(),
-        SafeArea(
-          child: SingleChildScrollView(
+    return CustomScrollView(
+      slivers: [
+        SliverAppBar(
+          expandedHeight: 200.0,
+          backgroundColor: Colors.white,
+          elevation: 0,
+          pinned: true,
+          leading: _buildAppBar(context),
+          flexibleSpace: FlexibleSpaceBar(background: _buildHeroBanner()),
+        ),
+        SliverToBoxAdapter(
+          child: Padding(
+            padding: const EdgeInsets.all(24.0),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                _buildAppBar(context),
-                const SizedBox(height: 24),
                 _buildSchoolHeader(),
-                const SizedBox(height: 24),
+                const SizedBox(height: 32),
                 _buildStatsRow(context),
-                const SizedBox(height: 24),
+                const Divider(height: 48, thickness: 0.5),
                 _buildDescription(),
                 const SizedBox(height: 32),
-                Center(child: _buildApplyButton(context)),
-                const SizedBox(height: 24),
                 _buildAdditionalInfo(),
+                const SizedBox(height: 32),
+                _buildApplyButton(context),
               ],
             ),
           ),
@@ -105,38 +112,37 @@ class SchoolProfilePage extends StatelessWidget {
   }
 
   Widget _buildAdditionalInfo({bool onWideLayout = false}) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24),
-      child: Card(
-        color: onWideLayout
-            ? Colors.grey.shade100
-            : Colors.white.withOpacity(0.85),
-        elevation: onWideLayout ? 0 : 8,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        child: Padding(
-          padding: const EdgeInsets.all(20),
-          child: Column(
-            children: [_buildInfoItem(Icons.location_on, school.address)],
-          ),
+    final content = Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          "Contact Information",
+          style: GoogleFonts.poppins(fontSize: 18, fontWeight: FontWeight.w600),
         ),
-      ),
+        const SizedBox(height: 16),
+        _buildInfoItem(Icons.location_on, school.address),
+      ],
     );
+
+    return onWideLayout
+        ? content
+        : Card(
+            elevation: 0,
+            color: Colors.grey.shade50,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Padding(padding: const EdgeInsets.all(20), child: content),
+          );
   }
 
   Widget _buildAppBar(BuildContext context, {bool onWideLayout = false}) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: Row(
-        children: [
-          IconButton(
-            icon: Icon(
-              Icons.arrow_back,
-              color: onWideLayout ? Colors.black87 : Colors.white,
-            ),
-            onPressed: () => Navigator.pop(context),
-          ),
-        ],
+    return IconButton(
+      icon: Icon(
+        Icons.arrow_back,
+        color: onWideLayout ? Colors.black87 : Colors.black54,
       ),
+      onPressed: () => Navigator.pop(context),
     );
   }
 
@@ -144,9 +150,9 @@ class SchoolProfilePage extends StatelessWidget {
     return FilledButton.icon(
       onPressed: null, // TODO: Implement application logic
       icon: const Icon(Icons.edit_document),
-      label: const Text("Apply"),
+      label: const Text("Apply Now"),
       style: FilledButton.styleFrom(
-        padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+        padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 20),
         textStyle: GoogleFonts.poppins(
           fontSize: 18,
           fontWeight: FontWeight.w600,
@@ -156,24 +162,19 @@ class SchoolProfilePage extends StatelessWidget {
   }
 
   Widget _buildDescription({bool onWideLayout = false}) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24),
-      child: MarkdownBody(
-        data: school.description ?? "No description provided.",
-        styleSheet: MarkdownStyleSheet(
-          p: GoogleFonts.poppins(
-            fontSize: 16,
-            color: onWideLayout
-                ? Colors.black87.withOpacity(0.7)
-                : Colors.white.withOpacity(0.85),
-            height: 1.6,
-          ),
+    return MarkdownBody(
+      data: school.description ?? "No description provided.",
+      styleSheet: MarkdownStyleSheet(
+        p: GoogleFonts.poppins(
+          fontSize: 16,
+          color: Colors.black87.withOpacity(0.7),
+          height: 1.7,
         ),
       ),
     );
   }
 
-  Widget _buildHeroBackground() {
+  Widget _buildHeroBanner() {
     return Hero(
       tag: 'school-bg-${school.id}',
       child: Container(
@@ -182,14 +183,13 @@ class SchoolProfilePage extends StatelessWidget {
               ? DecorationImage(
                   image: NetworkImage(school.logoUrl!),
                   fit: BoxFit.cover,
-                  onError: (error, stackTrace) => {},
+                  colorFilter: ColorFilter.mode(
+                    Colors.black.withOpacity(0.2),
+                    BlendMode.darken,
+                  ),
                 )
               : null,
-          color: Colors.grey.shade400,
-        ),
-        child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
-          child: Container(color: Colors.black.withOpacity(0.1)),
+          color: Colors.grey.shade200,
         ),
       ),
     );
@@ -210,88 +210,71 @@ class SchoolProfilePage extends StatelessWidget {
   }
 
   Widget _buildSchoolHeader({bool onWideLayout = false}) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24),
-      child: Row(
-        children: [
-          Hero(
-            tag: 'school-logo-${school.id}',
-            child: CircleAvatar(
-              radius: onWideLayout ? 60 : 50,
-              backgroundColor: Colors.white,
-              backgroundImage: school.logoUrl != null
-                  ? NetworkImage(school.logoUrl!)
-                  : null,
-              child: school.logoUrl == null
-                  ? Text(
-                      school.schoolname.isNotEmpty ? school.schoolname[0] : 'S',
-                      style: GoogleFonts.poppins(
-                        fontSize: 40,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    )
-                  : null,
-            ),
+    return Row(
+      children: [
+        Hero(
+          tag: 'school-logo-${school.id}',
+          child: CircleAvatar(
+            radius: onWideLayout ? 50 : 40,
+            backgroundColor: Colors.white,
+            backgroundImage: school.logoUrl != null
+                ? NetworkImage(school.logoUrl!)
+                : null,
+            child: school.logoUrl == null
+                ? Text(
+                    school.schoolname.isNotEmpty ? school.schoolname[0] : 'S',
+                    style: GoogleFonts.poppins(
+                      fontSize: 32,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.grey.shade600,
+                    ),
+                  )
+                : null,
           ),
-          const SizedBox(width: 20),
-          Expanded(
-            child: Text(
-              school.fullname,
-              style: GoogleFonts.poppins(
-                fontSize: onWideLayout ? 36 : 28,
-                fontWeight: FontWeight.bold,
-                color: onWideLayout ? Colors.black87 : Colors.white,
-                shadows: onWideLayout
-                    ? []
-                    : [
-                        const Shadow(
-                          blurRadius: 8.0,
-                          color: Colors.black54,
-                          offset: Offset(2.0, 2.0),
-                        ),
-                      ],
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildScrim() {
-    return Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [
-            Colors.black.withOpacity(0.2),
-            Colors.black.withOpacity(0.8),
-          ],
-          stops: const [0.0, 0.7],
         ),
-      ),
+        const SizedBox(width: 24),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                school.fullname,
+                style: GoogleFonts.poppins(
+                  fontSize: onWideLayout ? 32 : 24,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black87,
+                ),
+              ),
+              const SizedBox(height: 4),
+              Text(
+                "Established in 2023", // Placeholder
+                style: GoogleFonts.poppins(fontSize: 16, color: Colors.black54),
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 
-  Widget _buildStatItem(
-    IconData icon,
-    String value, {
-    bool onWideLayout = false,
-  }) {
-    final color = onWideLayout ? Colors.black54 : Colors.white;
+  Widget _buildStatItem(IconData icon, String label, String value) {
     return Expanded(
       child: Column(
         children: [
-          Icon(icon, color: color, size: 28),
-          const SizedBox(height: 8),
+          Icon(icon, color: Colors.blue.shade700, size: 28),
+          const SizedBox(height: 12),
           Text(
             value,
             style: GoogleFonts.poppins(
-              fontSize: 16,
-              color: color,
-              fontWeight: FontWeight.w500,
+              fontSize: 20,
+              color: Colors.black87,
+              fontWeight: FontWeight.bold,
             ),
+          ),
+          const SizedBox(height: 4),
+          Text(
+            label,
+            style: GoogleFonts.poppins(fontSize: 14, color: Colors.black54),
           ),
         ],
       ),
@@ -299,18 +282,21 @@ class SchoolProfilePage extends StatelessWidget {
   }
 
   Widget _buildStatsRow(BuildContext context, {bool onWideLayout = false}) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 32),
+    final stats = [
+      _buildStatItem(Icons.star, "Rating", "4.4"),
+      _buildStatItem(Icons.people, "Students", "0"),
+      _buildStatItem(Icons.location_city, "Campus", "Online"),
+    ];
+
+    return IntrinsicHeight(
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          _buildStatItem(Icons.star, "4.4", onWideLayout: onWideLayout),
-          _buildStatItem(Icons.people, "0", onWideLayout: onWideLayout),
-          _buildStatItem(
-            Icons.location_city,
-            "Somewhere",
-            onWideLayout: onWideLayout,
-          ),
+          stats[0],
+          const VerticalDivider(width: 20, thickness: 0.5),
+          stats[1],
+          const VerticalDivider(width: 20, thickness: 0.5),
+          stats[2],
         ],
       ),
     );

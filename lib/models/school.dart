@@ -1,3 +1,4 @@
+import 'package:ins/models/school_application.dart';
 import 'package:ins/models/school_user.dart';
 
 import 'model.dart';
@@ -78,5 +79,22 @@ class School implements Model {
 
   double computeRating() {
     return 3.2;
+  }
+
+  Future<List<SchoolApplicationForm>> getApplicationForms(
+    Session? session,
+  ) async {
+    final data = await backend.query("v1/school/applications/forschool", {
+      "school_id": id.toString(),
+    }, session);
+    if (data['status'] < 0) {
+      throw Exception(data['message']);
+    }
+    return (data['forms'] as List<dynamic>)
+        .map(
+          (form) =>
+              SchoolApplicationForm.fromJson(form as Map<String, dynamic>),
+        )
+        .toList();
   }
 }
