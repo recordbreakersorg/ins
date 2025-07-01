@@ -43,3 +43,6 @@ RUN echo 'server {     listen 80;     location / {         root /usr/share/nginx
 
 # Expose port 80 to the Railway network
 EXPOSE 80
+
+# Start Nginx in the foreground
+CMD ["nginx", "-g", "daemon off;"]
