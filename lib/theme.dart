@@ -63,7 +63,7 @@ ThemeData _buildHarbourHazeTheme() {
 
     primary: primaryColor,
     onPrimary: onPrimaryColor,
-    primaryContainer: lighten(primaryColor, 0.3),
+    primaryContainer: lighten(primaryColor, 0.5),
     onPrimaryContainer: darken(
       primaryColor,
       0.3,
@@ -87,8 +87,10 @@ ThemeData _buildHarbourHazeTheme() {
     surface: surfaceColor, // Main surfaces like cards, dialogs
     onSurface: onSurfaceColor, // Text on surface
 
-    surfaceContainerHighest:
-        hhBrightGrayBrown, // For elements like Card backgrounds, chip backgrounds
+    surfaceContainerHighest: lighten(
+      hhBrightGrayBrown,
+      0.3,
+    ), // For elements like Card backgrounds, chip backgrounds
     onSurfaceVariant: hhBrown, // Text on surfaceVariant
 
     outline: hhBrown.withAlpha(128),
@@ -218,10 +220,17 @@ ThemeData _buildHarbourHazeTheme() {
       style: ElevatedButton.styleFrom(
         backgroundColor: colorScheme.primary,
         foregroundColor: colorScheme.onPrimary,
-        textStyle: originalTextTheme.labelLarge, // Already has onPrimary color
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         elevation: 2,
+        padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 14),
+        textStyle: originalTextTheme.labelLarge?.copyWith(
+          fontWeight: FontWeight.w600, // Slightly bolder
+          fontSize: 16, // Slightly larger font
+        ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(
+            24.0,
+          ), // More rounded, modern feel
+        ),
       ),
     ),
     textButtonTheme: TextButtonThemeData(
@@ -231,7 +240,7 @@ ThemeData _buildHarbourHazeTheme() {
           color: colorScheme.primary,
           fontWeight: FontWeight.w600,
         ),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
       ),
     ),
     outlinedButtonTheme: OutlinedButtonThemeData(
@@ -375,3 +384,7 @@ class ThemeManager with ChangeNotifier {
 }
 
 final themeManager = ThemeManager();
+
+Future<void> init() async {
+  themeManager.initialize();
+}
