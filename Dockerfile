@@ -1,6 +1,15 @@
 # Stage 1: Build the Flutter application
-# Use the cirrusci/flutter image, which comes with the Flutter SDK pre-installed.
-FROM cirrusci/flutter:stable as build
+# Use the official Dart image, which provides a stable Dart SDK.
+FROM dart:stable AS build
+
+# Install git and other tools needed for the Flutter SDK
+RUN apt-get update && apt-get install -y git unzip
+
+# Clone the Flutter repository to get the SDK
+RUN git clone https://github.com/flutter/flutter.git /usr/local/flutter
+
+# Set the Flutter SDK path
+ENV PATH="$PATH:/usr/local/flutter/bin"
 
 # Set the working directory
 WORKDIR /app
@@ -9,7 +18,10 @@ WORKDIR /app
 COPY pubspec.yaml ./
 COPY pubspec.lock ./
 
-# Fetch Flutter dependencies
+# Pre-download Flutter dependencies
+RUN flutter precache
+
+# Fetch Flutter dependencies for the project
 RUN flutter pub get
 
 # Copy the rest of the application source code
