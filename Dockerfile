@@ -1,6 +1,6 @@
 # Stage 1: Build the Flutter application
 # Use the cirrusci/flutter image, which comes with the Flutter SDK pre-installed.
-FROM cirrusci/flutter:stable as build
+FROM cirrusci/flutter:3.32.5 as build
 
 # Set the working directory
 WORKDIR /app
