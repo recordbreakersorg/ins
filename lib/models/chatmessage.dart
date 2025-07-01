@@ -1,10 +1,8 @@
-import 'dart:ffi';
-
 import 'model.dart';
 import 'thread.dart';
 import 'user.dart';
 import 'session.dart';
-import 'package:ins/backend.dart';
+import 'package:ins/backend.dart' as backend;
 
 class Chatmessage implements Model {
   final int id;
@@ -34,9 +32,10 @@ class Chatmessage implements Model {
       userId: data['user_id'] as int,
       content: data['content'] as String,
       createdAt: DateTime.parse(data['created_at'] as String),
-      editedAt: data['edited_at'] == null
-          ? null
-          : DateTime.parse(data['edited_at'] as String),
+      editedAt:
+          data['edited_at'] == null
+              ? null
+              : DateTime.parse(data['edited_at'] as String),
       reactions: data['reactions'] as Map<int, String>,
       repliesTo: data['replies_to'] as int?,
       repliesThread: data['replies_thread'] as int?,
