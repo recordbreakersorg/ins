@@ -30,12 +30,18 @@ const List<Color> harbourHazePalette = [
     0xFF736F60, // #736F60
   ), // brown (Muted, earthy Brown) - Good for text, outlines, darker accents
 ];
-final Color hhSage = harbourHazePalette[0];
-final Color hhBlue = harbourHazePalette[1];
-final Color hhBrightGrayBrown = harbourHazePalette[2];
-final Color hhBrown = harbourHazePalette[3];
+final List<Color> harbourHazeDarkPalette = [
+  darken(harbourHazePalette[0], 0.8),
+  darken(harbourHazePalette[1], 0.8),
+  darken(harbourHazePalette[2], 0.8),
+  darken(harbourHazePalette[3], 0.8),
+];
+ThemeData _buildHarbourHazeTheme(List<Color> palette) {
+  final Color hhSage = palette[0];
+  final Color hhBlue = palette[1];
+  final Color hhBrightGrayBrown = palette[2];
+  final Color hhBrown = palette[3];
 
-ThemeData _buildHarbourHazeTheme() {
   // Define base colors from the palette for Material 3 ColorScheme
   final Color primaryColor = hhBlue;
   final Color secondaryColor = hhSage;
@@ -256,8 +262,9 @@ ThemeData _buildHarbourHazeTheme() {
     ),
 
     cardTheme: CardThemeData(
-      color: colorScheme
-          .surfaceContainerHighest, // Slightly different from main surface for visual separation
+      color:
+          colorScheme
+              .surfaceContainerHighest, // Slightly different from main surface for visual separation
       elevation: 0.5, // Subtle elevation
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
@@ -338,22 +345,23 @@ ThemeData _buildHarbourHazeTheme() {
       ), // color set by unselectedLabelColor
     ),
 
-    pageTransitionsTheme: const PageTransitionsTheme(
-      builders: {
-        TargetPlatform.android: OpenUpwardsPageTransitionsBuilder(),
-        TargetPlatform.iOS: CupertinoPageTransitionsBuilder(), // Good practice
-        TargetPlatform.linux: OpenUpwardsPageTransitionsBuilder(),
-        TargetPlatform.macOS: CupertinoPageTransitionsBuilder(),
-        TargetPlatform.windows: FadeUpwardsPageTransitionsBuilder(),
-      },
-    ),
+    //pageTransitionsTheme: const PageTransitionsTheme(
+    //  builders: {
+    //    TargetPlatform.android: OpenUpwardsPageTransitionsBuilder(),
+    //    TargetPlatform.iOS: CupertinoPageTransitionsBuilder(), // Good practice
+    //    TargetPlatform.linux: OpenUpwardsPageTransitionsBuilder(),
+    //    TargetPlatform.macOS: CupertinoPageTransitionsBuilder(),
+    //    TargetPlatform.windows: FadeUpwardsPageTransitionsBuilder(),
+    //  },
+    //),
     useMaterial3: true,
   );
 }
 
 // Your themes map
 final Map<String, ThemeData> themes = {
-  'harbourHaze': _buildHarbourHazeTheme(),
+  'harbourHaze': _buildHarbourHazeTheme(harbourHazePalette),
+  'harbourHazeDark': _buildHarbourHazeTheme(harbourHazeDarkPalette),
   // You can add more themes here if needed
 };
 const themeKey = "app_theme";
