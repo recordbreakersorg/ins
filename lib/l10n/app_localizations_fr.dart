@@ -100,4 +100,17 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get continueGt => 'Continuer >';
+
+  @override
+  String get loadingTerms => 'Loading terms of service';
+
+  @override
+  String get errorLoadingTerms => 'Error loading terms of service';
+
+  @override
+  String get termsAndConditions => 'Terms and Conditions';
+
+  @override
+  String get pleaseReviewAndAcceptOurTermsAndConditionsToContinue =>
+      'Please review and accept our terms and conditions to continue.';
 }

@@ -4,7 +4,6 @@ import 'package:ins/utils/terms.dart' as terms;
 import 'package:ins/widgets/imsg.dart';
 import 'package:ins/widgets/loading.dart';
 import 'form.dart';
-import 'base.dart';
 import 'namepassword.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:ins/l10n/app_localizations.dart';
@@ -23,7 +22,9 @@ class TermsPage extends StatelessWidget {
           return TermsWidget(form: form, termsMarkdown: snapshot.data!);
         } else if (snapshot.connectionState == ConnectionState.waiting) {
           return Scaffold(
-            appBar: AppBar(title: Text("Loading terms ")),
+            appBar: AppBar(
+              title: Text(AppLocalizations.of(context)!.loadingTerms),
+            ),
             body: LoadingWidget(
               messages: AppLocalizations.of(
                 context,
@@ -32,7 +33,9 @@ class TermsPage extends StatelessWidget {
           );
         } else {
           return Scaffold(
-            appBar: AppBar(title: Text("Error")),
+            appBar: AppBar(
+              title: Text(AppLocalizations.of(context)!.errorLoadingTerms),
+            ),
             body: IMsgWidget(
               icon: Icon(Icons.error_rounded, size: 150, color: Colors.red),
               message: Text(snapshot.error.toString()),
@@ -62,7 +65,9 @@ class _TermsWidgetState extends State<TermsWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Terms & Conditions")),
+      appBar: AppBar(
+        title: Text(AppLocalizations.of(context)!.termsAndConditions),
+      ),
       body: Padding(
         padding: const EdgeInsets.fromLTRB(
           16.0,
@@ -74,7 +79,9 @@ class _TermsWidgetState extends State<TermsWidget> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(
-              "Please review and accept our terms and conditions to continue.",
+              AppLocalizations.of(
+                context,
+              )!.pleaseReviewAndAcceptOurTermsAndConditionsToContinue,
               style: Theme.of(context).textTheme.titleMedium?.copyWith(
                 color: Theme.of(context).colorScheme.onSurfaceVariant,
               ),

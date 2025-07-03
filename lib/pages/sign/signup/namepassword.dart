@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ins/animations/page/slide.dart';
 import 'package:ins/l10n/app_localizations.dart';
-import 'package:ins/models.dart' as models;
 import 'package:ins/utils/username.dart';
 
 import 'base.dart';

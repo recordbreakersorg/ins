@@ -265,6 +265,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Continue >'**
   String get continueGt;
+
+  /// No description provided for @loadingTerms.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading terms of service'**
+  String get loadingTerms;
+
+  /// No description provided for @errorLoadingTerms.
+  ///
+  /// In en, this message translates to:
+  /// **'Error loading terms of service'**
+  String get errorLoadingTerms;
+
+  /// No description provided for @termsAndConditions.
+  ///
+  /// In en, this message translates to:
+  /// **'Terms and Conditions'**
+  String get termsAndConditions;
+
+  /// No description provided for @pleaseReviewAndAcceptOurTermsAndConditionsToContinue.
+  ///
+  /// In en, this message translates to:
+  /// **'Please review and accept our terms and conditions to continue.'**
+  String get pleaseReviewAndAcceptOurTermsAndConditionsToContinue;
 }
 
 class _AppLocalizationsDelegate
