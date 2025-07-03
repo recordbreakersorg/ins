@@ -21,14 +21,12 @@ end
 function watchchanges()::Channel{String}
   println("Watching for changes...")
   mtimes = Dict{String,Float64}()
-
   for _ ∈ checktimer() # controlled checks seperation
     shouldRefresh = false
     for file ∈ getwatcheablefile()
       if file ∉ keys(mtimes)
         println(" - Adding file $file")
         mtimes[file] = mtime(file)
-        shouldRefresh = true
       else
         modified = mtime(file)
         if modified > mtimes[file]
@@ -38,7 +36,40 @@ function watchchanges()::Channel{String}
         end
       end
     end
+    for (normalized, text) in extractmarkedstrings()
+      addtranslationkey(normalized, text)
+    end
     shouldRefresh && rebuildLocalizations()
+  end
+end
+function addtranslationkey(normalized::String, text::String) 
+  println("Got translations $normalized = $text")
+end
+function extractmarkedstringsinfile(file::String)::Channel{Tuple{String, String}}
+  Channel{Tuple{String, String}}() do channel
+    while true
+      found = false
+      for (lineidx, line) in enumerate(open(readlines,file))
+        m = match(r"_\"[^\"]+\"", line)
+        isnothing(m) && continue
+
+        normalized = normalizestring(m.match)
+        put!(channel, (normalized, m.match))
+
+        found = true
+        break
+      end
+    end
+  end
+end
+function extractmarkedstrings()::Channel{Tuple{String, String}}
+  Channel{Tuple{String, String}}() do channel
+    for (parent, folder, file) in walkdir("lib")
+      folder == "" && continue
+      for group in extractmarkedstringsinfile(joinpath(parent, file))
+        put!(channel, group)
+      end
+    end
   end
 end
 function (@main)(::Vector{String})::Cint
