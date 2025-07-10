@@ -6,13 +6,13 @@ end
 arbfile(path::String) = ArbFile(path)
 
 function readfile(file::ArbFile)::Dict
-  open(file) do f
+  open(file.path) do f
     JSON.parse(read(f, String))
   end
 end
 
 function writefile(file::ArbFile, data::Dict)
-  serial = JSON.json(data)
+  serial = JSON.json(data, 2)
   open(file.path, "w") do f
     write(f, serial)
   end
@@ -24,7 +24,7 @@ end
 
 function addtranslation!(arb::ArbFile, key::String, value::String)
   data = readfile(arb)
-  data[key] = JSON.parse(value)
+  data[key] = value
   writefile(arb, data)
 end
 
@@ -41,35 +41,50 @@ end
 function rebuildLocalizations()
   run(`flutter gen-l10n`)
 end
+function synchronizearbfiles()
+  files = collect(getarbfiles()) .|> arbfile
+  for file1 in files, file2 in files
+    file1 == file2 && continue
+    copymissingkeys(file1, file2)
+  end
+end
+function copymissingkeys(from::ArbFile, to::ArbFile)
+  data1 = readfile(from)
+  data2 = readfile(to)
+  missingkeys = setdiff(keys(data1), keys(data2))
+  for key in missingkeys
+    println("Adding missing $key to $(to.path)")
+    addtranslation!(to, key, "#" * data1[key])
+  end
+end
 function watchchanges()
     println("Watching for changes...")
     mtimes = Dict{String,Float64}()
     while true
-      # shouldRefresh = false
-      # for file ∈ getwatcheablefile()
-      #   if file ∉ keys(mtimes)
-      #     println(" - Adding file $file")
-      #     mtimes[file] = mtime(file)
-      #   else
-      #     modified = mtime(file)
-      #     if modified > mtimes[file]
-      #       println("File modified", last(splitdir(file)))
-      #       mtimes[file] = modified
-      #       shouldRefresh = true
-      #     end
-      #   end
-      # end
-      println("Checking for translation strings")
+      shouldRefresh = false
       for (normalized, text) in extractmarkedstrings()
-        addtranslationkey(normalized, text)
+        addtranslationkey(normalized, JSON.parse(text))
+        shouldRefresh = true
       end
-      break
-      sleep(10)
+      synchronizearbfiles()
+      for file ∈ getarbfiles()
+        if file ∉ keys(mtimes)
+          println(" - Adding file $file")
+          mtimes[file] = mtime(file)
+        else
+          modified = mtime(file)
+          if modified > mtimes[file]
+            println("File modified", last(splitdir(file)))
+            mtimes[file] = modified
+            shouldRefresh = true
+          end
+        end
+      end
       shouldRefresh && rebuildLocalizations()
+      sleep(5)
     end
 end
 function addtranslationkey(normalized::String, text::String) 
-  println("Got translations $normalized = $text")
   for file in getarbfiles()
     arb = arbfile(file)
     !hastranslation(arb, normalized) && addtranslation!(arb, normalized, text)
@@ -84,6 +99,7 @@ function extractmarkedstringsinfile(file::String)::Channel{Tuple{String, String}
         isnothing(m) && continue
         normalized = normalizedtranslationname(m.match)
         put!(channel, (normalized, m.match[2:end]))
+        println("Replacing $normalized in $file")
         replacetranslation(file, normalized, m.match)
         found = true
         break
@@ -119,9 +135,7 @@ function normalizedtranslationname(string::AbstractString)::String
   return normal
 end
 function extractmarkedstrings()::Channel{Tuple{String, String}}
-  println("Starting task")
   Channel{Tuple{String, String}}() do channel
-    println("Extracting marked strings in task")
     for (folder, _, files) ∈ walkdir("lib/")
       flush(Core.stdout)
       for file in files
