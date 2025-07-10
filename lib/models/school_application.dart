@@ -1,5 +1,45 @@
 import 'model.dart';
 
+enum SchoolApplicationFormQuestionType {
+  mcqQuestion
+}
+
+class SchoolApplicationFormQuestion implements Model {
+  final int id;
+  final int formId;
+  final String text;
+  final SchoolApplicationFormQuestionType questionType;
+  final Map<String, dynamic> options;
+  final bool required;
+
+  const SchoolApplicationFormQuestion({
+    required this.id, required this.formId, required this.text, required this.questionType, required this.options, required this.required,
+  });
+
+  factory SchoolApplicationFormQuestion.fromJson(Map<String, dynamic> data) {
+    return SchoolApplicationFormQuestion(
+      id: data['id'] as int,
+      formId: data['form_id'] as int,
+      text: data['text'] as String,
+      questionType: SchoolApplicationFormQuestionType.values.byName(data['question_type']),
+      options: data['options'] as Map<String, dynamic>,
+      required: data['required'] as bool,
+    );
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'form_id': formId,
+      'text': text,
+      'question_type': questionType.name,
+      'options': options,
+      'required': required,
+    };
+  }
+}
+
 class SchoolApplicationForm implements Model {
   final int id;
   final int schoolId;
@@ -7,6 +47,7 @@ class SchoolApplicationForm implements Model {
   final String? description;
   final String? instructions;
   final String submittedMessage;
+  final List<SchoolApplicationFormQuestion> questions;
   //TODO: add questions
   const SchoolApplicationForm({
     required this.id,
@@ -15,6 +56,7 @@ class SchoolApplicationForm implements Model {
     required this.description,
     required this.instructions,
     required this.submittedMessage,
+    required this.questions
   });
   factory SchoolApplicationForm.fromJson(Map<String, dynamic> data) {
     return SchoolApplicationForm(
@@ -24,6 +66,7 @@ class SchoolApplicationForm implements Model {
       description: data['description'] as String?,
       instructions: data['instructions'] as String?,
       submittedMessage: data['submitted_message'] as String,
+      questions: (data['questions'] as List).map((e) => SchoolApplicationFormQuestion.fromJson(e as Map<String, dynamic>)).toList(),
     );
   }
   @override
@@ -35,6 +78,7 @@ class SchoolApplicationForm implements Model {
       "description": description,
       "instructions": instructions,
       "submitted_message": submittedMessage,
+      "questions": questions.map((e) => e.toJson()).toList(),
     };
   }
 }
