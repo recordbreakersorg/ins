@@ -67,6 +67,9 @@ class AppLocalizationsFr extends AppLocalizations {
       'Le nom d\'utilisateur doit faire entre 3 et 20 characteres de long';
 
   @override
+  String get helloWorldOfThings => 'hello world of things';
+
+  @override
   String get password => 'Mot de passe';
 
   @override
@@ -112,8 +115,8 @@ class AppLocalizationsFr extends AppLocalizations {
   String get errorLoadingTerms => '#Error loading terms of service';
 
   @override
-  String get retry => 'Reessayer';
+  String get wasNotTranslated => '#Was not translated';
 
   @override
-  String get wasNotTranslated => '#Was not translated';
+  String get retry => 'Reessayer';
 }

@@ -65,6 +65,9 @@ class AppLocalizationsEn extends AppLocalizations {
       'Username must have between 3 and 20 characters';
 
   @override
+  String get helloWorldOfThings => 'hello world of things';
+
+  @override
   String get password => 'Password';
 
   @override
@@ -109,8 +112,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get errorLoadingTerms => 'Error loading terms of service';
 
   @override
-  String get retry => 'Retry';
+  String get wasNotTranslated => 'Was not translated';
 
   @override
-  String get wasNotTranslated => 'Was not translated';
+  String get retry => 'Retry';
 }

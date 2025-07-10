@@ -200,6 +200,12 @@ abstract class AppLocalizations {
   /// **'Username must have between 3 and 20 characters'**
   String get usernameMustHaveBetween4And20Characters;
 
+  /// No description provided for @helloWorldOfThings.
+  ///
+  /// In en, this message translates to:
+  /// **'hello world of things'**
+  String get helloWorldOfThings;
+
   /// No description provided for @password.
   ///
   /// In en, this message translates to:
@@ -284,17 +290,17 @@ abstract class AppLocalizations {
   /// **'Error loading terms of service'**
   String get errorLoadingTerms;
 
-  /// No description provided for @retry.
-  ///
-  /// In en, this message translates to:
-  /// **'Retry'**
-  String get retry;
-
   /// No description provided for @wasNotTranslated.
   ///
   /// In en, this message translates to:
   /// **'Was not translated'**
   String get wasNotTranslated;
+
+  /// No description provided for @retry.
+  ///
+  /// In en, this message translates to:
+  /// **'Retry'**
+  String get retry;
 }
 
 class _AppLocalizationsDelegate

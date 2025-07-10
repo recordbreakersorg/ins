@@ -16,6 +16,7 @@
   "loginInformations": "Login information",
   "usernameDesc": "A short public name visible by others",
   "usernameMustHaveBetween4And20Characters": "Username must have between 3 and 20 characters",
+  "helloWorldOfThings": "hello world of things",
   "password": "Password",
   "thisUsernameIsAlreadyTaken": "This username is already taken",
   "fullName": "Full name",
@@ -30,6 +31,6 @@
   "passwordShouldHaveAtleast8Characters": "Password should have atleast 8 characters length",
   "createAccount": "Create an account",
   "errorLoadingTerms": "Error loading terms of service",
-  "retry": "Retry",
-  "wasNotTranslated": "Was not translated"
+  "wasNotTranslated": "Was not translated",
+  "retry": "Retry"
 }

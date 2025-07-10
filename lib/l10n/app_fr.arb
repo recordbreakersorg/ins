@@ -16,6 +16,7 @@
   "loginInformations": "Informations de connection",
   "usernameDesc": "Un surnom court, et visible des autres",
   "usernameMustHaveBetween4And20Characters": "Le nom d'utilisateur doit faire entre 3 et 20 characteres de long",
+  "helloWorldOfThings": "hello world of things",
   "password": "Mot de passe",
   "thisUsernameIsAlreadyTaken": "Ce nom d'utilisateur est deja prit",
   "fullName": "Nom complet",
