@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ins/l10n/app_localizations.dart';
+import 'package:ins/pages/dashboard/dashboard.dart';
 import 'package:ins/widgets/imsg.dart';
 import 'form.dart';
 import 'package:ins/widgets/loading.dart';
@@ -74,5 +75,9 @@ class SubmitingPage extends StatelessWidget {
     );
   }
 
-  void _openDashboard(BuildContext context) {}
+  void _openDashboard(BuildContext context) {
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(builder: (context) => loadDashboard(null)),
+    );
+  }
 }

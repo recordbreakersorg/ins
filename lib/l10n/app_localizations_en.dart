@@ -12,7 +12,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get acceptContinue => 'Accept & Continue';
 
   @override
+  String get contactInformation => 'Contact Information';
+
+  @override
   String get accountCreatedSuccesfuly => 'Account created succesfuly';
+
+  @override
+  String get invalidDomainComponent => 'Invalid domain component';
 
   @override
   String get loadingTerms => 'Loading terms of service';
@@ -36,7 +42,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get welcomeToIS => 'Welcome to IS';
 
   @override
+  String get emailShouldContain1 => 'Email should contain 1 \'@\'';
+
+  @override
   String get wasNotTranslated => 'Was not translated';
+
+  @override
+  String get students => 'Students';
 
   @override
   String get sloganShort => 'Empowering connections, empowering futures';
@@ -49,6 +61,13 @@ class AppLocalizationsEn extends AppLocalizations {
       'We\'re getting this done...|Please wait a little more...|Things are going as expected...|...|Wait once more...|A few moments...';
 
   @override
+  String get invalidEmailDomainsecondPart =>
+      'Invalid email domain(second part)';
+
+  @override
+  String get rating => 'Rating';
+
+  @override
   String get openDashboard => 'Open dashboard';
 
   @override
@@ -56,6 +75,12 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get addEmailaoPhoneNumber => 'Add email and/or phone number';
+
+  @override
+  String get campus => 'Campus';
+
+  @override
+  String get applyNow => 'Apply Now';
 
   @override
   String get usernameDesc => 'A short public name visible by others';
@@ -74,6 +99,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get connectAccount => 'Connect account';
 
   @override
+  String get emailShouldContain => 'Email should contain \'@\'';
+
+  @override
   String get continueGt => 'Continue >';
 
   @override
@@ -88,8 +116,14 @@ class AppLocalizationsEn extends AppLocalizations {
       'Phone number should be 9 digits long (without country code)';
 
   @override
+  String get online => 'Online';
+
+  @override
   String get homeLoadingMessages =>
       'Loading app state...|Verifying user details...|Getting permissions from your schools..|Verifying the age on your birth certificate...|Please wait...|Almost there...';
+
+  @override
+  String get atAGlance => 'At a Glance';
 
   @override
   String get browseSchools => 'Browse Schools';
@@ -101,7 +135,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get creatingYourAccount => 'Creating you account';
 
   @override
+  String get emailNameTooShort => 'Email name too short';
+
+  @override
+  String get loadingYourDashboard => 'Loading your dashboard';
+
+  @override
   String get welcomeExcl => 'Welcome!';
+
+  @override
+  String get noDescriptionProvided => 'No description provided.';
 
   @override
   String get errorLoadingTerms => 'Error loading terms of service';
@@ -122,6 +165,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get loginInformations => 'Login information';
 
   @override
+  String get invalidCharacterInEmail => 'Invalid character in email ';
+
+  @override
   String get exploreSchools => 'Explore Schools';
 
   @override
@@ -137,6 +183,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get termsAndConditions => 'Terms and Conditions';
+
+  @override
+  String get establishedIn2023 => 'Established in 2023';
 
   @override
   String get passwordShouldHaveAtleast8Characters =>

@@ -10,7 +10,10 @@ class BlankDashboard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(AppLocalizations.of(context)!.areWeGoing)),
+      appBar: AppBar(
+        title: Text(AppLocalizations.of(context)!.areWeGoing),
+        leading: null,
+      ),
       body: Center(
         child: SizedBox(
           width: 500,

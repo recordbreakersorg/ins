@@ -104,11 +104,23 @@ abstract class AppLocalizations {
   /// **'Accept & Continue'**
   String get acceptContinue;
 
+  /// No description provided for @contactInformation.
+  ///
+  /// In en, this message translates to:
+  /// **'Contact Information'**
+  String get contactInformation;
+
   /// No description provided for @accountCreatedSuccesfuly.
   ///
   /// In en, this message translates to:
   /// **'Account created succesfuly'**
   String get accountCreatedSuccesfuly;
+
+  /// No description provided for @invalidDomainComponent.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid domain component'**
+  String get invalidDomainComponent;
 
   /// No description provided for @loadingTerms.
   ///
@@ -152,11 +164,23 @@ abstract class AppLocalizations {
   /// **'Welcome to IS'**
   String get welcomeToIS;
 
+  /// No description provided for @emailShouldContain1.
+  ///
+  /// In en, this message translates to:
+  /// **'Email should contain 1 \'@\''**
+  String get emailShouldContain1;
+
   /// No description provided for @wasNotTranslated.
   ///
   /// In en, this message translates to:
   /// **'Was not translated'**
   String get wasNotTranslated;
+
+  /// No description provided for @students.
+  ///
+  /// In en, this message translates to:
+  /// **'Students'**
+  String get students;
 
   /// No description provided for @sloganShort.
   ///
@@ -176,6 +200,18 @@ abstract class AppLocalizations {
   /// **'We\'re getting this done...|Please wait a little more...|Things are going as expected...|...|Wait once more...|A few moments...'**
   String get waitingMessages;
 
+  /// No description provided for @invalidEmailDomainsecondPart.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid email domain(second part)'**
+  String get invalidEmailDomainsecondPart;
+
+  /// No description provided for @rating.
+  ///
+  /// In en, this message translates to:
+  /// **'Rating'**
+  String get rating;
+
   /// No description provided for @openDashboard.
   ///
   /// In en, this message translates to:
@@ -193,6 +229,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Add email and/or phone number'**
   String get addEmailaoPhoneNumber;
+
+  /// No description provided for @campus.
+  ///
+  /// In en, this message translates to:
+  /// **'Campus'**
+  String get campus;
+
+  /// No description provided for @applyNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Apply Now'**
+  String get applyNow;
 
   /// No description provided for @usernameDesc.
   ///
@@ -224,6 +272,12 @@ abstract class AppLocalizations {
   /// **'Connect account'**
   String get connectAccount;
 
+  /// No description provided for @emailShouldContain.
+  ///
+  /// In en, this message translates to:
+  /// **'Email should contain \'@\''**
+  String get emailShouldContain;
+
   /// No description provided for @continueGt.
   ///
   /// In en, this message translates to:
@@ -248,11 +302,23 @@ abstract class AppLocalizations {
   /// **'Phone number should be 9 digits long (without country code)'**
   String get signupAssistant_phoneNumberError;
 
+  /// No description provided for @online.
+  ///
+  /// In en, this message translates to:
+  /// **'Online'**
+  String get online;
+
   /// No description provided for @homeLoadingMessages.
   ///
   /// In en, this message translates to:
   /// **'Loading app state...|Verifying user details...|Getting permissions from your schools..|Verifying the age on your birth certificate...|Please wait...|Almost there...'**
   String get homeLoadingMessages;
+
+  /// No description provided for @atAGlance.
+  ///
+  /// In en, this message translates to:
+  /// **'At a Glance'**
+  String get atAGlance;
 
   /// No description provided for @browseSchools.
   ///
@@ -272,11 +338,29 @@ abstract class AppLocalizations {
   /// **'Creating you account'**
   String get creatingYourAccount;
 
+  /// No description provided for @emailNameTooShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Email name too short'**
+  String get emailNameTooShort;
+
+  /// No description provided for @loadingYourDashboard.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading your dashboard'**
+  String get loadingYourDashboard;
+
   /// No description provided for @welcomeExcl.
   ///
   /// In en, this message translates to:
   /// **'Welcome!'**
   String get welcomeExcl;
+
+  /// No description provided for @noDescriptionProvided.
+  ///
+  /// In en, this message translates to:
+  /// **'No description provided.'**
+  String get noDescriptionProvided;
 
   /// No description provided for @errorLoadingTerms.
   ///
@@ -314,6 +398,12 @@ abstract class AppLocalizations {
   /// **'Login information'**
   String get loginInformations;
 
+  /// No description provided for @invalidCharacterInEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid character in email '**
+  String get invalidCharacterInEmail;
+
   /// No description provided for @exploreSchools.
   ///
   /// In en, this message translates to:
@@ -343,6 +433,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Terms and Conditions'**
   String get termsAndConditions;
+
+  /// No description provided for @establishedIn2023.
+  ///
+  /// In en, this message translates to:
+  /// **'Established in 2023'**
+  String get establishedIn2023;
 
   /// No description provided for @passwordShouldHaveAtleast8Characters.
   ///
