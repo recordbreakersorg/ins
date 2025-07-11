@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ins/appstate.dart';
 import 'package:ins/pages/school/explore.dart';
+import 'package:ins/l10n/app_localizations.dart';
 
 class BlankDashboard extends StatelessWidget {
   final AppState appState;
@@ -9,7 +10,7 @@ class BlankDashboard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Are we going?")),
+      appBar: AppBar(title: Text(AppLocalizations.of(context)!.areWeGoing)),
       body: Center(
         child: SizedBox(
           width: 500,
@@ -19,7 +20,7 @@ class BlankDashboard extends StatelessWidget {
               children: [
                 DashboardButton(
                   icon: Icons.edit,
-                  text: "Edit Profile",
+                  text: AppLocalizations.of(context)!.editProfile,
                   color: Colors.blue,
                   onPressed: () {
                     // TODO: Implement edit profile functionality
@@ -28,7 +29,7 @@ class BlankDashboard extends StatelessWidget {
                 const SizedBox(height: 20),
                 DashboardButton(
                   icon: Icons.settings,
-                  text: "Edit Preferences",
+                  text: AppLocalizations.of(context)!.editPreferences,
                   color: Colors.orange,
                   onPressed: () {
                     // TODO: Implement edit preferences functionality
@@ -37,7 +38,7 @@ class BlankDashboard extends StatelessWidget {
                 const SizedBox(height: 20),
                 DashboardButton(
                   icon: Icons.school,
-                  text: "Browse Schools",
+                  text: AppLocalizations.of(context)!.browseSchools,
                   color: Colors.green,
                   onPressed: () {
                     Navigator.of(context).push(

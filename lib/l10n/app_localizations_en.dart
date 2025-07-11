@@ -9,53 +9,53 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
-  String get sloganShort => 'Empowering connections, empowering futures';
-
-  @override
-  String get emailAddress => 'Email address';
-
-  @override
-  String get optionalInformations => 'Optional information';
-
-  @override
-  String get reenterPassword => 'Reenter password';
+  String get acceptContinue => 'Accept & Continue';
 
   @override
   String get accountCreatedSuccesfuly => 'Account created succesfuly';
+
+  @override
+  String get loadingTerms => 'Loading terms of service';
+
+  @override
+  String get passwordsDoNotMatch => 'Password do not match';
+
+  @override
+  String get noSchoolFound => 'No school found';
+
+  @override
+  String get nothingHere => 'Nothing here';
+
+  @override
+  String get errorLoadingYourDashboard => 'Error loading your dashboard';
+
+  @override
+  String get fullName => 'Full name';
+
+  @override
+  String get welcomeToIS => 'Welcome to IS';
+
+  @override
+  String get wasNotTranslated => 'Was not translated';
+
+  @override
+  String get sloganShort => 'Empowering connections, empowering futures';
+
+  @override
+  String get optionalInformations => 'Optional information';
 
   @override
   String get waitingMessages =>
       'We\'re getting this done...|Please wait a little more...|Things are going as expected...|...|Wait once more...|A few moments...';
 
   @override
-  String get pleaseReviewAndAcceptOurTermsAndConditionsToContinue =>
-      'Please review and accept our terms and conditions to continue.';
-
-  @override
-  String get signupAssistant_phoneNumberError =>
-      'Phone number should be 9 digits long (without country code)';
-
-  @override
-  String get loadingTerms => 'Loading terms of service';
-
-  @override
-  String get homeLoadingMessages =>
-      'Loading app state...|Verifying user details...|Getting permissions from your schools..|Verifying the age on your birth certificate...|Please wait...|Almost there...';
-
-  @override
-  String get passwordsDoNotMatch => 'Password do not match';
-
-  @override
   String get openDashboard => 'Open dashboard';
 
   @override
-  String get username => 'Username';
+  String get editPreferences => 'Edit Preferences';
 
   @override
   String get addEmailaoPhoneNumber => 'Add email and/or phone number';
-
-  @override
-  String get loginInformations => 'Login information';
 
   @override
   String get usernameDesc => 'A short public name visible by others';
@@ -71,26 +71,66 @@ class AppLocalizationsEn extends AppLocalizations {
   String get password => 'Password';
 
   @override
-  String get thisUsernameIsAlreadyTaken => 'This username is already taken';
+  String get connectAccount => 'Connect account';
 
   @override
-  String get fullName => 'Full name';
+  String get continueGt => 'Continue >';
+
+  @override
+  String get emailAddress => 'Email address';
+
+  @override
+  String get pleaseReviewAndAcceptOurTermsAndConditionsToContinue =>
+      'Please review and accept our terms and conditions to continue.';
+
+  @override
+  String get signupAssistant_phoneNumberError =>
+      'Phone number should be 9 digits long (without country code)';
+
+  @override
+  String get homeLoadingMessages =>
+      'Loading app state...|Verifying user details...|Getting permissions from your schools..|Verifying the age on your birth certificate...|Please wait...|Almost there...';
+
+  @override
+  String get browseSchools => 'Browse Schools';
+
+  @override
+  String get thisUsernameIsAlreadyTaken => 'This username is already taken';
 
   @override
   String get creatingYourAccount => 'Creating you account';
 
   @override
-  String get welcomeToIS => 'Welcome to IS';
+  String get welcomeExcl => 'Welcome!';
+
+  @override
+  String get errorLoadingTerms => 'Error loading terms of service';
+
+  @override
+  String get areWeGoing => 'Are we going?';
+
+  @override
+  String get editProfile => 'Edit Profile';
+
+  @override
+  String get reenterPassword => 'Reenter password';
+
+  @override
+  String get username => 'Username';
+
+  @override
+  String get loginInformations => 'Login information';
+
+  @override
+  String get exploreSchools => 'Explore Schools';
+
+  @override
+  String get iHaveReadAndAgreeToTheTermsAndConditions =>
+      'I have read and agree to the terms and conditions.';
 
   @override
   String get welcomeConnectOrCreateAccount =>
       'Connect an existing account or create a new one to embark on your journey with us';
-
-  @override
-  String get connectAccount => 'Connect account';
-
-  @override
-  String get welcomeExcl => 'Welcome!';
 
   @override
   String get phoneNumber => 'Phone number';
@@ -99,20 +139,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get termsAndConditions => 'Terms and Conditions';
 
   @override
-  String get continueGt => 'Continue >';
-
-  @override
   String get passwordShouldHaveAtleast8Characters =>
       'Password should have atleast 8 characters length';
 
   @override
   String get createAccount => 'Create an account';
-
-  @override
-  String get errorLoadingTerms => 'Error loading terms of service';
-
-  @override
-  String get wasNotTranslated => 'Was not translated';
 
   @override
   String get retry => 'Retry';

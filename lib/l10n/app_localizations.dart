@@ -98,29 +98,11 @@ abstract class AppLocalizations {
     Locale('fr'),
   ];
 
-  /// No description provided for @sloganShort.
+  /// No description provided for @acceptContinue.
   ///
   /// In en, this message translates to:
-  /// **'Empowering connections, empowering futures'**
-  String get sloganShort;
-
-  /// No description provided for @emailAddress.
-  ///
-  /// In en, this message translates to:
-  /// **'Email address'**
-  String get emailAddress;
-
-  /// No description provided for @optionalInformations.
-  ///
-  /// In en, this message translates to:
-  /// **'Optional information'**
-  String get optionalInformations;
-
-  /// No description provided for @reenterPassword.
-  ///
-  /// In en, this message translates to:
-  /// **'Reenter password'**
-  String get reenterPassword;
+  /// **'Accept & Continue'**
+  String get acceptContinue;
 
   /// No description provided for @accountCreatedSuccesfuly.
   ///
@@ -128,35 +110,11 @@ abstract class AppLocalizations {
   /// **'Account created succesfuly'**
   String get accountCreatedSuccesfuly;
 
-  /// No description provided for @waitingMessages.
-  ///
-  /// In en, this message translates to:
-  /// **'We\'re getting this done...|Please wait a little more...|Things are going as expected...|...|Wait once more...|A few moments...'**
-  String get waitingMessages;
-
-  /// No description provided for @pleaseReviewAndAcceptOurTermsAndConditionsToContinue.
-  ///
-  /// In en, this message translates to:
-  /// **'Please review and accept our terms and conditions to continue.'**
-  String get pleaseReviewAndAcceptOurTermsAndConditionsToContinue;
-
-  /// No description provided for @signupAssistant_phoneNumberError.
-  ///
-  /// In en, this message translates to:
-  /// **'Phone number should be 9 digits long (without country code)'**
-  String get signupAssistant_phoneNumberError;
-
   /// No description provided for @loadingTerms.
   ///
   /// In en, this message translates to:
   /// **'Loading terms of service'**
   String get loadingTerms;
-
-  /// No description provided for @homeLoadingMessages.
-  ///
-  /// In en, this message translates to:
-  /// **'Loading app state...|Verifying user details...|Getting permissions from your schools..|Verifying the age on your birth certificate...|Please wait...|Almost there...'**
-  String get homeLoadingMessages;
 
   /// No description provided for @passwordsDoNotMatch.
   ///
@@ -164,29 +122,77 @@ abstract class AppLocalizations {
   /// **'Password do not match'**
   String get passwordsDoNotMatch;
 
+  /// No description provided for @noSchoolFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No school found'**
+  String get noSchoolFound;
+
+  /// No description provided for @nothingHere.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing here'**
+  String get nothingHere;
+
+  /// No description provided for @errorLoadingYourDashboard.
+  ///
+  /// In en, this message translates to:
+  /// **'Error loading your dashboard'**
+  String get errorLoadingYourDashboard;
+
+  /// No description provided for @fullName.
+  ///
+  /// In en, this message translates to:
+  /// **'Full name'**
+  String get fullName;
+
+  /// No description provided for @welcomeToIS.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome to IS'**
+  String get welcomeToIS;
+
+  /// No description provided for @wasNotTranslated.
+  ///
+  /// In en, this message translates to:
+  /// **'Was not translated'**
+  String get wasNotTranslated;
+
+  /// No description provided for @sloganShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Empowering connections, empowering futures'**
+  String get sloganShort;
+
+  /// No description provided for @optionalInformations.
+  ///
+  /// In en, this message translates to:
+  /// **'Optional information'**
+  String get optionalInformations;
+
+  /// No description provided for @waitingMessages.
+  ///
+  /// In en, this message translates to:
+  /// **'We\'re getting this done...|Please wait a little more...|Things are going as expected...|...|Wait once more...|A few moments...'**
+  String get waitingMessages;
+
   /// No description provided for @openDashboard.
   ///
   /// In en, this message translates to:
   /// **'Open dashboard'**
   String get openDashboard;
 
-  /// No description provided for @username.
+  /// No description provided for @editPreferences.
   ///
   /// In en, this message translates to:
-  /// **'Username'**
-  String get username;
+  /// **'Edit Preferences'**
+  String get editPreferences;
 
   /// No description provided for @addEmailaoPhoneNumber.
   ///
   /// In en, this message translates to:
   /// **'Add email and/or phone number'**
   String get addEmailaoPhoneNumber;
-
-  /// No description provided for @loginInformations.
-  ///
-  /// In en, this message translates to:
-  /// **'Login information'**
-  String get loginInformations;
 
   /// No description provided for @usernameDesc.
   ///
@@ -212,17 +218,53 @@ abstract class AppLocalizations {
   /// **'Password'**
   String get password;
 
+  /// No description provided for @connectAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Connect account'**
+  String get connectAccount;
+
+  /// No description provided for @continueGt.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue >'**
+  String get continueGt;
+
+  /// No description provided for @emailAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'Email address'**
+  String get emailAddress;
+
+  /// No description provided for @pleaseReviewAndAcceptOurTermsAndConditionsToContinue.
+  ///
+  /// In en, this message translates to:
+  /// **'Please review and accept our terms and conditions to continue.'**
+  String get pleaseReviewAndAcceptOurTermsAndConditionsToContinue;
+
+  /// No description provided for @signupAssistant_phoneNumberError.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone number should be 9 digits long (without country code)'**
+  String get signupAssistant_phoneNumberError;
+
+  /// No description provided for @homeLoadingMessages.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading app state...|Verifying user details...|Getting permissions from your schools..|Verifying the age on your birth certificate...|Please wait...|Almost there...'**
+  String get homeLoadingMessages;
+
+  /// No description provided for @browseSchools.
+  ///
+  /// In en, this message translates to:
+  /// **'Browse Schools'**
+  String get browseSchools;
+
   /// No description provided for @thisUsernameIsAlreadyTaken.
   ///
   /// In en, this message translates to:
   /// **'This username is already taken'**
   String get thisUsernameIsAlreadyTaken;
-
-  /// No description provided for @fullName.
-  ///
-  /// In en, this message translates to:
-  /// **'Full name'**
-  String get fullName;
 
   /// No description provided for @creatingYourAccount.
   ///
@@ -230,29 +272,65 @@ abstract class AppLocalizations {
   /// **'Creating you account'**
   String get creatingYourAccount;
 
-  /// No description provided for @welcomeToIS.
+  /// No description provided for @welcomeExcl.
   ///
   /// In en, this message translates to:
-  /// **'Welcome to IS'**
-  String get welcomeToIS;
+  /// **'Welcome!'**
+  String get welcomeExcl;
+
+  /// No description provided for @errorLoadingTerms.
+  ///
+  /// In en, this message translates to:
+  /// **'Error loading terms of service'**
+  String get errorLoadingTerms;
+
+  /// No description provided for @areWeGoing.
+  ///
+  /// In en, this message translates to:
+  /// **'Are we going?'**
+  String get areWeGoing;
+
+  /// No description provided for @editProfile.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Profile'**
+  String get editProfile;
+
+  /// No description provided for @reenterPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Reenter password'**
+  String get reenterPassword;
+
+  /// No description provided for @username.
+  ///
+  /// In en, this message translates to:
+  /// **'Username'**
+  String get username;
+
+  /// No description provided for @loginInformations.
+  ///
+  /// In en, this message translates to:
+  /// **'Login information'**
+  String get loginInformations;
+
+  /// No description provided for @exploreSchools.
+  ///
+  /// In en, this message translates to:
+  /// **'Explore Schools'**
+  String get exploreSchools;
+
+  /// No description provided for @iHaveReadAndAgreeToTheTermsAndConditions.
+  ///
+  /// In en, this message translates to:
+  /// **'I have read and agree to the terms and conditions.'**
+  String get iHaveReadAndAgreeToTheTermsAndConditions;
 
   /// No description provided for @welcomeConnectOrCreateAccount.
   ///
   /// In en, this message translates to:
   /// **'Connect an existing account or create a new one to embark on your journey with us'**
   String get welcomeConnectOrCreateAccount;
-
-  /// No description provided for @connectAccount.
-  ///
-  /// In en, this message translates to:
-  /// **'Connect account'**
-  String get connectAccount;
-
-  /// No description provided for @welcomeExcl.
-  ///
-  /// In en, this message translates to:
-  /// **'Welcome!'**
-  String get welcomeExcl;
 
   /// No description provided for @phoneNumber.
   ///
@@ -266,12 +344,6 @@ abstract class AppLocalizations {
   /// **'Terms and Conditions'**
   String get termsAndConditions;
 
-  /// No description provided for @continueGt.
-  ///
-  /// In en, this message translates to:
-  /// **'Continue >'**
-  String get continueGt;
-
   /// No description provided for @passwordShouldHaveAtleast8Characters.
   ///
   /// In en, this message translates to:
@@ -283,18 +355,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Create an account'**
   String get createAccount;
-
-  /// No description provided for @errorLoadingTerms.
-  ///
-  /// In en, this message translates to:
-  /// **'Error loading terms of service'**
-  String get errorLoadingTerms;
-
-  /// No description provided for @wasNotTranslated.
-  ///
-  /// In en, this message translates to:
-  /// **'Was not translated'**
-  String get wasNotTranslated;
 
   /// No description provided for @retry.
   ///
