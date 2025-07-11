@@ -1,7 +1,15 @@
 import 'model.dart';
 
 enum SchoolApplicationFormQuestionType {
-  mcqQuestion
+  string,
+  select,
+  checkbox,
+  date,
+  int,
+  phone,
+  email,
+  file,
+  bool,
 }
 
 class SchoolApplicationFormQuestion implements Model {
@@ -13,7 +21,12 @@ class SchoolApplicationFormQuestion implements Model {
   final bool required;
 
   const SchoolApplicationFormQuestion({
-    required this.id, required this.formId, required this.text, required this.questionType, required this.options, required this.required,
+    required this.id,
+    required this.formId,
+    required this.text,
+    required this.questionType,
+    required this.options,
+    required this.required,
   });
 
   factory SchoolApplicationFormQuestion.fromJson(Map<String, dynamic> data) {
@@ -21,7 +34,9 @@ class SchoolApplicationFormQuestion implements Model {
       id: data['id'] as int,
       formId: data['form_id'] as int,
       text: data['text'] as String,
-      questionType: SchoolApplicationFormQuestionType.values.byName(data['question_type']),
+      questionType: SchoolApplicationFormQuestionType.values.byName(
+        data['question_type'] as String,
+      ),
       options: data['options'] as Map<String, dynamic>,
       required: data['required'] as bool,
     );
@@ -56,7 +71,7 @@ class SchoolApplicationForm implements Model {
     required this.description,
     required this.instructions,
     required this.submittedMessage,
-    required this.questions
+    required this.questions,
   });
   factory SchoolApplicationForm.fromJson(Map<String, dynamic> data) {
     return SchoolApplicationForm(
@@ -66,7 +81,13 @@ class SchoolApplicationForm implements Model {
       description: data['description'] as String?,
       instructions: data['instructions'] as String?,
       submittedMessage: data['submitted_message'] as String,
-      questions: (data['questions'] as List).map((e) => SchoolApplicationFormQuestion.fromJson(e as Map<String, dynamic>)).toList(),
+      questions: (data['questions'] as List)
+          .map(
+            (e) => SchoolApplicationFormQuestion.fromJson(
+              e as Map<String, dynamic>,
+            ),
+          )
+          .toList(),
     );
   }
   @override
