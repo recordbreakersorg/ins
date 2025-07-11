@@ -1,10 +1,11 @@
+import 'package:ins/utils/logger.dart';
 import 'package:http/http.dart' as http;
 import 'package:ins/app.dart' as app;
 
 String getDocUrl(String version, String doc, String lang, String format) {
   final url =
       "https://raw.githubusercontent.com/recordbreakersorg/docs/main/ins/$version/$doc/$lang.$format";
-  print(url);
+  logger.d(url);
   return url;
 }
 

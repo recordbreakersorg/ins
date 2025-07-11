@@ -1,4 +1,4 @@
-// locale.dart
+import 'package:ins/utils/logger.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ins/l10n/app_localizations.dart'; // Assuming this defines supportedLocales
@@ -41,7 +41,7 @@ class LocaleProvider with ChangeNotifier {
           // or fallback to the first supported. Let's try null first.
           // _removeSavedLocale(); // Optionally remove invalid preference
           // return AppLocalizations.supportedLocales.first;
-          print(
+          logger.w(
             "Saved locale '$languageCode' not in supported list, using device default or first supported.",
           );
           return AppLocalizations
@@ -62,7 +62,7 @@ class LocaleProvider with ChangeNotifier {
     if (!AppLocalizations.supportedLocales.any(
       (sl) => sl.languageCode == newLocale.languageCode,
     )) {
-      debugPrint("Locale ${newLocale.languageCode} is not supported.");
+      logger.w("Locale ${newLocale.languageCode} is not supported.");
       return;
     }
 
@@ -95,7 +95,7 @@ void init() {
 LocaleProvider getProvider() {
   if (_globalLocaleProvider == null) {
     // This case should ideally not happen if init() is called in main.dart
-    debugPrint(
+    logger.w(
       "Warning: LocaleProvider accessed before init(). Initializing now.",
     );
     init();
