@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:ins/models.dart' as models;
 import 'package:ins/appstate.dart';
 import 'package:ins/l10n/app_localizations.dart';
+import 'package:ins/pages/school/apply/home.dart';
 
 class SchoolProfilePage extends StatelessWidget {
   final models.School school;
@@ -152,7 +153,12 @@ class SchoolProfilePage extends StatelessWidget {
 
   Widget _buildApplyButton(BuildContext context) {
     return FilledButton.icon(
-      onPressed: null, // TODO: Implement application logic
+      onPressed: () => Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) =>
+              SchoolApplyHomePage(school: school, appState: appState),
+        ),
+      ),
       icon: const Icon(Icons.edit_document),
       label: Text(AppLocalizations.of(context)!.applyNow),
       style: FilledButton.styleFrom(

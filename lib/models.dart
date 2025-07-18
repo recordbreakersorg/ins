@@ -7,3 +7,4 @@ export 'models/thread.dart';
 export 'models/class.dart';
 export 'models/userrole.dart';
 export 'models/school_user.dart';
+export 'models/school_application.dart';

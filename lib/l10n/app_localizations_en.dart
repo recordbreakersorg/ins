@@ -15,7 +15,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get contactInformation => 'Contact Information';
 
   @override
-  String get accountCreatedSuccesfuly => 'Account created succesfuly';
+  String get accountCreatedSuccesfuly => '#Account succefsully created';
 
   @override
   String get invalidDomainComponent => 'Invalid domain component';
@@ -24,7 +24,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get loadingTerms => 'Loading terms of service';
 
   @override
-  String get passwordsDoNotMatch => 'Password do not match';
+  String get passwordsDoNotMatch => 'Passwords do not match';
 
   @override
   String get noSchoolFound => 'No school found';
@@ -45,6 +45,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get emailShouldContain1 => 'Email should contain 1 \'@\'';
 
   @override
+  String get whatDoYouWantToApplyFor => 'What do you want to apply for?';
+
+  @override
   String get wasNotTranslated => 'Was not translated';
 
   @override
@@ -54,7 +57,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get sloganShort => 'Empowering connections, empowering futures';
 
   @override
-  String get optionalInformations => 'Optional information';
+  String get optionalInformations => '#Informations optionnelles';
 
   @override
   String get waitingMessages =>
@@ -62,7 +65,15 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get invalidEmailDomainsecondPart =>
-      'Invalid email domain(second part)';
+      '#Domaine de l\'e-mail invalide (deuxième partie)';
+
+  @override
+  String get couldNotGetSchooolApplicationForms =>
+      '#Nous n\'avons pas pu recevoid les formulaires d\'inscription';
+
+  @override
+  String get passwordShouldHaveAtLeast8Characters =>
+      'Password should have at least 8 characters length';
 
   @override
   String get rating => 'Rating';
@@ -74,7 +85,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get editPreferences => 'Edit Preferences';
 
   @override
-  String get addEmailaoPhoneNumber => 'Add email and/or phone number';
+  String get addEmailaoPhoneNumber =>
+      '#Renseigner une adresse e-mail et/ou un numéro de téléphone';
 
   @override
   String get campus => 'Campus';
@@ -87,7 +99,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get usernameMustHaveBetween4And20Characters =>
-      'Username must have between 3 and 20 characters';
+      '###Le nom d\'utilisateur doit contenir entre 3 et 20 caractères';
 
   @override
   String get helloWorldOfThings => 'hello world of things';
@@ -99,13 +111,23 @@ class AppLocalizationsEn extends AppLocalizations {
   String get connectAccount => 'Connect account';
 
   @override
+  String get usernameMustHaveBetween3And20Characters =>
+      'Username must have between 3 and 20 characters';
+
+  @override
   String get emailShouldContain => 'Email should contain \'@\'';
 
   @override
   String get continueGt => 'Continue >';
 
   @override
+  String get accountCreatedSuccessfully => 'Account created successfully';
+
+  @override
   String get emailAddress => 'Email address';
+
+  @override
+  String get optionalInformation => 'Optional information';
 
   @override
   String get pleaseReviewAndAcceptOurTermsAndConditionsToContinue =>
@@ -132,7 +154,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get thisUsernameIsAlreadyTaken => 'This username is already taken';
 
   @override
-  String get creatingYourAccount => 'Creating you account';
+  String get creatingYourAccount => 'Creating your account';
 
   @override
   String get emailNameTooShort => 'Email name too short';
@@ -141,7 +163,14 @@ class AppLocalizationsEn extends AppLocalizations {
   String get loadingYourDashboard => 'Loading your dashboard';
 
   @override
+  String get couldNotGetSchoolApplicationForms =>
+      'Could not get school application forms';
+
+  @override
   String get welcomeExcl => 'Welcome!';
+
+  @override
+  String get schoolApplication => 'School Application';
 
   @override
   String get noDescriptionProvided => 'No description provided.';
@@ -156,7 +185,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get editProfile => 'Edit Profile';
 
   @override
-  String get reenterPassword => 'Reenter password';
+  String get reenterPassword => 'Re-enter password';
 
   @override
   String get username => 'Username';
@@ -169,6 +198,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get exploreSchools => 'Explore Schools';
+
+  @override
+  String get invalidEmailDomainSecondPart =>
+      'Invalid email domain (second part)';
 
   @override
   String get iHaveReadAndAgreeToTheTermsAndConditions =>
@@ -185,11 +218,14 @@ class AppLocalizationsEn extends AppLocalizations {
   String get termsAndConditions => 'Terms and Conditions';
 
   @override
+  String get addEmailOrPhoneNumber => 'Add email or phone number';
+
+  @override
   String get establishedIn2023 => 'Established in 2023';
 
   @override
   String get passwordShouldHaveAtleast8Characters =>
-      'Password should have atleast 8 characters length';
+      '#Le mot de passe doit contenir au moins 8 caractères';
 
   @override
   String get createAccount => 'Create an account';

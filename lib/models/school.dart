@@ -84,17 +84,20 @@ class School implements Model {
   Future<List<SchoolApplicationForm>> getApplicationForms(
     Session? session,
   ) async {
-    final data = await backend.query("v1/school/applications/forschool", {
+    final data = await backend.query("v1/school/application/forschool", {
       "school_id": id.toString(),
     }, session);
     if (data['status'] < 0) {
       throw Exception(data['message']);
     }
-    return (data['forms'] as List<dynamic>)
-        .map(
-          (form) =>
-              SchoolApplicationForm.fromJson(form as Map<String, dynamic>),
-        )
-        .toList();
+    return data['forms'] == null
+        ? []
+        : (data['forms'] as List<dynamic>)
+              .map(
+                (form) => SchoolApplicationForm.fromJson(
+                  form as Map<String, dynamic>,
+                ),
+              )
+              .toList();
   }
 }
