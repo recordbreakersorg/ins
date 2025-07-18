@@ -3,6 +3,8 @@ import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ins/models.dart' as models;
 import 'package:ins/appstate.dart';
+import 'package:ins/l10n/app_localizations.dart';
+import 'package:ins/pages/school/apply/home.dart';
 
 class SchoolProfilePage extends StatelessWidget {
   final models.School school;
@@ -41,9 +43,9 @@ class SchoolProfilePage extends StatelessWidget {
               children: [
                 _buildAppBar(context, onWideLayout: true),
                 const SizedBox(height: 40),
-                _buildSchoolHeader(onWideLayout: true),
+                _buildSchoolHeader(context, onWideLayout: true),
                 const SizedBox(height: 40),
-                _buildDescription(onWideLayout: true),
+                _buildDescription(context, onWideLayout: true),
               ],
             ),
           ),
@@ -57,7 +59,7 @@ class SchoolProfilePage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Text(
-                  "At a Glance",
+                  AppLocalizations.of(context)!.atAGlance,
                   style: GoogleFonts.poppins(
                     fontSize: 22,
                     fontWeight: FontWeight.bold,
@@ -66,7 +68,7 @@ class SchoolProfilePage extends StatelessWidget {
                 const SizedBox(height: 24),
                 _buildStatsRow(context, onWideLayout: true),
                 const Divider(height: 48, thickness: 0.5),
-                _buildAdditionalInfo(onWideLayout: true),
+                _buildAdditionalInfo(context, onWideLayout: true),
                 const Spacer(),
                 _buildApplyButton(context),
               ],
@@ -94,13 +96,13 @@ class SchoolProfilePage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                _buildSchoolHeader(),
+                _buildSchoolHeader(context),
                 const SizedBox(height: 32),
                 _buildStatsRow(context),
                 const Divider(height: 48, thickness: 0.5),
-                _buildDescription(),
+                _buildDescription(context),
                 const SizedBox(height: 32),
-                _buildAdditionalInfo(),
+                _buildAdditionalInfo(context),
                 const SizedBox(height: 32),
                 _buildApplyButton(context),
               ],
@@ -111,12 +113,15 @@ class SchoolProfilePage extends StatelessWidget {
     );
   }
 
-  Widget _buildAdditionalInfo({bool onWideLayout = false}) {
+  Widget _buildAdditionalInfo(
+    BuildContext context, {
+    bool onWideLayout = false,
+  }) {
     final content = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "Contact Information",
+          AppLocalizations.of(context)!.contactInformation,
           style: GoogleFonts.poppins(fontSize: 18, fontWeight: FontWeight.w600),
         ),
         const SizedBox(height: 16),
@@ -148,9 +153,14 @@ class SchoolProfilePage extends StatelessWidget {
 
   Widget _buildApplyButton(BuildContext context) {
     return FilledButton.icon(
-      onPressed: null, // TODO: Implement application logic
+      onPressed: () => Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) =>
+              SchoolApplyHomePage(school: school, appState: appState),
+        ),
+      ),
       icon: const Icon(Icons.edit_document),
-      label: const Text("Apply Now"),
+      label: Text(AppLocalizations.of(context)!.applyNow),
       style: FilledButton.styleFrom(
         padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 20),
         textStyle: GoogleFonts.poppins(
@@ -161,9 +171,11 @@ class SchoolProfilePage extends StatelessWidget {
     );
   }
 
-  Widget _buildDescription({bool onWideLayout = false}) {
+  Widget _buildDescription(BuildContext context, {bool onWideLayout = false}) {
     return MarkdownBody(
-      data: school.description ?? "No description provided.",
+      data:
+          school.description ??
+          AppLocalizations.of(context)!.noDescriptionProvided,
       styleSheet: MarkdownStyleSheet(
         p: GoogleFonts.poppins(
           fontSize: 16,
@@ -209,7 +221,7 @@ class SchoolProfilePage extends StatelessWidget {
     );
   }
 
-  Widget _buildSchoolHeader({bool onWideLayout = false}) {
+  Widget _buildSchoolHeader(BuildContext context, {bool onWideLayout = false}) {
     return Row(
       children: [
         Hero(
@@ -247,7 +259,7 @@ class SchoolProfilePage extends StatelessWidget {
               ),
               const SizedBox(height: 4),
               Text(
-                "Established in 2023", // Placeholder
+                AppLocalizations.of(context)!.establishedIn2023, // Placeholder
                 style: GoogleFonts.poppins(fontSize: 16, color: Colors.black54),
               ),
             ],
@@ -283,9 +295,13 @@ class SchoolProfilePage extends StatelessWidget {
 
   Widget _buildStatsRow(BuildContext context, {bool onWideLayout = false}) {
     final stats = [
-      _buildStatItem(Icons.star, "Rating", "4.4"),
-      _buildStatItem(Icons.people, "Students", "0"),
-      _buildStatItem(Icons.location_city, "Campus", "Online"),
+      _buildStatItem(Icons.star, AppLocalizations.of(context)!.rating, "4.4"),
+      _buildStatItem(Icons.people, AppLocalizations.of(context)!.students, "0"),
+      _buildStatItem(
+        Icons.location_city,
+        AppLocalizations.of(context)!.campus,
+        AppLocalizations.of(context)!.online,
+      ),
     ];
 
     return IntrinsicHeight(
@@ -302,158 +318,3 @@ class SchoolProfilePage extends StatelessWidget {
     );
   }
 }
-
-
-
-//IconData _getFormIcon(models.SchoolApplicationForm form) {
-//  return Icons.school;
-//  /*
-//  switch (form.type.toLowerCase()) {
-//    case 'transfer':
-//      return Icons.swap_horiz;
-//    case 'international':
-//      return Icons.language;
-//    case 'graduate':
-//      return Icons.school;
-//    case 'scholarship':
-//      return Icons.attach_money;
-//    default:
-//      return Icons.description;
-//  }*/
-//}
-
-//Future<void> _selectApplicationForm(
-//BuildContext context,
-//models.School school,
-//models.Session session,
-//models.User user,
-//) async {
-//  final forms = await school.getApplicationForms();
-//  if (!context.mounted) return;
-//
-//  showModalBottomSheet(
-//    context: context,
-//    isScrollControlled: true,
-//    backgroundColor: Colors.transparent,
-//    barrierColor: Colors.black.withOpacity(0.4),
-//    builder: (context) => Container(
-//      decoration: BoxDecoration(
-//        color: Theme.of(context).scaffoldBackgroundColor,
-//        borderRadius: const BorderRadius.vertical(top: Radius.circular(25)),
-//      ),
-//      child: Padding(
-//        padding: const EdgeInsets.only(
-//          top: 12,
-//          left: 16,
-//          right: 16,
-//          bottom: 24,
-//        ),
-//        child: Column(
-//          mainAxisSize: MainAxisSize.min,
-//          children: [
-//            Center(
-//              child: Container(
-//                width: 40,
-//                height: 4,
-//                decoration: BoxDecoration(
-//                  color: Colors.grey[400],
-//                  borderRadius: BorderRadius.circular(2),
-//                ),
-//              ),
-//            ),
-//            const SizedBox(height: 16),
-//            Text(
-//              "Select application form",
-//              style: GoogleFonts.poppins(
-//                fontSize: 22,
-//                fontWeight: FontWeight.w600,
-//                color: Theme.of(context).primaryColor,
-//              ),
-//            ),
-//            const SizedBox(height: 24),
-//            Flexible(
-//              child: ListView.separated(
-//                shrinkWrap: true,
-//                physics: const ClampingScrollPhysics(),
-//                itemCount: forms.length,
-//                separatorBuilder: (_, __) => const Divider(height: 1),
-//                itemBuilder: (context, index) {
-//                  final form = forms[index];
-//                  return Material(
-//                    color: Colors.transparent,
-//                    child: InkWell(
-//                      borderRadius: BorderRadius.circular(12),
-//                      onTap: () {
-//                        Navigator.pop(context);
-//                        launchApplicationForm(
-//                          context,
-//                          school,
-//                          session,
-//                          user,
-//                          form,
-//                        );
-//                      },
-//                      child: Container(
-//                        padding: const EdgeInsets.symmetric(
-//                          vertical: 16,
-//                          horizontal: 20,
-//                        ),
-//                        child: Row(
-//                          children: [
-//                            Container(
-//                              padding: const EdgeInsets.all(12),
-//                              decoration: BoxDecoration(
-//                                color: Theme.of(
-//                                  context,
-//                                ).primaryColor.withOpacity(0.1),
-//                                borderRadius: BorderRadius.circular(12),
-//                              ),
-//                              child: Icon(
-//                                _getFormIcon(form),
-//                                color: Theme.of(context).focusColor,
-//                                size: 28,
-//                              ),
-//                            ),
-//                            const SizedBox(width: 20),
-//                            Expanded(
-//                              child: Column(
-//                                crossAxisAlignment: CrossAxisAlignment.start,
-//                                children: [
-//                                  Text(
-//                                    form.title,
-//                                    style: GoogleFonts.poppins(
-//                                      fontSize: 16,
-//                                      fontWeight: FontWeight.w600,
-//                                    ),
-//                                  ),
-//                                  Padding(
-//                                    padding: const EdgeInsets.only(top: 4),
-//                                    child: Text(
-//                                      form.description,
-//                                      style: GoogleFonts.poppins(
-//                                        fontSize: 14,
-//                                        color: Colors.grey[600],
-//                                      ),
-//                                      maxLines: 2,
-//                                    ),
-//                                  ),
-//                                ],
-//                              ),
-//                            ),
-//                            Icon(Icons.chevron_right, color: Colors.grey[400]),
-//                          ],
-//                        ),
-//                      ),
-//                    ),
-//                  );
-//                },
-//              ),
-//            ),
-//          ],
-//        ),
-//      ),
-//    ),
-//  );
-//}
-
-

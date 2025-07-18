@@ -46,7 +46,7 @@ Widget getPage() {
                 return _inBlank(
                   IMsgWidget(
                     icon: Icon(Icons.error),
-                    message: Text("Error loading your dashboard"),
+                    message: Text(AppLocalizations.of(context)!.errorLoadingYourDashboard),
                   ),
                 );
               }

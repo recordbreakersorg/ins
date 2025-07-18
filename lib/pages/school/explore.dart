@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:ins/appstate.dart';
 import 'package:ins/widgets/loading.dart';
 import 'school_profile.dart';
+import 'package:ins/l10n/app_localizations.dart';
 
 class SchoolExplorePage extends StatefulWidget {
   final AppState appState;
@@ -22,7 +23,10 @@ class _SchoolExplorePageState extends State<SchoolExplorePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Explore Schools"), elevation: 0),
+      appBar: AppBar(
+        title: Text(AppLocalizations.of(context)!.exploreSchools),
+        elevation: 0,
+      ),
       body: FutureBuilder<List<models.School>>(
         future: models.School.getAllSchools(
           widget.appState.session,
@@ -71,7 +75,7 @@ class _SchoolExplorePageState extends State<SchoolExplorePage> {
                           ),
                           SizedBox(height: 30),
                           Text(
-                            "No school found",
+                            AppLocalizations.of(context)!.noSchoolFound,
                             style: Theme.of(context).textTheme.displayLarge,
                           ),
                         ],

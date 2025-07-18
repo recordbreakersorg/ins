@@ -9,114 +9,231 @@ class AppLocalizationsFr extends AppLocalizations {
   AppLocalizationsFr([String locale = 'fr']) : super(locale);
 
   @override
-  String get sloganShort =>
-      'Construire des liens puissants, bâtir des avenirs prometteurs';
+  String get acceptContinue => 'Accepter & Continuer';
 
   @override
-  String get emailAddress => 'Addresse email';
+  String get contactInformation => 'Informations de contact';
 
   @override
-  String get optionalInformations => 'Informations optionelles';
+  String get accountCreatedSuccesfuly => '##Account succefsully created';
 
   @override
-  String get reenterPassword => 'Re-entrez votre mot de passe';
+  String get invalidDomainComponent => 'Composant de domaine invalide';
 
   @override
-  String get accountCreatedSuccesfuly => 'Compte cree avec succes';
+  String get loadingTerms => 'Chargement des conditions d\'utilisation';
+
+  @override
+  String get passwordsDoNotMatch => 'Les mots de passe ne correspondent pas';
+
+  @override
+  String get noSchoolFound => 'Aucune école trouvée';
+
+  @override
+  String get nothingHere => 'Rien ici';
+
+  @override
+  String get errorLoadingYourDashboard =>
+      'Erreur lors du chargement de votre tableau de bord';
+
+  @override
+  String get fullName => 'Nom complet';
+
+  @override
+  String get welcomeToIS => 'Bienvenue sur IS';
+
+  @override
+  String get emailShouldContain1 => 'L\'e-mail doit contenir un \'@\'';
+
+  @override
+  String get whatDoYouWantToApplyFor => 'Pour quoi voulez-vous postuler ?';
+
+  @override
+  String get wasNotTranslated => 'N\'a pas été traduit';
+
+  @override
+  String get students => 'Étudiants';
+
+  @override
+  String get sloganShort => 'Des liens forts, un avenir prometteur';
+
+  @override
+  String get optionalInformations => '##Informations optionnelles';
 
   @override
   String get waitingMessages =>
-      'Nous ourons bientot fini...|Attendez encore un peu...|Tout ce passe bien...|...|Un peu plus de temps...|Quelques instants d\'attente...';
+      'Nous aurons bientôt fini...|Attendez encore un peu...|Tout se passe bien...|...|Un peu plus de temps...|Quelques instants d\'attente...';
 
   @override
-  String get pleaseReviewAndAcceptOurTermsAndConditionsToContinue =>
-      '#Please review and accept our terms and conditions to continue.';
+  String get invalidEmailDomainsecondPart =>
+      '##Domaine de l\'e-mail invalide (deuxième partie)';
 
   @override
-  String get signupAssistant_phoneNumberError =>
-      'Le numero devrais faire 9 chiffres de long (Sans code iso)';
+  String get couldNotGetSchooolApplicationForms =>
+      '##Nous n\'avons pas pu recevoid les formulaires d\'inscription';
 
   @override
-  String get loadingTerms => '#Loading terms of service';
+  String get passwordShouldHaveAtLeast8Characters =>
+      'Le mot de passe doit contenir au moins 8 caractères';
 
   @override
-  String get homeLoadingMessages =>
-      'Verification des details d\'utilisateur...|Acquisition de permission de votre ecole..|Veuillez patienter...|Nous y sommes presque...';
+  String get rating => 'Évaluation';
 
   @override
-  String get passwordsDoNotMatch => 'Les mot-de-passe ne coincident pas';
+  String get openDashboard => 'Ouvrir le tableau de bord';
 
   @override
-  String get openDashboard => 'Ouvrir le tableaux de bord';
-
-  @override
-  String get username => 'Nom d\'utilisateur';
+  String get editPreferences => 'Modifier les préférences';
 
   @override
   String get addEmailaoPhoneNumber =>
-      'Renseigner une addresse email et/ou numero de telephone';
+      '##Renseigner une adresse e-mail et/ou un numéro de téléphone';
 
   @override
-  String get loginInformations => 'Informations de connection';
+  String get campus => 'Campus';
+
+  @override
+  String get applyNow => 'Postuler maintenant';
 
   @override
   String get usernameDesc => 'Un surnom court, et visible des autres';
 
   @override
   String get usernameMustHaveBetween4And20Characters =>
-      'Le nom d\'utilisateur doit faire entre 3 et 20 characteres de long';
+      '####Le nom d\'utilisateur doit contenir entre 3 et 20 caractères';
 
   @override
-  String get helloWorldOfThings => 'hello world of things';
+  String get helloWorldOfThings => 'Salut le monde des choses';
 
   @override
   String get password => 'Mot de passe';
 
   @override
-  String get thisUsernameIsAlreadyTaken =>
-      'Ce nom d\'utilisateur est deja prit';
+  String get connectAccount => 'Connecter votre compte';
 
   @override
-  String get fullName => 'Nom complet';
+  String get usernameMustHaveBetween3And20Characters =>
+      'Le nom d\'utilisateur doit contenir entre 3 et 20 caractères';
 
   @override
-  String get creatingYourAccount => 'Nous creons votre compte';
-
-  @override
-  String get welcomeToIS => 'Bienvenue sur IS';
-
-  @override
-  String get welcomeConnectOrCreateAccount =>
-      'Connectez un compte existant ou creez en un nouveau pour utiliser IS';
-
-  @override
-  String get connectAccount => 'Connectez votre compte';
-
-  @override
-  String get welcomeExcl => 'Bienvenue!';
-
-  @override
-  String get phoneNumber => 'Numero de telephone';
-
-  @override
-  String get termsAndConditions => '#Terms and Conditions';
+  String get emailShouldContain => 'L\'e-mail doit contenir \'@\'';
 
   @override
   String get continueGt => 'Continuer >';
 
   @override
+  String get accountCreatedSuccessfully => 'Compte créé avec succès';
+
+  @override
+  String get emailAddress => 'Adresse e-mail';
+
+  @override
+  String get optionalInformation => 'Informations optionnelles';
+
+  @override
+  String get pleaseReviewAndAcceptOurTermsAndConditionsToContinue =>
+      'Veuillez consulter et accepter nos conditions d\'utilisation pour continuer.';
+
+  @override
+  String get signupAssistant_phoneNumberError =>
+      'Le numéro de téléphone doit comporter 9 chiffres (sans l\'indicatif du pays)';
+
+  @override
+  String get online => 'En ligne';
+
+  @override
+  String get homeLoadingMessages =>
+      'Chargement de l\'état de l\'application...|Vérification des détails de l\'utilisateur...|Obtention des autorisations de vos écoles...|Vérification de l\'âge sur votre acte de naissance...|Veuillez patienter...|Presque là...';
+
+  @override
+  String get atAGlance => 'En un coup d\'œil';
+
+  @override
+  String get browseSchools => 'Parcourir les écoles';
+
+  @override
+  String get thisUsernameIsAlreadyTaken =>
+      'Ce nom d\'utilisateur est déjà pris';
+
+  @override
+  String get creatingYourAccount => 'Création de votre compte';
+
+  @override
+  String get emailNameTooShort => 'Nom d\'e-mail trop court';
+
+  @override
+  String get loadingYourDashboard => 'Chargement de votre tableau de bord';
+
+  @override
+  String get couldNotGetSchoolApplicationForms =>
+      'Impossible de récupérer les formulaires de demande d\'école';
+
+  @override
+  String get welcomeExcl => 'Bienvenue !';
+
+  @override
+  String get schoolApplication => 'Candidature scolaire';
+
+  @override
+  String get noDescriptionProvided => 'Aucune description fournie.';
+
+  @override
+  String get errorLoadingTerms =>
+      'Erreur de chargement des conditions d\'utilisation';
+
+  @override
+  String get areWeGoing => 'On y va ?';
+
+  @override
+  String get editProfile => 'Modifier le profil';
+
+  @override
+  String get reenterPassword => 'Retapez votre mot de passe';
+
+  @override
+  String get username => 'Nom d\'utilisateur';
+
+  @override
+  String get loginInformations => 'Informations de connexion';
+
+  @override
+  String get invalidCharacterInEmail => 'Caractère invalide dans l\'e-mail';
+
+  @override
+  String get exploreSchools => 'Explorer les écoles';
+
+  @override
+  String get invalidEmailDomainSecondPart =>
+      'Domaine de l\'e-mail invalide (deuxième partie)';
+
+  @override
+  String get iHaveReadAndAgreeToTheTermsAndConditions =>
+      'J\'ai lu et j\'accepte les conditions d\'utilisation.';
+
+  @override
+  String get welcomeConnectOrCreateAccount =>
+      'Connectez un compte existant ou créez-en un nouveau pour commencer votre voyage avec nous';
+
+  @override
+  String get phoneNumber => 'Numéro de téléphone';
+
+  @override
+  String get termsAndConditions => 'Conditions d\'utilisation';
+
+  @override
+  String get addEmailOrPhoneNumber =>
+      'Ajouter une adresse e-mail ou un numéro de téléphone';
+
+  @override
+  String get establishedIn2023 => 'Établi en 2023';
+
+  @override
   String get passwordShouldHaveAtleast8Characters =>
-      'Le mot-de-passe doit faire au moins 8 characteres de long';
+      '##Le mot de passe doit contenir au moins 8 caractères';
 
   @override
-  String get createAccount => 'Creez un compte';
+  String get createAccount => 'Créer un compte';
 
   @override
-  String get errorLoadingTerms => '#Error loading terms of service';
-
-  @override
-  String get wasNotTranslated => '#Was not translated';
-
-  @override
-  String get retry => 'Reessayer';
+  String get retry => 'Réessayer';
 }

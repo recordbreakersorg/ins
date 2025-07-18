@@ -131,8 +131,10 @@ class _TermsWidgetState extends State<TermsWidget> {
             ),
             const SizedBox(height: 16),
             CheckboxListTile(
-              title: const Text(
-                "I have read and agree to the terms and conditions.",
+              title: Text(
+                AppLocalizations.of(
+                  context,
+                )!.iHaveReadAndAgreeToTheTermsAndConditions,
               ),
               value: _termsAccepted,
               onChanged: (bool? value) {
@@ -162,7 +164,7 @@ class _TermsWidgetState extends State<TermsWidget> {
                 padding: const EdgeInsets.symmetric(vertical: 16.0),
                 textStyle: Theme.of(context).textTheme.labelLarge,
               ),
-              child: Text("Accept & Continue"),
+              child: Text(AppLocalizations.of(context)!.acceptContinue),
             ),
           ],
         ),

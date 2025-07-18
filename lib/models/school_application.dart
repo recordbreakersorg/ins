@@ -81,13 +81,15 @@ class SchoolApplicationForm implements Model {
       description: data['description'] as String?,
       instructions: data['instructions'] as String?,
       submittedMessage: data['submitted_message'] as String,
-      questions: (data['questions'] as List)
-          .map(
-            (e) => SchoolApplicationFormQuestion.fromJson(
-              e as Map<String, dynamic>,
-            ),
-          )
-          .toList(),
+      questions: data['questions'] == null
+          ? []
+          : (data['questions'] as List)
+                .map(
+                  (e) => SchoolApplicationFormQuestion.fromJson(
+                    e as Map<String, dynamic>,
+                  ),
+                )
+                .toList(),
     );
   }
   @override
