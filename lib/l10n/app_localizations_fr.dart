@@ -18,6 +18,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get accountCreatedSuccesfuly => '##Account succefsully created';
 
   @override
+  String get couldNotSaveAppState => '#Could not save app State';
+
+  @override
   String get invalidDomainComponent => 'Composant de domaine invalide';
 
   @override
@@ -189,6 +192,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get reenterPassword => 'Retapez votre mot de passe';
+
+  @override
+  String get signin => '#Signin';
 
   @override
   String get username => 'Nom d\'utilisateur';

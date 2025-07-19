@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ins/l10n/app_localizations.dart';
+import 'package:ins/pages/sign/signin.dart';
 import 'package:ins/pages/sign/signup/launcher.dart';
 import 'package:ins/widgets/locale_chooser.dart';
 
@@ -72,12 +73,8 @@ class WelcomePage extends StatelessWidget {
                   context: context,
                   text: AppLocalizations.of(context)!.connectAccount,
                   onPressed: () {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text(
-                          "Connect account tapped (Not implemented)",
-                        ),
-                      ),
+                    Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => SigninPage()),
                     );
                   },
                   isPrimary: false,

@@ -116,6 +116,12 @@ abstract class AppLocalizations {
   /// **'#Account succefsully created'**
   String get accountCreatedSuccesfuly;
 
+  /// No description provided for @couldNotSaveAppState.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not save app State'**
+  String get couldNotSaveAppState;
+
   /// No description provided for @invalidDomainComponent.
   ///
   /// In en, this message translates to:
@@ -433,6 +439,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Re-enter password'**
   String get reenterPassword;
+
+  /// No description provided for @signin.
+  ///
+  /// In en, this message translates to:
+  /// **'Signin'**
+  String get signin;
 
   /// No description provided for @username.
   ///

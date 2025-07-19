@@ -4,7 +4,7 @@ import 'package:ins/models.dart' as models;
 import 'package:http/http.dart' as http;
 
 String getBackendBase() {
-  return kDebugMode ? "http://localhost:8080" : "https://api.ins.rbs.cm";
+  return kDebugMode ? "http://191.168.1.192:8080" : "https://api.ins.rbs.cm";
 }
 
 Future<Map<String, dynamic>> query(

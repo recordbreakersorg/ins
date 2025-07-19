@@ -18,6 +18,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get accountCreatedSuccesfuly => '#Account succefsully created';
 
   @override
+  String get couldNotSaveAppState => 'Could not save app State';
+
+  @override
   String get invalidDomainComponent => 'Invalid domain component';
 
   @override
@@ -186,6 +189,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get reenterPassword => 'Re-enter password';
+
+  @override
+  String get signin => 'Signin';
 
   @override
   String get username => 'Username';
