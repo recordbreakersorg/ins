@@ -3,9 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ins/appstate.dart';
 import 'package:ins/l10n/app_localizations.dart';
+import 'package:ins/l10n/app_localizations_en.dart';
+import 'package:ins/utils/logger.dart';
 import 'package:ins/widgets/locale_chooser.dart';
 import 'package:ins/backend.dart' as backend;
 import 'package:ins/models.dart' as models;
+import 'package:ins/firebase_messaging.dart';
 
 class SigninPage extends StatelessWidget {
   final TextEditingController _usernameController = TextEditingController();
@@ -119,7 +122,7 @@ class SigninPage extends StatelessWidget {
                 FilledButton(
                   onPressed: () => _signinUser(context),
                   style: FilledButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(vertical: 16.0),
+                    padding: const EdgeInsets.symmetric(vertical: 13.0),
                     textStyle: Theme.of(context).textTheme.labelLarge,
                   ),
                   child: Text(
@@ -220,11 +223,13 @@ class SigninPage extends StatelessWidget {
   }
 
   void _signinUser(BuildContext context) async {
+    logger.i("Login in user");
     try {
       final result = await backend.query("v1/signin", {
         "username": _usernameController.text,
         "password": _passwordController.text,
       }, null);
+      logger.i("received response: $result");
       if (result['status'] as int < 0) {
         throw Exception(result['message'] as String);
       }
@@ -238,13 +243,16 @@ class SigninPage extends StatelessWidget {
       state.user = user;
       try {
         await state.save();
+        await FirebaseMessagingHandler().requestPermissionAndRegisterToken();
       } catch (e) {
         if (context.mounted) {
           throw Exception(AppLocalizations.of(context)!.couldNotSaveAppState);
+        } else {
+          throw Exception(AppLocalizationsEn().couldNotSaveAppState);
         }
       }
     } catch (e) {
-      if (!context.mounted) return;
+      logger.e(e);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(e.toString()),
@@ -254,6 +262,7 @@ class SigninPage extends StatelessWidget {
           ),
         ),
       );
+      if (!context.mounted) return;
     }
   }
 }

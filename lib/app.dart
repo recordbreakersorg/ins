@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ins/appstate.dart';
 import 'package:ins/theme.dart';
 import 'package:ins/pages/home.dart'
     as home; // Ensure home.getPage() returns a Widget
@@ -11,9 +12,15 @@ final version = "v1.0.0";
 final versionShort = "v1.0";
 final apiVersion = "v1";
 
-class ISApp extends StatelessWidget {
-  const ISApp({super.key});
+class ISApp extends StatefulWidget {
+  final AppState appState;
+  const ISApp({super.key, required this.appState});
 
+  @override
+  State<ISApp> createState() => _ISAppState();
+}
+
+class _ISAppState extends State<ISApp> {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<locale_manager.LocaleProvider>(
@@ -52,7 +59,7 @@ class ISApp extends StatelessWidget {
                   return supportedLocales.first;
                 },
                 theme: themeManager.getTheme(),
-                home: home.getPage(),
+                home: home.getPage(widget.appState),
               );
             },
           );

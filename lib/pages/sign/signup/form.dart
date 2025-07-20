@@ -1,6 +1,7 @@
 import 'package:ins/models.dart' as models;
 import 'package:ins/appstate.dart';
 import 'package:ins/backend.dart' as backend;
+import 'package:ins/firebase_messaging.dart';
 
 class SignupForm {
   String? username;
@@ -36,6 +37,7 @@ class SignupFormSubmitResult {
     AppState state = await AppState.load();
     state.session = session;
     state.user = user;
-    state.save();
+    await state.save();
+    await FirebaseMessagingHandler().requestPermissionAndRegisterToken();
   }
 }
