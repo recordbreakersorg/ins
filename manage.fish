@@ -6,7 +6,7 @@ function deploy
 end
 function build-web
     echo "[manage.fish] Building for the web"
-    flutter build web --no-web-resources-cdn --optimization-level 4
+    flutter build web --no-web-resources-cdn --optimization-level 4 --wasm
 end
 
 set usage "manage deploy|build-web"
