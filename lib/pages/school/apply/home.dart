@@ -83,9 +83,9 @@ class SchoolApplyHomePage extends StatelessWidget {
                       children: [
                         Text(
                           form.title,
-                          style: Theme.of(context).textTheme.titleLarge,
+                          style: Theme.of(context).textTheme.headlineMedium,
                         ),
-                        const SizedBox(height: 8),
+                        const SizedBox(height: 10),
                         if (form.description != null &&
                             form.description!.isNotEmpty)
                           Text(
@@ -115,4 +115,3 @@ class SchoolApplyHomePage extends StatelessWidget {
     );
   }
 }
-

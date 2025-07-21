@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:ins/animations/page/fade.dart';
 import 'package:ins/models.dart' as models;
+
+import 'package:ins/stuff.dart' as stuff;
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ins/appstate.dart';
 import 'package:ins/widgets/loading.dart';
@@ -180,22 +182,22 @@ class SchoolThumbnailCard extends StatelessWidget {
   Widget _buildBackgroundImage() {
     return Hero(
       tag: 'school-bg-${school.id}',
-      child: Image.asset(
-        "assets/icon/is.png",
+      child: Image.network(
+        stuff.fileUrl(school.profileImage ?? 1),
         fit: BoxFit.cover,
         width: double.infinity,
         height: double.infinity,
-        //loadingBuilder: (context, child, loadingProgress) {
-        //  if (loadingProgress == null) return child;
-        //  return Center(
-        //    child: CircularProgressIndicator(
-        //      value: loadingProgress.expectedTotalBytes != null
-        //          ? loadingProgress.cumulativeBytesLoaded /
-        //                loadingProgress.expectedTotalBytes!
-        //          : null,
-        //    ),
-        //  );
-        //},
+        loadingBuilder: (context, child, loadingProgress) {
+          if (loadingProgress == null) return child;
+          return Center(
+            child: CircularProgressIndicator(
+              value: loadingProgress.expectedTotalBytes != null
+                  ? loadingProgress.cumulativeBytesLoaded /
+                        loadingProgress.expectedTotalBytes!
+                  : null,
+            ),
+          );
+        },
         errorBuilder: (context, error, stackTrace) => Container(
           color: Colors.grey[300],
           child: const Center(child: Icon(Icons.error_outline)),
@@ -236,8 +238,8 @@ class SchoolThumbnailCard extends StatelessWidget {
                   ),
                   child: CircleAvatar(
                     radius: 28,
-                    backgroundColor: Colors.white,
-                    child: Text(school.fullname[0]),
+                    backgroundColor: Colors.transparent,
+                    child: null,
                   ),
                 ),
               ),

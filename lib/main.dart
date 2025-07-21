@@ -12,9 +12,15 @@ void main() async {
   logger.i("started running");
   WidgetsFlutterBinding.ensureInitialized();
   final appState = await AppState.load();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  // This now only sets up the background handler, so it's safe to call here.
-  await FirebaseMessagingHandler().init();
+  try {
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+    // This now only sets up the background handler, so it's safe to call here.
+    await FirebaseMessagingHandler().init();
+  } catch (e) {
+    logger.e("Error initializing Firebase: $e");
+  }
   theme.init();
   locale.init();
   runApp(ISApp(appState: appState));

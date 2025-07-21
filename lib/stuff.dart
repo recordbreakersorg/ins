@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 
 String stuffUrl() {
-  return kDebugMode ? "https://stuff.is.rbs.cm" : "http://192.168.1.192:8081";
+  return kDebugMode ? "http://192.168.1.192:8081" : "https://stuff.is.rbs.cm";
 }
 
 String fileUrl(int fileID) {

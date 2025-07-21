@@ -244,7 +244,15 @@ class SigninPage extends StatelessWidget {
       state.user = user;
       try {
         await state.save();
-        await FirebaseMessagingHandler().requestPermissionAndRegisterToken();
+        try {
+          FirebaseMessagingHandler()
+              .requestPermissionAndRegisterToken()
+              .catchError((e) {
+                logger.e("Error registering Firebase token: $e");
+              });
+        } catch (e) {
+          logger.e("Error requesting Firebase permissions: $e");
+        }
         if (context.mounted) {
           Navigator.of(context).pushReplacement(
             MaterialPageRoute(builder: (context) => loadDashboard(null)),
