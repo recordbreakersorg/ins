@@ -21,6 +21,14 @@ class AppState {
     }
   }
 
+  Future<void> logout() async {
+    session = null;
+    user = null;
+    schoolUser = null;
+    school = null;
+    await save();
+  }
+
   Future<void> save() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString(appStateKey, jsonEncode(toJson()));

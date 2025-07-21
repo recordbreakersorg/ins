@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ins/appstate.dart';
 import 'package:ins/pages/school/explore.dart';
 import 'package:ins/l10n/app_localizations.dart';
+import 'package:ins/pages/welcomepage.dart';
 
 class BlankDashboard extends StatelessWidget {
   final AppState appState;
@@ -49,6 +50,22 @@ class BlankDashboard extends StatelessWidget {
                         builder: (context) =>
                             SchoolExplorePage(appState: appState),
                       ),
+                    );
+                  },
+                ),
+                const SizedBox(height: 20),
+                DashboardButton(
+                  icon: Icons.school,
+                  text: "Logout",
+                  color: Colors.red,
+                  onPressed: () {
+                    appState.logout().then(
+                      (_) => context.mounted
+                          ? Navigator.of(context).pushAndRemoveUntil(
+                              MaterialPageRoute(builder: (_) => WelcomePage()),
+                              (_) => false,
+                            )
+                          : null,
                     );
                   },
                 ),

@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:ins/appstate.dart';
 import 'package:ins/l10n/app_localizations.dart';
 import 'package:ins/l10n/app_localizations_en.dart';
+import 'package:ins/pages/dashboard/dashboard.dart';
 import 'package:ins/utils/logger.dart';
 import 'package:ins/widgets/locale_chooser.dart';
 import 'package:ins/backend.dart' as backend;
@@ -244,6 +245,11 @@ class SigninPage extends StatelessWidget {
       try {
         await state.save();
         await FirebaseMessagingHandler().requestPermissionAndRegisterToken();
+        if (context.mounted) {
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (context) => loadDashboard(null)),
+          );
+        }
       } catch (e) {
         if (context.mounted) {
           throw Exception(AppLocalizations.of(context)!.couldNotSaveAppState);
@@ -253,15 +259,17 @@ class SigninPage extends StatelessWidget {
       }
     } catch (e) {
       logger.e(e);
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(e.toString()),
-          action: SnackBarAction(
-            label: AppLocalizations.of(context)!.retry,
-            onPressed: () {},
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(e.toString()),
+            action: SnackBarAction(
+              label: AppLocalizations.of(context)!.retry,
+              onPressed: () {},
+            ),
           ),
-        ),
-      );
+        );
+      }
       if (!context.mounted) return;
     }
   }

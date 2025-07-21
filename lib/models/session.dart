@@ -7,7 +7,7 @@ class Session implements Model {
   final int userId;
   final DateTime createdAt;
   final String token;
-  final String fcmToken;
+  final String? fcmToken;
   const Session({
     required this.id,
     required this.userId,
@@ -22,7 +22,8 @@ class Session implements Model {
       'user_id': userId,
       'created_at': createdAt.toIso8601String(),
       'token': token,
-      'fcm-token': fcmToken,
+      'fcm-token':
+          fcmToken, //dGW5j79xRTCWHiRthH653Q:APA91bHBejLJusCumxMpFrKy9kXKBj7JbcniOcQGZwqYTrCKlt6kojuBhyclxmuSEo6AYh31Y1h8k-EchpVuRwKUIWT15bi8OQ-XZcmlhiHFaIgg8sZoBbg
     };
   }
 
@@ -32,7 +33,7 @@ class Session implements Model {
       userId: json['user_id'] as int,
       createdAt: DateTime.parse(json['created_at'] as String),
       token: json['token'] as String,
-      fcmToken: json['fcm-token'],
+      fcmToken: json['fcm-token'] as String?,
     );
   }
   Future<User> getUser(Session? session) {

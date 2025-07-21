@@ -10,7 +10,7 @@ class User implements Model {
   final String username;
   final String? email;
   final String fullname;
-  final String? profilePicture;
+  final int? profileImage;
   final String? phone;
   final bool phoneVerified;
   final bool emailVerified;
@@ -28,7 +28,7 @@ class User implements Model {
     required this.fullname,
     required this.birthdate,
     required this.joinedDate,
-    required this.profilePicture,
+    required this.profileImage,
     required this.bio,
     required this.socialLinks,
   });
@@ -41,7 +41,7 @@ class User implements Model {
       fullname: json['fullname'] as String,
       phone: json['phone'] as String?,
       phoneVerified: json['phone_verified'] as bool,
-      profilePicture: json['profile_picture'] as String?,
+      profileImage: json['profile_image'] as int?,
       birthdate: DateTime.tryParse(json['birthdate'] as String? ?? ""),
       joinedDate: DateTime.tryParse(json['joined_date'] as String),
       socialLinks: json['social_links'] as Map<String, dynamic>? ?? {},
@@ -60,7 +60,7 @@ class User implements Model {
       "phone_verified": phoneVerified,
       "birthdate": birthdate?.toIso8601String(),
       "joined_date": joinedDate?.toIso8601String(),
-      "profile_picture": profilePicture,
+      "profile_image": profileImage,
       "bio": bio,
       "social_links": socialLinks,
     };

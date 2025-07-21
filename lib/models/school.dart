@@ -4,23 +4,28 @@ import 'package:ins/models/school_user.dart';
 import 'model.dart';
 import 'package:ins/backend.dart' as backend;
 import 'session.dart';
+import 'package:ins/stuff.dart' as stuff;
 
 class School implements Model {
-  final String? logoUrl;
   final String? address;
   final int id;
   final String schoolname;
   final String fullname;
   final String? description;
   final int? chatserverId;
+  final int? profileImage;
+  String? get logoUrl {
+    print("${profileImage != null ? stuff.fileUrl(profileImage!) : null}");
+    return profileImage != null ? stuff.fileUrl(profileImage!) : null;
+  }
+
   const School({
     required this.id,
     required this.schoolname,
     required this.fullname,
     required this.description,
     required this.chatserverId,
-    this.logoUrl =
-        "http://localhost:8123/is.png", //"https://sintranet.vercel.app/is_logo.png",
+    required this.profileImage,
     this.address = "Somewhere",
   });
   @override
@@ -41,6 +46,7 @@ class School implements Model {
       fullname: obj["fullname"] as String,
       description: obj["description"] as String?,
       chatserverId: obj["chatserver_id"] as int?,
+      profileImage: obj["profile_image"] as int?,
     );
   }
 
