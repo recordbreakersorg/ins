@@ -17,12 +17,12 @@ set usage "manage deploy|build-web|watch"
 
 if test $argv[1] = deploy
     deploy
-else if test $argv[1] = build-web
+else if test "$argv[1]" = build-web
     build-web
-else if test $argv[1] = fire
+else if test "$argv[1]" = fire
     build-web
     deploy
-else if test $argv[1] = watch
+else if test "$argv[1]" = watch
     watch
 else
     echo $usage

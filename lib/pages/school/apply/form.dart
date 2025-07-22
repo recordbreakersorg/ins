@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ins/models.dart' as models;
 import 'package:ins/appstate.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
+import 'package:ins/l10n/app_localizations.dart';
 
 class FormFillPage extends StatefulWidget {
   final AppState appState;
@@ -27,6 +28,7 @@ class _FormFillPageState extends State<FormFillPage> {
   Widget build(BuildContext context) {
     final questions = widget.form.questions;
     final bool isLastQuestion = questionIndex == questions.length - 1;
+    final bool isReviewPage = questionIndex == questions.length;
 
     return Scaffold(
       appBar: AppBar(
@@ -35,42 +37,110 @@ class _FormFillPageState extends State<FormFillPage> {
           icon: const Icon(Icons.close_sharp),
         ),
         title: Text(widget.form.title),
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(8.0),
-          child: LinearProgressIndicator(
-            value: (questionIndex + 1) / questions.length,
-            valueColor: AlwaysStoppedAnimation<Color>(
-              Theme.of(context).colorScheme.primary,
-            ),
-            backgroundColor: Theme.of(
-              context,
-            ).colorScheme.primary.withOpacity(0.2),
-          ),
-        ),
+        bottom: questionIndex < questions.length
+            ? PreferredSize(
+                preferredSize: const Size.fromHeight(8.0),
+                child: LinearProgressIndicator(
+                  value: (questionIndex + 1) / questions.length,
+                  valueColor: AlwaysStoppedAnimation<Color>(
+                    Theme.of(context).colorScheme.primary,
+                  ),
+                  backgroundColor: Theme.of(
+                    context,
+                  ).colorScheme.primary.withAlpha(15),
+                ),
+              )
+            : null,
       ),
       body: Column(
         children: [
           Expanded(
             child: PageView.builder(
               controller: _pageController,
-              itemCount: questions.length,
+              itemCount: questions.length + 1,
               onPageChanged: (index) {
                 setState(() {
                   questionIndex = index;
                 });
               },
               itemBuilder: (context, index) {
-                return _buildQuestionWidget(context, questions[index]);
+                return index == questions.length
+                    ? _buildReviewWidget(context)
+                    : _buildQuestionWidget(context, questions[index]);
               },
             ),
           ),
-          _buildNavigation(isLastQuestion),
+          _buildNavigation(isLastQuestion, isReviewPage),
         ],
       ),
     );
   }
 
-  Widget _buildNavigation(bool isLastQuestion) {
+  Widget _buildReviewWidget(BuildContext context) {
+    return SingleChildScrollView(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            AppLocalizations.of(context)!.pleaseReviewYourEntries,
+            style: Theme.of(
+              context,
+            ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 24),
+          ListView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: widget.form.questions.length,
+            itemBuilder: (BuildContext context, int index) {
+              final question = widget.form.questions[index];
+              final answerFed = answers.containsKey(question.id);
+              final answer = answerFed ? answers[question.id] : null;
+              return Card(
+                margin: const EdgeInsets.symmetric(vertical: 8.0),
+                child: ListTile(
+                  contentPadding: const EdgeInsets.all(16.0),
+                  title: Text(
+                    question.questionText,
+                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                      fontWeight: FontWeight.bold,
+                      color: Theme.of(context).colorScheme.onSurface,
+                    ),
+                  ),
+                  subtitle: Padding(
+                    padding: const EdgeInsets.only(top: 8.0),
+                    child: Text(
+                      answerFed &&
+                              answer != null &&
+                              answer.toString().isNotEmpty
+                          ? answer.toString()
+                          : AppLocalizations.of(context)!.noAnswerProvided,
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        color:
+                            answerFed &&
+                                answer != null &&
+                                answer.toString().isNotEmpty
+                            ? Theme.of(context).colorScheme.onSurfaceVariant
+                            : Theme.of(context).colorScheme.error,
+                      ),
+                    ),
+                  ),
+                  trailing: IconButton(
+                    icon: const Icon(Icons.edit_outlined),
+                    onPressed: () => _gotoQuestion(index),
+                    tooltip: 'Edit Answer',
+                  ),
+                ),
+              );
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildNavigation(bool isLastQuestion, bool isReviewPage) {
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: Row(
@@ -80,17 +150,33 @@ class _FormFillPageState extends State<FormFillPage> {
             TextButton.icon(
               onPressed: _previousQuestion,
               icon: const Icon(Icons.arrow_back_sharp),
-              label: const Text("PREVIOUS"),
+              label: Text(AppLocalizations.of(context)!.previous),
             ),
           const Spacer(),
+          if (!isReviewPage)
+            TextButton(
+              onPressed: () => _gotoQuestion(widget.form.questions.length),
+              child: Text(AppLocalizations.of(context)!.review),
+            ),
+          const SizedBox(width: 16),
           FilledButton.icon(
-            onPressed: isLastQuestion ? _submitForm : _nextQuestion,
+            onPressed: isReviewPage
+                ? _submitForm
+                : isLastQuestion
+                ? () => _gotoQuestion(widget.form.questions.length)
+                : _nextQuestion,
             icon: Icon(
-              isLastQuestion
+              isReviewPage || isLastQuestion
                   ? Icons.check_circle_outline
                   : Icons.arrow_forward_sharp,
             ),
-            label: Text(isLastQuestion ? "SUBMIT" : "NEXT"),
+            label: Text(
+              isReviewPage
+                  ? AppLocalizations.of(context)!.submit
+                  : isLastQuestion
+                  ? AppLocalizations.of(context)!.review
+                  : AppLocalizations.of(context)!.next,
+            ),
           ),
         ],
       ),
@@ -107,7 +193,7 @@ class _FormFillPageState extends State<FormFillPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Question ${questionIndex + 1} of ${widget.form.questions.length}",
+            "${questionIndex + 1} / ${widget.form.questions.length}",
             style: Theme.of(context).textTheme.bodySmall,
           ),
           const SizedBox(height: 8),
@@ -133,9 +219,9 @@ class _FormFillPageState extends State<FormFillPage> {
         return TextFormField(
           initialValue: answers[question.id] as String?,
           onChanged: (value) => answers[question.id] = value,
-          decoration: const InputDecoration(
+          decoration: InputDecoration(
             border: OutlineInputBorder(),
-            hintText: 'Your answer',
+            hintText: AppLocalizations.of(context)!.yourAnswer,
           ),
         );
       case models.SchoolApplicationFormQuestionType.int:
@@ -143,9 +229,9 @@ class _FormFillPageState extends State<FormFillPage> {
           initialValue: answers[question.id]?.toString(),
           onChanged: (value) => answers[question.id] = int.tryParse(value),
           keyboardType: TextInputType.number,
-          decoration: const InputDecoration(
+          decoration: InputDecoration(
             border: OutlineInputBorder(),
-            hintText: 'Enter a number',
+            hintText: AppLocalizations.of(context)!.enterANumber,
           ),
         );
       case models.SchoolApplicationFormQuestionType.email:
@@ -155,7 +241,7 @@ class _FormFillPageState extends State<FormFillPage> {
           keyboardType: TextInputType.emailAddress,
           decoration: const InputDecoration(
             border: OutlineInputBorder(),
-            hintText: 'you@example.com',
+            hintText: 'bananana@example.cm',
           ),
         );
       case models.SchoolApplicationFormQuestionType.phone:
@@ -167,15 +253,19 @@ class _FormFillPageState extends State<FormFillPage> {
             selectorType: PhoneInputSelectorType.BOTTOM_SHEET,
           ),
           ignoreBlank: false,
+          initialValue: PhoneNumber(
+            phoneNumber: answers[question.id] as String?,
+            isoCode: 'CM',
+          ),
           autoValidateMode: AutovalidateMode.onUserInteraction,
           formatInput: true,
           keyboardType: const TextInputType.numberWithOptions(
             signed: true,
             decimal: true,
           ),
-          inputDecoration: const InputDecoration(
+          inputDecoration: InputDecoration(
             border: OutlineInputBorder(),
-            hintText: 'Phone number',
+            hintText: AppLocalizations.of(context)!.phoneNumber,
           ),
         );
       case models.SchoolApplicationFormQuestionType.date:
@@ -201,9 +291,9 @@ class _FormFillPageState extends State<FormFillPage> {
               });
             }
           },
-          decoration: const InputDecoration(
+          decoration: InputDecoration(
             border: OutlineInputBorder(),
-            hintText: 'Select a date',
+            hintText: AppLocalizations.of(context)!.selectADate,
             suffixIcon: Icon(Icons.calendar_today),
           ),
         );
@@ -231,9 +321,9 @@ class _FormFillPageState extends State<FormFillPage> {
               answers[question.id] = newValue;
             });
           },
-          decoration: const InputDecoration(
+          decoration: InputDecoration(
             border: OutlineInputBorder(),
-            hintText: 'Select an option',
+            hintText: AppLocalizations.of(context)!.selectAnOption,
           ),
         );
       case models.SchoolApplicationFormQuestionType.checkbox:
@@ -261,8 +351,6 @@ class _FormFillPageState extends State<FormFillPage> {
         );
       case models.SchoolApplicationFormQuestionType.file:
         return const Text("File uploads are not supported in this version.");
-      default:
-        return Text("Unsupported question type: ${question.questionType}");
     }
   }
 
@@ -280,10 +368,15 @@ class _FormFillPageState extends State<FormFillPage> {
     );
   }
 
+  void _gotoQuestion(int index) {
+    _pageController.jumpToPage(index);
+  }
+
   void _submitForm() {
-    // TODO: Implement form submission logic
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Form submitted! (Not really)')),
+      SnackBar(
+        content: Text(AppLocalizations.of(context)!.formSubmittedNotReally),
+      ),
     );
     Navigator.of(context).pop();
   }
@@ -294,4 +387,3 @@ class _FormFillPageState extends State<FormFillPage> {
     super.dispose();
   }
 }
-

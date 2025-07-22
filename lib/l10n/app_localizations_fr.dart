@@ -15,10 +15,14 @@ class AppLocalizationsFr extends AppLocalizations {
   String get contactInformation => 'Informations de contact';
 
   @override
-  String get accountCreatedSuccesfuly => '##Account succefsully created';
+  String get accountCreatedSuccesfuly => 'Compte créé avec succès';
 
   @override
-  String get couldNotSaveAppState => '#Could not save app State';
+  String get couldNotSaveAppState =>
+      'Impossible d\'enregistrer l\'état de l\'application';
+
+  @override
+  String get formSubmittedNotReally => 'Formulaire soumis ! (Pas vraiment)';
 
   @override
   String get invalidDomainComponent => 'Composant de domaine invalide';
@@ -31,6 +35,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get noSchoolFound => 'Aucune école trouvée';
+
+  @override
+  String get submit => 'SOUMETTRE';
 
   @override
   String get nothingHere => 'Rien ici';
@@ -52,6 +59,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get whatDoYouWantToApplyFor => 'Pour quoi voulez-vous postuler ?';
 
   @override
+  String get next => 'SUIVANT';
+
+  @override
   String get wasNotTranslated => 'N\'a pas été traduit';
 
   @override
@@ -61,7 +71,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get sloganShort => 'Des liens forts, un avenir prometteur';
 
   @override
-  String get optionalInformations => '##Informations optionnelles';
+  String get optionalInformations => 'Informations optionnelles';
 
   @override
   String get waitingMessages =>
@@ -69,11 +79,11 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get invalidEmailDomainsecondPart =>
-      '##Domaine de l\'e-mail invalide (deuxième partie)';
+      'Domaine de l\'e-mail invalide (deuxième partie)';
 
   @override
   String get couldNotGetSchooolApplicationForms =>
-      '##Nous n\'avons pas pu recevoid les formulaires d\'inscription';
+      'Nous n\'avons pas pu recevoir les formulaires d\'inscription';
 
   @override
   String get passwordShouldHaveAtLeast8Characters =>
@@ -90,7 +100,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get addEmailaoPhoneNumber =>
-      '##Renseigner une adresse e-mail et/ou un numéro de téléphone';
+      'Ajouter une adresse e-mail et/ou un numéro de téléphone';
 
   @override
   String get campus => 'Campus';
@@ -103,13 +113,16 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get usernameMustHaveBetween4And20Characters =>
-      '####Le nom d\'utilisateur doit contenir entre 3 et 20 caractères';
+      'Le nom d\'utilisateur doit contenir entre 3 et 20 caractères';
 
   @override
   String get helloWorldOfThings => 'Salut le monde des choses';
 
   @override
   String get password => 'Mot de passe';
+
+  @override
+  String get selectADate => 'Sélectionner une date';
 
   @override
   String get connectAccount => 'Connecter votre compte';
@@ -123,6 +136,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get continueGt => 'Continuer >';
+
+  @override
+  String get enterANumber => 'Entrez un nombre';
 
   @override
   String get accountCreatedSuccessfully => 'Compte créé avec succès';
@@ -152,6 +168,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get atAGlance => 'En un coup d\'œil';
 
   @override
+  String get pleaseReviewYourEntries => 'Veuillez vérifier vos saisies';
+
+  @override
   String get browseSchools => 'Parcourir les écoles';
 
   @override
@@ -172,10 +191,17 @@ class AppLocalizationsFr extends AppLocalizations {
       'Impossible de récupérer les formulaires de demande d\'école';
 
   @override
+  String get noAnswerProvided => 'Aucune réponse fournie';
+
+  @override
   String get welcomeExcl => 'Bienvenue !';
 
   @override
   String get schoolApplication => 'Candidature scolaire';
+
+  @override
+  String get iHaveReadAndAgreeToTheTearmsAndConditions =>
+      'J\'ai lu et j\'accepte les conditions d\'utilisation.';
 
   @override
   String get noDescriptionProvided => 'Aucune description fournie.';
@@ -191,10 +217,16 @@ class AppLocalizationsFr extends AppLocalizations {
   String get editProfile => 'Modifier le profil';
 
   @override
+  String get previous => 'PRÉCÉDENT';
+
+  @override
   String get reenterPassword => 'Retapez votre mot de passe';
 
   @override
-  String get signin => '#Signin';
+  String get signin => 'Se connecter';
+
+  @override
+  String get selectAnOption => 'Sélectionner une option';
 
   @override
   String get username => 'Nom d\'utilisateur';
@@ -213,12 +245,18 @@ class AppLocalizationsFr extends AppLocalizations {
       'Domaine de l\'e-mail invalide (deuxième partie)';
 
   @override
+  String get review => 'VÉRIFIER';
+
+  @override
   String get iHaveReadAndAgreeToTheTermsAndConditions =>
-      'J\'ai lu et j\'accepte les conditions d\'utilisation.';
+      '#I have read and agree to the terms and conditions.';
 
   @override
   String get welcomeConnectOrCreateAccount =>
       'Connectez un compte existant ou créez-en un nouveau pour commencer votre voyage avec nous';
+
+  @override
+  String get yourAnswer => 'Votre réponse';
 
   @override
   String get phoneNumber => 'Numéro de téléphone';
@@ -235,7 +273,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get passwordShouldHaveAtleast8Characters =>
-      '##Le mot de passe doit contenir au moins 8 caractères';
+      'Le mot de passe doit contenir au moins 8 caractères';
 
   @override
   String get createAccount => 'Créer un compte';

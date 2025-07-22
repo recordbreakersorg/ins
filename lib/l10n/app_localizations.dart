@@ -113,14 +113,20 @@ abstract class AppLocalizations {
   /// No description provided for @accountCreatedSuccesfuly.
   ///
   /// In en, this message translates to:
-  /// **'#Account succefsully created'**
+  /// **'Account successfully created'**
   String get accountCreatedSuccesfuly;
 
   /// No description provided for @couldNotSaveAppState.
   ///
   /// In en, this message translates to:
-  /// **'Could not save app State'**
+  /// **'Could not save app state'**
   String get couldNotSaveAppState;
+
+  /// No description provided for @formSubmittedNotReally.
+  ///
+  /// In en, this message translates to:
+  /// **'Form submitted! (Not really)'**
+  String get formSubmittedNotReally;
 
   /// No description provided for @invalidDomainComponent.
   ///
@@ -145,6 +151,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No school found'**
   String get noSchoolFound;
+
+  /// No description provided for @submit.
+  ///
+  /// In en, this message translates to:
+  /// **'SUBMIT'**
+  String get submit;
 
   /// No description provided for @nothingHere.
   ///
@@ -182,6 +194,12 @@ abstract class AppLocalizations {
   /// **'What do you want to apply for?'**
   String get whatDoYouWantToApplyFor;
 
+  /// No description provided for @next.
+  ///
+  /// In en, this message translates to:
+  /// **'NEXT'**
+  String get next;
+
   /// No description provided for @wasNotTranslated.
   ///
   /// In en, this message translates to:
@@ -203,7 +221,7 @@ abstract class AppLocalizations {
   /// No description provided for @optionalInformations.
   ///
   /// In en, this message translates to:
-  /// **'#Informations optionnelles'**
+  /// **'Optional information'**
   String get optionalInformations;
 
   /// No description provided for @waitingMessages.
@@ -215,13 +233,13 @@ abstract class AppLocalizations {
   /// No description provided for @invalidEmailDomainsecondPart.
   ///
   /// In en, this message translates to:
-  /// **'#Domaine de l\'e-mail invalide (deuxième partie)'**
+  /// **'Invalid email domain (second part)'**
   String get invalidEmailDomainsecondPart;
 
   /// No description provided for @couldNotGetSchooolApplicationForms.
   ///
   /// In en, this message translates to:
-  /// **'#Nous n\'avons pas pu recevoid les formulaires d\'inscription'**
+  /// **'Could not get school application forms'**
   String get couldNotGetSchooolApplicationForms;
 
   /// No description provided for @passwordShouldHaveAtLeast8Characters.
@@ -251,7 +269,7 @@ abstract class AppLocalizations {
   /// No description provided for @addEmailaoPhoneNumber.
   ///
   /// In en, this message translates to:
-  /// **'#Renseigner une adresse e-mail et/ou un numéro de téléphone'**
+  /// **'Add an email address and/or a phone number'**
   String get addEmailaoPhoneNumber;
 
   /// No description provided for @campus.
@@ -275,7 +293,7 @@ abstract class AppLocalizations {
   /// No description provided for @usernameMustHaveBetween4And20Characters.
   ///
   /// In en, this message translates to:
-  /// **'###Le nom d\'utilisateur doit contenir entre 3 et 20 caractères'**
+  /// **'Username must have between 3 and 20 characters'**
   String get usernameMustHaveBetween4And20Characters;
 
   /// No description provided for @helloWorldOfThings.
@@ -289,6 +307,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Password'**
   String get password;
+
+  /// No description provided for @selectADate.
+  ///
+  /// In en, this message translates to:
+  /// **'Select a date'**
+  String get selectADate;
 
   /// No description provided for @connectAccount.
   ///
@@ -313,6 +337,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Continue >'**
   String get continueGt;
+
+  /// No description provided for @enterANumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a number'**
+  String get enterANumber;
 
   /// No description provided for @accountCreatedSuccessfully.
   ///
@@ -362,6 +392,12 @@ abstract class AppLocalizations {
   /// **'At a Glance'**
   String get atAGlance;
 
+  /// No description provided for @pleaseReviewYourEntries.
+  ///
+  /// In en, this message translates to:
+  /// **'Please, review your entries'**
+  String get pleaseReviewYourEntries;
+
   /// No description provided for @browseSchools.
   ///
   /// In en, this message translates to:
@@ -398,6 +434,12 @@ abstract class AppLocalizations {
   /// **'Could not get school application forms'**
   String get couldNotGetSchoolApplicationForms;
 
+  /// No description provided for @noAnswerProvided.
+  ///
+  /// In en, this message translates to:
+  /// **'No answer provided'**
+  String get noAnswerProvided;
+
   /// No description provided for @welcomeExcl.
   ///
   /// In en, this message translates to:
@@ -409,6 +451,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'School Application'**
   String get schoolApplication;
+
+  /// No description provided for @iHaveReadAndAgreeToTheTearmsAndConditions.
+  ///
+  /// In en, this message translates to:
+  /// **'#J\'ai lu et j\'accepte les conditions d\'utilisation.'**
+  String get iHaveReadAndAgreeToTheTearmsAndConditions;
 
   /// No description provided for @noDescriptionProvided.
   ///
@@ -434,6 +482,12 @@ abstract class AppLocalizations {
   /// **'Edit Profile'**
   String get editProfile;
 
+  /// No description provided for @previous.
+  ///
+  /// In en, this message translates to:
+  /// **'PREVIOUS'**
+  String get previous;
+
   /// No description provided for @reenterPassword.
   ///
   /// In en, this message translates to:
@@ -445,6 +499,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Signin'**
   String get signin;
+
+  /// No description provided for @selectAnOption.
+  ///
+  /// In en, this message translates to:
+  /// **'Select an option'**
+  String get selectAnOption;
 
   /// No description provided for @username.
   ///
@@ -476,6 +536,12 @@ abstract class AppLocalizations {
   /// **'Invalid email domain (second part)'**
   String get invalidEmailDomainSecondPart;
 
+  /// No description provided for @review.
+  ///
+  /// In en, this message translates to:
+  /// **'REVIEW'**
+  String get review;
+
   /// No description provided for @iHaveReadAndAgreeToTheTermsAndConditions.
   ///
   /// In en, this message translates to:
@@ -487,6 +553,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Connect an existing account or create a new one to embark on your journey with us'**
   String get welcomeConnectOrCreateAccount;
+
+  /// No description provided for @yourAnswer.
+  ///
+  /// In en, this message translates to:
+  /// **'Your answer'**
+  String get yourAnswer;
 
   /// No description provided for @phoneNumber.
   ///
@@ -515,7 +587,7 @@ abstract class AppLocalizations {
   /// No description provided for @passwordShouldHaveAtleast8Characters.
   ///
   /// In en, this message translates to:
-  /// **'#Le mot de passe doit contenir au moins 8 caractères'**
+  /// **'Password should have at least 8 characters'**
   String get passwordShouldHaveAtleast8Characters;
 
   /// No description provided for @createAccount.

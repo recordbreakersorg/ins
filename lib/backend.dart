@@ -1,7 +1,9 @@
 import 'dart:convert';
-import 'package:flutter/foundation.dart';
+//import 'package:flutter/foundation.dart';
 import 'package:ins/models.dart' as models;
 import 'package:http/http.dart' as http;
+
+final kDebugMode = true;
 
 String getBackendBase() {
   return kDebugMode ? "http://192.168.1.192:8080" : "https://api.ins.rbs.cm";
