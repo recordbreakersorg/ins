@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:ins/l10n/app_localizations.dart';
 
-String? chechEmail(BuildContext context, String email) {
-  final match = RegExp("[^a-zA-Z0-9@.]").firstMatch("email");
+String? checkEmail(BuildContext context, String email) {
+  final match = RegExp("[^a-zA-Z0-9@.]").firstMatch(email);
   if (match != null) {
     return AppLocalizations.of(context)!.invalidCharacterInEmail +
         match[0].toString();

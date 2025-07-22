@@ -122,7 +122,7 @@ class _ExtraLinkedPageState extends State<ExtraLinkedPage> {
       if (_emailController.text.isEmpty) {
         _emailError = null;
       } else {
-        _emailError = chechEmail(context, _emailController.text);
+        _emailError = checkEmail(context, _emailController.text);
       }
     });
   }
