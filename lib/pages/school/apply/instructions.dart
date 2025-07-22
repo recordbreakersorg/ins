@@ -57,7 +57,7 @@ class InstructionsPage extends StatelessWidget {
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () {
-                  Navigator.of(context).push(
+                  Navigator.of(context).pushReplacement(
                     MaterialPageRoute(
                       builder: (context) =>
                           FormFillPage(appState: appState, form: form),
