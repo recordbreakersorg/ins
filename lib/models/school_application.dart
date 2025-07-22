@@ -1,3 +1,5 @@
+import 'package:ins/utils/logger.dart';
+
 import 'model.dart';
 
 enum SchoolApplicationFormQuestionType {
@@ -14,16 +16,14 @@ enum SchoolApplicationFormQuestionType {
 
 class SchoolApplicationFormQuestion implements Model {
   final int id;
-  final int formId;
-  final String text;
+  final String questionText;
   final SchoolApplicationFormQuestionType questionType;
   final Map<String, dynamic> options;
   final bool required;
 
   const SchoolApplicationFormQuestion({
     required this.id,
-    required this.formId,
-    required this.text,
+    required this.questionText,
     required this.questionType,
     required this.options,
     required this.required,
@@ -32,12 +32,11 @@ class SchoolApplicationFormQuestion implements Model {
   factory SchoolApplicationFormQuestion.fromJson(Map<String, dynamic> data) {
     return SchoolApplicationFormQuestion(
       id: data['id'] as int,
-      formId: data['form_id'] as int,
-      text: data['text'] as String,
+      questionText: data['question_text'] as String,
       questionType: SchoolApplicationFormQuestionType.values.byName(
         data['question_type'] as String,
       ),
-      options: data['options'] as Map<String, dynamic>,
+      options: data['options'] as Map<String, dynamic>? ?? {},
       required: data['required'] as bool,
     );
   }
@@ -46,8 +45,7 @@ class SchoolApplicationFormQuestion implements Model {
   Map<String, dynamic> toJson() {
     return {
       'id': id,
-      'form_id': formId,
-      'text': text,
+      'question_text': questionText,
       'question_type': questionType.name,
       'options': options,
       'required': required,
@@ -73,6 +71,25 @@ class SchoolApplicationForm implements Model {
     required this.submittedMessage,
     required this.questions,
   });
+  String getInstructions() {
+    return instructions ??
+        """
+# School Application Instructions
+
+Welcome to the school application form. Please read the following instructions carefully before proceeding:
+
+1. **Complete All Fields:** Ensure that you fill in all required fields in the application form. Incomplete applications may not be processed.
+
+2. **Review Your Information:** Before submitting, double-check all the information you have provided. Make sure your details are accurate and reflect your values and intentions.
+
+3. **Submission and Processing:** After submitting your application, it will be reviewed by our school staff. Please note that the review process is handled by real people and may take a variable number of working days.
+
+4. **Notification:** You will be notified of the outcome once a decision has been made. If further information is needed, we may contact you using the details provided.
+
+Thank you for your interest in our school. We look forward to reviewing your application.
+""";
+  }
+
   factory SchoolApplicationForm.fromJson(Map<String, dynamic> data) {
     return SchoolApplicationForm(
       id: data['id'] as int,

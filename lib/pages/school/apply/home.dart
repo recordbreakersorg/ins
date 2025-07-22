@@ -3,6 +3,7 @@ import 'package:ins/appstate.dart';
 import 'package:ins/l10n/app_localizations.dart';
 import 'package:ins/models.dart' as models;
 import 'package:ins/widgets/imsg.dart';
+import 'instructions.dart';
 
 class SchoolApplyHomePage extends StatelessWidget {
   final AppState appState;
@@ -74,7 +75,12 @@ class SchoolApplyHomePage extends StatelessWidget {
                 clipBehavior: Clip.antiAlias,
                 child: InkWell(
                   onTap: () {
-                    // TODO: Handle form selection and navigation
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            InstructionsPage(appState: appState, form: form),
+                      ),
+                    );
                   },
                   child: Padding(
                     padding: const EdgeInsets.all(16.0),
@@ -85,7 +91,7 @@ class SchoolApplyHomePage extends StatelessWidget {
                           form.title,
                           style: Theme.of(context).textTheme.headlineMedium,
                         ),
-                        const SizedBox(height: 10),
+                        const SizedBox(height: 15),
                         if (form.description != null &&
                             form.description!.isNotEmpty)
                           Text(

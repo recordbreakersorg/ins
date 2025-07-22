@@ -23,21 +23,31 @@ class _FormFillPageState extends State<FormFillPage> {
 
   @override
   Widget build(BuildContext context) {
+    if (widget.form.questions.isEmpty) {
+      return Scaffold(
+        appBar: AppBar(title: Text("Application form")),
+        body: Center(child: Text("No questions to display.")),
+      );
+    } else {
+      questionIndex = questionIndex.clamp(0, widget.form.questions.length - 1);
+    }
     final question = widget.form.questions[questionIndex];
     // bad to recreate the whole scaffold each time, but...
     return Scaffold(
       appBar: AppBar(
-        leading: OutlinedButton.icon(
+        leading: IconButton(
           onPressed: () => Navigator.of(context).pop(),
-          label: Icon(Icons.close_sharp),
+          icon: Icon(Icons.close_sharp),
         ),
         title: Text("Applicaiton form"),
       ),
       body: Column(
         children: [
+          Text(
+            "Question ${questionIndex + 1} of ${widget.form.questions.length}",
+          ),
           LinearProgressIndicator(
             value: (questionIndex + 1) / widget.form.questions.length,
-            backgroundColor: Theme.of(context).primaryColor,
             valueColor: AlwaysStoppedAnimation<Color>(
               Theme.of(context).colorScheme.primary,
             ),
@@ -50,13 +60,69 @@ class _FormFillPageState extends State<FormFillPage> {
                 onPressed: questionIndex > 0 ? _previousQuesiton : null,
                 icon: Icon(Icons.arrow_back_sharp),
               ),
-              SizedBox(width: double.infinity),
             ],
           ),
           const SizedBox(height: 20),
+          _buildQuestionWidget(context, question),
+          Spacer(),
+          SizedBox(
+            width: double.infinity,
+            child: Padding(
+              padding: EdgeInsets.all(20),
+              child: FilledButton(
+                onPressed: _nextQuesiton,
+                child: Text("next >"),
+              ),
+            ),
+          ),
         ],
       ),
     );
+  }
+
+  Widget _buildQuestionWidget(
+    BuildContext context,
+    models.SchoolApplicationFormQuestion question,
+  ) {
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            question.questionText,
+            style: Theme.of(context).textTheme.headlineMedium,
+          ),
+          const SizedBox(height: 10),
+          Hero(
+            tag: "school-application-form-question-entry",
+            child: _buildQuestionInputField(context, question),
+          ),
+
+          // Add more question types as needed
+        ],
+      ),
+    );
+  }
+
+  Widget _buildQuestionInputField(
+    BuildContext context,
+    models.SchoolApplicationFormQuestion question,
+  ) {
+    if (question.questionType ==
+        models.SchoolApplicationFormQuestionType.string) {
+      return TextField(
+        onChanged: (value) {
+          answers[question.id] = value;
+        },
+        decoration: InputDecoration(
+          border: OutlineInputBorder(),
+          hintText: 'Your answer',
+        ),
+      );
+    } else {
+      return Text("Unsupported question type: ${question.questionType}");
+    }
   }
 
   void _previousQuesiton() {
@@ -69,7 +135,7 @@ class _FormFillPageState extends State<FormFillPage> {
   void _nextQuesiton() {
     if (questionIndex >= widget.form.questions.length - 1) return;
     setState(() {
-      questionIndex--;
+      questionIndex++;
     });
   }
 }
