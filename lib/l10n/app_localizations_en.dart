@@ -39,6 +39,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get submit => 'SUBMIT';
 
   @override
+  String get pleaseFixTheErrorsBeforeSubmitting =>
+      'Please fix the errors before submitting.';
+
+  @override
   String get nothingHere => 'Nothing here';
 
   @override
@@ -49,6 +53,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get welcomeToIS => 'Welcome to IS';
+
+  @override
+  String get thisFieldIsRequired => 'This field is required.';
 
   @override
   String get emailShouldContain1 => 'Email should contain 1 \'@\'';
@@ -84,8 +91,17 @@ class AppLocalizationsEn extends AppLocalizations {
       'Could not get school application forms';
 
   @override
+  String get pleaseEnterAValidPhoneNumber =>
+      'Please enter a valid phone number.';
+
+  @override
   String get passwordShouldHaveAtLeast8Characters =>
       'Password should have at least 8 characters length';
+
+  @override
+  String
+  get underscoreareYouSureYouWantToLogoutquestionYouWillNeedToLoginAgainOrCreateAnAccountdot =>
+      'Are you sure you want to logout? You will need to login again or create an account.';
 
   @override
   String get rating => 'Rating';
@@ -123,7 +139,17 @@ class AppLocalizationsEn extends AppLocalizations {
   String get selectADate => 'Select a date';
 
   @override
+  String get starRequired => '* Required';
+
+  @override
   String get connectAccount => 'Connect account';
+
+  @override
+  String get fileUploadsAreNotSupportedInThisVersion =>
+      'File uploads are not supported in this version.';
+
+  @override
+  String get underscorestartApplication => 'Start Application';
 
   @override
   String get usernameMustHaveBetween3And20Characters =>
@@ -172,7 +198,19 @@ class AppLocalizationsEn extends AppLocalizations {
   String get browseSchools => 'Browse Schools';
 
   @override
+  String get pleaseSelectAtLeastOneOption =>
+      'Please select at least one option.';
+
+  @override
+  String get logout => 'Logout';
+
+  @override
   String get thisUsernameIsAlreadyTaken => 'This username is already taken';
+
+  @override
+  String
+  get areYouSureYouWantToLogoutquestionYouWillNeedToLoginAgainOrCreateAnAccountdot =>
+      'Are you sure you want to logout? You will need to login again or create an account.';
 
   @override
   String get creatingYourAccount => 'Creating your account';
@@ -198,7 +236,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get iHaveReadAndAgreeToTheTearmsAndConditions =>
-      '#J\'ai lu et j\'accepte les conditions d\'utilisation.';
+      'I have read and agree to the terms and conditions.';
+
+  @override
+  String get editAnswer => 'Edit Answer';
 
   @override
   String get noDescriptionProvided => 'No description provided.';
@@ -208,6 +249,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get areWeGoing => 'Are we going?';
+
+  @override
+  String get underscorelogout => 'Logout';
 
   @override
   String get editProfile => 'Edit Profile';

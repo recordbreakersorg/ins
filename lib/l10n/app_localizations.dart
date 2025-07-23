@@ -158,6 +158,12 @@ abstract class AppLocalizations {
   /// **'SUBMIT'**
   String get submit;
 
+  /// No description provided for @pleaseFixTheErrorsBeforeSubmitting.
+  ///
+  /// In en, this message translates to:
+  /// **'Please fix the errors before submitting.'**
+  String get pleaseFixTheErrorsBeforeSubmitting;
+
   /// No description provided for @nothingHere.
   ///
   /// In en, this message translates to:
@@ -181,6 +187,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Welcome to IS'**
   String get welcomeToIS;
+
+  /// No description provided for @thisFieldIsRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'This field is required.'**
+  String get thisFieldIsRequired;
 
   /// No description provided for @emailShouldContain1.
   ///
@@ -242,11 +254,24 @@ abstract class AppLocalizations {
   /// **'Could not get school application forms'**
   String get couldNotGetSchooolApplicationForms;
 
+  /// No description provided for @pleaseEnterAValidPhoneNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid phone number.'**
+  String get pleaseEnterAValidPhoneNumber;
+
   /// No description provided for @passwordShouldHaveAtLeast8Characters.
   ///
   /// In en, this message translates to:
   /// **'Password should have at least 8 characters length'**
   String get passwordShouldHaveAtLeast8Characters;
+
+  /// No description provided for @underscoreareYouSureYouWantToLogoutquestionYouWillNeedToLoginAgainOrCreateAnAccountdot.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to logout? You will need to login again or create an account.'**
+  String
+  get underscoreareYouSureYouWantToLogoutquestionYouWillNeedToLoginAgainOrCreateAnAccountdot;
 
   /// No description provided for @rating.
   ///
@@ -314,11 +339,29 @@ abstract class AppLocalizations {
   /// **'Select a date'**
   String get selectADate;
 
+  /// No description provided for @starRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'* Required'**
+  String get starRequired;
+
   /// No description provided for @connectAccount.
   ///
   /// In en, this message translates to:
   /// **'Connect account'**
   String get connectAccount;
+
+  /// No description provided for @fileUploadsAreNotSupportedInThisVersion.
+  ///
+  /// In en, this message translates to:
+  /// **'File uploads are not supported in this version.'**
+  String get fileUploadsAreNotSupportedInThisVersion;
+
+  /// No description provided for @underscorestartApplication.
+  ///
+  /// In en, this message translates to:
+  /// **'Start Application'**
+  String get underscorestartApplication;
 
   /// No description provided for @usernameMustHaveBetween3And20Characters.
   ///
@@ -404,11 +447,30 @@ abstract class AppLocalizations {
   /// **'Browse Schools'**
   String get browseSchools;
 
+  /// No description provided for @pleaseSelectAtLeastOneOption.
+  ///
+  /// In en, this message translates to:
+  /// **'Please select at least one option.'**
+  String get pleaseSelectAtLeastOneOption;
+
+  /// No description provided for @logout.
+  ///
+  /// In en, this message translates to:
+  /// **'Logout'**
+  String get logout;
+
   /// No description provided for @thisUsernameIsAlreadyTaken.
   ///
   /// In en, this message translates to:
   /// **'This username is already taken'**
   String get thisUsernameIsAlreadyTaken;
+
+  /// No description provided for @areYouSureYouWantToLogoutquestionYouWillNeedToLoginAgainOrCreateAnAccountdot.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to logout? You will need to login again or create an account.'**
+  String
+  get areYouSureYouWantToLogoutquestionYouWillNeedToLoginAgainOrCreateAnAccountdot;
 
   /// No description provided for @creatingYourAccount.
   ///
@@ -455,8 +517,14 @@ abstract class AppLocalizations {
   /// No description provided for @iHaveReadAndAgreeToTheTearmsAndConditions.
   ///
   /// In en, this message translates to:
-  /// **'#J\'ai lu et j\'accepte les conditions d\'utilisation.'**
+  /// **'I have read and agree to the terms and conditions.'**
   String get iHaveReadAndAgreeToTheTearmsAndConditions;
+
+  /// No description provided for @editAnswer.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Answer'**
+  String get editAnswer;
 
   /// No description provided for @noDescriptionProvided.
   ///
@@ -475,6 +543,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Are we going?'**
   String get areWeGoing;
+
+  /// No description provided for @underscorelogout.
+  ///
+  /// In en, this message translates to:
+  /// **'Logout'**
+  String get underscorelogout;
 
   /// No description provided for @editProfile.
   ///

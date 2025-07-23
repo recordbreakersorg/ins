@@ -9,7 +9,7 @@ import 'package:ins/utils/logger.dart';
 import 'package:ins/widgets/locale_chooser.dart';
 import 'package:ins/backend.dart' as backend;
 import 'package:ins/models.dart' as models;
-import 'package:ins/firebase_messaging.dart';
+import 'package:ins/firebase_messaging.dart' as firebase_messaging;
 
 class SigninPage extends StatelessWidget {
   final TextEditingController _usernameController = TextEditingController();
@@ -245,11 +245,11 @@ class SigninPage extends StatelessWidget {
       try {
         await state.save();
         try {
-          FirebaseMessagingHandler()
-              .requestPermissionAndRegisterToken()
-              .catchError((e) {
-                logger.e("Error registering Firebase token: $e");
-              });
+          firebase_messaging.requestPermissionAndRegisterToken().catchError((
+            e,
+          ) {
+            logger.e("Error registering Firebase token: $e");
+          });
         } catch (e) {
           logger.e("Error requesting Firebase permissions: $e");
         }

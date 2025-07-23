@@ -85,13 +85,13 @@ class _FormFillPageState extends State<FormFillPage> {
   ) {
     if (question.required) {
       if (answer == null) {
-        return "This field is required.";
+        return AppLocalizations.of(context)!.thisFieldIsRequired;
       }
       if (answer is String && answer.isEmpty) {
-        return "This field is required.";
+        return AppLocalizations.of(context)!.thisFieldIsRequired;
       }
       if (answer is Set && answer.isEmpty) {
-        return "Please select at least one option.";
+        return AppLocalizations.of(context)!.pleaseSelectAtLeastOneOption;
       }
     }
 
@@ -103,7 +103,7 @@ class _FormFillPageState extends State<FormFillPage> {
         break;
       case models.SchoolApplicationFormQuestionType.phone:
         if (answer is String && answer.length < 9) {
-          return "Please enter a valid phone number.";
+          return AppLocalizations.of(context)!.pleaseEnterAValidPhoneNumber;
         }
         break;
       default:
@@ -120,7 +120,7 @@ class _FormFillPageState extends State<FormFillPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Please review your entries",
+            AppLocalizations.of(context)!.pleaseReviewYourEntries,
             style: Theme.of(
               context,
             ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
@@ -152,7 +152,7 @@ class _FormFillPageState extends State<FormFillPage> {
                     child: Text(
                       answer != null && answer.toString().isNotEmpty
                           ? answer.toString()
-                          : "No answer provided",
+                          : AppLocalizations.of(context)!.noAnswerProvided,
                       style: TextStyle(
                         color: answer != null && answer.toString().isNotEmpty
                             ? Theme.of(context).textTheme.bodyLarge?.color
@@ -168,7 +168,7 @@ class _FormFillPageState extends State<FormFillPage> {
                       : IconButton(
                           icon: const Icon(Icons.edit_outlined),
                           onPressed: () => _gotoQuestion(index),
-                          tooltip: 'Edit Answer',
+                          tooltip: AppLocalizations.of(context)!.editAnswer,
                         ),
                   onTap: () => _gotoQuestion(index),
                 ),
@@ -190,7 +190,7 @@ class _FormFillPageState extends State<FormFillPage> {
             TextButton.icon(
               onPressed: _previousQuestion,
               icon: const Icon(Icons.arrow_back_sharp),
-              label: const Text("Previous"),
+              label: Text(AppLocalizations.of(context)!.previous),
             ),
           const Spacer(),
           if (!isReviewPage)
@@ -200,7 +200,7 @@ class _FormFillPageState extends State<FormFillPage> {
                   _gotoQuestion(widget.form.questions.length);
                 }
               },
-              child: const Text("Review"),
+              child: Text(AppLocalizations.of(context)!.review),
             ),
           const SizedBox(width: 16),
           FilledButton.icon(
@@ -220,10 +220,10 @@ class _FormFillPageState extends State<FormFillPage> {
             ),
             label: Text(
               isReviewPage
-                  ? "Submit"
+                  ? AppLocalizations.of(context)!.submit
                   : isLastQuestion
-                  ? "Review"
-                  : "Next",
+                  ? AppLocalizations.of(context)!.review
+                  : AppLocalizations.of(context)!.next,
             ),
           ),
         ],
@@ -255,7 +255,7 @@ class _FormFillPageState extends State<FormFillPage> {
             Padding(
               padding: const EdgeInsets.only(top: 4.0),
               child: Text(
-                '* Required',
+                AppLocalizations.of(context)!.starRequired,
                 style: TextStyle(color: Theme.of(context).colorScheme.error),
               ),
             ),
@@ -286,7 +286,7 @@ class _FormFillPageState extends State<FormFillPage> {
           },
           decoration: InputDecoration(
             border: const OutlineInputBorder(),
-            hintText: "Your answer",
+            hintText: AppLocalizations.of(context)!.yourAnswer,
             errorText: errorText,
           ),
         );
@@ -305,7 +305,7 @@ class _FormFillPageState extends State<FormFillPage> {
           keyboardType: TextInputType.number,
           decoration: InputDecoration(
             border: const OutlineInputBorder(),
-            hintText: "Enter a number",
+            hintText: AppLocalizations.of(context)!.enterANumber,
             errorText: errorText,
           ),
         );
@@ -355,7 +355,7 @@ class _FormFillPageState extends State<FormFillPage> {
           ),
           inputDecoration: InputDecoration(
             border: const OutlineInputBorder(),
-            hintText: "Phone number",
+            hintText: AppLocalizations.of(context)!.phoneNumber,
             errorText: errorText,
           ),
         );
@@ -388,7 +388,7 @@ class _FormFillPageState extends State<FormFillPage> {
           },
           decoration: InputDecoration(
             border: const OutlineInputBorder(),
-            hintText: "Select a date",
+            hintText: AppLocalizations.of(context)!.selectADate,
             suffixIcon: const Icon(Icons.calendar_today),
             errorText: errorText,
           ),
@@ -427,7 +427,7 @@ class _FormFillPageState extends State<FormFillPage> {
           },
           decoration: InputDecoration(
             border: const OutlineInputBorder(),
-            hintText: "Select an option",
+            hintText: AppLocalizations.of(context)!.selectAnOption,
             errorText: errorText,
           ),
         );
@@ -457,7 +457,7 @@ class _FormFillPageState extends State<FormFillPage> {
                   });
                 },
               );
-            }).toList(),
+            }),
             if (errorText != null)
               Padding(
                 padding: const EdgeInsets.only(left: 16.0, top: 8.0),
@@ -472,7 +472,9 @@ class _FormFillPageState extends State<FormFillPage> {
           ],
         );
       case models.SchoolApplicationFormQuestionType.file:
-        return const Text("File uploads are not supported in this version.");
+        return Text(
+          AppLocalizations.of(context)!.fileUploadsAreNotSupportedInThisVersion,
+        );
     }
   }
 
@@ -519,13 +521,17 @@ class _FormFillPageState extends State<FormFillPage> {
 
     if (allValid) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Form submitted! (Not really)")),
+        SnackBar(
+          content: Text(AppLocalizations.of(context)!.formSubmittedNotReally),
+        ),
       );
       Navigator.of(context).pop();
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text("Please fix the errors before submitting."),
+        SnackBar(
+          content: Text(
+            AppLocalizations.of(context)!.pleaseFixTheErrorsBeforeSubmitting,
+          ),
           backgroundColor: Colors.red,
         ),
       );
@@ -540,4 +546,3 @@ class _FormFillPageState extends State<FormFillPage> {
     super.dispose();
   }
 }
-

@@ -3,6 +3,7 @@ import 'package:ins/appstate.dart';
 import 'package:ins/models.dart' as models;
 import 'form.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:ins/l10n/app_localizations.dart';
 
 class InstructionsPage extends StatelessWidget {
   final AppState appState;
@@ -64,7 +65,9 @@ class InstructionsPage extends StatelessWidget {
                     ),
                   );
                 },
-                child: Text('Start Application'),
+                child: Text(
+                  AppLocalizations.of(context)!.underscorestartApplication,
+                ),
               ),
             ),
           ],

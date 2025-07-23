@@ -40,6 +40,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get submit => 'SOUMETTRE';
 
   @override
+  String get pleaseFixTheErrorsBeforeSubmitting =>
+      'Veuillez corriger les erreurs avant de soumettre.';
+
+  @override
   String get nothingHere => 'Rien ici';
 
   @override
@@ -51,6 +55,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get welcomeToIS => 'Bienvenue sur IS';
+
+  @override
+  String get thisFieldIsRequired => 'Ce champ est requis.';
 
   @override
   String get emailShouldContain1 => 'L\'e-mail doit contenir un \'@\'';
@@ -86,8 +93,17 @@ class AppLocalizationsFr extends AppLocalizations {
       'Nous n\'avons pas pu recevoir les formulaires d\'inscription';
 
   @override
+  String get pleaseEnterAValidPhoneNumber =>
+      'Veuillez saisir un numéro de téléphone valide.';
+
+  @override
   String get passwordShouldHaveAtLeast8Characters =>
       'Le mot de passe doit contenir au moins 8 caractères';
+
+  @override
+  String
+  get underscoreareYouSureYouWantToLogoutquestionYouWillNeedToLoginAgainOrCreateAnAccountdot =>
+      'Êtes-vous sûr de vouloir vous déconnecter ? Vous devrez vous reconnecter ou créer un compte.';
 
   @override
   String get rating => 'Évaluation';
@@ -125,7 +141,17 @@ class AppLocalizationsFr extends AppLocalizations {
   String get selectADate => 'Sélectionner une date';
 
   @override
+  String get starRequired => '* Requis';
+
+  @override
   String get connectAccount => 'Connecter votre compte';
+
+  @override
+  String get fileUploadsAreNotSupportedInThisVersion =>
+      'Le téléversement de fichiers n\'est pas pris en charge dans cette version.';
+
+  @override
+  String get underscorestartApplication => 'Commencer la candidature';
 
   @override
   String get usernameMustHaveBetween3And20Characters =>
@@ -174,8 +200,20 @@ class AppLocalizationsFr extends AppLocalizations {
   String get browseSchools => 'Parcourir les écoles';
 
   @override
+  String get pleaseSelectAtLeastOneOption =>
+      'Veuillez sélectionner au moins une option.';
+
+  @override
+  String get logout => 'Se déconnecter';
+
+  @override
   String get thisUsernameIsAlreadyTaken =>
       'Ce nom d\'utilisateur est déjà pris';
+
+  @override
+  String
+  get areYouSureYouWantToLogoutquestionYouWillNeedToLoginAgainOrCreateAnAccountdot =>
+      'Êtes-vous sûr de vouloir vous déconnecter ? Vous devrez vous reconnecter ou créer un compte.';
 
   @override
   String get creatingYourAccount => 'Création de votre compte';
@@ -204,6 +242,9 @@ class AppLocalizationsFr extends AppLocalizations {
       'J\'ai lu et j\'accepte les conditions d\'utilisation.';
 
   @override
+  String get editAnswer => 'Modifier la réponse';
+
+  @override
   String get noDescriptionProvided => 'Aucune description fournie.';
 
   @override
@@ -212,6 +253,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get areWeGoing => 'On y va ?';
+
+  @override
+  String get underscorelogout => 'Se déconnecter';
 
   @override
   String get editProfile => 'Modifier le profil';
@@ -249,7 +293,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get iHaveReadAndAgreeToTheTermsAndConditions =>
-      '#I have read and agree to the terms and conditions.';
+      'J\'ai lu et j\'accepte les conditions d\'utilisation.';
 
   @override
   String get welcomeConnectOrCreateAccount =>

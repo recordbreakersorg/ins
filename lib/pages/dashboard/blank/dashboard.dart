@@ -3,6 +3,8 @@ import 'package:ins/appstate.dart';
 import 'package:ins/pages/school/explore.dart';
 import 'package:ins/l10n/app_localizations.dart';
 import 'package:ins/pages/welcomepage.dart';
+import 'package:ins/widgets/locale_chooser.dart';
+import 'package:ins/utils/dialogs.dart';
 
 class BlankDashboard extends StatelessWidget {
   final AppState appState;
@@ -14,6 +16,7 @@ class BlankDashboard extends StatelessWidget {
       appBar: AppBar(
         title: Text(AppLocalizations.of(context)!.areWeGoing),
         leading: null,
+        actions: [LocaleChooserWidget(), const SizedBox(width: 10)],
       ),
       body: Center(
         child: SizedBox(
@@ -56,17 +59,29 @@ class BlankDashboard extends StatelessWidget {
                 const SizedBox(height: 20),
                 DashboardButton(
                   icon: Icons.school,
-                  text: "Logout",
+                  text: AppLocalizations.of(context)!.underscorelogout,
                   color: Colors.red,
                   onPressed: () {
-                    appState.logout().then(
-                      (_) => context.mounted
-                          ? Navigator.of(context).pushAndRemoveUntil(
-                              MaterialPageRoute(builder: (_) => WelcomePage()),
-                              (_) => false,
-                            )
-                          : null,
-                    );
+                    showConfirmationDialog(
+                      context,
+                      AppLocalizations.of(context)!.logout,
+                      AppLocalizations.of(
+                        context,
+                      )!.areYouSureYouWantToLogoutquestionYouWillNeedToLoginAgainOrCreateAnAccountdot,
+                    ).then((confirmed) {
+                      if (confirmed == true) {
+                        appState.logout().then(
+                          (_) => context.mounted
+                              ? Navigator.of(context).pushAndRemoveUntil(
+                                  MaterialPageRoute(
+                                    builder: (_) => WelcomePage(),
+                                  ),
+                                  (_) => false,
+                                )
+                              : null,
+                        );
+                      }
+                    });
                   },
                 ),
               ],
